@@ -1,0 +1,251 @@
+﻿@model Entity.info_Asset
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/css.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/vue.js"></script>
+    <script src="~/Scripts/DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#JID").hide();
+        })
+        var vm;
+        function show() {
+            //每个 Vue.js 应用的起步都是通过构造函数 Vue 创建一个 Vue 的根实例：
+            vm = new Vue({
+                el: ".modal-body",
+                data: {    //每个 Vue 实例都会代理其 data 对象里所有的属性
+                    nums: null
+                }, methods: {
+                    load: function () {
+                        var t = this;
+                        $.ajax({
+                            url: "/Asset/selectYiJu",
+                            type: "post",
+                            success: function (msg) {
+                                var dt = eval("(" + msg + ")");
+                                t.nums = dt;
+                            }
+                        })
+                    }
+                }
+            });
+            vm.load();
+        }
+
+        function img_select() {
+            show();
+            $(document).on("dblclick", "#option", function () {
+                $("#YiJu").val($("#option").text());
+                $('#myModal').modal('hide');
+            })
+
+        }
+        function Update() {
+            if (msg == "ok") {
+                alert("修改成功！");
+                window.location.href = "/Asset/Index";
+            }
+        }
+    
+     </script>
+</head>
+
+<body>
+    @using (Ajax.BeginForm("Edit", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Update" }))
+    {
+        <h2>资产登记表</h2>
+        <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse"
+               bordercolor="#6c9ec1">
+            <tr>
+                <td>
+                    @Html.HiddenFor(model=>model.AID)
+                    @Html.Label("采购依据:")
+                </td>
+                <td >
+                    @foreach (CaiGouYiJu item in ViewBag.jname)
+                    {
+                      
+                    <font face="宋体">
+
+                        @Html.TextBox("YiJu",item.JName )
+                        @Html.EditorFor(model => model.JID)
+                        <img id="Img1" alt="请选择" src="~/img/lookup.gif" data-toggle="modal" data-target="#myModal"
+                             onclick="img_select()" />
+                    </font>
+                    }
+                </td>
+                <td>
+                    @Html.Label("采购形式:")
+                </td>
+                <td>
+                    @Html.DropDownListFor(e => e.SID, ViewData["xs"] as IEnumerable<SelectListItem>)
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("中标价格:")
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.AMoney)
+                </td>
+                <td>
+                    @Html.Label("供应商:")
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ASuppler)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("供应商电话:")
+                </td>
+                <td>
+                    @Html.TextBox("Phone")
+                </td>
+                <td>
+                    @Html.Label("资产名称:")
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.AName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("购入时间:")
+                </td>
+                <td class="date">
+                    @Html.EditorFor(model => model.ABuyTime)
+                   
+                </td>
+                <td>
+                    @Html.Label("资产类别:")
+                </td>
+                <td>
+                    @Html.DropDownListFor(e => e.ATypeId, ViewData["type"] as IEnumerable<SelectListItem>)
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("资产型号:")
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.AModel)
+                </td>
+                <td>
+                    @Html.Label("设备负责人:")
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.AEM)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("详细参数:")
+                </td>
+                <td colspan="2">
+                    @Html.TextAreaFor(model => model.AParameter, new { cols = "30" })
+                </td>
+                <td align="left">
+                    详细参数填写设备的详细参数<br />
+                    如CPU型号个数，硬盘大小，内存大小<br />
+                    安装的操作系统等参数
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("备注:")
+                </td>
+                <td colspan="3">
+
+                    @Html.TextAreaFor(model => model.ARemarks, new { cols = "50" })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <input id="btn_save" type="submit" value="保 存" class="btn1" />
+                    <input id="btn_QX" type="button" value="返回" class="btn1" style="margin-left:30px" onclick="window.location.href = '/Asset/Index'" />
+
+                </td>
+            </tr>
+        </table>
+    }
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <table id="Table2" border="0" cellpadding="3" cellspacing="0" class="table3">
+                        <tr>
+                            <td colspan="3">
+                                <asp:ScriptManager ID="ScriptManager1" runat="server">
+                                </asp:ScriptManager>
+                                <asp:Panel ID="Panel1" runat="server" Width="100%">
+                                    @*<table border="0" cellpadding="0" cellspacing="0" style="width: 100%">
+                                        <tr>
+                                            <td>
+                                                编号：
+                                            </td>
+                                            <td align="center">
+                                                <input id="Text1" type="text" />
+                                            </td>
+                                            <td align="left">
+                                                <input id="Button1" type="button" value="查询" Class="btn1" style="margin-left:10px" />
+                                            </td>
+                                            <td align="right">
+                                                &nbsp;
+                                            </td>
+                                        </tr>
+                                    </table>*@
+                                    <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse;margin:10px 0px 0px 20px"
+                                           bordercolor="#6c9ec1" width="200px">
+                                        <tr>
+
+                                            <td>请示报告</td>
+                                        </tr>
+                                        <tr v-for="(item,i) in nums">
+                                            <td colspan="2">
+                                                <select size="10" style="width: 200px;" id="sel">
+                                                    @*<option  id="option">{{item.JID}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<text  id="op_name">{{item.JName}}</text></option>*@
+                                                    <option id="option" value="{{item.JID}}">{{item.JName}}</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" align="center">
+                                                <input id="Button1" type="button" value="关闭" data-dismiss="modal" Class="btn1" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br />
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+
+                </div>
+
+
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+</body>
+</html>

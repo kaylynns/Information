@@ -1,0 +1,102 @@
+﻿@model Entity.info_ComputerRoomVisit
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>机房出入申请表</title>
+    <link href="~/css/css.css" rel="stylesheet" />
+    <script src="~/DatePicker/WdatePicker.js"></script>
+    <style type="text/css">
+        input {
+            outline: none;
+            background: transparent;
+            border: none;
+            outline: medium;
+        }
+
+        .JiaCu input {
+            font-weight: 800;
+        }
+    </style>
+    <script src="~/Scripts/jquery-1.11.1.js"></script>
+    <script type="text/javascript">
+        $(document).on("click", ".JiFang input", function () {
+            WdatePicker();
+        })
+        $(function () {
+            var user='<%=%>'
+        })
+    </script>
+</head>
+<body>
+    <h2 align="left"> 机房出入申请表 </h2>
+    <form method="post">
+        <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse"
+               bordercolor="#6c9ec1">
+            <tr>
+                <td align="left" style="height: 30px">
+                    登记人：
+                </td>
+                <td align="left">                   
+                    @ViewData["DengJiren"]
+                </td>
+                <td align="left">
+                    @Html.HiddenFor(model => model.CID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    &nbsp;
+                </td>
+                <td align="left">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 30px" align="left">
+                    来访日期：
+                </td>
+                <td align="left" class="JiFang">
+                    @Html.TextBoxFor(model => model.CTIme, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td align="left">
+                    来访人员：
+                </td>
+                <td align="left">
+                    @Html.TextBoxFor(model => model.CName, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+            </tr>
+            <tr>
+                <td align="left">
+                    来访事由：
+                </td>
+                <td align="left" colspan="3">
+                    @Html.TextAreaFor(model => model.Cause, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+            </tr>
+            <tr>
+                <td align="left" class="style1">
+                    携带物品：
+                </td>
+                <td align="left" class="style1">
+                    @Html.EditorFor(model => model.Carries, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td align="left" class="style1">
+                    陪同人员：
+                </td>
+                <td align="left" class="style1">
+                    @Html.DropDownListFor(model => model.CEntourage, ViewData["PeiTong"] as IEnumerable<SelectListItem>)
+                </td>
+            </tr>
+            <tr>
+                <td align="center" colspan="4" width="26">
+                    <input id="btn_Bao" type="submit" value="提交" class="btn1" onclick="location.href = '/JiFang/Create'" />
+                    <input id="btn_add" type="button" value="返回" class="btn1" onclick="location.href = '/JiFang/Index'" />
+                </td>
+            </tr>
+            <tr></tr>
+        </table>
+    </form>
+</body>
+</html>

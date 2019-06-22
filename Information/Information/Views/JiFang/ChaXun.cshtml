@@ -1,0 +1,114 @@
+﻿@model  Entity.V_ComputerRoomVisit 
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>查看机房出入申请表</title>
+    <script src="~/Scripts/jquery-1.7.2.min.js"></script>
+    <link href="~/css/css.css" rel="stylesheet" />
+</head>
+<body>
+    <h2 align="center"> 机房出入申请表 </h2>
+        <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse"
+               bordercolor="#6c9ec1">
+            <tr>
+                <td align="left" style="height: 30px">
+                    登记人：
+                </td>
+                <td align="left">
+                    @ViewData["DengJiren"]
+                  
+                </td>
+                <td align="left">
+                    &nbsp;
+                </td>
+                <td align="left">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 30px" align="left">
+                    来访日期：
+                </td>
+                <td align="left">
+                    @Html.TextBoxFor(model => model.CTIme, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+                <td align="left">
+                    来访人员：
+                </td>
+                <td align="left">
+                    @Html.TextBoxFor(model => model.CName, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+            </tr>
+            <tr>
+                <td align="left">
+                    来访事由：
+                </td>
+                <td align="left" colspan="3">
+                    @Html.TextAreaFor(model => model.Cause, htmlAttributes: new { @class = "control-label col-md-2" })                         
+                </td>
+            </tr>
+            <tr>
+                <td align="left" class="style1">
+                    携带物品：
+                </td>
+                <td align="left" class="style1">
+                    @Html.EditorFor(model => model.Carries, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td align="left" class="style1">
+                    陪同人员：
+                </td>
+                <td align="left" class="style1">
+                    @Html.TextBoxFor(model => model.CEntourage, htmlAttributes: new { @class = "control-label col-md-2" })
+                </td>
+            </tr>
+            <tr id="tr_sh">
+                <td style="height: 20px">
+                    主任批示
+                </td>
+                <td align="left" colspan="3" style="padding-right: 0px; padding-left: 0px; padding-bottom: 0px;
+                                                        margin: 0px; padding-top: 0px" valign="middle">
+                    <table align="center" cellpadding="3" cellspacing="0" width="100%">
+                        <tr height="22" class="JiaCu">
+                            <td align="left">
+                                批示结果：&nbsp;&nbsp;<b>
+                                    @Html.TextBoxFor(Model => Model.CRelustID)
+                                </b>
+                            </td>
+                            <td align="left">
+                                批示人：<b>
+                                    @Html.TextBoxFor(Model => Model.CInstructor)
+                                </b>
+                            </td>
+                            <td align="left">
+                                批示日期：<b>
+                                    @Html.TextBoxFor(Model => Model.CInstructorTime)
+                                </b>
+                            </td>
+                        </tr>
+                        <tr style="border-top: 1px; border-top-color: #6c9ec1; border-bottom: 0px; border-left: 0px;
+                                                                border-right: 0px; border-style: solid" height="22" class="JiaCu">
+                            <td align="left" colspan="3">
+                                批示意见： <b>
+                                    @Html.TextBoxFor(Model => Model.COpinion)
+                                </b>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" colspan="4" width="26">
+                    <input id="btn_add" type="button" value="返回"  class="btn1" onclick="location.href = '/JiFang/Index'" />
+                </td>
+            </tr>
+            <tr>
+            </tr>
+        </table>
+</body>
+</html>

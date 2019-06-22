@@ -1,0 +1,39 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+  
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/css/style1.css" rel="stylesheet" />
+    <link href="~/Scripts/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+
+</head>
+<body style="background-color:#2B3137">
+    <div id="body">
+        <div id="body_left">
+            <img src="~/Image/home-illo-team.svg" width="359" height="312" />
+        </div>
+
+    </div>
+    <div id="body_right">
+        <form role="form" action="Login" method="post">
+            <div class="form-group" style="margin:12px">
+                <label for="name">用户名</label>
+                <input type="text" class="form-control" placeholder="请输入用户名" height="100" name="UserName">
+                <label for="name" style="margin-top:25px">密码</label>
+                <input type="password" class="form-control" placeholder="请输入密码" name="Pass">
+                <input id="submit" type="submit" value="登录" class=".btn-success" />
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+

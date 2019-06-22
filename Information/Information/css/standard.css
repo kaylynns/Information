@@ -1,0 +1,373 @@
+body 
+{
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	font-family: "宋体";
+	font-size: 9pt;
+	background-image: url(../img/111.jpg);
+}
+td {
+	font-family: "宋体";
+	font-size: 9pt;
+}
+
+.htd {
+	font-family: "宋体";
+	font-size: 9pt;
+	color:White;
+}
+
+input 
+{	
+	POSITION: relative;
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 20px;
+	color: #4E507C;
+	text-decoration: none;
+	background-color: #FFFFFF;
+	border: 1px solid #8B8DB6;
+	}
+
+select {  font-size: 9pt;border: 1pt solid #5F9B2E; }
+
+textarea{
+	font-family: "Tahoma", "宋体";
+	font-size: 9pt;
+
+	font-style: normal;
+	border-top: 1px solid #5F9B2E;
+	border-right: 1px solid #5F9B2E;
+	border-bottom: 1px solid #5F9B2E;
+	border-left: 1px solid #5F9B2E;
+}
+
+.td1 td
+{
+	
+	border-width:1px;
+	border-style:solid;
+	
+}
+
+
+a:link {
+	font-family: "宋体";
+	font-size: 13px;
+	font-weight: bold;
+	color: #074B82;
+	text-decoration: none;
+}
+a:visited {
+	font-family: "宋体";
+	font-size: 13px;
+	font-weight: bold;
+	color: #074B82;
+	text-decoration: none;
+}a:hover {
+	font-family: "宋体";
+	font-size: 13px;
+	font-weight: bold;
+	color: #BD0614;
+	text-decoration: none;
+}
+
+a.a3:link {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #71A701;
+	text-decoration: none;
+}
+a.a3:visited {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #71A701;
+	text-decoration: none;
+}
+a.a3:hover {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #FF0000;
+	text-decoration: none;
+}
+
+
+a.a2:link {
+	font-family: "宋体";
+	font-size: 10.5pt;
+	font-weight: bold;
+	color: #2F58A4;
+	text-decoration: none;
+}
+a.a2:visited {
+	font-family: "宋体";
+	font-size: 10.5pt;
+	font-weight: bold;
+	color: #2F58A4;
+	text-decoration: none;
+}
+a.a2:hover {
+	font-family: "宋体";
+	font-size: 10.5pt;
+	font-weight: bold;
+	color: #2F58A4;
+	text-decoration: underline;
+}
+
+a.a4:link {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #45952C;
+	text-decoration: none;
+	font-weight: normal;
+	line-height: 20px;
+}
+a.a4:visited {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #45952C;
+	text-decoration: none;
+	font-weight: normal;
+	line-height: 20px;
+}
+a.a4:hover {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #FCA406;
+	text-decoration: none;
+	font-weight: normal;
+	line-height: 20px;
+}
+
+/****************************************************
+TreeView
+*****************************************************/
+
+.TreeView 
+{ 
+  background-color:Transparent;
+  padding-top:4px; 
+  padding-left:1px; 
+  border: #5F9B2E 1px solid; 
+  cursor:default; 
+}
+
+.TreeNode 
+{ 
+  font-family: tahoma; 
+  font-size: 11px; 
+  padding-top:2px;
+  padding-bottom:1px;
+  padding-left: 3px; 
+  padding-right: 3px; 
+}
+
+.GrayedTreeNode 
+{ 
+  font-family: tahoma; 
+  font-size: 11px; 
+  padding-top:2px;
+  padding-bottom:1px;
+  padding-left: 3px; 
+  padding-right: 3px; 
+  color:gray; 
+  cursor:default;
+}
+
+.HoverTreeNode 
+{ 
+  font-family: tahoma; 
+  font-size: 11px; 
+  text-decoration:underline; 
+  padding-top:2px;
+  padding-bottom:1px;
+  padding-left: 3px; 
+  padding-right: 3px; 
+  cursor: default; 
+}
+
+.SelectedTreeNode
+{
+	font-family: tahoma;
+	font-size: 11px;
+	background-color: Gainsboro;
+	color: white;
+	padding-top: 2px;
+	padding-bottom: 1px;
+	padding-left: 3px;
+	padding-right: 3px;
+	cursor: default;
+}
+
+.btn1 
+{
+	background-color:Transparent;
+    font-family: "宋体";
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+	background-image: url(../img/login_9.gif);
+	height: 18px;
+	width: 70px;
+	border: none;
+	line-height: 22px;
+	 cursor:pointer; 
+	 _cursor /* */:hand;}
+	 
+.btn2 
+{
+	 background-color:Transparent;
+	 font-family: "宋体";
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+	background-image: url(../img/login_90.gif);
+	height: 18px;
+	width: 106px;
+	border: none;
+	line-height: 22px;
+	 cursor:pointer; 
+	 _cursor /* */:hand;}
+
+
+/*Modal Popup*/
+.modalBackground {
+	background-color:Gray;
+	filter:alpha(opacity=70);
+	opacity:0.7;
+}
+
+.modalPopup {
+	background-color:#ffffdd;
+	border-width:3px;
+	border-style:solid;
+	border-color:Gray;
+	padding:3px;
+	width:250px;
+}
+
+.sampleStyleA {
+	background-color:#FFF;
+}
+
+.sampleStyleB {
+	background-color:#FFF;
+	font-family:monospace;
+	font-size:10pt;
+	font-weight:bold;
+}
+
+.sampleStyleC {
+	background-color:#ddffdd;
+	font-family:sans-serif;
+	font-size:10pt;
+	font-style:italic;
+}
+
+.sampleStyleD {
+	background-color:Blue;
+	color:White;
+	font-family:Arial;
+	font-size:10pt;
+}
+
+/*Popup Control*/
+.popupControl{
+	background-color:White;
+	position:absolute;
+	visibility:hidden;
+}
+
+
+.quanbu{
+	border: 1px none;
+	background-color: #7EBC01;
+}
+.dan 
+{
+	TEXT-INDENT: 3px;
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+	height: 31px;
+	background-color: #DAEE9D;
+}
+
+.suang
+{
+	TEXT-INDENT: 3px;
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+	height: 31px;
+	background-color: #F1F5FA;
+	}
+
+.mdr
+{
+	font-family: "宋体";
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+	background-color: #E2F7FE;
+	text-indent: 3px;
+	line-height: 20px;
+	 _cursor:hand;
+	
+}
+
+
+.xiuan {
+	border-right-style: solid;
+	border-right-color: #A8D48D;
+	border-right-width: 1px;
+}
+.biaoti {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: bold;
+	color: #527801;
+	text-decoration: none;
+	background-image: url(../img/about_5.jpg);
+	height: 31px;
+}
+.txtnr {
+	font-family: "宋体";
+	font-size: 9pt;
+	color: #000000;
+	text-decoration: none;
+	font-weight: normal;
+	line-height: 22px;
+}
+
+.dl {
+	font-family: "宋体";
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: none;
+	background-color: #7DB748;
+}
+
+.txt {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #8B8DB6;
+	text-decoration: none;
+}
+.txt1 {
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 20px;
+	color: #000000;
+	text-decoration: none;
+}

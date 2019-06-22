@@ -1,0 +1,1362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="InformationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CaiGouXingShi">
+          <Key>
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="SID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CaiGouYiJu">
+          <Key>
+            <PropertyRef Name="JID" />
+          </Key>
+          <Property Name="JID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="info_Asset">
+          <Key>
+            <PropertyRef Name="AID" />
+          </Key>
+          <Property Name="AID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AName" Type="varchar" MaxLength="50" />
+          <Property Name="ATypeId" Type="int" Nullable="false" />
+          <Property Name="AModel" Type="varchar" MaxLength="50" />
+          <Property Name="AMoney" Type="money" />
+          <Property Name="ABuyTime" Type="datetime" />
+          <Property Name="ApplyTime" Type="datetime" />
+          <Property Name="AParameter" Type="varchar" MaxLength="50" />
+          <Property Name="ASuppler" Type="varchar" MaxLength="50" />
+          <Property Name="AEM" Type="varchar" MaxLength="50" />
+          <Property Name="RealName" Type="varchar" MaxLength="50" />
+          <Property Name="JID" Type="int" />
+          <Property Name="SID" Type="int" />
+          <Property Name="ARemarks" Type="varchar" MaxLength="50" />
+          <Property Name="TID" Type="int" />
+          <Property Name="CRelustID" Type="int" />
+          <Property Name="AYears" Type="varchar" MaxLength="50" />
+          <Property Name="AExplain" Type="varchar" MaxLength="100" />
+          <Property Name="ASupplerPhone" Type="varchar" MaxLength="50" />
+          <Property Name="AShenHeRan" Type="int" />
+          <Property Name="AShenHeYiJian" Type="varchar" MaxLength="50" />
+          <Property Name="AShenHeJieGuo" Type="varchar" MaxLength="50" />
+          <Property Name="AShenHeRiQi" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="info_ComputerRoomVisit">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CName" Type="varchar" MaxLength="100" />
+          <Property Name="CTIme" Type="datetime" />
+          <Property Name="Cause" Type="varchar" MaxLength="100" />
+          <Property Name="Carries" Type="varchar" MaxLength="100" />
+          <Property Name="CEntourage" Type="int" />
+          <Property Name="CBringOut" Type="varchar" MaxLength="100" />
+          <Property Name="CEntryTime" Type="datetime" />
+          <Property Name="CLeaveTime" Type="datetime" />
+          <Property Name="CRegistar" Type="int" />
+          <Property Name="CInstructor" Type="varchar" MaxLength="50" />
+          <Property Name="CRelustID" Type="int" Nullable="false" />
+          <Property Name="CInstructorTime" Type="datetime" />
+          <Property Name="COpinion" Type="varchar" MaxLength="50" />
+          <Property Name="CXuanXiang" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Information.dbo.info_Equipment”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="info_Equipment">
+          <Key>
+            <PropertyRef Name="EID" />
+          </Key>
+          <Property Name="EID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EDeviceName" Type="varchar" MaxLength="50" />
+          <Property Name="EquipmentModel" Type="varchar" MaxLength="50" />
+          <Property Name="Eoffice" Type="varchar" MaxLength="50" />
+          <Property Name="Ebusinesssystem" Type="varchar" MaxLength="50" />
+          <Property Name="EbuYTime" Type="datetime" />
+          <Property Name="Eyear" Type="varchar" MaxLength="50" />
+          <Property Name="Eversion" Type="varchar" MaxLength="50" />
+          <Property Name="DEetailedParameters" Type="varchar" MaxLength="50" />
+          <Property Name="Esupplier" Type="varchar" MaxLength="50" />
+          <Property Name="EPhone" Type="varchar" MaxLength="50" />
+          <Property Name="Econtact" Type="varchar" MaxLength="50" />
+          <Property Name="EIP" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="info_Maintenance">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Name="MID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaintenanceTime" Type="datetime" />
+          <Property Name="MDeviceName" Type="int" />
+          <Property Name="MDetectionUnit" Type="varchar" MaxLength="50" />
+          <Property Name="MTestingPersonnel" Type="varchar" MaxLength="50" />
+          <Property Name="MAccompanyingOfficials" Type="varchar" MaxLength="50" />
+          <Property Name="MTheRegistrar" Type="varchar" MaxLength="50" />
+          <Property Name="Madvice" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="info_Meeting">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Name="MID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MTime" Type="datetime" />
+          <Property Name="MAudioSituation" Type="nvarchar" MaxLength="50" />
+          <Property Name="MText" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mspeak" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mhealth" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mstart" Type="datetime" />
+          <Property Name="MOwer" Type="datetime" />
+          <Property Name="MSolve" Type="nvarchar" MaxLength="50" />
+          <Property Name="MNote" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOpenTime" Type="datetime" />
+          <Property Name="MConference" Type="nvarchar" MaxLength="50" />
+          <Property Name="MUserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOpinion" Type="nvarchar" MaxLength="50" />
+          <Property Name="Msignature" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOverTime" Type="datetime" />
+          <Property Name="MComments" Type="nvarchar" MaxLength="50" />
+          <Property Name="closeDevice" Type="nvarchar" MaxLength="50" />
+          <Property Name="QZ" Type="int" />
+        </EntityType>
+        <EntityType Name="info_Offices">
+          <Key>
+            <PropertyRef Name="OID" />
+          </Key>
+          <Property Name="OID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Offices" Type="nvarchar" MaxLength="50" />
+          <Property Name="OAdrees" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="info_Question">
+          <Key>
+            <PropertyRef Name="QID" />
+          </Key>
+          <Property Name="QID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QName" Type="nvarchar" MaxLength="50" />
+          <Property Name="QRemark" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="info_Registration">
+          <Key>
+            <PropertyRef Name="RID" />
+          </Key>
+          <Property Name="RID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SID" Type="int" />
+          <Property Name="RUserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="ROffice" Type="nvarchar" MaxLength="50" />
+          <Property Name="RDate" Type="datetime" />
+          <Property Name="RFunction" Type="nvarchar" MaxLength="50" />
+          <Property Name="Requirements" Type="nvarchar" MaxLength="50" />
+          <Property Name="Rdepartment" Type="nvarchar" MaxLength="50" />
+          <Property Name="RInformationCenter" Type="nvarchar" MaxLength="50" />
+          <Property Name="RState" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remaek" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="info_Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="info_Software">
+          <Key>
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="SID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sdynacomm" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sremark" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="info_Technology">
+          <Key>
+            <PropertyRef Name="TID" />
+          </Key>
+          <Property Name="TID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TSerialNumber" Type="varchar" MaxLength="50" />
+          <Property Name="SID" Type="int" />
+          <Property Name="TDate" Type="datetime" />
+          <Property Name="TUserId" Type="int" />
+          <Property Name="TRegistrationTiime" Type="datetime" />
+          <Property Name="TConsultant" Type="nvarchar" MaxLength="50" />
+          <Property Name="TDepartment" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tcontact" Type="nvarchar" MaxLength="50" />
+          <Property Name="QID" Type="int" />
+          <Property Name="TDescribe" Type="nvarchar" MaxLength="50" />
+          <Property Name="TAnswer" Type="nvarchar" MaxLength="50" />
+          <Property Name="TAnswerTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="TRemark" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="info_User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserPass" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserRealName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserPhone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UseroffcePhone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserKeShi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserJueSe" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PiShiJieGuo">
+          <Key>
+            <PropertyRef Name="CRelustID" />
+          </Key>
+          <Property Name="CRelustID" Type="int" Nullable="false" />
+          <Property Name="CRelustName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="ZiChanBeiZhu">
+          <Key>
+            <PropertyRef Name="ATypeId" />
+          </Key>
+          <Property Name="ATypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AName" Type="varchar" MaxLength="50" />
+          <Property Name="ABeiZhu" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ZiChanZhuangTai">
+          <Key>
+            <PropertyRef Name="TID" />
+          </Key>
+          <Property Name="TID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TStates" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Information.dbo.v_Asset”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="v_Asset">
+          <Key>
+            <PropertyRef Name="AID" />
+          </Key>
+          <Property Name="AID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AName" Type="varchar" MaxLength="50" />
+          <Property Name="ATypeId" Type="varchar" MaxLength="50" />
+          <Property Name="AModel" Type="varchar" MaxLength="50" />
+          <Property Name="AMoney" Type="money" />
+          <Property Name="ABuyTime" Type="datetime" />
+          <Property Name="ApplyTime" Type="datetime" />
+          <Property Name="AParameter" Type="varchar" MaxLength="50" />
+          <Property Name="ASuppler" Type="varchar" MaxLength="50" />
+          <Property Name="AEM" Type="varchar" MaxLength="50" />
+          <Property Name="RealName" Type="varchar" MaxLength="50" />
+          <Property Name="JID" Type="int" />
+          <Property Name="SID" Type="int" />
+          <Property Name="ARemarks" Type="varchar" MaxLength="50" />
+          <Property Name="TID" Type="nvarchar" MaxLength="50" />
+          <Property Name="CRelustID" Type="nvarchar" MaxLength="50" />
+          <Property Name="AYears" Type="varchar" MaxLength="50" />
+          <Property Name="AExplain" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Information.dbo.V_ComputerRoomVisit”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="V_ComputerRoomVisit">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CName" Type="varchar" MaxLength="100" />
+          <Property Name="CTIme" Type="datetime" />
+          <Property Name="Cause" Type="varchar" MaxLength="100" />
+          <Property Name="Carries" Type="varchar" MaxLength="100" />
+          <Property Name="CEntourage" Type="varchar" MaxLength="50" />
+          <Property Name="CBringOut" Type="varchar" MaxLength="100" />
+          <Property Name="CEntryTime" Type="datetime" />
+          <Property Name="CLeaveTime" Type="datetime" />
+          <Property Name="CRegistar" Type="int" />
+          <Property Name="CInstructor" Type="varchar" MaxLength="50" />
+          <Property Name="CRelustID" Type="nvarchar" MaxLength="50" />
+          <Property Name="CInstructorTime" Type="datetime" />
+          <Property Name="COpinion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_info_Asset_CaiGouXingShi">
+          <End Role="CaiGouXingShi" Type="Self.CaiGouXingShi" Multiplicity="0..1" />
+          <End Role="info_Asset" Type="Self.info_Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CaiGouXingShi">
+              <PropertyRef Name="SID" />
+            </Principal>
+            <Dependent Role="info_Asset">
+              <PropertyRef Name="SID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_info_Asset_CaiGouYiJu">
+          <End Role="CaiGouYiJu" Type="Self.CaiGouYiJu" Multiplicity="0..1" />
+          <End Role="info_Asset" Type="Self.info_Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CaiGouYiJu">
+              <PropertyRef Name="JID" />
+            </Principal>
+            <Dependent Role="info_Asset">
+              <PropertyRef Name="JID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_info_Asset_PiShiJieGuo">
+          <End Role="PiShiJieGuo" Type="Self.PiShiJieGuo" Multiplicity="0..1" />
+          <End Role="info_Asset" Type="Self.info_Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PiShiJieGuo">
+              <PropertyRef Name="CRelustID" />
+            </Principal>
+            <Dependent Role="info_Asset">
+              <PropertyRef Name="CRelustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_info_Asset_ZiChanBeiZhu">
+          <End Role="ZiChanBeiZhu" Type="Self.ZiChanBeiZhu" Multiplicity="1" />
+          <End Role="info_Asset" Type="Self.info_Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZiChanBeiZhu">
+              <PropertyRef Name="ATypeId" />
+            </Principal>
+            <Dependent Role="info_Asset">
+              <PropertyRef Name="ATypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_info_Asset_ZiChanZhuangTai">
+          <End Role="ZiChanZhuangTai" Type="Self.ZiChanZhuangTai" Multiplicity="0..1" />
+          <End Role="info_Asset" Type="Self.info_Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZiChanZhuangTai">
+              <PropertyRef Name="TID" />
+            </Principal>
+            <Dependent Role="info_Asset">
+              <PropertyRef Name="TID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_info_ComputerRoomVisit_PiShiJieGuo">
+          <End Role="PiShiJieGuo" Type="Self.PiShiJieGuo" Multiplicity="1" />
+          <End Role="info_ComputerRoomVisit" Type="Self.info_ComputerRoomVisit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PiShiJieGuo">
+              <PropertyRef Name="CRelustID" />
+            </Principal>
+            <Dependent Role="info_ComputerRoomVisit">
+              <PropertyRef Name="CRelustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_info_Registration_info_Software">
+          <End Role="info_Software" Type="Self.info_Software" Multiplicity="0..1" />
+          <End Role="info_Registration" Type="Self.info_Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="info_Software">
+              <PropertyRef Name="SID" />
+            </Principal>
+            <Dependent Role="info_Registration">
+              <PropertyRef Name="SID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_info_Technology_info_Technology">
+          <End Role="info_Software" Type="Self.info_Software" Multiplicity="0..1" />
+          <End Role="info_Technology" Type="Self.info_Technology" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="info_Software">
+              <PropertyRef Name="SID" />
+            </Principal>
+            <Dependent Role="info_Technology">
+              <PropertyRef Name="SID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_info_User_info_Role">
+          <End Role="info_Role" Type="Self.info_Role" Multiplicity="1" />
+          <End Role="info_User" Type="Self.info_User" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="info_Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="info_User">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="InformationModelStoreContainer">
+          <EntitySet Name="CaiGouXingShi" EntityType="Self.CaiGouXingShi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CaiGouYiJu" EntityType="Self.CaiGouYiJu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="info_Asset" EntityType="Self.info_Asset" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="info_ComputerRoomVisit" EntityType="Self.info_ComputerRoomVisit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="info_Maintenance" EntityType="Self.info_Maintenance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="info_Meeting" EntityType="Self.info_Meeting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="info_Offices" EntityType="Self.info_Offices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="info_Question" EntityType="Self.info_Question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="info_Registration" EntityType="Self.info_Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="info_Role" EntityType="Self.info_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="info_Software" EntityType="Self.info_Software" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="info_Technology" EntityType="Self.info_Technology" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="info_User" EntityType="Self.info_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PiShiJieGuo" EntityType="Self.PiShiJieGuo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZiChanBeiZhu" EntityType="Self.ZiChanBeiZhu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZiChanZhuangTai" EntityType="Self.ZiChanZhuangTai" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="info_Equipment" EntityType="Self.info_Equipment" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [info_Equipment].[EID] AS [EID], 
+    [info_Equipment].[EDeviceName] AS [EDeviceName], 
+    [info_Equipment].[EquipmentModel] AS [EquipmentModel], 
+    [info_Equipment].[Eoffice] AS [Eoffice], 
+    [info_Equipment].[Ebusinesssystem] AS [Ebusinesssystem], 
+    [info_Equipment].[EbuYTime] AS [EbuYTime], 
+    [info_Equipment].[Eyear] AS [Eyear], 
+    [info_Equipment].[Eversion] AS [Eversion], 
+    [info_Equipment].[DEetailedParameters] AS [DEetailedParameters], 
+    [info_Equipment].[Esupplier] AS [Esupplier], 
+    [info_Equipment].[EPhone] AS [EPhone], 
+    [info_Equipment].[Econtact] AS [Econtact], 
+    [info_Equipment].[EIP] AS [EIP]
+    FROM [dbo].[info_Equipment] AS [info_Equipment]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_Asset" EntityType="Self.v_Asset" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_Asset].[AID] AS [AID], 
+    [v_Asset].[AName] AS [AName], 
+    [v_Asset].[ATypeId] AS [ATypeId], 
+    [v_Asset].[AModel] AS [AModel], 
+    [v_Asset].[AMoney] AS [AMoney], 
+    [v_Asset].[ABuyTime] AS [ABuyTime], 
+    [v_Asset].[ApplyTime] AS [ApplyTime], 
+    [v_Asset].[AParameter] AS [AParameter], 
+    [v_Asset].[ASuppler] AS [ASuppler], 
+    [v_Asset].[AEM] AS [AEM], 
+    [v_Asset].[RealName] AS [RealName], 
+    [v_Asset].[JID] AS [JID], 
+    [v_Asset].[SID] AS [SID], 
+    [v_Asset].[ARemarks] AS [ARemarks], 
+    [v_Asset].[TID] AS [TID], 
+    [v_Asset].[CRelustID] AS [CRelustID], 
+    [v_Asset].[AYears] AS [AYears], 
+    [v_Asset].[AExplain] AS [AExplain]
+    FROM [dbo].[v_Asset] AS [v_Asset]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_ComputerRoomVisit" EntityType="Self.V_ComputerRoomVisit" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_ComputerRoomVisit].[CID] AS [CID], 
+    [V_ComputerRoomVisit].[CName] AS [CName], 
+    [V_ComputerRoomVisit].[CTIme] AS [CTIme], 
+    [V_ComputerRoomVisit].[Cause] AS [Cause], 
+    [V_ComputerRoomVisit].[Carries] AS [Carries], 
+    [V_ComputerRoomVisit].[CEntourage] AS [CEntourage], 
+    [V_ComputerRoomVisit].[CBringOut] AS [CBringOut], 
+    [V_ComputerRoomVisit].[CEntryTime] AS [CEntryTime], 
+    [V_ComputerRoomVisit].[CLeaveTime] AS [CLeaveTime], 
+    [V_ComputerRoomVisit].[CRegistar] AS [CRegistar], 
+    [V_ComputerRoomVisit].[CInstructor] AS [CInstructor], 
+    [V_ComputerRoomVisit].[CRelustID] AS [CRelustID], 
+    [V_ComputerRoomVisit].[CInstructorTime] AS [CInstructorTime], 
+    [V_ComputerRoomVisit].[COpinion] AS [COpinion]
+    FROM [dbo].[V_ComputerRoomVisit] AS [V_ComputerRoomVisit]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_info_Asset_CaiGouXingShi" Association="Self.FK_info_Asset_CaiGouXingShi">
+            <End Role="CaiGouXingShi" EntitySet="CaiGouXingShi" />
+            <End Role="info_Asset" EntitySet="info_Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_info_Asset_CaiGouYiJu" Association="Self.FK_info_Asset_CaiGouYiJu">
+            <End Role="CaiGouYiJu" EntitySet="CaiGouYiJu" />
+            <End Role="info_Asset" EntitySet="info_Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_info_Asset_PiShiJieGuo" Association="Self.FK_info_Asset_PiShiJieGuo">
+            <End Role="PiShiJieGuo" EntitySet="PiShiJieGuo" />
+            <End Role="info_Asset" EntitySet="info_Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_info_Asset_ZiChanBeiZhu" Association="Self.FK_info_Asset_ZiChanBeiZhu">
+            <End Role="ZiChanBeiZhu" EntitySet="ZiChanBeiZhu" />
+            <End Role="info_Asset" EntitySet="info_Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_info_Asset_ZiChanZhuangTai" Association="Self.FK_info_Asset_ZiChanZhuangTai">
+            <End Role="ZiChanZhuangTai" EntitySet="ZiChanZhuangTai" />
+            <End Role="info_Asset" EntitySet="info_Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_info_ComputerRoomVisit_PiShiJieGuo" Association="Self.FK_info_ComputerRoomVisit_PiShiJieGuo">
+            <End Role="PiShiJieGuo" EntitySet="PiShiJieGuo" />
+            <End Role="info_ComputerRoomVisit" EntitySet="info_ComputerRoomVisit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_info_Registration_info_Software" Association="Self.FK_info_Registration_info_Software">
+            <End Role="info_Software" EntitySet="info_Software" />
+            <End Role="info_Registration" EntitySet="info_Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_info_Technology_info_Technology" Association="Self.FK_info_Technology_info_Technology">
+            <End Role="info_Software" EntitySet="info_Software" />
+            <End Role="info_Technology" EntitySet="info_Technology" />
+          </AssociationSet>
+          <AssociationSet Name="FK_info_User_info_Role" Association="Self.FK_info_User_info_Role">
+            <End Role="info_Role" EntitySet="info_Role" />
+            <End Role="info_User" EntitySet="info_User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InformationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CaiGouXingShi">
+          <Key>
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="SID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="info_Asset" Relationship="Self.FK_info_Asset_CaiGouXingShi" FromRole="CaiGouXingShi" ToRole="info_Asset" />
+        </EntityType>
+        <EntityType Name="CaiGouYiJu">
+          <Key>
+            <PropertyRef Name="JID" />
+          </Key>
+          <Property Name="JID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="info_Asset" Relationship="Self.FK_info_Asset_CaiGouYiJu" FromRole="CaiGouYiJu" ToRole="info_Asset" />
+        </EntityType>
+        <EntityType Name="info_Asset">
+          <Key>
+            <PropertyRef Name="AID" />
+          </Key>
+          <Property Name="AID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ATypeId" Type="Int32" Nullable="false" />
+          <Property Name="AModel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AMoney" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ABuyTime" Type="DateTime" Precision="3" />
+          <Property Name="ApplyTime" Type="DateTime" Precision="3" />
+          <Property Name="AParameter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ASuppler" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AEM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RealName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="JID" Type="Int32" />
+          <Property Name="SID" Type="Int32" />
+          <Property Name="ARemarks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TID" Type="Int32" />
+          <Property Name="CRelustID" Type="Int32" />
+          <Property Name="AYears" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AExplain" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ASupplerPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AShenHeRan" Type="Int32" />
+          <Property Name="AShenHeYiJian" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AShenHeJieGuo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AShenHeRiQi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CaiGouXingShi" Relationship="Self.FK_info_Asset_CaiGouXingShi" FromRole="info_Asset" ToRole="CaiGouXingShi" />
+          <NavigationProperty Name="CaiGouYiJu" Relationship="Self.FK_info_Asset_CaiGouYiJu" FromRole="info_Asset" ToRole="CaiGouYiJu" />
+          <NavigationProperty Name="PiShiJieGuo" Relationship="Self.FK_info_Asset_PiShiJieGuo" FromRole="info_Asset" ToRole="PiShiJieGuo" />
+          <NavigationProperty Name="ZiChanBeiZhu" Relationship="Self.FK_info_Asset_ZiChanBeiZhu" FromRole="info_Asset" ToRole="ZiChanBeiZhu" />
+          <NavigationProperty Name="ZiChanZhuangTai" Relationship="Self.FK_info_Asset_ZiChanZhuangTai" FromRole="info_Asset" ToRole="ZiChanZhuangTai" />
+        </EntityType>
+        <EntityType Name="info_ComputerRoomVisit">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CTIme" Type="DateTime" Precision="3" />
+          <Property Name="Cause" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Carries" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CEntourage" Type="Int32" />
+          <Property Name="CBringOut" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CEntryTime" Type="DateTime" Precision="3" />
+          <Property Name="CLeaveTime" Type="DateTime" Precision="3" />
+          <Property Name="CRegistar" Type="Int32" />
+          <Property Name="CInstructor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CRelustID" Type="Int32" Nullable="false" />
+          <Property Name="CInstructorTime" Type="DateTime" Precision="3" />
+          <Property Name="COpinion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CXuanXiang" Type="Int32" />
+          <NavigationProperty Name="PiShiJieGuo" Relationship="Self.FK_info_ComputerRoomVisit_PiShiJieGuo" FromRole="info_ComputerRoomVisit" ToRole="PiShiJieGuo" />
+        </EntityType>
+        <EntityType Name="info_Maintenance">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Name="MID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaintenanceTime" Type="DateTime" Precision="3" />
+          <Property Name="MDeviceName" Type="Int32" />
+          <Property Name="MDetectionUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MTestingPersonnel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MAccompanyingOfficials" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MTheRegistrar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Madvice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="info_Meeting">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Name="MID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MTime" Type="DateTime" Precision="3" />
+          <Property Name="MAudioSituation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mspeak" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mhealth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mstart" Type="DateTime" Precision="3" />
+          <Property Name="MOwer" Type="DateTime" Precision="3" />
+          <Property Name="MSolve" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MNote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOpenTime" Type="DateTime" Precision="3" />
+          <Property Name="MConference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOpinion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Msignature" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOverTime" Type="DateTime" Precision="3" />
+          <Property Name="MComments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="closeDevice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QZ" Type="Int32" />
+        </EntityType>
+        <EntityType Name="info_Offices">
+          <Key>
+            <PropertyRef Name="OID" />
+          </Key>
+          <Property Name="OID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Offices" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OAdrees" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="info_Question">
+          <Key>
+            <PropertyRef Name="QID" />
+          </Key>
+          <Property Name="QID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QRemark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="info_Registration">
+          <Key>
+            <PropertyRef Name="RID" />
+          </Key>
+          <Property Name="RID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SID" Type="Int32" />
+          <Property Name="RUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ROffice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RDate" Type="DateTime" Precision="3" />
+          <Property Name="RFunction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Requirements" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rdepartment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RInformationCenter" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remaek" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="info_Software" Relationship="Self.FK_info_Registration_info_Software" FromRole="info_Registration" ToRole="info_Software" />
+        </EntityType>
+        <EntityType Name="info_Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="info_User" Relationship="Self.FK_info_User_info_Role" FromRole="info_Role" ToRole="info_User" />
+        </EntityType>
+        <EntityType Name="info_Software">
+          <Key>
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="SID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sdynacomm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sremark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="info_Registration" Relationship="Self.FK_info_Registration_info_Software" FromRole="info_Software" ToRole="info_Registration" />
+          <NavigationProperty Name="info_Technology" Relationship="Self.FK_info_Technology_info_Technology" FromRole="info_Software" ToRole="info_Technology" />
+        </EntityType>
+        <EntityType Name="info_Technology">
+          <Key>
+            <PropertyRef Name="TID" />
+          </Key>
+          <Property Name="TID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TSerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SID" Type="Int32" />
+          <Property Name="TDate" Type="DateTime" Precision="3" />
+          <Property Name="TUserId" Type="Int32" />
+          <Property Name="TRegistrationTiime" Type="DateTime" Precision="3" />
+          <Property Name="TConsultant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TDepartment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tcontact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QID" Type="Int32" />
+          <Property Name="TDescribe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TAnswer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TAnswerTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TRemark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="info_Software" Relationship="Self.FK_info_Technology_info_Technology" FromRole="info_Technology" ToRole="info_Software" />
+        </EntityType>
+        <EntityType Name="info_User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserPass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserRealName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UseroffcePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserKeShi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserJueSe" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="info_Role" Relationship="Self.FK_info_User_info_Role" FromRole="info_User" ToRole="info_Role" />
+        </EntityType>
+        <EntityType Name="PiShiJieGuo">
+          <Key>
+            <PropertyRef Name="CRelustID" />
+          </Key>
+          <Property Name="CRelustID" Type="Int32" Nullable="false" />
+          <Property Name="CRelustName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="info_Asset" Relationship="Self.FK_info_Asset_PiShiJieGuo" FromRole="PiShiJieGuo" ToRole="info_Asset" />
+          <NavigationProperty Name="info_ComputerRoomVisit" Relationship="Self.FK_info_ComputerRoomVisit_PiShiJieGuo" FromRole="PiShiJieGuo" ToRole="info_ComputerRoomVisit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ZiChanBeiZhu">
+          <Key>
+            <PropertyRef Name="ATypeId" />
+          </Key>
+          <Property Name="ATypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ABeiZhu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="info_Asset" Relationship="Self.FK_info_Asset_ZiChanBeiZhu" FromRole="ZiChanBeiZhu" ToRole="info_Asset" />
+        </EntityType>
+        <EntityType Name="ZiChanZhuangTai">
+          <Key>
+            <PropertyRef Name="TID" />
+          </Key>
+          <Property Name="TID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TStates" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="info_Asset" Relationship="Self.FK_info_Asset_ZiChanZhuangTai" FromRole="ZiChanZhuangTai" ToRole="info_Asset" />
+        </EntityType>
+        <EntityType Name="info_Equipment">
+          <Key>
+            <PropertyRef Name="EID" />
+          </Key>
+          <Property Name="EID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EDeviceName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EquipmentModel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Eoffice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ebusinesssystem" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EbuYTime" Type="DateTime" Precision="3" />
+          <Property Name="Eyear" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Eversion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DEetailedParameters" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Esupplier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Econtact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="v_Asset">
+          <Key>
+            <PropertyRef Name="AID" />
+          </Key>
+          <Property Name="AID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ATypeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AModel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AMoney" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ABuyTime" Type="DateTime" Precision="3" />
+          <Property Name="ApplyTime" Type="DateTime" Precision="3" />
+          <Property Name="AParameter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ASuppler" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AEM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RealName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="JID" Type="Int32" />
+          <Property Name="SID" Type="Int32" />
+          <Property Name="ARemarks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CRelustID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AYears" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AExplain" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="V_ComputerRoomVisit">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CTIme" Type="DateTime" Precision="3" />
+          <Property Name="Cause" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Carries" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CEntourage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CBringOut" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CEntryTime" Type="DateTime" Precision="3" />
+          <Property Name="CLeaveTime" Type="DateTime" Precision="3" />
+          <Property Name="CRegistar" Type="Int32" />
+          <Property Name="CInstructor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CRelustID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CInstructorTime" Type="DateTime" Precision="3" />
+          <Property Name="COpinion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_info_Asset_CaiGouXingShi">
+          <End Role="CaiGouXingShi" Type="Self.CaiGouXingShi" Multiplicity="0..1" />
+          <End Role="info_Asset" Type="Self.info_Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CaiGouXingShi">
+              <PropertyRef Name="SID" />
+            </Principal>
+            <Dependent Role="info_Asset">
+              <PropertyRef Name="SID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_info_Asset_CaiGouYiJu">
+          <End Role="CaiGouYiJu" Type="Self.CaiGouYiJu" Multiplicity="0..1" />
+          <End Role="info_Asset" Type="Self.info_Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CaiGouYiJu">
+              <PropertyRef Name="JID" />
+            </Principal>
+            <Dependent Role="info_Asset">
+              <PropertyRef Name="JID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_info_Asset_PiShiJieGuo">
+          <End Role="PiShiJieGuo" Type="Self.PiShiJieGuo" Multiplicity="0..1" />
+          <End Role="info_Asset" Type="Self.info_Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PiShiJieGuo">
+              <PropertyRef Name="CRelustID" />
+            </Principal>
+            <Dependent Role="info_Asset">
+              <PropertyRef Name="CRelustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_info_Asset_ZiChanBeiZhu">
+          <End Role="ZiChanBeiZhu" Type="Self.ZiChanBeiZhu" Multiplicity="1" />
+          <End Role="info_Asset" Type="Self.info_Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZiChanBeiZhu">
+              <PropertyRef Name="ATypeId" />
+            </Principal>
+            <Dependent Role="info_Asset">
+              <PropertyRef Name="ATypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_info_Asset_ZiChanZhuangTai">
+          <End Role="ZiChanZhuangTai" Type="Self.ZiChanZhuangTai" Multiplicity="0..1" />
+          <End Role="info_Asset" Type="Self.info_Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZiChanZhuangTai">
+              <PropertyRef Name="TID" />
+            </Principal>
+            <Dependent Role="info_Asset">
+              <PropertyRef Name="TID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_info_ComputerRoomVisit_PiShiJieGuo">
+          <End Role="PiShiJieGuo" Type="Self.PiShiJieGuo" Multiplicity="1" />
+          <End Role="info_ComputerRoomVisit" Type="Self.info_ComputerRoomVisit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PiShiJieGuo">
+              <PropertyRef Name="CRelustID" />
+            </Principal>
+            <Dependent Role="info_ComputerRoomVisit">
+              <PropertyRef Name="CRelustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_info_Registration_info_Software">
+          <End Role="info_Software" Type="Self.info_Software" Multiplicity="0..1" />
+          <End Role="info_Registration" Type="Self.info_Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="info_Software">
+              <PropertyRef Name="SID" />
+            </Principal>
+            <Dependent Role="info_Registration">
+              <PropertyRef Name="SID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_info_User_info_Role">
+          <End Role="info_Role" Type="Self.info_Role" Multiplicity="1" />
+          <End Role="info_User" Type="Self.info_User" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="info_Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="info_User">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_info_Technology_info_Technology">
+          <End Role="info_Software" Type="Self.info_Software" Multiplicity="0..1" />
+          <End Role="info_Technology" Type="Self.info_Technology" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="info_Software">
+              <PropertyRef Name="SID" />
+            </Principal>
+            <Dependent Role="info_Technology">
+              <PropertyRef Name="SID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InformationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CaiGouXingShi" EntityType="Self.CaiGouXingShi" />
+          <EntitySet Name="CaiGouYiJu" EntityType="Self.CaiGouYiJu" />
+          <EntitySet Name="info_Asset" EntityType="Self.info_Asset" />
+          <EntitySet Name="info_ComputerRoomVisit" EntityType="Self.info_ComputerRoomVisit" />
+          <EntitySet Name="info_Maintenance" EntityType="Self.info_Maintenance" />
+          <EntitySet Name="info_Meeting" EntityType="Self.info_Meeting" />
+          <EntitySet Name="info_Offices" EntityType="Self.info_Offices" />
+          <EntitySet Name="info_Question" EntityType="Self.info_Question" />
+          <EntitySet Name="info_Registration" EntityType="Self.info_Registration" />
+          <EntitySet Name="info_Role" EntityType="Self.info_Role" />
+          <EntitySet Name="info_Software" EntityType="Self.info_Software" />
+          <EntitySet Name="info_Technology" EntityType="Self.info_Technology" />
+          <EntitySet Name="info_User" EntityType="Self.info_User" />
+          <EntitySet Name="PiShiJieGuo" EntityType="Self.PiShiJieGuo" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="ZiChanBeiZhu" EntityType="Self.ZiChanBeiZhu" />
+          <EntitySet Name="ZiChanZhuangTai" EntityType="Self.ZiChanZhuangTai" />
+          <EntitySet Name="info_Equipment" EntityType="Self.info_Equipment" />
+          <EntitySet Name="v_Asset" EntityType="Self.v_Asset" />
+          <EntitySet Name="V_ComputerRoomVisit" EntityType="Self.V_ComputerRoomVisit" />
+          <AssociationSet Name="FK_info_Asset_CaiGouXingShi" Association="Self.FK_info_Asset_CaiGouXingShi">
+            <End Role="CaiGouXingShi" EntitySet="CaiGouXingShi" />
+            <End Role="info_Asset" EntitySet="info_Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_info_Asset_CaiGouYiJu" Association="Self.FK_info_Asset_CaiGouYiJu">
+            <End Role="CaiGouYiJu" EntitySet="CaiGouYiJu" />
+            <End Role="info_Asset" EntitySet="info_Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_info_Asset_PiShiJieGuo" Association="Self.FK_info_Asset_PiShiJieGuo">
+            <End Role="PiShiJieGuo" EntitySet="PiShiJieGuo" />
+            <End Role="info_Asset" EntitySet="info_Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_info_Asset_ZiChanBeiZhu" Association="Self.FK_info_Asset_ZiChanBeiZhu">
+            <End Role="ZiChanBeiZhu" EntitySet="ZiChanBeiZhu" />
+            <End Role="info_Asset" EntitySet="info_Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_info_Asset_ZiChanZhuangTai" Association="Self.FK_info_Asset_ZiChanZhuangTai">
+            <End Role="ZiChanZhuangTai" EntitySet="ZiChanZhuangTai" />
+            <End Role="info_Asset" EntitySet="info_Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_info_ComputerRoomVisit_PiShiJieGuo" Association="Self.FK_info_ComputerRoomVisit_PiShiJieGuo">
+            <End Role="PiShiJieGuo" EntitySet="PiShiJieGuo" />
+            <End Role="info_ComputerRoomVisit" EntitySet="info_ComputerRoomVisit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_info_Registration_info_Software" Association="Self.FK_info_Registration_info_Software">
+            <End Role="info_Software" EntitySet="info_Software" />
+            <End Role="info_Registration" EntitySet="info_Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_info_User_info_Role" Association="Self.FK_info_User_info_Role">
+            <End Role="info_Role" EntitySet="info_Role" />
+            <End Role="info_User" EntitySet="info_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_info_Technology_info_Technology" Association="Self.FK_info_Technology_info_Technology">
+            <End Role="info_Software" EntitySet="info_Software" />
+            <End Role="info_Technology" EntitySet="info_Technology" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InformationModelStoreContainer" CdmEntityContainer="InformationEntities">
+          <EntitySetMapping Name="CaiGouXingShi">
+            <EntityTypeMapping TypeName="InformationModel.CaiGouXingShi">
+              <MappingFragment StoreEntitySet="CaiGouXingShi">
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="SName" ColumnName="SName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CaiGouYiJu">
+            <EntityTypeMapping TypeName="InformationModel.CaiGouYiJu">
+              <MappingFragment StoreEntitySet="CaiGouYiJu">
+                <ScalarProperty Name="JID" ColumnName="JID" />
+                <ScalarProperty Name="JName" ColumnName="JName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="info_Asset">
+            <EntityTypeMapping TypeName="InformationModel.info_Asset">
+              <MappingFragment StoreEntitySet="info_Asset">
+                <ScalarProperty Name="AID" ColumnName="AID" />
+                <ScalarProperty Name="AName" ColumnName="AName" />
+                <ScalarProperty Name="ATypeId" ColumnName="ATypeId" />
+                <ScalarProperty Name="AModel" ColumnName="AModel" />
+                <ScalarProperty Name="AMoney" ColumnName="AMoney" />
+                <ScalarProperty Name="ABuyTime" ColumnName="ABuyTime" />
+                <ScalarProperty Name="ApplyTime" ColumnName="ApplyTime" />
+                <ScalarProperty Name="AParameter" ColumnName="AParameter" />
+                <ScalarProperty Name="ASuppler" ColumnName="ASuppler" />
+                <ScalarProperty Name="AEM" ColumnName="AEM" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="JID" ColumnName="JID" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="ARemarks" ColumnName="ARemarks" />
+                <ScalarProperty Name="TID" ColumnName="TID" />
+                <ScalarProperty Name="CRelustID" ColumnName="CRelustID" />
+                <ScalarProperty Name="AYears" ColumnName="AYears" />
+                <ScalarProperty Name="AExplain" ColumnName="AExplain" />
+                <ScalarProperty Name="ASupplerPhone" ColumnName="ASupplerPhone" />
+                <ScalarProperty Name="AShenHeRan" ColumnName="AShenHeRan" />
+                <ScalarProperty Name="AShenHeYiJian" ColumnName="AShenHeYiJian" />
+                <ScalarProperty Name="AShenHeJieGuo" ColumnName="AShenHeJieGuo" />
+                <ScalarProperty Name="AShenHeRiQi" ColumnName="AShenHeRiQi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="info_ComputerRoomVisit">
+            <EntityTypeMapping TypeName="InformationModel.info_ComputerRoomVisit">
+              <MappingFragment StoreEntitySet="info_ComputerRoomVisit">
+                <ScalarProperty Name="CID" ColumnName="CID" />
+                <ScalarProperty Name="CName" ColumnName="CName" />
+                <ScalarProperty Name="CTIme" ColumnName="CTIme" />
+                <ScalarProperty Name="Cause" ColumnName="Cause" />
+                <ScalarProperty Name="Carries" ColumnName="Carries" />
+                <ScalarProperty Name="CEntourage" ColumnName="CEntourage" />
+                <ScalarProperty Name="CBringOut" ColumnName="CBringOut" />
+                <ScalarProperty Name="CEntryTime" ColumnName="CEntryTime" />
+                <ScalarProperty Name="CLeaveTime" ColumnName="CLeaveTime" />
+                <ScalarProperty Name="CRegistar" ColumnName="CRegistar" />
+                <ScalarProperty Name="CInstructor" ColumnName="CInstructor" />
+                <ScalarProperty Name="CRelustID" ColumnName="CRelustID" />
+                <ScalarProperty Name="CInstructorTime" ColumnName="CInstructorTime" />
+                <ScalarProperty Name="COpinion" ColumnName="COpinion" />
+                <ScalarProperty Name="CXuanXiang" ColumnName="CXuanXiang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="info_Maintenance">
+            <EntityTypeMapping TypeName="InformationModel.info_Maintenance">
+              <MappingFragment StoreEntitySet="info_Maintenance">
+                <ScalarProperty Name="MID" ColumnName="MID" />
+                <ScalarProperty Name="MaintenanceTime" ColumnName="MaintenanceTime" />
+                <ScalarProperty Name="MDeviceName" ColumnName="MDeviceName" />
+                <ScalarProperty Name="MDetectionUnit" ColumnName="MDetectionUnit" />
+                <ScalarProperty Name="MTestingPersonnel" ColumnName="MTestingPersonnel" />
+                <ScalarProperty Name="MAccompanyingOfficials" ColumnName="MAccompanyingOfficials" />
+                <ScalarProperty Name="MTheRegistrar" ColumnName="MTheRegistrar" />
+                <ScalarProperty Name="Madvice" ColumnName="Madvice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="info_Meeting">
+            <EntityTypeMapping TypeName="InformationModel.info_Meeting">
+              <MappingFragment StoreEntitySet="info_Meeting">
+                <ScalarProperty Name="MID" ColumnName="MID" />
+                <ScalarProperty Name="MName" ColumnName="MName" />
+                <ScalarProperty Name="MTime" ColumnName="MTime" />
+                <ScalarProperty Name="MAudioSituation" ColumnName="MAudioSituation" />
+                <ScalarProperty Name="MText" ColumnName="MText" />
+                <ScalarProperty Name="Mspeak" ColumnName="Mspeak" />
+                <ScalarProperty Name="Mhealth" ColumnName="Mhealth" />
+                <ScalarProperty Name="Mstart" ColumnName="Mstart" />
+                <ScalarProperty Name="MOwer" ColumnName="MOwer" />
+                <ScalarProperty Name="MSolve" ColumnName="MSolve" />
+                <ScalarProperty Name="MNote" ColumnName="MNote" />
+                <ScalarProperty Name="MOpenTime" ColumnName="MOpenTime" />
+                <ScalarProperty Name="MConference" ColumnName="MConference" />
+                <ScalarProperty Name="MUserName" ColumnName="MUserName" />
+                <ScalarProperty Name="MOpinion" ColumnName="MOpinion" />
+                <ScalarProperty Name="Msignature" ColumnName="Msignature" />
+                <ScalarProperty Name="MOverTime" ColumnName="MOverTime" />
+                <ScalarProperty Name="MComments" ColumnName="MComments" />
+                <ScalarProperty Name="closeDevice" ColumnName="closeDevice" />
+                <ScalarProperty Name="QZ" ColumnName="QZ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="info_Offices">
+            <EntityTypeMapping TypeName="InformationModel.info_Offices">
+              <MappingFragment StoreEntitySet="info_Offices">
+                <ScalarProperty Name="OID" ColumnName="OID" />
+                <ScalarProperty Name="OName" ColumnName="OName" />
+                <ScalarProperty Name="Offices" ColumnName="Offices" />
+                <ScalarProperty Name="OAdrees" ColumnName="OAdrees" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="info_Question">
+            <EntityTypeMapping TypeName="InformationModel.info_Question">
+              <MappingFragment StoreEntitySet="info_Question">
+                <ScalarProperty Name="QID" ColumnName="QID" />
+                <ScalarProperty Name="QName" ColumnName="QName" />
+                <ScalarProperty Name="QRemark" ColumnName="QRemark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="info_Registration">
+            <EntityTypeMapping TypeName="InformationModel.info_Registration">
+              <MappingFragment StoreEntitySet="info_Registration">
+                <ScalarProperty Name="RID" ColumnName="RID" />
+                <ScalarProperty Name="RName" ColumnName="RName" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="RUserId" ColumnName="RUserId" />
+                <ScalarProperty Name="ROffice" ColumnName="ROffice" />
+                <ScalarProperty Name="RDate" ColumnName="RDate" />
+                <ScalarProperty Name="RFunction" ColumnName="RFunction" />
+                <ScalarProperty Name="Requirements" ColumnName="Requirements" />
+                <ScalarProperty Name="Rdepartment" ColumnName="Rdepartment" />
+                <ScalarProperty Name="RInformationCenter" ColumnName="RInformationCenter" />
+                <ScalarProperty Name="RState" ColumnName="RState" />
+                <ScalarProperty Name="Remaek" ColumnName="Remaek" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="info_Role">
+            <EntityTypeMapping TypeName="InformationModel.info_Role">
+              <MappingFragment StoreEntitySet="info_Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="info_Software">
+            <EntityTypeMapping TypeName="InformationModel.info_Software">
+              <MappingFragment StoreEntitySet="info_Software">
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="Sdynacomm" ColumnName="Sdynacomm" />
+                <ScalarProperty Name="Sremark" ColumnName="Sremark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="info_Technology">
+            <EntityTypeMapping TypeName="InformationModel.info_Technology">
+              <MappingFragment StoreEntitySet="info_Technology">
+                <ScalarProperty Name="TID" ColumnName="TID" />
+                <ScalarProperty Name="TSerialNumber" ColumnName="TSerialNumber" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="TDate" ColumnName="TDate" />
+                <ScalarProperty Name="TUserId" ColumnName="TUserId" />
+                <ScalarProperty Name="TRegistrationTiime" ColumnName="TRegistrationTiime" />
+                <ScalarProperty Name="TConsultant" ColumnName="TConsultant" />
+                <ScalarProperty Name="TDepartment" ColumnName="TDepartment" />
+                <ScalarProperty Name="Tcontact" ColumnName="Tcontact" />
+                <ScalarProperty Name="QID" ColumnName="QID" />
+                <ScalarProperty Name="TDescribe" ColumnName="TDescribe" />
+                <ScalarProperty Name="TAnswer" ColumnName="TAnswer" />
+                <ScalarProperty Name="TAnswerTime" ColumnName="TAnswerTime" />
+                <ScalarProperty Name="TRemark" ColumnName="TRemark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="info_User">
+            <EntityTypeMapping TypeName="InformationModel.info_User">
+              <MappingFragment StoreEntitySet="info_User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPass" ColumnName="UserPass" />
+                <ScalarProperty Name="UserRealName" ColumnName="UserRealName" />
+                <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+                <ScalarProperty Name="UseroffcePhone" ColumnName="UseroffcePhone" />
+                <ScalarProperty Name="UserKeShi" ColumnName="UserKeShi" />
+                <ScalarProperty Name="UserJueSe" ColumnName="UserJueSe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PiShiJieGuo">
+            <EntityTypeMapping TypeName="InformationModel.PiShiJieGuo">
+              <MappingFragment StoreEntitySet="PiShiJieGuo">
+                <ScalarProperty Name="CRelustID" ColumnName="CRelustID" />
+                <ScalarProperty Name="CRelustName" ColumnName="CRelustName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="InformationModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZiChanBeiZhu">
+            <EntityTypeMapping TypeName="InformationModel.ZiChanBeiZhu">
+              <MappingFragment StoreEntitySet="ZiChanBeiZhu">
+                <ScalarProperty Name="ATypeId" ColumnName="ATypeId" />
+                <ScalarProperty Name="AName" ColumnName="AName" />
+                <ScalarProperty Name="ABeiZhu" ColumnName="ABeiZhu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZiChanZhuangTai">
+            <EntityTypeMapping TypeName="InformationModel.ZiChanZhuangTai">
+              <MappingFragment StoreEntitySet="ZiChanZhuangTai">
+                <ScalarProperty Name="TID" ColumnName="TID" />
+                <ScalarProperty Name="TStates" ColumnName="TStates" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="info_Equipment">
+            <EntityTypeMapping TypeName="InformationModel.info_Equipment">
+              <MappingFragment StoreEntitySet="info_Equipment">
+                <ScalarProperty Name="EID" ColumnName="EID" />
+                <ScalarProperty Name="EDeviceName" ColumnName="EDeviceName" />
+                <ScalarProperty Name="EquipmentModel" ColumnName="EquipmentModel" />
+                <ScalarProperty Name="Eoffice" ColumnName="Eoffice" />
+                <ScalarProperty Name="Ebusinesssystem" ColumnName="Ebusinesssystem" />
+                <ScalarProperty Name="EbuYTime" ColumnName="EbuYTime" />
+                <ScalarProperty Name="Eyear" ColumnName="Eyear" />
+                <ScalarProperty Name="Eversion" ColumnName="Eversion" />
+                <ScalarProperty Name="DEetailedParameters" ColumnName="DEetailedParameters" />
+                <ScalarProperty Name="Esupplier" ColumnName="Esupplier" />
+                <ScalarProperty Name="EPhone" ColumnName="EPhone" />
+                <ScalarProperty Name="Econtact" ColumnName="Econtact" />
+                <ScalarProperty Name="EIP" ColumnName="EIP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_Asset">
+            <EntityTypeMapping TypeName="InformationModel.v_Asset">
+              <MappingFragment StoreEntitySet="v_Asset">
+                <ScalarProperty Name="AID" ColumnName="AID" />
+                <ScalarProperty Name="AName" ColumnName="AName" />
+                <ScalarProperty Name="ATypeId" ColumnName="ATypeId" />
+                <ScalarProperty Name="AModel" ColumnName="AModel" />
+                <ScalarProperty Name="AMoney" ColumnName="AMoney" />
+                <ScalarProperty Name="ABuyTime" ColumnName="ABuyTime" />
+                <ScalarProperty Name="ApplyTime" ColumnName="ApplyTime" />
+                <ScalarProperty Name="AParameter" ColumnName="AParameter" />
+                <ScalarProperty Name="ASuppler" ColumnName="ASuppler" />
+                <ScalarProperty Name="AEM" ColumnName="AEM" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="JID" ColumnName="JID" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="ARemarks" ColumnName="ARemarks" />
+                <ScalarProperty Name="TID" ColumnName="TID" />
+                <ScalarProperty Name="CRelustID" ColumnName="CRelustID" />
+                <ScalarProperty Name="AYears" ColumnName="AYears" />
+                <ScalarProperty Name="AExplain" ColumnName="AExplain" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_ComputerRoomVisit">
+            <EntityTypeMapping TypeName="InformationModel.V_ComputerRoomVisit">
+              <MappingFragment StoreEntitySet="V_ComputerRoomVisit">
+                <ScalarProperty Name="CID" ColumnName="CID" />
+                <ScalarProperty Name="CName" ColumnName="CName" />
+                <ScalarProperty Name="CTIme" ColumnName="CTIme" />
+                <ScalarProperty Name="Cause" ColumnName="Cause" />
+                <ScalarProperty Name="Carries" ColumnName="Carries" />
+                <ScalarProperty Name="CEntourage" ColumnName="CEntourage" />
+                <ScalarProperty Name="CBringOut" ColumnName="CBringOut" />
+                <ScalarProperty Name="CEntryTime" ColumnName="CEntryTime" />
+                <ScalarProperty Name="CLeaveTime" ColumnName="CLeaveTime" />
+                <ScalarProperty Name="CRegistar" ColumnName="CRegistar" />
+                <ScalarProperty Name="CInstructor" ColumnName="CInstructor" />
+                <ScalarProperty Name="CRelustID" ColumnName="CRelustID" />
+                <ScalarProperty Name="CInstructorTime" ColumnName="CInstructorTime" />
+                <ScalarProperty Name="COpinion" ColumnName="COpinion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="InformationModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="InformationModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="InformationModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="InformationModel.Store.sp_helpdiagramdefinition" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="InformationModel.Store.sp_helpdiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="InformationModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="InformationModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

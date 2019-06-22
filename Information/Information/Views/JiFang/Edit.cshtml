@@ -1,0 +1,166 @@
+﻿@model Entity.V_ComputerRoomVisit 
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>查看机房出入申请表</title>
+    <link href="~/css/css.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.11.1.js"></script>
+    <script src="~/DatePicker/WdatePicker.js"></script>
+
+    <script src="~/Scripts/jquery-1.11.1.js"></script>
+    <script type="text/javascript">
+        $(document).on("click", ".JiFang input", function () {
+            WdatePicker();
+        })
+
+    </script>
+
+    <style type="text/css">
+        input {
+            outline: none;
+            background: transparent;
+            border: none;
+            outline: medium;
+        }
+
+        .JiaCu input {
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body>
+    <h2 align="left"> 机房出入申请表 </h2>
+    <form method="post">
+        <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse"
+               bordercolor="#6c9ec1">
+            <tr>
+                <td align="left" style="height: 30px">
+                    登记人：
+                </td>
+                <td align="left">
+                    @ViewData["DengJiren"]
+                </td>
+                <td align="left">
+                    @Html.HiddenFor(model => model.CID, htmlAttributes: new { @class = "control-label col-md-2" })
+                &nbsp;
+            </td>
+            <td align="left">
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 30px" align="left">
+                来访日期：
+            </td>
+            <td align="left">
+                @Html.TextBoxFor(model => model.CTIme, htmlAttributes: new { @class = "control-label col-md-2" })
+            </td>
+            <td align="left">
+                来访人员：
+            </td>
+            <td align="left">
+                @Html.TextBoxFor(model => model.CName, htmlAttributes: new { @class = "control-label col-md-2" })
+            </td>
+        </tr>
+        <tr>
+            <td align="left">
+                来访事由：
+            </td>
+            <td align="left" colspan="3">
+                @Html.TextAreaFor(model => model.Cause, htmlAttributes: new { @class = "control-label col-md-2" })
+            </td>
+        </tr>
+        <tr>
+            <td align="left" class="style1">
+                携带物品：
+            </td>
+            <td align="left" class="style1">
+                @Html.EditorFor(model => model.Carries, new { htmlAttributes = new { @class = "form-control" } })
+            </td>
+            <td align="left" class="style1">
+                陪同人员：
+            </td>
+            <td align="left" class="style1">
+                @Html.TextBoxFor(model => model.CEntourage, htmlAttributes: new { @class = "control-label col-md-2" })
+            </td>
+        </tr>
+        <tr id="tr_yincang2">
+            <td align="left">
+                进入机房时间：
+            </td>
+            <td align="left" class="JiFang">
+                @Html.TextBoxFor(model => model.CEntryTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            </td>
+            <td align="left">
+                离开机房时间：
+            </td>
+            <td align="left" class="JiFang">
+                @Html.TextBoxFor(model => model.CLeaveTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            </td>
+        </tr>
+        <tr id="tr_yincang3" runat="server" visible="false">
+            <td align="left">
+                带出物品：
+            </td>
+            <td align="left" colspan="2">
+                @Html.TextAreaFor(model => model.CBringOut, htmlAttributes: new { @class = "control-label col-md-2" })
+                @*<asp:TextBox ID="txt_dcwp" runat="server" Width="360px" BorderColor="#3399FF" BorderWidth="1px"
+                             Rows="4" TextMode="MultiLine"></asp:TextBox>*@
+            </td>
+            <td align="left">
+                如果没有带出物品不用填写<br />
+                如果带出物品必填
+            </td>
+        </tr>
+            <tr id="tr_sh">
+                <td style="height: 20px">
+                    主任批示
+                </td>
+                <td align="left" colspan="3" style="padding-right: 0px; padding-left: 0px; padding-bottom: 0px;
+                                                        margin: 0px; padding-top: 0px" valign="middle">
+                    <table align="center" cellpadding="3" cellspacing="0" width="100%">
+                        <tr height="22" class="JiaCu">
+                            <td align="left">
+                                批示结果：&nbsp;&nbsp;<b>
+                                    @Html.TextBoxFor(Model => Model.CRelustID)
+                                </b>
+                            </td>
+                            <td align="left">
+                                批示人：<b>
+                                    @Html.TextBoxFor(Model => Model.CInstructor)
+                                </b>
+                            </td>
+                            <td align="left">
+                                批示日期：<b>
+                                    @Html.TextBoxFor(Model => Model.CInstructorTime)
+                                </b>
+                            </td>
+                        </tr>
+                        <tr style="border-top: 1px; border-top-color: #6c9ec1; border-bottom: 0px; border-left: 0px;
+                                                                border-right: 0px; border-style: solid" height="22" class="JiaCu">
+                            <td align="left" colspan="3">
+                                批示意见： <b>
+                                    @Html.TextBoxFor(Model => Model.COpinion)
+                                </b>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        <tr>
+            <td align="center" colspan="4" width="26">
+                <input id="btn_Bao" type="submit" value="保存" class="btn1" onclick="location.href = '/JiFang/Edit'" />
+                <input id="btn_add" type="button" value="返回" class="btn1" onclick="location.href = '/JiFang/Index'" />
+            </td>
+        </tr>
+        <tr></tr>
+    </table>
+</form>
+</body>
+</html>
