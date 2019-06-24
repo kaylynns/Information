@@ -9,11 +9,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
-    @*<script src="~/Scripts/WebDatePicker.js"></script>*@
+    <title>Edit</title>
     <link href="~/css/bootstrap.css" rel="stylesheet" />
     <link href="~/css/css.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-1.7.2.min.js"></script>
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/vue.js"></script>
@@ -22,22 +20,6 @@
         $(function () {
             $("#JID").hide();
         })
-        function img_select() {
-            show();
-            $(document).on("dblclick", "#option", function () {
-                $("#YiJu").val($("#option").text());
-                $('#myModal').modal('hide');
-                // var jid = $("#jid").text();//获取jid    $("ul li:nth-child(2)")
-                $("#JID").val($("#jid").text());//获取jid
-                
-            })
-           
-        }
-
-        $(document).on("click", ".date input", function () {
-            WdatePicker();
-        })
-      
         var vm;
         function show() {
             //每个 Vue.js 应用的起步都是通过构造函数 Vue 创建一个 Vue 的根实例：
@@ -62,36 +44,47 @@
             vm.load();
         }
 
-        function Add() {
+        function img_select() {
+            show();
+            $(document).on("dblclick", "#option", function () {
+                $("#YiJu").val($("#option").text());
+                $('#myModal').modal('hide');
+            })
+
+        }
+        function Update() {
             if (msg == "ok") {
-                alert("添加成功！");
-                window.location.href = "/Asset/Index";
+                alert("修改成功！");
+                window.location.href = "/Asset/AssetSelect";
             }
         }
 
     </script>
-   
 </head>
+
 <body>
-   @using (Ajax.BeginForm("Create", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Add" }))
-   {
+    @using (Ajax.BeginForm("AssetEdits", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Update" }))
+    {
         <h2>资产登记表</h2>
         <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse"
                bordercolor="#6c9ec1">
             <tr>
                 <td>
+                    @Html.HiddenFor(model => model.AID)
                     @Html.Label("采购依据:")
                 </td>
-                <td id="td1">
-                   
-                    <font face="宋体">
-                       <input id="YiJu" type="text"/>
-                      
-                        @Html.EditorFor(model => model.JID)
-                        <img id="Img1" alt="请选择" src="../img/lookup.gif"  data-toggle="modal"  data-target="#myModal" 
-                          onclick="img_select()"  />
-                    </font>
+                <td>
+                    @foreach (CaiGouYiJu item in ViewBag.jname)
+                    {
 
+                        <font face="宋体">
+
+                            @Html.TextBox("YiJu", item.JName)
+                            @Html.EditorFor(model => model.JID)
+                            <img id="Img1" alt="请选择" src="~/img/lookup.gif" data-toggle="modal" data-target="#myModal"
+                                 onclick="img_select()" />
+                        </font>
+                    }
                 </td>
                 <td>
                     @Html.Label("采购形式:")
@@ -134,7 +127,8 @@
                     @Html.Label("购入时间:")
                 </td>
                 <td class="date">
-                   @Html.EditorFor(model => model.ABuyTime)
+                    @Html.EditorFor(model => model.ABuyTime)
+
                 </td>
                 <td>
                     @Html.Label("资产类别:")
@@ -176,14 +170,14 @@
                     @Html.Label("备注:")
                 </td>
                 <td colspan="3">
-                  
-                    @Html.TextAreaFor(model => model.ARemarks,new { cols = "50" })
+
+                    @Html.TextAreaFor(model => model.ARemarks, new { cols = "50" })
                 </td>
             </tr>
             <tr>
                 <td colspan="4" align="center">
                     <input id="btn_save" type="submit" value="保 存" class="btn1" />
-                    <input id="btn_QX" type="button" value="返回" class="btn1" style="margin-left:30px" onclick="window.location.href = '/Asset/Index'"/>
+                    <input id="btn_QX" type="button" value="返回" class="btn1" style="margin-left:30px" onclick="window.location.href = '/Asset/AssetSelect'" />
 
                 </td>
             </tr>
@@ -191,69 +185,68 @@
     }
 
 
-   <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <table id="Table2" border="0" cellpadding="3" cellspacing="0" class="table3"  align="center">
+                    <table id="Table2" border="0" cellpadding="3" cellspacing="0" class="table3">
                         <tr>
-                            <td colspan="3" align="center">
+                            <td colspan="3">
                                 <asp:ScriptManager ID="ScriptManager1" runat="server">
                                 </asp:ScriptManager>
                                 <asp:Panel ID="Panel1" runat="server" Width="100%">
-                                    <h2>采购依据查询</h2>
                                     @*<table border="0" cellpadding="0" cellspacing="0" style="width: 100%">
-                                        <tr>
-                                            <td>
-                                                编号：
-                                            </td>
-                                            <td align="center">
-                                                <input id="Text1" type="text" />
-                                            </td>
-                                            <td align="left">
-                                                <input id="Button1" type="button" value="查询"  Class="btn1"  style="margin-left:10px"/>
-                                            </td>
-                                            <td align="right">
-                                                &nbsp;
-                                            </td>
-                                        </tr>
-                                    </table>*@
+                                            <tr>
+                                                <td>
+                                                    编号：
+                                                </td>
+                                                <td align="center">
+                                                    <input id="Text1" type="text" />
+                                                </td>
+                                                <td align="left">
+                                                    <input id="Button1" type="button" value="查询" Class="btn1" style="margin-left:10px" />
+                                                </td>
+                                                <td align="right">
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                        </table>*@
                                     <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse;margin:10px 0px 0px 20px"
-                                           bordercolor="#6c9ec1" width="200px" >
+                                           bordercolor="#6c9ec1" width="200px">
                                         <tr>
-                                           
-                                           <td>请示报告</td>
+
+                                            <td>请示报告</td>
                                         </tr>
                                         <tr v-for="(item,i) in nums">
-                                           
                                             <td colspan="2">
-                                                <span id="jid" style="display:none">{{item.JID}}</span>
                                                 <select size="10" style="width: 200px;" id="sel">
-                                                <option id="option" >{{item.JName}}</option>
+                                                    @*<option  id="option">{{item.JID}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<text  id="op_name">{{item.JName}}</text></option>*@
+                                                    <option id="option" value="{{item.JID}}">{{item.JName}}</option>
                                                 </select>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="2" align="center">
-                                                <input id="Button1" type="button" value="关闭" data-dismiss="modal"   Class="btn1" />
+                                                <input id="Button1" type="button" value="关闭" data-dismiss="modal" Class="btn1" />
                                             </td>
                                         </tr>
                                     </table>
-                        <br />
+                                    <br />
 
-                        </td>
+                            </td>
                         </tr>
                     </table>
                 </div>
-             <div >
-              
-            </div>
-                    
-                  
-              
+                <div>
+
+                </div>
+
+
+
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
 </body>
 </html>
+

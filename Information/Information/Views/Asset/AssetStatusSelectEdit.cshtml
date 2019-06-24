@@ -1,0 +1,146 @@
+﻿@model Entity.info_Asset
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AssetReviewEdit</title>
+    <link href="~/css/css.css" rel="stylesheet" />
+    <script src="~/Scripts/DatePicker/WdatePicker.js"></script>
+    <script src="~/Scripts/jquery-1.7.1.js"></script>
+    <style type="text/css">
+        .sq input {
+            outline: none;
+            background: transparent;
+            border: none;
+            outline: medium;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $(document).on("click", ".date input", function () {
+                WdatePicker();
+            })
+        })
+
+        function Update() {
+            if (msg == "ok") {
+                alert("报废申请成功！");
+                window.location.href = "/Asset/AssetRepairSelect";
+            }
+        }
+    </script>
+
+</head>
+<body>
+    @using (Ajax.BeginForm("AssetReviewEdits", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Update" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <h4>资产报废停用维修审核</h4>
+        <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse"
+               bordercolor="#6c9ec1">
+            <tr class="sq">
+                <td>产品类别</td>
+                <td>
+                    @Html.HiddenFor(model => model.AID)
+                    @Html.HiddenFor(model => model.ATypeId)
+                    @foreach (ZiChanBeiZhu item in ViewBag.ATypeId)
+                    {
+                        @Html.TextBox("ATypeId", item.AName, new { @readonly = "readonly" })
+                    }
+
+                </td>
+                <td>资产名称</td>
+                <td>@Html.TextBoxFor(model => model.AName, new { @readonly = "readonly" })</td>
+            </tr>
+            <tr class="sq">
+                <td>资产型号</td>
+                <td>@Html.TextBoxFor(model => model.AModel, new { @readonly = "readonly" })</td>
+                <td>详细参数</td>
+                <td>@Html.TextBoxFor(model => model.AParameter, new { @readonly = "readonly" })</td>
+            </tr>
+            <tr class="sq">
+                <td>资产备注</td>
+                <td>@Html.TextBoxFor(model => model.ARemarks, new { @readonly = "readonly" })</td>
+                <td>供货商</td>
+                <td>@Html.TextBoxFor(model => model.ASuppler, new { @readonly = "readonly" })</td>
+            </tr>
+            <tr class="sq">
+                <td>供货商电话</td>
+                <td>@Html.TextBoxFor(model => model.ASupplerPhone, new { @readonly = "readonly" })</td>
+                <td>采购依据</td>
+                <td>
+                    @foreach (CaiGouYiJu item1 in ViewBag.JID)
+                    {
+                        @Html.TextBoxFor(model => item1.JName, new { @readonly = "readonly" })
+                        @Html.HiddenFor(model => model.JID);
+                    }
+                </td>
+            </tr>
+            <tr class="sq">
+                <td>采购形式</td>
+                <td>
+                    @foreach (CaiGouXingShi item2 in ViewBag.SID)
+                    {
+                        @Html.TextBoxFor(model => item2.SName, new { @readonly = "readonly" })
+                        @Html.HiddenFor(model => model.SID);
+                    }
+                </td>
+                <td>金额</td>
+                <td>@Html.TextBoxFor(model => model.AMoney, new { @readonly = "readonly" })</td>
+            </tr>
+
+            <tr class="sq">
+                <td>设备负责人</td>
+                <td>@Html.TextBoxFor(model => model.AEM, new { @readonly = "readonly" })</td>
+                <td>购入时间</td>
+                <td>@Html.TextBoxFor(model => model.ABuyTime, new { @readonly = "readonly" })</td>
+            </tr>
+            <tr class="sq">
+                <td>使用年限</td>
+                <td>@Html.TextBoxFor(model => model.AYears, new { @readonly = "readonly" })</td>
+                <td>资产状态</td>
+                <td>
+                    @Html.RadioButtonFor(model => model.TID, "1")使用中
+                    @Html.RadioButtonFor(model => model.TID, "4")维修
+                    @Html.RadioButtonFor(model => model.TID, "3")停用
+                    @Html.RadioButtonFor(model => model.TID, "2")报废
+                </td>
+            </tr>
+            <tr class="sq">
+                <td>申请日期</td>
+                <td class="date">@Html.TextBoxFor(model => model.ApplyTime, new { @readonly = "readonly" })</td>
+                <td>备注</td>
+                <td colspan="2">@Html.TextBoxFor(model => model.AExplain, new { @readonly = "readonly" })</td>
+
+            </tr>
+
+            <tr class="sq">
+                <td>审核</td>
+                <td colspan="3">
+                    @*@Html.RadioButtonFor(model => model.AShenHeJieGuo, "同意", new { @checked = true })同意
+                    @Html.RadioButtonFor(model => model.AShenHeJieGuo, "不同意")不同意<br />*@
+                    审核结果：@Html.TextBoxFor(model => model.AShenHeJieGuo)
+                    审核人：@Html.TextBoxFor(model => model.AShenHeRan)
+                    审核日期：@Html.TextBoxFor(model => model.AShenHeRiQi)<br />
+                    审核意见：@Html.TextBoxFor(model => model.AShenHeYiJian)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <input id="btn_QX" type="button" value="返回" class="btn1" style="margin-left:30px" onclick="window.location.href = '/Asset/AssetStatusSelect'" />
+
+                </td>
+            </tr>
+        </table>
+    }
+
+
+</body>
+</html>
