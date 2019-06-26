@@ -50,10 +50,29 @@
             $('.nav-header').click(function () {
                 $(this).next(".nav").toggle(300);
             });
+                                                <a class="a1" href="~/Asset/AssetSelect" target="main">资产登记</a>
+                                            </td>
+                                        </tr>
 
+                                        <tr>
+                                            <td width="13%" align="center">
+                                                <img src="~/img/left_1.gif" width="8" height="8" />
+                                            </td>
+                                            <td width="87%">
+                                                <a class="a1" href="/Asset/AssetRepairSelect" target="main">资产维修报废申请</a>
+                                            </td>
+                                        </tr>
 
             });
     </script>
+                                        <tr>
+                                            <td width="13%" align="center">
+                                                <img src="~/img/left_1.gif" width="8" height="8" />
+                                            </td>
+                                            <td width="87%">
+                                                <a class="a1" href="/Asset/AssetReviewSelect" target="main">资产维修报废审核</a>
+                                            </td>
+                                        </tr>
 
 </head>
 <body class="" style="background-color:#F3F3F3">
@@ -69,8 +88,19 @@
             <li><a href="calendar.html" target="main">资产设备统计查询</a></li>
 
         </ul>
+                                        <tr>
+                                            <td width="13%" align="center">
+                                                <img src="~/img/left_1.gif" width="8" height="8" />
+                                            </td>
+                                            <td width="87%">
+                                                <a class="a1" href="/Asset/AssetStatusSelect" target="main">资产维修报废查询</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
 
-        @*机房管理*@
+                            @*机房管理*@
         <p class="nav-header"><a href="#dashboard-menu"><i class="icon-dashboard"></i>机房管理</a></p>
         <ul id="accounts-menu" class="nav nav-list collapse in">
             <li><a href="index.html" target="main">机房进出申请</a></li>
@@ -81,7 +111,7 @@
             <li><a href="#" target="main">机房维护维修查询</a></li>
         </ul>
 
-        @*视频会议*@
+                            @*视频会议*@
         <p class="nav-header"><a href="#dashboard-menu"><i class="icon-dashboard"></i>视频会议</a></p>
         <ul id="accounts-menu" class="nav nav-list collapse in">
             <li><a href="~/Meeting/Index" target="main">会议测试及开会记录</a></li>
@@ -91,7 +121,7 @@
             <li><a href="/Meeting/selectCX" target="main">视频会议查询</a></li>
         </ul>
 
-        @*软件维护*@
+                            @*软件维护*@
         <p class="nav-header"><a href="#dashboard-menu"><i class="icon-dashboard"></i>软件维护</a></p>
         <ul id="accounts-menu" class="nav nav-list collapse in">
             <li><a href="~/Meeting/Index" target="main">技术支持内容登记</a></li>
@@ -118,7 +148,7 @@
             <li><a href="/Meeting/IndexQZ" target="main">业务系统使用查询</a></li>
         </ul>
 
-        @*查询统计*@
+                            @*查询统计*@
         <p class="nav-header"><a href="#dashboard-menu"><i class="icon-dashboard"></i>系统设置</a></p>
         <ul id="accounts-menu" class="nav nav-list collapse in">
             <li><a href="~/Meeting/Index" target="main">权限管理</a></li>
@@ -130,6 +160,6 @@
             <li><a href="/Meeting/IndexQZ" target="main">问题分类维护</a></li>
             <li><a href="/Meeting/IndexQZ" target="main">人员情况查询</a></li>
         </ul>
-    </div>
+        </div>
 </body>
 </html>

@@ -14,9 +14,11 @@
     <script src="~/Scripts/DatePicker/WdatePicker.js"></script>
     <script src="~/Scripts/jquery-1.7.1.js"></script>
     <style type="text/css">
-        .sq {
-             
-        
+        .sq input{
+            outline:none;
+            background:transparent;
+            border:none;
+            outline:medium;
         }
     </style>
     <script type="text/javascript">
@@ -25,59 +27,59 @@
                 WdatePicker();
             })
         })
-      
+
         function Update() {
             if (msg == "ok") {
                 alert("报废申请成功！");
-                window.location.href = "/AssetRepair/AssetRepairSelect";
+                window.location.href = "/Asset/AssetRepairSelect";
             }
         }
     </script>
-  
+
 
 </head>
 <body>
-    @using (Ajax.BeginForm("Edit", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Update" }))
+    @using (Ajax.BeginForm("AssetRepairEdits", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Update" }))
     {
         @Html.AntiForgeryToken()
 
-            <h4>资产维修报废申请</h4>
+        <h4>资产维修报废申请</h4>
             <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse"
                    bordercolor="#6c9ec1">
                 <tr class="sq">
                     <td>产品类别</td>
-                    <td >
+                    <td>
                         @Html.HiddenFor(model => model.AID)
                         @Html.HiddenFor(model => model.ATypeId)
-                    @foreach (ZiChanBeiZhu item in ViewBag.ATypeId)
-                    {
-                        @Html.TextBox("ATypeId", item.AName, new { @readonly = "readonly" })
-                    }
-                     
+                        @foreach (ZiChanBeiZhu item in ViewBag.ATypeId)
+                        {
+                            @Html.TextBox("ATypeId", item.AName, new { @readonly = "readonly" })
+                        }
+
                     </td>
                     <td>资产名称</td>
                     <td>@Html.TextBoxFor(model => model.AName, new { @readonly = "readonly" })</td>
                 </tr>
-                <tr  class="sq">
+                <tr class="sq">
                     <td>资产型号</td>
                     <td>@Html.TextBoxFor(model => model.AModel, new { @readonly = "readonly" })</td>
                     <td>详细参数</td>
                     <td>@Html.TextBoxFor(model => model.AParameter, new { @readonly = "readonly" })</td>
                 </tr>
-                <tr  class="sq">
+                <tr class="sq">
                     <td>资产备注</td>
                     <td>@Html.TextBoxFor(model => model.ARemarks, new { @readonly = "readonly" })</td>
                     <td>供货商</td>
                     <td>@Html.TextBoxFor(model => model.ASuppler, new { @readonly = "readonly" })</td>
                 </tr>
-                <tr  class="sq">
+                <tr class="sq">
                     <td>供货商电话</td>
-                    <td>@Html.TextBox("phone")</td>
+                    <td>@Html.TextBoxFor(model => model.ASupplerPhone, new { @readonly = "readonly" })</td>
                     <td>采购依据</td>
                     <td>
                         @foreach (CaiGouYiJu item1 in ViewBag.JID)
                         {
-                        @Html.TextBoxFor(model => item1.JName, new { @readonly = "readonly" })
+                            @Html.TextBoxFor(model => item1.JName, new { @readonly = "readonly" })
                             @Html.HiddenFor(model => model.JID);
                         }
                     </td>
@@ -85,11 +87,12 @@
                 <tr class="sq">
                     <td>采购形式</td>
                     <td>
-                    @foreach (CaiGouXingShi item2 in ViewBag.SID)
-                    {
-                    @Html.TextBoxFor(model =>item2.SName , new { @readonly = "readonly" })
-                        @Html.HiddenFor(model => model.SID);
-                    }</td>
+                        @foreach (CaiGouXingShi item2 in ViewBag.SID)
+                        {
+                            @Html.TextBoxFor(model => item2.SName, new { @readonly = "readonly" })
+                            @Html.HiddenFor(model => model.SID);
+                        }
+                    </td>
                     <td>金额</td>
                     <td>@Html.TextBoxFor(model => model.AMoney, new { @readonly = "readonly" })</td>
                 </tr>
@@ -98,14 +101,14 @@
                     <td>设备负责人</td>
                     <td>@Html.TextBoxFor(model => model.AEM, new { @readonly = "readonly" })</td>
                     <td>购入时间</td>
-                    <td >@Html.TextBoxFor(model => model.ABuyTime, new { @readonly = "readonly" })</td>
+                    <td>@Html.TextBoxFor(model => model.ABuyTime, new { @readonly = "readonly" })</td>
                 </tr>
                 <tr>
                     <td>使用年限</td>
                     <td>@Html.TextBoxFor(model => model.AYears)</td>
                     <td>资产状态</td>
                     <td>
-                        @Html.RadioButtonFor(model => model.TID,"1",new { @checked=true})使用中
+                        @Html.RadioButtonFor(model => model.TID, "1", new { @checked = true })使用中
                         @Html.RadioButtonFor(model => model.TID, "4")维修
                         @Html.RadioButtonFor(model => model.TID, "3")停用
                         @Html.RadioButtonFor(model => model.TID, "2")报废
@@ -116,12 +119,12 @@
                     <td class="date">@Html.TextBoxFor(model => model.ApplyTime)</td>
                     <td>备注</td>
                     <td colspan="2">@Html.TextAreaFor(model => model.AExplain)<font color="red">*</font>必填,请填写报废/停用/维修的原因</td>
-   
+
                 </tr>
                 <tr>
                     <td colspan="4" align="center">
                         <input id="btn_save" type="submit" value="保 存" class="btn1" />
-                        <input id="btn_QX" type="button" value="返回" class="btn1" style="margin-left:30px" onclick="window.location.href = '/AssetRepair/AssetRepairSelect'" />
+                        <input id="btn_QX" type="button" value="返回" class="btn1" style="margin-left:30px" onclick="window.location.href = '/Asset/AssetRepairSelect'" />
 
                     </td>
                 </tr>
@@ -129,7 +132,7 @@
 
 
     }
-    
-   
+
+
 </body>
 </html>

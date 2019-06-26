@@ -33,7 +33,7 @@ namespace Entity
         public string AYears { get; set; }
         public string AExplain { get; set; }
         public string ASupplerPhone { get; set; }
-        public Nullable<int> AShenHeRan { get; set; }
+        public string AShenHeRan { get; set; }
         public string AShenHeYiJian { get; set; }
         public string AShenHeJieGuo { get; set; }
         public string AShenHeRiQi { get; set; }

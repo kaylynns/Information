@@ -1,4 +1,4 @@
-﻿@model Entity.info_Asset
+﻿@model Entity.ZiChanBeiZhu
 @{
     Layout = null;
 }
@@ -8,12 +8,10 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>资产设备登记</title>
-    <meta http-equiv="content-type" content="application/ms-excel; charset=UTF-8" />
-    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <title>资产报废停用维修审核</title>
     <link href="~/css/css.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.10.2.js"></script>
-    <script src="~/Scripts/WebDatePicker.js" type="text/javascript"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/vue.js"></script>
     <style type="text/css">
@@ -54,10 +52,8 @@
             background: #bcd4ec; /*这个将是鼠标高亮行的背景色*/
         }
     </style>
-    <script>
-       
-        $(function () {
-
+    <script type="text/javascript">
+        $(document).ready(function () { //这个就是传说的ready
             $(".t1 tr").mouseover(function () {
                 //如果鼠标移到class为stripe的表格的tr上时，执行函数
                 $(this).addClass("over");
@@ -67,22 +63,17 @@
             }) //移除该行的class
             $(".t1 tr:even").addClass("alt");
             //给class为stripe的表格的偶数行添加class值为alt
-
-            $("#btn_add").click(function () {
-                window.location.href = "/Meeting/Create";
-            })
-            $("#btn_clear").click(function () {
-                $("#Text1").val("");
-            })
-        
-        })
-
+        });
     </script>
     <script type="text/javascript">
         var pageSize = 1;
         var vm;
         var pages;
         var currentPage = 1;
+        var vm;
+        var TName="";
+        var AName="";
+        var AType="";
         $(function () {
             //每个 Vue.js 应用的起步都是通过构造函数 Vue 创建一个 Vue 的根实例：
             vm = new Vue({
@@ -90,29 +81,33 @@
                 data: {    //每个 Vue 实例都会代理其 data 对象里所有的属性
                     nums: null
                 }, methods: {
-                    load: function (currPage) {
+                    load: function (currPage,AType, AName, TName) {
                         var t = this;
                         $.ajax({
-                            url: "/Asset/index2",
+                            url: "/Asset/AssetReviewFen",
                             type: "Post",
-                            data: "currentPage=" + currPage,
+                            data: "currentPage=" + currPage + "&AType=" + AType + "&AName=" + AName + "&TName=" + TName,
                             success: function (msg) {
                                 var dt = eval("(" + msg + ")");
                                 t.nums = dt["data"];
+                                var dd= dt["data"];
+
                                 var rows = dt["rows"];
                                 pages = dt["pages"];
                                 $("#leftPage").text("共有" + rows + "条记录，当前第" + currentPage + "/" + pages + "页");
+
                             }
                         })
                     }
+
                 }
             });
             //加载
-            vm.load(currentPage);
+            vm.load(currentPage, AType, AName, TName);
             //首页
             $("#first").click(function () {
                 currentPage = 1;
-                vm.load(currentPage);
+                vm.load(currentPage, AType, AName, TName);
             })
 
             //上一页
@@ -120,7 +115,7 @@
                 if (currentPage > 1) {
                     currentPage--;
                 }
-                vm.load(currentPage);
+                vm.load(currentPage, AType, AName, TName);
             })
 
             //下一页
@@ -128,43 +123,38 @@
                 if (currentPage < pages) {
                     currentPage++;
                 }
-                vm.load(currentPage);
-                show("currentPage=" + currentPage);
+                vm.load(currentPage, AType, AName, TName);
             })
             //尾页
             $("#last").click(function () {
                 currentPage = pages;
-                vm.load(currentPage);
+                vm.load(currentPage, AType, AName, TName);
             })
+
+            //双击选中
+            $(document).on("dblclick", "#option", function () {
+                $("#txt_type").val($(this).val());
+                $('#myModal').modal('hide');
+            })
+
+            //查询
+            $("#btn_select").click(function () {
+                AType = $("#txt_type").val();
+                 TName = $("#Select1").val();
+                 AName = $("#txt_name").val();
+                 vm.load(currentPage,AType,AName,TName);
+            })
+
         })
-
-        function btn_select() {
-            alert("查询");
-            var AType = $("#txt_type").val();
-            var AName = $("#txt_name").val();
-            alert(AType + ":" + AName);
-            if (AType != "" && AName !="") {
-                alert(a);
-                show("currentpage=" + currentpage + "&AName=" + AName + "&AType=" + AType)
-            } else {
-                alert(b);
-                show("currentpage=" + 1);
-            }
-
-
-          
-
-        }
 
         function img_select() {
             //点击资产类别的图片，查询出所有的资产类别
             Select_Type();
         }
-
-        var vm;
+        var vms;
         function Select_Type() {
             //每个 Vue.js 应用的起步都是通过构造函数 Vue 创建一个 Vue 的根实例：
-            vm = new Vue({
+            vms = new Vue({
                 el: ".modal-body",
                 data: {    //每个 Vue 实例都会代理其 data 对象里所有的属性
                     nums: null
@@ -182,59 +172,89 @@
                     }
                 }
             });
-            vm.load();
+            vms.load();
         }
-    
+
+
+        //点击添加模态框隐藏
+        function btnAdd() {
+            $("#myModal").hide();
+        }
+        //点击返回模态框显示
+        function hui() {
+            $("#myModal").show();
+        }
+
+
+
+
     </script>
+
+
 </head>
 <body>
     <div id="zong">
+        <h2 align="center">资产维修报废申请</h2>
+        <table border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+            <tr>
+                <td>
+                    资产类别：<input id="txt_type" type="text" />
+                </td>
+                <td>
+                    <font face="宋体">
+                        <img id="Img1" alt="请选择" src="../img/lookup.gif" style="margin-left:10px;" OnClick="img_select()" data-toggle="modal" data-target="#myModal" />
+                    </font>
+                </td>
 
-        <h2 align="center">资产登记表</h2>
-        <div>
-            <table border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
-                <tr>
-                    <td>
-                        资产类别：<input id="txt_type" type="text"  />
-                    </td>
-                    <td>
-                        <font face="宋体">
-                            <img id="Img1" alt="请选择" src="../img/lookup.gif" style="margin-left:10px;" OnClick="img_select()" data-toggle="modal"  data-target="#myModal" />
-                        </font>
-                    </td>
+                <td> 资产名称：<input id="txt_name" type="text" /></td>
+                <td>
+                    资产状态:<select id="Select1">
+                        <option value="" selected="selected">全部</option>
+                        <option value="使用中">使用中</option>
+                        <option value="报废">报废</option>
+                        <option value="停用">停用</option>
+                        <option value="维修">维修</option>
+                    </select>
+                </td>
+                <td><input type="button" value="查询" id="btn_select" Class="btn1" style="margin-left:10px" /></td>
+            </tr>
+        </table>
 
-                    <td> 资产名称：<input id="txt_name" type="text" /></td>
-                    <td><input id="Button1" type="button" value="查询" ID="btn_select" OnClick="btn_select()" Class="btn1" style="margin-left:10px" /></td>
-                    <td><input id="Button1" type="button" value="添加" ID="btn_Add" OnClick="window.location.href = '/Asset/Create'" Class="btn1" style="margin-left:10px" /></td>
-                </tr>
-            </table>
-          
-        </div>
-      
-     
         <table width="100%" id="ListArea" border="0" class="t1" align="center" cellpadding="0" cellspacing="0">
             <tr>
-                <td>资产名称</td>
-                <td>购入时间</td>
+                <td>序号</td>
                 <td>资产类别</td>
+                <td>资产名称</td>
                 <td>资产型号</td>
                 <td>金额（元）</td>
+                <td>购入时间</td>
+                <td>资产状态</td>
                 <td>详细参数</td>
-                <td>编辑</td>
-                <td>删除</td>
+                <td>审核状态</td>
+                <td>操作</td>
             </tr>
             <tr v-for="(item,i) in nums">
-                @*<td>{{item.AID}}</td>*@
-                <td>{{item.AName}}</td>
-                <td>{{item.ABuyTime}}</td>
+                <td>{{item.AID}}</td>
                 <td>{{item.ATypeId}}</td>
+                <td>{{item.AName}}</td>
                 <td>{{item.AModel}}</td>
                 <td>{{item.AMoney}}</td>
+                <td>{{item.ABuyTime}}</td>
+                <td v-if="item.TID==='使用中'" :style="{color: '#6CE26C'}">{{item.TID}}</td>
+                <td v-else-if="item.TID==='报废'" :style="{color: '#FFCC00'}">{{item.TID}}</td>
+                <td v-else-if="item.TID==='维修'" :style="{color: 'red'}">{{item.TID}}</td>
+                <td v-else="item.TID===''">{{item.TID}}</td>
+
                 <td>{{item.AParameter}}</td>
-                <td>
-                    <a v-bind:href="['/Asset/Edit/'+item.AID]">修改</a>
-                </td>
-                <td><a v-bind:href="['/Asset/Delete/'+item.AID]" onclick="return confirm('您确定要删除这条数据吗？')">删除</a></td>
+
+                <td v-if="item.CRelustID==='审核通过'" :style="{color: '#6CE26C'}">{{item.CRelustID}}</td>
+                <td v-else-if="item.CRelustID==='待审核'" :style="{color: '#FFCC00'}">{{item.CRelustID}}</td>
+                <td v-else-if="item.CRelustID==='驳回'" :style="{color: 'red'}">{{item.CRelustID}}</td>
+                <td v-else="item.CRelustID===''">{{item.CRelustID}}</td>
+
+
+                <td v-if="item.CRelustID!='待审核'" :style="{visibility: 'hidden'}"><a>操作</a></td>
+                <td v-else="item.CRelustID==='待审核'"><a v-bind:href="['/Asset/AssetReviewEdit/'+item.AID]">操作</a></td>
             </tr>
 
 
@@ -249,9 +269,10 @@
             </div>
         </div>
 
-
-
     </div>
+
+
+
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -264,52 +285,32 @@
                                 </asp:ScriptManager>
                                 <asp:Panel ID="Panel1" runat="server" Width="100%">
                                     <h2>资产类别查询</h2>
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 100%">
-                                        <tr>
-                                            <td>
-                                                编号：
-                                            </td>
-                                            <td align="center">
-                                                <input id="Text1" type="text" />
-                                            </td>
-                                            <td align="left">
-                                                <input id="Button1" type="button" value="查询" Class="btn1" style="margin-left:10px" />
-                                            </td>
-                                            <td align="right">
-                                                <input id="Button1" type="button" value="添加" Class="btn1" style="margin-left:10px" data-toggle="modal" data-target="#myModal2"  /> &nbsp;
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse;margin:10px 0px 0px 20px"
-                                           bordercolor="#6c9ec1" width="200px">
-                                        <tr>
+                                    @using (Ajax.BeginForm("AssetCreates", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Add" }))
+                                    {
+                                        <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse;margin:10px 0px 0px 20px"
+                                               bordercolor="#6c9ec1" width="200px">
+                                            <tr>
 
-                                            <td colspan="3">类别管理</td>
-                                        </tr>
-                                        @*<tr>
-                                                <td colspan="2" v-for="(item,i) in nums">
+                                                <td>类别管理</td>
+                                            </tr>
+                                            <tr>
 
+                                                <td colspan="2">
 
+                                                    <select size="10" style="width: 200px;">
 
-                                                    <span id="jid" style="display:none">{{item.ATypeId}}</span>
-                                                    <select size="10" style="width: 200px;" id="sel">
-                                                        <option id="option">{{item.AName}}</option>
+                                                        <option id="option" v-for="(item,i) in nums">{{item.AName}}</option>
                                                     </select>
                                                 </td>
-                                            </tr>*@
-
-                                        <tr v-for="(item,i) in nums">
-                                            <td>{{item.ATypeId}}</td>
-                                            <td>{{item.AName}}</td>
-                                            <td>{{item.ABeiZhu}}</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td colspan="2" align="center">
-                                                <input id="Button1" type="button" value="关闭" data-dismiss="modal" Class="btn1" />
-                                            </td>
-                                        </tr>
-                                    </table>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" align="center">
+                                                    <input id="btnAdd" type="button" value="添加" Class="btn1" style="margin-left:10px" onclick="btnAdd()" data-toggle="modal" data-target="#myModal2" />
+                                                    <input id="Button1" type="button" value="关闭" data-dismiss="modal" Class="btn1" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    }
                                     <br />
 
                             </td>
@@ -332,17 +333,22 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <form action="Asset/TypeAdd"  >
-                        资产类别:<input id="Text1" type="text" /><br />
-                        资产备注:<input id="Text2" type="text" /><br />
-                        <input id="btn_chun" type="submit" value="保存" Class="btn1" style="margin-left:10px" />
-                        <input id="btn_QX" type="button" value="返回" class="btn1" style="margin-left:30px" />
-                    </form>
+                    @using (Ajax.BeginForm("AssetCreateType", new AjaxOptions() { HttpMethod = "Post" }))
+                    {
+                        <form action="AssetCreateType" method="post">
+                            <h2>资产类别添加</h2>
+                            资产类别:@Html.TextBoxFor(e => e.AName)<br />
+                            资产备注:@Html.TextBoxFor(e => e.ABeiZhu)<br />
+                            <input id="btn_chun" type="submit" value="保存" Class="btn1" style="margin-left:10px" />
+                            <input id="btn_QX" type="button" value="返回" class="btn1" style="margin-left:30px" onclick="hui()" data-dismiss="modal" />
+                        </form>
+                    }
                 </div>
-              
+
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
+
 
 </body>
 

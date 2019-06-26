@@ -42,7 +42,7 @@
           <Property Name="AYears" Type="varchar" MaxLength="50" />
           <Property Name="AExplain" Type="varchar" MaxLength="100" />
           <Property Name="ASupplerPhone" Type="varchar" MaxLength="50" />
-          <Property Name="AShenHeRan" Type="int" />
+          <Property Name="AShenHeRan" Type="varchar" MaxLength="50" />
           <Property Name="AShenHeYiJian" Type="varchar" MaxLength="50" />
           <Property Name="AShenHeJieGuo" Type="varchar" MaxLength="50" />
           <Property Name="AShenHeRiQi" Type="varchar" MaxLength="50" />
@@ -585,7 +585,7 @@
           <Property Name="AYears" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AExplain" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ASupplerPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AShenHeRan" Type="Int32" />
+          <Property Name="AShenHeRan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AShenHeYiJian" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AShenHeJieGuo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AShenHeRiQi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />

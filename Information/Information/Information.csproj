@@ -195,7 +195,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AssetController.cs" />
-    <Compile Include="Controllers\AssetRepairController.cs" />
     <Compile Include="Controllers\JiFangController.cs" />
     <Compile Include="Controllers\JiFangSheBeiController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -637,7 +636,6 @@
     <Content Include="Views\Main\Main.cshtml" />
     <Content Include="Views\Main\left.cshtml" />
     <Content Include="Views\Main\top.cshtml" />
-    <Content Include="Views\Asset\Index.cshtml" />
     <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Views\JiFang\Index.cshtml" />
     <Content Include="Views\JiFang\Edit.cshtml" />
@@ -648,6 +646,13 @@
     <Content Include="Views\ShenPi\ChaXun.cshtml" />
     <Content Include="Views\ShenPi\Edit.cshtml" />
     <Content Include="Views\ShenPi\DaiShenHe.cshtml" />
+    <Content Include="Views\Asset\AssetCreate.cshtml" />
+    <Content Include="Views\Asset\AssetEdit.cshtml" />
+    <Content Include="Views\Asset\AssetRepairEdit.cshtml" />
+    <Content Include="Views\Asset\AssetRepairSelect.cshtml" />
+    <Content Include="Views\Asset\AssetReviewEdit.cshtml" />
+    <Content Include="Views\Asset\AssetReviewSelect.cshtml" />
+    <Content Include="Views\Asset\AssetSelect.cshtml" />
     <Content Include="Views\Asset\Create.cshtml" />
     <Content Include="Views\Asset\Edit.cshtml" />
     <Content Include="Views\AssetRepair\AssetRepairSelect.cshtml" />
@@ -661,6 +666,9 @@
     <Content Include="Views\WhuWxiu\Index.cshtml" />
     <Content Include="Views\WhuWxiu\Create.cshtml" />
     <Content Include="Views\WhuWxiu\Edit.cshtml" />
+    <Content Include="Views\Asset\AssetStatusSelect.cshtml" />
+    <Content Include="Views\Asset\AssetStatusWaitSelect.cshtml" />
+    <Content Include="Views\Asset\AssetStatusSelectEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
