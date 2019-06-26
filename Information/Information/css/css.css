@@ -251,14 +251,16 @@ input
     background-color: Transparent;
     font-family: "ËÎÌו";
     font-size: 12px;
-    background-image: url('../img/login_6.gif');
-    color: #336D93;
+    background-image: url('../Image/t01be1b91aaa6956546.png');
+    background-position:-3px -9px;
+    /*color: #336D93;*/
     text-decoration: none;
     border: none;
-    height: 23px;
-    width: 68px;
-    line-height: 26px;
-    text-indent: 10px;
+    height: 28px;
+    width: 89px;
+    line-height: 23px;
+    /*text-indent: 10px;*/
+    border:1px solid #54627D;
 }
 
 .btn2 {
@@ -354,3 +356,8 @@ TreeView
 	padding-right: 3px;
 	cursor: default;
 }
+
+
+
+
+

@@ -42,8 +42,12 @@
   <ItemGroup>
     <Compile Include="CaiGouXingShiService.cs" />
     <Compile Include="CaiGouYiJuService.cs" />
+    <Compile Include="CheckService.cs" />
     <Compile Include="ComputerRoomVisitService.cs" />
     <Compile Include="AssetService.cs" />
+    <Compile Include="EquipmentService.cs" />
+    <Compile Include="MaintenanceService.cs" />
+    <Compile Include="MeetingService.cs" />
     <Compile Include="PiShiJieGuoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserService.cs" />
@@ -55,7 +59,7 @@
       <Name>DAO</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entity\Entity.csproj">
-      <Project>{c221f513-2052-421c-9708-245142b923b4}</Project>
+      <Project>{f97ee5b1-4362-4b82-acbe-b1f67e4e4e5b}</Project>
       <Name>Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\IBLL\IBLL.csproj">

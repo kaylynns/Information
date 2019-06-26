@@ -1,0 +1,309 @@
+﻿@model Entity.info_Maintenance
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+
+    <link href="~/css/css.css" rel="stylesheet" />
+    <link href="~/Scripts/bootstrap.css" rel="stylesheet" />
+    <script src="~/DatePicker/WdatePicker.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+   
+    <style type="text/css">
+        .t1 {
+            clear: both;
+            border: 1px solid #c9dae4;
+            margin-top: 10px;
+        }
+
+            .t1 tr th {
+                color: #0d487b;
+                /*background: #f2f4f8 url(../CSS/Table/images/sj_title_pp.jpg) repeat-x left bottom;*/
+                line-height: 28px;
+                border-bottom: 1px solid #9cb6cf;
+                border-top: 1px solid #e9edf3;
+                font-weight: normal;
+                text-shadow: #e6ecf3 1px 1px 0px;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+
+            .t1 tr td {
+                border-bottom: 1px solid #e9e9e9;
+                padding-bottom: 5px;
+                padding-top: 5px;
+                color: #444;
+                border-top: 1px solid #DDDDDD;
+                padding-left: 5px;
+                padding-right: 5px;
+                word-break: break-all;
+            }
+
+        tr.over td {
+            background: #bcd4ec; /*这个将是鼠标高亮行的背景色*/
+        }
+
+        #ListArea tr:first-child {
+            background: linear-gradient(#F8F8F8,#DEDEDE);
+            font-weight: 800;
+            font-size: 15px;
+        }
+
+        .t1 tr {
+            background-color: white;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .aa input {
+         background-color:transparent;
+         border:none;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).on("click", ".sj input", function () {
+         
+            WdatePicker({ readOnly: true, dateFmt: 'yyyy-MM-dd' });
+        })
+
+        $(function () {
+            var ids;
+            $("#jc").click(function(){
+                $.ajax({
+                    url: "/WhuWxiu/checkCreate",
+                    type: "post",
+                    data: "project=" + $("#project").val() + "&result=" + $("#result").val(),
+                    success: function (msg) {
+                        if (msg == "ok") {
+                            alert("添加成功");
+                            $("#project").val("");
+                            $("#result").val("");
+                            show();
+
+                        } else {
+                            alert("添加失败");
+                        }
+                    }
+                })
+            })
+
+            $("#ck").click(function () {
+              
+                $.ajax({
+                    url: "/WhuWxiu/selectCB",
+                    type: "post",
+                    data: "",
+                    success: function (msg) {
+                        var dts = eval("(" + msg + ")");
+
+                        $("#re tr:gt(0)").remove();//清空表格
+                       
+                        for (var i = 0; i < dts.length; i++) {
+                            var $tr = $('<tr id="urm"></tr>');
+                            var $td1 = $('<td id="urms" ss=' + dts[i]["EDeviceName"] + '  ids=' + dts[i]["EID"] + '>' + dts[i]["EDeviceName"] + "</td>");
+                            $tr.append($td1);
+                            $("#re").append($tr);
+                        }
+                    }
+                })
+            })
+
+            $(document).on("click","#urms",function(){
+                var em = $(this).attr("ss");
+                ids = $(this).attr("ids");
+                $("#sbid input").val(ids);
+                $("#Text1").val(em);
+                $("#myModal").modal("hide");
+            })
+
+            //加载检测
+            show();
+            var aa;
+            var ids
+            $(document).on("click", "#updates", function () {
+                ids = $(this).attr("ids");
+                aa = $(this).html("<a href='#' id='qr'  >确认</a>");
+                $(this).prev().children().css({ "border": "1px solid blue", " background-color": "none" });
+                $(this).prev().prev().children().css({ "border": "1px solid blue", " background-color": "none" });
+                
+            })
+            $(document).on("click", "#qr", function () {
+                    var pro = $(this).parent().prev().prev().children().val();
+                    var res = $(this).parent().prev().children().val();
+                $.ajax({
+                    url: "/WhuWxiu/CheIdEdit",
+                    type: "post",
+                    data: "id=" + ids + "&pro=" +pro+ "&res=" + res,
+                    success: function (msg) {
+                        if (msg == "ok") {
+                            alert("修改成功");
+                            $(this).parent().prev().children().css({ "border": "none", " background-color": "transparent" });
+                            $(this).parent().prev().prev().children().css({ "border": "none", " background-color": "transparent" });
+                            show();
+                        } else {
+                            alert("修改失败");
+                        }
+                    }
+                })
+                
+            })
+        })
+        function show() {
+            $.ajax({
+                url: "/WhuWxiu/selectJC",
+                type: "post",
+                data: "",
+                success: function (msg) {
+                    var dts = eval("(" + msg + ")");
+
+                    $("#jcT tr:gt(0)").remove();//清空表格
+
+                    for (var i = 0; i < dts.length; i++) {
+                        var $tr = $('<tr class="aa" align="center"></tr>');
+                        var $td1 = $('<td>  <input id="pro" type="text" Width="240" value=' + dts[i]["project"] + '></td>');
+                        var $td2 = $('<td>  <input id="res" type="text" Width="240" value=' + dts[i]["result"] + '></td>');
+                        var $td3 = $("<td id='updates' class='gai' ids=" + dts[i]["id"] + " > <a href='#' id='update' >修改</a></td>")
+                        var $td4 = $("<td > <a href='/WhuWxiu/CheDel/" + dts[i]["id"] + "' >删除</a></td>")
+                        $tr.append($td1, $td2, $td3, $td4);
+                        $("#jcT").append($tr);
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <h2 align="center"> 机房维护 </h2>
+
+    <form method="post" action="/WhuWxiu/Create" style="">
+        <table cellspacing="0" cellpadding="7" align="center" border="1" style="border-collapse: collapse; margin-bottom:20px"
+               bordercolor="#6c9ec1">
+            <tr>
+                <td align="center">  日期：</td>
+
+                <td align="left" class="sj">
+                    @Html.EditorFor(model => model.MaintenanceTime)
+                  
+                </td>
+                <td id="sbid">
+                    @Html.HiddenFor(model => model.MDeviceName)
+                </td>
+            </tr>
+            <tr>
+                <td align="center" style="height: 20px" id="sbname">
+                  维护设备名称
+                </td>
+                <td align="left">
+                    <input id="Text1" type="text" />
+                  <img src="~/img/lookup.gif" id="ck"data-toggle="modal" data-target="#myModal"/>
+                </td>
+               
+            </tr>
+            <tr>
+                <td align="center" style="height: 20px">
+                   负责检测单位
+                </td>
+                <td align="left">
+                    @Html.EditorFor(model => model.MDetectionUnit)
+                </td>
+            </tr>
+            <tr>
+                <td align="center" style="height: 20px">
+                   检测人员
+                </td>
+                <td align="left">
+                    @Html.DropDownListFor(e => e.MTestingPersonnel, ViewData["s"] as IEnumerable<SelectListItem>)
+                </td>
+              
+            </tr>
+            <tr>
+                <td align="center" style="height: 20px">
+                   陪同人员
+                </td>
+                <td align="left">
+                    @Html.DropDownListFor(e => e.MAccompanyingOfficials, ViewData["p"] as IEnumerable<SelectListItem>)
+                </td>
+             
+            </tr>
+            <tr> </tr>
+            <tr>
+                <td colspan="2">
+                   <table width="100%" id="jcT" border="0" class="t1" align="center" cellpadding="0"
+                           cellspacing="0">
+                        <tr id="head">
+                            <td>检测项目</td>
+                            <td>检测结果</td>
+                            <td id="jcUpdate">编辑</td>
+                            <td>删除</td>
+                        </tr>
+
+                       
+                    </table>
+                </td>
+           </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="text" name="project" id="project" />
+                    <input type="text" name="result" id="result" />
+                    <input type="button" value="保 存" class="btn1" id="jc" />
+                </td>
+            </tr>
+            
+
+            <tr>
+               
+                <td align="center">
+                    相关建议
+                </td>
+                <td align="left">
+                  @Html.TextAreaFor(model => model.Madvice)
+                </td>
+            </tr>
+         
+            <tr>
+                <td align="center" colspan="4" height="26">
+                    <input type="submit" value="保 存" class="btn1" id="add"/>
+                    &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                    <input ID="btn_remove" type="reset" value="清 空" class="btn1" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input ID="btn_back" type="button" value="返 回" class="btn1" onclick="window.location.href=document.referrer" />
+                    <br />
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <form id="form1" role="form">
+                        <table class="tableEdit" id="re" align="center" style="border:1px solid red;width:200px;">
+                            <thead>
+                                <tr>
+                                    <td>
+                                       设备名称
+                                    </td>
+                                </tr>
+                            </thead>
+
+                        </table>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
+</body>
+</html>

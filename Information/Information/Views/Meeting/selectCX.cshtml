@@ -1,0 +1,248 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>selectCX</title>
+    <link href="~/css/css.css" rel="stylesheet" />
+    <link href="~/Scripts/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <style type="text/css">
+        .t1 {
+            clear: both;
+            border: 1px solid #c9dae4;
+            margin-top: 10px;
+        }
+
+            .t1 tr th {
+                color: #0d487b;
+                /*background: #f2f4f8 url(../CSS/Table/images/sj_title_pp.jpg) repeat-x left bottom;*/
+                line-height: 28px;
+                border-bottom: 1px solid #9cb6cf;
+                border-top: 1px solid #e9edf3;
+                font-weight: normal;
+                text-shadow: #e6ecf3 1px 1px 0px;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+
+            .t1 tr td {
+                border-bottom: 1px solid #e9e9e9;
+                padding-bottom: 5px;
+                padding-top: 5px;
+                color: #444;
+                border-top: 1px solid #DDDDDD;
+                padding-left: 5px;
+                padding-right: 5px;
+                word-break: break-all;
+            }
+
+        tr.over td {
+            background: #bcd4ec; /*这个将是鼠标高亮行的背景色*/
+        }
+
+        #ListArea tr:first-child {
+            background: linear-gradient(#F8F8F8,#DEDEDE);
+            font-weight: 800;
+            font-size: 15px;
+        }
+
+        .t1 tr {
+            background-color: white;
+            text-align: center;
+            font-size: 15px;
+        }
+    </style>
+
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $(".t1 tr").mouseover(function () {
+                //如果鼠标移到class为stripe的表格的tr上时，执行函数
+                $(this).addClass("over");
+            }).mouseout(function () {
+                //给这行添加class值为over，并且当鼠标一出该行时执行函数
+                $(this).removeClass("over");
+            }) //移除该行的class
+            $(".t1 tr:even").addClass("alt");
+            //给class为stripe的表格的偶数行添加class值为alt
+
+            //清除
+            $("#btn_clear").click(function () {
+                $("#Text1").val("");
+            })
+
+            var currentPage = 1;//当前页
+            var pages = 1;//总页数
+            var names;
+            var mid;
+            show();//加载
+
+
+            function show() {
+                $.ajax({
+                    url: "/Meeting/CXIndex",
+                    type: "post",
+                    data: "currentpage=" + currentPage,
+                    success: function (msg) {
+
+                        var dts = eval("(" + msg + ")");
+                        var dt = dts["dt"];
+                        fileTable(dt);
+                        var rows = dts["rows"];
+                        pages = dts["pages"];
+                        $("#leftPage").html("共有" + rows + "条记录，当前第" + currentPage + "/" + pages + "页");
+                    }
+                })
+
+            }//加载全部
+            function fileTable(dt) {
+                $("#ListArea tr:gt(0)").remove();//清空表格
+                for (var i = 0; i < dt.length; i++) {
+                    var $tr = $("<tr></tr>");
+                    var $td1 = $("<td id='aa'>" + dt[i]["MName"] + "</td>");
+                    var $td2 = $("<td>" + dt[i]["Mstart"] + "</td>");
+                    var $td3 = $("<td>" + dt[i]["MOwer"] + "</td>");
+                    var $td4 = $("<td>" + dt[i]["MOpenTime"] + "</td>");
+                    var $td5 = $("<td>" + dt[i]["MOverTime"] + "</td>");
+                    var $td7 = $("<td style='color:red;'>" + dt[i]["Msignature"] + "</td>");
+                    var $td8;
+                    var $td9 = $("<td><a href='/Meeting/selectId/" + dt[i]["MID"] + "'>查看</a></td>")
+
+                    //alert($("#Text2").val());
+                    if (dt[i]["QZ"] == "1") {
+                        $td8 = $("<td style='color:blue;'>未签字</td>");
+                    } else if (dt[i]["QZ"] == "2") {
+                        $td8 = $("<td style='color:green;'>已签字</td>");
+                    }
+
+                    $tr.append($td1, $td2, $td3, $td4, $td5, $td7, $td8,$td9);
+                    $("#ListArea").append($tr);
+
+                    }
+              }
+
+
+            //模糊查询
+            $("#Button1").click(function () {
+                names = $("#Text1").val();
+                Mshow();//加载模糊查询
+             })
+
+            //加载模糊查询
+            function Mshow() {
+                $.ajax({
+                    url: "/Meeting/Index2",
+                    type: "post",
+                    data: "currentPage=" + currentPage + "&names=" + names,
+                    success: function (msg) {
+                        var dts = eval("(" + msg + ")");
+                        var dt = dts["dt"];
+                        fileTable(dt);
+                        var rows = dts["rows"];
+                        pages = dts["pages"];
+                        $("#leftPage").html("共有" + rows + "条记录，当前第" + currentPage + "/" + pages + "页");
+                    }
+                })
+            }
+
+                //首页
+                $("#first").click(function () {
+                    currentPage = 1;
+                    if (names != null) {
+                        Mshow()
+                    } else {
+                        show();
+                    }
+                })
+
+                //上一页
+                $("#prev").click(function () {
+                    if (currentPage > 1) {
+                        currentPage--;
+                    }
+                    if (names != null) {
+                        Mshow()
+                    } else {
+                        show();
+                    }
+                })
+
+                //下一页
+                $("#next").click(function () {
+                     if (currentPage < pages) {
+                            currentPage++;
+                        }
+
+                        if (names != null) {
+                            Mshow()
+                        } else {
+                            show();
+                        }
+                  })
+
+                //尾页
+                $("#last").click(function () {
+                    currentPage = pages;
+                    if (names != null) {
+                        Mshow()
+                    } else {
+                        show();
+                    }
+                })
+
+            });
+
+
+
+
+    </script>
+
+</head>
+<body>
+    <h2 align="center"> 会议测试及开会签字 </h2>
+    <div>
+
+        会议名称：
+        <input id="Text1" type="text" Width="240" />
+        &nbsp;
+        <input id="Button1" type="button" value="查 询" Class="btn1" />
+        &nbsp;
+        <input id="btn_clear" type="reset" value="清 空" Class="btn1" />
+
+    </div>
+
+    <table width="100%" id="ListArea" border="0" class="t1" align="center" cellpadding="0"
+           cellspacing="0">
+        <tr>
+            <td>会议名称</td>
+            <td>测试开始时间</td>
+            <td>测试结束时间</td>
+            <td>会议开始时间</td>
+            <td>会议结束时间</td>
+            <td>主任签字</td>
+            <td>状态</td>
+            <td>查看</td>
+        </tr>
+    </table>
+    <div id="pageDiv">
+        <div id="leftPage" style="color:#3C8ABC;padding-top:10px"></div>
+        <div id="rightPage" style="float:right;position:relative;bottom:20px;">
+            <input type="button" value="首页" OnClick="btn_select_Click" Class="btn1" id="first" />&nbsp;&nbsp;
+            <input type="button" value="上一页" Class="btn1" id="prev" />&nbsp;&nbsp;
+            <input type="button" value="下一页" Class="btn1" id="next" />&nbsp;&nbsp;
+            <input type="button" value="尾页" Class="btn1" id="last" />&nbsp;&nbsp;
+        </div>
+    </div>
+
+</body>
+</html>
+
