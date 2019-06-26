@@ -1,0 +1,95 @@
+﻿@model Entity.info_Maintenance
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MaintainLook</title>
+    <link href="~/css/css.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.js"></script>
+    <style type="text/css">
+        .wh input {
+            outline: none;
+            background: transparent;
+            border: none;
+            outline: medium;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                url: "",
+                type: "post",
+                success: function (msg) {
+                    var datas = eval("(" + msg + ")");
+                    $("#tables tr:gt(0)").remove();
+                    for (var i = 0; i < datas.length; i++) {
+                        var $tr = $("<tr></tr>");
+                        var $td = $("<td>" + datas[i]["MaintenanceTime"] + "</td>");
+                        var $td2 = $("<td>" + datas[i]["MDeviceName"] + "</td>");
+                        $tr.append($td, $td2);
+                        $("#tables").append($tr);
+                    }
+                }
+            })
+        })
+
+    </script>
+</head>
+<body>
+    <h2>设备维护查询</h2>
+  <table>
+      <tr class="wh">
+          <td>日期：</td>
+          <td>@Html.EditorFor(model => model.MaintenanceTime,new { @readonly = "readonly" })</td>
+      </tr>
+      <tr class="wh">
+          <td>维护设备名称：</td>
+          <td>@Html.EditorFor(model => model.MDeviceName, new { @readonly = "readonly" })</td>
+      </tr>
+      <tr class="wh">
+          <td>负责检测单位：</td>
+          <td>@Html.EditorFor(model => model.MDetectionUnit, new { @readonly = "readonly" })</td>
+      </tr>
+      <tr class="wh">
+          <td>检测人员：</td>
+          <td>@Html.EditorFor(model => model.MTestingPersonnel, new { @readonly = "readonly" })</td>
+      </tr>
+      <tr class="wh">
+          <td>陪同人员：</td>
+          <td>@Html.EditorFor(model => model.MAccompanyingOfficials, new { @readonly = "readonly" })</td>
+      </tr>
+      <tr>
+          <td colspan="2"></td>
+      </tr>
+      <tr>
+          <td>
+              <table  width="100%" id="tables" border="0" class="t1" align="center" cellpadding="0" cellspacing="0">
+                  <tr>
+                      <th>检测项目</th>
+                      <th>检测结果</th>
+                  </tr>
+
+              </table>
+          </td>
+      </tr>
+      <tr>
+          <td colspan="2"></td>
+      </tr>
+      <tr class="wh">
+          <td>相关意见：</td>
+          <td>@Html.EditorFor(model => model.Madvice, new { @readonly = "readonly" })</td>
+      </tr>
+      <tr>
+          <td colspan="2" align="center">
+              <input id="btn_QX" type="button" value="返回" class="btn1" style="margin-left:30px" onclick="window.location.href = '/Maintain/MaintainSelect'" />
+          </td>
+      </tr>
+  </table>
+</body>
+</html>

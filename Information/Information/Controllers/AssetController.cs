@@ -29,7 +29,7 @@ namespace information.Controllers
             return View();
         }
         //资产登记页面分页查询
-        public ActionResult AssetSelectFen(int currentPage, string AType, string AName)
+           public ActionResult AssetSelectFen(int currentPage, string AType, string AName)
         {
             //currentPage：当前页 pageSize:显示几页,rows:总记录数,pages总页数
             var pageSize = 2;
@@ -149,6 +149,7 @@ namespace information.Controllers
             var JID = asset.JID;  //获取采购依据
             var jname = icgyjb.SelectWhere(f => f.JID == JID); //根据采购依据进行查询
             ViewBag.jname = jname; //将查询结果存入viewBag
+            
             return View(asset);
         }
 

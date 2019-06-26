@@ -23,11 +23,12 @@
         })
         function img_select() {
             show();
-            $(document).on("dblclick", "#option", function () {
-                $("#YiJu").val($("#option").text());
-                $('#myModal').modal('hide');
-                // var jid = $("#jid").text();//获取jid    $("ul li:nth-child(2)")
-                $("#JID").val($("#jid").text());//获取jid
+            $(document).on("dblclick", ".option", function () {
+              
+                $("#YiJu").val($(this).text());
+                $('#myModal').modal('hide');//关闭模态框
+           
+                $("#JID").val($(this).val());//获取jid
 
             })
 
@@ -202,22 +203,6 @@
                                 </asp:ScriptManager>
                                 <asp:Panel ID="Panel1" runat="server" Width="100%">
                                     <h2>采购依据查询</h2>
-                                    @*<table border="0" cellpadding="0" cellspacing="0" style="width: 100%">
-                                            <tr>
-                                                <td>
-                                                    编号：
-                                                </td>
-                                                <td align="center">
-                                                    <input id="Text1" type="text" />
-                                                </td>
-                                                <td align="left">
-                                                    <input id="Button1" type="button" value="查询"  Class="btn1"  style="margin-left:10px"/>
-                                                </td>
-                                                <td align="right">
-                                                    &nbsp;
-                                                </td>
-                                            </tr>
-                                        </table>*@
                                     <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse;margin:10px 0px 0px 20px"
                                            bordercolor="#6c9ec1" width="200px">
                                         <tr>
@@ -225,12 +210,12 @@
                                             <td>请示报告</td>
                                         </tr>
                                         <tr>
-
+                                           
                                             <td colspan="2">
-                                                <select size="10" style="width: 200px;" id="sel" v-for="(item,i) in nums" >
-                                                    <option id="jid" style="display:none">{{item.JID}}</option>
-                                                    <option id="option"  >{{item.JName}}</option>
+                                                <select size="10" style="width: 200px;" id="sel" >
+                                                    <option class="option" v-for="(item,i) in nums" :value="item.JID" >{{item.JName}}</option>
                                                 </select>
+                                            
                                             </td>
                                         </tr>
                                         <tr>

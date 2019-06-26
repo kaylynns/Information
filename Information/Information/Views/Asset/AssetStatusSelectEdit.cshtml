@@ -112,7 +112,22 @@
                     @Html.RadioButtonFor(model => model.TID, "3")停用
                     @Html.RadioButtonFor(model => model.TID, "2")报废
                 </td>
-            </tr>
+                @*<td  v-if="item.TID==='1'">
+                    @Html.TextBox("1", "使用中",new { @readonly = "readonly" })
+                   
+                    
+                    @Html.TextBoxFor(model => model.TID, new { @readonly = "readonly" })
+                </td>
+                <td v-else-if="item.TID==='2'">
+                    @Html.TextBox("2", "报废",new { @readonly = "readonly" })
+                 </td>
+                <td v-else-if="item.TID==='3'">
+                    @Html.TextBox("3", "停用", new { @readonly = "readonly" })
+                </td>
+                <td v-else-if="item.TID==='4'">
+                    @Html.TextBox("4", "维修", new { @readonly = "readonly" })
+                </td>*@
+</tr>
             <tr class="sq">
                 <td>申请日期</td>
                 <td class="date">@Html.TextBoxFor(model => model.ApplyTime, new { @readonly = "readonly" })</td>

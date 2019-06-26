@@ -1,0 +1,175 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MaintainSelect</title>
+    <link href="~/css/css.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <style type="text/css">
+        .t1 {
+            clear: both;
+            border: 1px solid #c9dae4;
+            margin-top: 10px;
+        }
+
+            .t1 tr th {
+                color: #0d487b;
+                background: #f2f4f8 url(../CSS/Table/images/sj_title_pp.jpg) repeat-x left bottom;
+                line-height: 28px;
+                border-bottom: 1px solid #9cb6cf;
+                border-top: 1px solid #e9edf3;
+                font-weight: normal;
+                text-shadow: #e6ecf3 1px 1px 0px;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+
+            .t1 tr td {
+                border-bottom: 1px solid #e9e9e9;
+                padding-bottom: 5px;
+                padding-top: 5px;
+                color: #444;
+                border-top: 1px solid #FFFFFF;
+                padding-left: 5px;
+                padding-right: 5px;
+                word-break: break-all;
+            }
+        /* white-space:nowrap; text-overflow:ellipsis; */
+        tr.alt td {
+            background: #ecf6fc; /*这行将给所有的tr加上背景色*/
+        }
+
+        tr.over td {
+            background: #bcd4ec; /*这个将是鼠标高亮行的背景色*/
+        }
+    </style>
+    <script>
+
+        $(function () {
+
+            $(".t1 tr").mouseover(function () {
+                //如果鼠标移到class为stripe的表格的tr上时，执行函数
+                $(this).addClass("over");
+            }).mouseout(function () {
+                //给这行添加class值为over，并且当鼠标一出该行时执行函数
+                $(this).removeClass("over");
+            }) //移除该行的class
+            $(".t1 tr:even").addClass("alt");
+            //给class为stripe的表格的偶数行添加class值为alt
+
+
+
+        })
+
+    </script>
+    <script type="text/javascript">
+        var pages = 1;
+        var currentPage = 1;
+        var MDeviceName = "";
+        $(function () {
+
+            show(currentPage, MDeviceName);
+
+            $("#Button1").click(function () {
+                MDeviceName = $("#Text1").val();
+                show(currentPage, MDeviceName);
+            })
+        })
+        function show(currentPage, MDeviceName) {
+            $.ajax({
+                url: "/Maintain/MaintainSelectFen",
+                type: "Post",
+                data: "currentPage=" + currentPage + "&MDeviceName=" + MDeviceName,
+                success:function(msg){
+                    var dt = eval("(" + msg + ")");
+                    var datas= dt["data"];
+                    XunHuan(datas);
+                    var rows = data["rows"];
+                    pages = data["pages"];
+                    $("#leftPage").html("共有" + rows + "条记录，当前第" + currentpage + "/" + pages + "页");
+                }
+            })
+        }
+
+     
+        function XunHuan(biao) {
+            $("#tables tr:gt(0)").remove();
+            for (var i = 0; i < datas.length; i++) {
+                var $tr = $("<tr></tr>");
+                var $td = $("<td>" + datas[i]["MaintenanceTime"] + "</td>");
+                var $td2 = $("<td>" + datas[i]["MDeviceName"] + "</td>");
+                var $td3 = $("<td>" + datas[i]["MDetectionUnit"] + "</td>");
+                var $td4 = $("<td>" + datas[i]["MTestingPersonnel"] + "</td>");
+                var $td5 = $("<td>" + datas[i]["MAccompanyingOfficials"] + "</td>");
+                var $td6 = $("<td><a href='/Maintain/MaintainLook/" + datas[i]["MID"] + "'>查看</a></td>")
+                $tr.append($td, $td2, $td3, $td4, $td5);
+                $("#tables").append($tr);
+            }
+
+        }
+        $(function () {
+            //首页
+            $("#first").click(function () {
+                currentPage = 1;
+                show(currentPage, MDeviceName);
+            })
+
+            //上一页
+            $("#prev").click(function () {
+                if (currentPage > 1) {
+                    currentPage--;
+                }
+                show(currentPage, MDeviceName);
+            })
+
+            //下一页
+            $("#next").click(function () {
+                if (currentPage < pages) {
+                    currentPage++;
+                }
+                show(currentPage, MDeviceName);
+            })
+
+            //尾页
+            $("#last").click(function () {
+                currentPage = pages;
+                show(currentPage, MDeviceName);
+            })
+
+        })
+    </script>
+</head>
+<body>
+   <h2>设备维护查询</h2>
+    设备名称：
+    <input id="Text1" type="text" ID="txtSearch" Width="240" />
+    <input id="Button1" type="button" value="查询" />
+
+    <table width="100%" id="tables" border="0" class="t1" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>日期</td>
+            <td>维护设备名称</td>
+            <td>负责检测单位</td>
+            <td>检测人员</td>
+            <td>陪同人员</td>
+            <td>操作</td>
+        </tr>
+
+    </table>
+    <div id="pageDiv">
+        <div id="leftPage" style="color:#3C8ABC;padding-top:10px"></div>
+        <div id="rightPage" style="float:right;position:relative;bottom:20px;">
+            <input type="button" value="首页" OnClick="btn_select_Click" Class="btn1" id="first" />&nbsp;&nbsp;
+            <input type="button" value="上一页" Class="btn1" id="prev" />&nbsp;&nbsp;
+            <input type="button" value="下一页" Class="btn1" id="next" />&nbsp;&nbsp;
+            <input type="button" value="尾页" Class="btn1" id="last" />&nbsp;&nbsp;
+        </div>
+    </div>
+</body>
+</html>

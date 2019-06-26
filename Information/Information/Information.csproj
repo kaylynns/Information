@@ -200,6 +200,7 @@
     <Compile Include="Controllers\JiFangSheBeiController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\MaintainController.cs" />
     <Compile Include="Controllers\ShenPiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -384,6 +385,10 @@
     <Content Include="Views\Asset\AssetStatusSelect.cshtml" />
     <Content Include="Views\Asset\AssetStatusWaitSelect.cshtml" />
     <Content Include="Views\Asset\AssetStatusSelectEdit.cshtml" />
+    <Content Include="Views\Maintain\MaintainSelect.cshtml" />
+    <Content Include="Views\Maintain\MaintainLook.cshtml" />
+    <Content Include="Views\Maintain\JiFangJinChuSelelctAll.cshtml" />
+    <Content Include="Views\Maintain\JiFangJinChuSelectLook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

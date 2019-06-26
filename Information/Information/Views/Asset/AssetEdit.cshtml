@@ -16,6 +16,7 @@
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/vue.js"></script>
     <script src="~/Scripts/DatePicker/WdatePicker.js"></script>
+   
     <script type="text/javascript">
         $(function () {
             $("#JID").hide();
@@ -47,8 +48,11 @@
         function img_select() {
             show();
             $(document).on("dblclick", "#option", function () {
-                $("#YiJu").val($("#option").text());
-                $('#myModal').modal('hide');
+              
+                $("#YiJu").val($(this).text());
+                $('#myModal').modal('hide');//关闭模态框
+
+                $("#JID").val($(this).val());//获取jid
             })
 
         }
@@ -76,7 +80,6 @@
                 <td>
                     @foreach (CaiGouYiJu item in ViewBag.jname)
                     {
-
                         <font face="宋体">
 
                             @Html.TextBox("YiJu", item.JName)
@@ -221,9 +224,9 @@
                                         <tr v-for="(item,i) in nums">
                                             <td colspan="2">
                                                 <select size="10" style="width: 200px;" id="sel">
-                                                    @*<option  id="option">{{item.JID}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<text  id="op_name">{{item.JName}}</text></option>*@
-                                                    <option id="option" value="{{item.JID}}">{{item.JName}}</option>
+                                                    <option class="option" v-for="(item,i) in nums" value="item.JID">{{item.JName}}</option>
                                                 </select>
+                                                
                                             </td>
                                         </tr>
                                         <tr>
