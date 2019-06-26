@@ -25,7 +25,10 @@ namespace BLL
         {
             return iad.Delete(t);
         }
-
+        public List<info_Asset> SelectAll()
+        {
+            return iad.SelectAll();
+        }
 
         public List<v_Asset> SelectV_Asset<K>(Expression<Func<v_Asset, K>> order, Expression<Func<v_Asset, bool>> where, out int rows, int currentPage, int pageSize)
         {

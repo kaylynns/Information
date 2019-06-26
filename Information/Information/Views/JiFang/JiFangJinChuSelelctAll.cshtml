@@ -1,0 +1,195 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>机房进出申请表</title>
+    <link href="~/css/css.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.11.1.js"></script>
+    <style type="text/css">
+        .t1 {
+            clear: both;
+            border: 1px solid #c9dae4;
+            margin-top: 10px;
+        }
+
+            .t1 tr th {
+                color: #0d487b;
+                /*background: #f2f4f8 url(../CSS/Table/images/sj_title_pp.jpg) repeat-x left bottom;*/
+                line-height: 28px;
+                border-bottom: 1px solid #9cb6cf;
+                border-top: 1px solid #e9edf3;
+                font-weight: normal;
+                text-shadow: #e6ecf3 1px 1px 0px;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+
+            .t1 tr td {
+                border-bottom: 1px solid #e9e9e9;
+                padding-bottom: 5px;
+                padding-top: 5px;
+                color: #444;
+                border-top: 1px solid #DDDDDD;
+                padding-left: 5px;
+                padding-right: 5px;
+                word-break: break-all;
+            }
+
+        tr.over td {
+            background: #bcd4ec; /*这个将是鼠标高亮行的背景色*/
+        }
+
+        #ListArea tr:first-child {
+            background: linear-gradient(#F8F8F8,#DEDEDE);
+            font-weight: 800;
+            font-size: 15px;
+        }
+
+        .t1 tr {
+            background-color: white;
+            text-align: center;
+            font-size: 15px;
+        }
+    </style>
+  
+    <script type="text/javascript">
+            var pages = 1;
+            var currentPage = 1;
+            var lai="";
+            var ren="";
+            $(function () {
+                Show(currentPage, lai, ren);
+            })
+            function Show(currentPage,lai,ren) {
+                $.ajax({
+                    type: "post",
+                    data: "currentPage=" + currentPage+"&lai="+lai+"&ren="+ren,
+                    url: "/JiFang/JiFangJinChuSelelctAllFen",
+                    success: function (msg) {
+                        var data = eval("(" + msg + ")");
+                        var datas = data["list"];
+                        XunHuan(datas);
+                        var rows = data["rows"];
+                        pages = data["pages"];
+                        $("#leftPage").html("共有" + rows + "条记录，当前第" + currentPage + "/" + pages + "页");
+                    }
+                })
+            }
+        //模糊查询
+            $(function () {
+                $("#Button1").click(function () {
+                     lai = $("#Text1").val();
+                     ren = $("#Text2").val();
+                    Show(currentPage,lai,ren);
+                })
+            })
+            function XunHuan(datas) {
+                $("#ListArea tr:gt(0)").remove();
+                for (var i = 0; i < datas.length; i++) {
+                    var $tr = $("<tr></tr>");
+                    var $td = $("<td>" + datas[i]["CTIme"] + "</td>");
+                    var $td2 = $("<td>" + datas[i]["Cause"] + "</td>");
+                    var $td3 = $("<td>" + datas[i]["CName"] + "</td>");
+                    var $td4 = $("<td>" + datas[i]["Carries"] + "</td>");
+                    var $td5 = $("<td>" + datas[i]["CEntourage"] + "</td>");
+                    var $td6 = $("<td>" + datas[i]["CEntryTime"] + "</td>");
+                    var $td7 = $("<td>" + datas[i]["CLeaveTime"] + "</td>");
+                    var $td8 = $("<td>" + datas[i]["CBringOut"] + "</td>");
+                    var $td9 = $("<td  class='shen' >" + datas[i]["CRelustID"] + "</td>");
+                    var $td10;
+                    if (datas[i]["CRelustID"] == "待审核") {
+                        //修改
+                        $td10 = $("<td></td>");
+                    }else {
+                        //查看全部
+                        $td10 = $("<td><a href='/JiFang/JiFangJinChuSelectLook/" + datas[i]["CID"] + "'>查看</a></td>");
+                    }
+
+                    $tr.append($td, $td2, $td3, $td4, $td5, $td6, $td7, $td8, $td9, $td10);
+                    $("#ListArea").append($tr);
+
+
+                }
+
+
+
+            }
+            $(function () {
+                //首页
+                $("#first").click(function () {
+
+                    currentPage = 1;
+                    Show(currentPage, lai, ren);
+                })
+
+                //上一页
+                $("#prev").click(function () {
+                    if (currentPage > 1) {
+                        currentPage--;
+                    }
+                    Show(currentPage, lai, ren);
+                })
+
+                //下一页
+                $("#next").click(function () {
+                    if (currentPage < pages) {
+                        currentPage++;
+                    }
+                    Show(currentPage, lai, ren);
+                })
+
+                //尾页
+                $("#last").click(function () {
+                    currentPage = pages;
+                    Show(currentPage, lai, ren);
+                })
+
+            })
+    </script>
+</head>
+<body>
+    <div>
+        <h2 align="center"> 机房进出申请表 </h2>
+        <div>
+            来访事由：
+            <input id="Text1" type="text" ID="txtSearch" Width="240" />
+            &nbsp;
+            来访人员：
+            <input id="Text2" type="text" ID="txtSearch" Width="240" />
+            &nbsp;
+            <input id="Button1" type="button" value="查询" Class="btn1"/>
+        </div>
+        <table width="100%" id="ListArea" border="0" class="t1" align="center" cellpadding="0"
+               cellspacing="0" h>
+            <tr align="center">
+                <td> 来访日期</td>
+                <td>来访事由</td>
+                <td>来访人员</td>
+                <td>携带物品</td>
+                <td>陪同人员</td>
+                <td>进入机房时间</td>
+                <td>离开机房时间</td>
+                <td>带出物品</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+        </table>
+        <div id="pageDiv">
+            <div id="leftPage" style="color:#3C8ABC;padding-top:10px"></div>
+            <div id="rightPage" style="float:right;position:relative;bottom:20px;">
+                <input type="button" value="首页" Class="btn1" id="first" />&nbsp;&nbsp;
+                <input type="button" value="上一页" Class="btn1" id="prev" />&nbsp;&nbsp;
+                <input type="button" value="下一页" Class="btn1" id="next" />&nbsp;&nbsp;
+                <input type="button" value="尾页" Class="btn1" id="last" />&nbsp;&nbsp;
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -196,11 +196,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AssetController.cs" />
     <Compile Include="Controllers\JiFangController.cs" />
-    <Compile Include="Controllers\JiFangSheBeiController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\MeetingController.cs" />
-    <Compile Include="Controllers\ShenPiController.cs" />
+    <Compile Include="Controllers\WhuWuxiuSelectAllController.cs" />
+    <Compile Include="Controllers\WhuWxiuController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -209,7 +209,6 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Views\JiFang\WhuWxiuController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -630,6 +629,7 @@
     </Content>
     <Content Include="Unity.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Scripts\vssver2.scc" />
@@ -641,11 +641,6 @@
     <Content Include="Views\JiFang\Edit.cshtml" />
     <Content Include="Views\JiFang\ChaXun.cshtml" />
     <Content Include="Views\JiFang\Create.cshtml" />
-    <Content Include="Views\ShenPi\Index.cshtml" />
-    <Content Include="Views\JiFangSheBei\Index.cshtml" />
-    <Content Include="Views\ShenPi\ChaXun.cshtml" />
-    <Content Include="Views\ShenPi\Edit.cshtml" />
-    <Content Include="Views\ShenPi\DaiShenHe.cshtml" />
     <Content Include="Views\Asset\AssetCreate.cshtml" />
     <Content Include="Views\Asset\AssetEdit.cshtml" />
     <Content Include="Views\Asset\AssetRepairEdit.cshtml" />
@@ -669,12 +664,22 @@
     <Content Include="Views\Asset\AssetStatusSelect.cshtml" />
     <Content Include="Views\Asset\AssetStatusWaitSelect.cshtml" />
     <Content Include="Views\Asset\AssetStatusSelectEdit.cshtml" />
+    <Content Include="Views\JiFang\DaiShenHe.cshtml" />
+    <Content Include="Views\JiFang\JiFangJinChuSelectLook.cshtml" />
+    <Content Include="Views\JiFang\JiFangJinChuSelelctAll.cshtml" />
+    <Content Include="Views\JiFang\SheBeiAddShiTu.cshtml" />
+    <Content Include="Views\JiFang\SheBeiBianJi.cshtml" />
+    <Content Include="Views\JiFang\SheBeiGuanLiShiTu.cshtml" />
+    <Content Include="Views\JiFang\ShenPiBoHui.cshtml" />
+    <Content Include="Views\JiFang\ShenPiShiTu.cshtml" />
+    <Content Include="Views\JiFang\ShenPiTongGuo.cshtml" />
+    <Content Include="Views\WhuWuxiuSelectAll\MaintainSelect.cshtml" />
+    <Content Include="Views\WhuWuxiuSelectAll\MaintainLook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="DatePicker\" />
     <Folder Include="Scripts\DatePicker\" />
-    <Folder Include="Views\WeiHu\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

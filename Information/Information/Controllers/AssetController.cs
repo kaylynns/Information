@@ -353,7 +353,7 @@ namespace information.Controllers
         //进入资产审核申请操作页面（进行修改操作）
         public ActionResult AssetReviewEdits(info_Asset asset)
         {
-           asset.AShenHeRan = Session["UserRealName"].ToString();
+          // asset.AShenHeRan = Session["UserRealName"].ToString();
             asset.AShenHeRiQi = DateTime.Now.ToString();
             if (asset.AShenHeJieGuo == "同意")
             {

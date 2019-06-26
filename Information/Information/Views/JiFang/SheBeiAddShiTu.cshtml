@@ -1,0 +1,240 @@
+﻿@model Entity.info_Equipment
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>机房设备管理</title>
+    <link href="~/css/css.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.11.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript">
+        var AID;
+        $(document).on("click", "#GouMai input", function () {
+            WdatePicker();
+        })
+        $(function () {         
+            $("#Img1").click(function () {
+                $('#myModal').show();
+                $.ajax({
+                    type: "post",
+                    data: "",
+                    url: "SheBeiChaLeiBie",
+                    success: function (msg) {
+                        var use = eval("(" + msg + ")");
+                        $("#sel option:gt(0)").remove();
+                        for (var i = 0; i < use.length; i++) {
+                            var $tr = $('<option  id="btnAdd" AName=' + use[i]["AName"] + ' AID=' + use[i]["AID"] + '>' + use[i]["AName"] + "</option>");
+                            $("#sel").append($tr);
+                        }
+                    }
+                })
+            })
+            $(document).on("click", "#btnAdd", function () {
+                var AName = $(this).attr("AName")
+                $("#Text1").val(AName)
+                var AID=$(this).attr("AID");
+                $("#EAID").val(AID);
+                $('#myModal').modal('hide');
+            })
+            })
+               
+             
+
+    </script>
+</head>
+<body>
+    <h2 align="center">机房设备管理表</h2>
+    @using (Ajax.BeginForm("SheBeiAddShiTu",new AjaxOptions() {HttpMethod="Post"}))
+    {
+        <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse"
+               bordercolor="#6c9ec1">
+            <tr>
+                <td align="left" rowspan="2">
+                    设备名称：
+                </td>
+                <td align="left" rowspan="2">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <input id="Text1" type="text" />
+                                @Html.HiddenFor(model=>model.EAID)
+                            </td>
+                            <td>
+                                <font face="宋体">
+                                    <img id="Img1" alt="请选择" src="../img/lookup.gif" data-toggle="modal" data-target="#myModal" />
+                                </font>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td align="left">
+                    使用处室：
+                </td>
+                <td align="left">
+                    @Html.TextBoxFor(model => model.Eoffice)
+                </td>
+            </tr>
+            <tr>
+                <td align="left">
+                    IP地址：
+                </td>
+                <td align="left">
+                    @Html.TextBoxFor(model => model.EIP)
+                </td>
+            </tr>
+            <tr>
+                <td align="left" rowspan="2">
+                    业务系统：
+                </td>
+                <td align="left" rowspan="2">
+                    @Html.TextBoxFor(model => model.Ebusinesssystem)
+                </td>
+                <td align="left">
+                    购买时间：
+                </td>
+                <td align="left" id="GouMai">
+                    @Html.TextBoxFor(model => model.EbuYTime)
+                </td>
+            </tr>
+            <tr>
+                <td align="left">
+                    使用年限：
+                </td>
+                <td align="left">
+                    @Html.TextBoxFor(model => model.Eyear)
+                </td>
+            </tr>
+            <tr height="20">
+                <td align="left" colspan="4"></td>
+            </tr>
+            <tr height="150">
+                <td align="left">
+                    设备参数：
+                </td>
+                <td align="left" colspan="3">
+                    <table cellspacing="0" cellpadding="8" border="0" style="border-collapse: collapse"
+                           bordercolor="#6c9ec1">
+                        <tr>
+                            <td>
+                                设备型号：
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(model => model.EquipmentModel)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                系统版本：
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(model => model.Eversion)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                详细参数：
+                            </td>
+                            <td>
+                                @Html.TextAreaFor(model => model.DEetailedParameters)
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr height="20">
+                <td align="left" colspan="4"></td>
+            </tr>
+            <tr height="150">
+                <td align="left">
+                    供应商<br />
+                    联系方式：
+                </td>
+                <td align="left" class="style2" colspan="3">
+                    <table cellspacing="0" cellpadding="8" border="0" style="border-collapse: collapse"
+                           bordercolor="#6c9ec1">
+                        <tr>
+                            <td>
+                                供应商：
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(model => model.Esupplier)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                联系电话：
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(model => model.EPhone)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                联系人：
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(model => model.Econtact)
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" colspan="4" height="26">
+                    <input id="BaoCun" type="submit" value="保存" class="btn1" />
+                    <input id="btn_add" type="button" value="返回" onclick="location.href = '/JiFang/SheBeiGuanLiShiTu'" class="btn1" />
+                    <br />
+                </td>
+            </tr>
+        </table>
+     }
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <table id="Table2" border="0" cellpadding="3" cellspacing="0" class="table3" align="center">
+                        <tr>
+                            <td colspan="3" align="center">
+                                <asp:ScriptManager ID="ScriptManager1" runat="server">
+                                </asp:ScriptManager>
+                                <asp:Panel ID="Panel1" runat="server" Width="100%">
+                                    <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse;margin:10px 0px 0px 20px"
+                                           bordercolor="#6c9ec1" width="200px">
+                                        <tr>
+
+                                            <td>类别</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <select size="10" style="width: 200px;" id="sel"></select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="2" align="center">
+                                                <input id="Button1" type="button" value="关闭" data-dismiss="modal" Class="btn1" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br />
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -45,12 +45,13 @@
     <Compile Include="ICheckBll.cs" />
     <Compile Include="IComputerRoomVisitBll.cs" />
     <Compile Include="IAssetBll.cs" />
-    <Compile Include="IEquipmentBll.cs" />
+    <Compile Include="IEquipmentsBll.cs" />
     <Compile Include="IMaintenanceBll.cs" />
     <Compile Include="IMeetingBll.cs" />
     <Compile Include="IPiShiJieGuoBll.cs" />
     <Compile Include="IUserBll.cs" />
     <Compile Include="IZiChanBeiZhuBll.cs" />
+    <Compile Include="lIEquipmentBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

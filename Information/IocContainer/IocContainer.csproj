@@ -45,31 +45,24 @@
     <Reference Include="System.Xml" />
     <Reference Include="Unity.Abstractions">
       <HintPath>..\..\..\..\引用\Unity\Unity.5.8.11\lib\net45\Unity.Abstractions.dll</HintPath>
-      <HintPath>..\..\..\mvc\workspace\T08\Unity\Unity.5.8.11\lib\net45\Unity.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Configuration">
       <HintPath>..\..\..\..\引用\Unity\Unity.5.8.11\lib\net45\Unity.Configuration.dll</HintPath>
-      <HintPath>..\..\..\mvc\workspace\T08\Unity\Unity.5.8.11\lib\net45\Unity.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Container">
       <HintPath>..\..\..\..\引用\Unity\Unity.5.8.11\lib\net45\Unity.Container.dll</HintPath>
-      <HintPath>..\..\..\mvc\workspace\T08\Unity\Unity.5.8.11\lib\net45\Unity.Container.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Interception">
       <HintPath>..\..\..\..\引用\Unity\Unity.5.8.11\lib\net45\Unity.Interception.dll</HintPath>
-      <HintPath>..\..\..\mvc\workspace\T08\Unity\Unity.5.8.11\lib\net45\Unity.Interception.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Interception.Configuration">
       <HintPath>..\..\..\..\引用\Unity\Unity.5.8.11\lib\net45\Unity.Interception.Configuration.dll</HintPath>
-      <HintPath>..\..\..\mvc\workspace\T08\Unity\Unity.5.8.11\lib\net45\Unity.Interception.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RegistrationByConvention">
       <HintPath>..\..\..\..\引用\Unity\Unity.5.8.11\lib\net45\Unity.RegistrationByConvention.dll</HintPath>
-      <HintPath>..\..\..\mvc\workspace\T08\Unity\Unity.5.8.11\lib\net45\Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ServiceLocation">
       <HintPath>..\..\..\..\引用\Unity\Unity.5.8.11\lib\net45\Unity.ServiceLocation.dll</HintPath>
-      <HintPath>..\..\..\mvc\workspace\T08\Unity\Unity.5.8.11\lib\net45\Unity.ServiceLocation.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
