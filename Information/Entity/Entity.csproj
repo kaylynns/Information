@@ -138,7 +138,6 @@
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="App.Config" />
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
