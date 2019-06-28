@@ -17,7 +17,7 @@ namespace information.Views.JiFang
         IComputerRoomVisitBll lcr = IocCreate.CreateAll<ComputerRoomVisitService>("ComputerRoomVisitTwo", "ComputerRoomVisitService");
         IMaintenanceBll img = IocContainer.IocCreate.CreateAll<MaintenanceService>("MaintenanceTwo", "MaintenanceService");
         ICheckBll icb = IocContainer.IocCreate.CreateAll<CheckService>("CheckTwo", "CheckService");
-        IEquipmentBll ieb = IocContainer.IocCreate.CreateAll<EquipmentService>("EquipmentTwo", "EquipmentService");
+        IAssetBll iab = IocCreate.CreateAll<AssetService>("AssetTwo", "AssetService");
         // GET: WhuWxiu 设备维护
         public ActionResult Index()
         {
@@ -35,8 +35,6 @@ namespace information.Views.JiFang
             }
             else
             {
-
-                //  dt = imb.FenYe(e => e.MID, e => e.MName.Contains(names), out rows, currentpage, 3);
                 dt = icb.v_MainAll(e => e.MIDs, e => e.MDeviceName.Contains(names), out rows, currentpage, 3);
             }
 
@@ -50,7 +48,8 @@ namespace information.Views.JiFang
 
         public ActionResult selectCB()
         {
-            List<info_Equipments> list = ieb.SelectAll();
+           List<info_Asset> list= iab.SelectAll();
+           // List<info_Equipments> list = ieb.SelectAll();
             return Content(JsonConvert.SerializeObject(list));
         }
 
@@ -186,8 +185,8 @@ namespace information.Views.JiFang
             ShengCheng();//查询陪同人员
             FillClass();   //查询检测人员
             info_Maintenance im = img.SelectWhere(e=>e.MIDs==id).FirstOrDefault();
-            info_Equipments ies = ieb.SelectWhere(e => e.EID == im.MDeviceName).FirstOrDefault();
-            ViewData["a"] =ies.EDeviceName;
+            info_Asset ies = iab.SelectWhere(e => e.AID == im.MDeviceName).FirstOrDefault();
+            ViewData["a"] =ies.AName;
             return View(im);
         }
 

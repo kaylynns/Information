@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-  public  class EquipmentService: IEquipmentBll
+  public  class EquipmentsService: IEquipmentsBll
     {
-        IEquipmentDao imd = IocContainer.IocCreate.CreateAll<EquipmentDao>("EquipmentOne", "EquipmentDao");
+        IEquipmentsDao imd = IocContainer.IocCreate.CreateAll<EquipmentsDao>("EquipmentsOne", "EquipmentsDao");
 
         public int Add(info_Equipments t)
         {

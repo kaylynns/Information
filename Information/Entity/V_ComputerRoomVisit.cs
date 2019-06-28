@@ -23,10 +23,11 @@ namespace Entity
         public string CBringOut { get; set; }
         public Nullable<System.DateTime> CEntryTime { get; set; }
         public Nullable<System.DateTime> CLeaveTime { get; set; }
-        public Nullable<int> CRegistar { get; set; }
+        public string CRegistar { get; set; }
         public string CInstructor { get; set; }
         public string CRelustID { get; set; }
         public Nullable<System.DateTime> CInstructorTime { get; set; }
         public string COpinion { get; set; }
+        public Nullable<int> CXuanXiang { get; set; }
     }
 }

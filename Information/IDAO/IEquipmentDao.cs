@@ -10,11 +10,10 @@ namespace IDAO
 {
     public interface IEquipmentDao
     {
-        List<info_Equipments> SelectAll();
-        List<info_Equipments> SelectWhere(Expression<Func<info_Equipments, bool>> where);
-        List<info_Equipments> FenYe<K>(Expression<Func<info_Equipments, K>> order, Expression<Func<info_Equipments, bool>> where, out int rows, int currentPage, int pageSize);
-        int Add(info_Equipments t);
-        int Delete(info_Equipments t);
-        int Update(info_Equipments t);
+        //分页查询
+       List<V_info_Equipment> FenYes<K>(Expression<Func<V_info_Equipment, K>> order, Expression<Func<V_info_Equipment, bool>> where, out int rows, int currentPage, int pageSize);
+        int Add(info_Equipment t);
+        List<info_Equipment> SelectWhere(Expression<Func<info_Equipment, bool>> where);
+        int Update(info_Equipment t);
     }
 }
