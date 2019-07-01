@@ -29,5 +29,15 @@ namespace BLL
         {
             return izcbd.SelectWhere(where);
         }
+        public   List<ZiChanBeiZhu> FenYe<K>(Expression<Func<ZiChanBeiZhu, K>> order, Expression<Func<ZiChanBeiZhu, bool>> where, out int rows, int currentPage, int pageSize)
+        {
+            return izcbd.FenYe(order, where, out rows, currentPage, pageSize);
+        }
+        public int Delete(ZiChanBeiZhu t) {
+            return izcbd.Delete(t);
+        }
+        public int Update(ZiChanBeiZhu t) {
+            return izcbd.Update(t);
+        }
     }
 }

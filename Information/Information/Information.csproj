@@ -202,6 +202,7 @@
     <Compile Include="Controllers\MeetingController.cs" />
     <Compile Include="Controllers\WhuWuxiuSelectAllController.cs" />
     <Compile Include="Controllers\WhuWxiuController.cs" />
+    <Compile Include="Controllers\ZiChanController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -685,6 +686,8 @@
     <Content Include="Views\ChaXunXiTong\SelectTongJiWeiHuWeiXiuChaKan.cshtml" />
     <Content Include="Views\ChaXunXiTong\JiFangSheBeiSelelctAll.cshtml" />
     <Content Include="Views\ChaXunXiTong\JiFangSheBeiChaKan.cshtml" />
+    <Content Include="Views\ZiChan\Index.cshtml" />
+    <Content Include="Views\ZiChan\JiFangJinChuSelectShiTu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
