@@ -28,6 +28,7 @@ namespace Entity
         public virtual DbSet<CaiGouXingShi> CaiGouXingShi { get; set; }
         public virtual DbSet<CaiGouYiJu> CaiGouYiJu { get; set; }
         public virtual DbSet<info_Asset> info_Asset { get; set; }
+        public virtual DbSet<info_Check> info_Check { get; set; }
         public virtual DbSet<info_ComputerRoomVisit> info_ComputerRoomVisit { get; set; }
         public virtual DbSet<info_Maintenance> info_Maintenance { get; set; }
         public virtual DbSet<info_Meeting> info_Meeting { get; set; }
@@ -42,8 +43,9 @@ namespace Entity
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<ZiChanBeiZhu> ZiChanBeiZhu { get; set; }
         public virtual DbSet<ZiChanZhuangTai> ZiChanZhuangTai { get; set; }
-        public virtual DbSet<info_Equipment> info_Equipment { get; set; }
+        public virtual DbSet<info_Equipments> info_Equipments { get; set; }
         public virtual DbSet<v_Asset> v_Asset { get; set; }
         public virtual DbSet<V_ComputerRoomVisit> V_ComputerRoomVisit { get; set; }
+        public virtual DbSet<v_Maintenance> v_Maintenance { get; set; }
     }
 }

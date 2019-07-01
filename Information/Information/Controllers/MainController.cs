@@ -23,11 +23,13 @@ namespace information.Controllers
         //左边
         public ActionResult left()
         {
+           
             return View();
         }
         //头部
         public ActionResult top()
         {
+            ViewData["user"] = Session["UserName"];
             return View();
         }
 

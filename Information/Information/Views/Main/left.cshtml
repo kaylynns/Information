@@ -9,58 +9,47 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>left</title>
-    <link href="~/css/lcss.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-1.7.2.min.js"></script>
-    <script language="javascript">
 
+    <link href="~/Image/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/theme.css" rel="stylesheet" />
+    <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.js"></script>
+
+    <style type="text/css">
+        #line-chart {
+            height: 300px;
+            width: 800px;
+            margin: 0px auto;
+            margin-top: 1em;
+        }
+
+        .brand {
+            font-family: georgia, serif;
+        }
+
+            .brand .first {
+                color: #ccc;
+                font-style: italic;
+            }
+
+            .brand .second {
+                color: #fff;
+                font-weight: bold;
+            }
+
+        a {
+            color: black;
+        }
+    </style>
+
+    <script type="text/javascript">
+            //$("[rel=tooltip]").tooltip();
         $(function () {
-            $(".fist").click(function () {
-                $(this).next(".aaa").toggle();
-                $(this).next(".ccc").show();
+
+            $('.nav').hide();
+            $('.nav-header').click(function () {
+                $(this).next(".nav").toggle(300);
             });
-        });
-
-    </script>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-            <table border="0" align="left" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td width="185" valign="top" id="menu">
-                        <table width="185" border="0" cellpadding="0" cellspacing="0">
-                            @*资产管理*@
-                            <tr class="fist">
-                                <td height="38" background="~/img/left_1.jpg">
-                                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td width="22%" align="center">
-
-                                                <img src="~/img/left_9.jpg" width="23" height="23" />
-                                            </td>
-                                            <td width="49%">
-
-                                                <a href="#">资产管理</a>
-                                            </td>
-                                            <td width="29%">
-                                                &nbsp;
-                                            </td>
-                                        </tr>
-
-
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr class="aaa">
-                                <td height="168" class="left" valign=top>
-                                    <table width="85%" border="0" align="right" cellpadding="0" cellspacing="0" class="ccc">
-
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-
                                                 <a class="a1" href="~/Asset/AssetSelect" target="main">资产登记</a>
                                             </td>
                                         </tr>
@@ -74,6 +63,8 @@
                                             </td>
                                         </tr>
 
+            });
+    </script>
                                         <tr>
                                             <td width="13%" align="center">
                                                 <img src="~/img/left_1.gif" width="8" height="8" />
@@ -83,7 +74,20 @@
                                             </td>
                                         </tr>
 
+</head>
+<body class="" style="background-color:#F3F3F3">
+    <div class="sidebar-nav">
+        @*资产管理*@
+        <p class="nav-header"><a href="#dashboard-menu"> <i class="icon-dashboard"></i><spans id="aa">资产管理</spans> </a> </p>
 
+        <ul id="dashboard-menu" class="nav nav-list collapse in">
+            <li><a href="index.html" target="main">资产登记</a></li>
+            <li><a href="users.html" target="main">资产维修报废申请</a></li>
+            <li><a href="user.html" target="main">资产维修报废审核</a></li>
+            <li><a href="media.html" target="main">资产维修报废查询</a></li>
+            <li><a href="calendar.html" target="main">资产设备统计查询</a></li>
+
+        </ul>
                                         <tr>
                                             <td width="13%" align="center">
                                                 <img src="~/img/left_1.gif" width="8" height="8" />
@@ -97,35 +101,15 @@
                             </tr>
 
                             @*机房管理*@
-                            <tr class="fist">
-                                <td height="38" background="~/img/left_1.jpg" class="left">
-                                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td width="22%" align="center">
-
-                                                <img src="~/img/left_4.jpg" width="23" height="23" />
-                                            </td>
-                                            <td width="49%">
-
-                                                <a href="">机房管理</a>
-                                            </td>
-                                            <td width="29%">
-                                                &nbsp;
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-
-                            <tr class="aaa">
-                                <td height="168" class="left" valign=top>
-                                    <table width="85%" border="0" align="right" cellpadding="0" cellspacing="0" class="ddd">
-
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
+        <p class="nav-header"><a href="#dashboard-menu"><i class="icon-dashboard"></i>机房管理</a></p>
+        <ul id="accounts-menu" class="nav nav-list collapse in">
+            <li><a href="index.html" target="main">机房进出申请</a></li>
+            <li><a href="users.html" target="main">机房进出审批</a></li>
+            <li><a href="/WhuWxiu/Index" target="main">机房维护维修</a></li>
+            <li><a href="media.html" target="main">机房设备管理</a></li>
+            <li><a href="calendar.html" target="main">机房进出查询</a></li>
+            <li><a href="#" target="main">机房维护维修查询</a></li>
+        </ul>
 
                                                 <a class="a1" href="~/JiFang/Index" target="main">机房进出申请</a>
                                             </td>
@@ -179,303 +163,54 @@
                             </tr>
 
                             @*视频会议*@
-                            <tr class="fist">
-                                <td height="38" background="~/img/left_1.jpg" class="left">
-                                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td width="22%" align="center">
-
-                                                <img src="~/img/left_5.jpg" width="23" height="23" />
-                                            </td>
-                                            <td width="49%">
-
-                                                <a href="#">视频会议</a>
-                                            </td>
-                                            <td width="29%">
-                                                &nbsp;
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-
-                            <tr class="aaa">
-                                <td height="168" class="left" valign=top>
-                                    <table width="85%" border="0" align="right" cellpadding="0" cellspacing="0" class="ddd">
-
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="~/Meeting/Index" target="main">会议测试及开会记录</a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="~/Meeting/IndexQZ" target="main">会议测试及开会签字</a>
-                                            </td>
-                                        </tr>
-
-
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#">会议设备维修申请</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#">会议设备维修审核</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#">视频会议查询</a>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
+        <p class="nav-header"><a href="#dashboard-menu"><i class="icon-dashboard"></i>视频会议</a></p>
+        <ul id="accounts-menu" class="nav nav-list collapse in">
+            <li><a href="~/Meeting/Index" target="main">会议测试及开会记录</a></li>
+            <li><a href="/Meeting/IndexQZ" target="main">会议测试及开会签字</a></li>
+            <li><a href="#" target="main">会议设备维修申请</a></li>
+            <li><a href="#" target="main">会议设备维修审核</a></li>
+            <li><a href="/Meeting/selectCX" target="main">视频会议查询</a></li>
+        </ul>
 
                             @*软件维护*@
-                            <tr class="fist">
-                                <td height="38" background="~/img/left_1.jpg" class="left">
-                                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td width="22%" align="center">
+        <p class="nav-header"><a href="#dashboard-menu"><i class="icon-dashboard"></i>软件维护</a></p>
+        <ul id="accounts-menu" class="nav nav-list collapse in">
+            <li><a href="~/Meeting/Index" target="main">技术支持内容登记</a></li>
+            <li><a href="/Meeting/IndexQZ" target="main">业务系统使用申请</a></li>
+            <li><a href="#" target="main">业务系统变更申请</a></li>
+            <li><a href="#" target="main">业务系统数据修改申请</a></li>
+            <li><a href="/Meeting/selectCX" target="main">业务系统使用审核</a></li>
+            <li><a href="~/Meeting/Index" target="main">业务系统变更审核</a></li>
+            <li><a href="/Meeting/IndexQZ" target="main">业务系统数据修改审核</a></li>
+        </ul>
 
-                                                <img src="~/img/left_5.jpg" width="23" height="23" />
-                                            </td>
-                                            <td width="49%">
-
-                                                <a href="#">软件维护</a>
-                                            </td>
-                                            <td width="29%">
-                                                &nbsp;
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-
-                            <tr class="aaa">
-                                <td height="168" class="left" valign=top>
-                                    <table width="85%" border="0" align="right" cellpadding="0" cellspacing="0" class="ddd">
-
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-
-                                                <a class="a1" href="#">技术支持内容登记</a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#">业务系统使用申请</a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#">业务系统变更申请</a>
-                                            </td>
-                                        </tr>
-
-
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#">业务系统数据修改申请</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#">业务系统使用审核</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#">业务系统变更审核</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#">业务系统数据修改审核</a>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
+        @*查询统计*@
+        <p class="nav-header"><a href="#dashboard-menu"><i class="icon-dashboard"></i>查询统计</a></p>
+        <ul id="accounts-menu" class="nav nav-list collapse in">
+            <li><a href="~/Meeting/Index" target="main">技术支持查询</a></li>
+            <li><a href="/Meeting/IndexQZ" target="main">机房设备统计查询</a></li>
+            <li><a href="#" target="main">人员情况查询</a></li>
+            <li><a href="#" target="main">文档查询</a></li>
+            <li><a href="/Meeting/selectCX" target="main">机房进出查询</a></li>
+            <li><a href="~/Meeting/Index" target="main">视频会议查询</a></li>
+            <li><a href="/Meeting/IndexQZ" target="main">机房维护维修查询</a></li>
+            <li><a href="/Meeting/IndexQZ" target="main">机房设备查询</a></li>
+            <li><a href="/Meeting/IndexQZ" target="main">业务系统数据修改查询</a></li>
+            <li><a href="/Meeting/IndexQZ" target="main">业务系统使用查询</a></li>
+        </ul>
 
                             @*查询统计*@
-                            <tr class="fist">
-                                <td height="38" background="~/img/left_1.jpg" class="left">
-                                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td width="22%" align="center">
-
-                                                <img src="~/img/left_4.jpg" width="23" height="23" />
-                                            </td>
-                                            <td width="49%">
-
-                                                <a href="#">查询统计</a>
-                                            </td>
-                                            <td width="29%">
-                                                &nbsp;
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-
-                            <tr class="aaa">
-                                <td height="168" class="left" valign=top>
-                                    <table width="85%" border="0" align="right" cellpadding="0" cellspacing="0" class="ddd">
-
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-
-                                                <a class="a1" href="#">技术支持查询</a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#">机房设备统计查询</a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#">人员情况查询</a>
-                                            </td>
-                                        </tr>
-
-
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#">文档查询</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#">机房进出查询 </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#">视屏会议查询</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#">业务系统数据修改审核</a>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-
-                            @*退出系统*@
-                            <tr>
-                                <td height="38" background="img/left_1.jpg" class="left">
-                                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td width="22%" align="center">
-                                                <img src="~/img/left_10.jpg" width="22" height="24">
-                                            </td>
-                                            <td width="49%">
-                                                <a href="~/Login/Index">退出系统</a>
-                                            </td>
-                                            <td width="29%">
-                                                &nbsp;
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td height="420" class="left">
-                                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td width="22%" align="center"></td>
-                                            <td width="49%"></td>
-                                            <td width="29%"></td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td width="10" background="img/left_11.jpg" class="left1">
-                        <div align="center">
-                            <img id="limg" src="img/left_12.jpg" width="10" height="31" border="0" onclick="oa_tool()" title="隐藏菜单栏">
-                        </div>
-                    </td>
-                </tr>
-
-            </table>
-
+        <p class="nav-header"><a href="#dashboard-menu"><i class="icon-dashboard"></i>系统设置</a></p>
+        <ul id="accounts-menu" class="nav nav-list collapse in">
+            <li><a href="~/Meeting/Index" target="main">权限管理</a></li>
+            <li><a href="/Meeting/IndexQZ" target="main">部门管理</a></li>
+            <li><a href="#" target="main">用户管理</a></li>
+            <li><a href="#" target="main">文件类别管理</a></li>
+            <li><a href="/Meeting/selectCX" target="main">资产类别管理</a></li>
+            <li><a href="~/Meeting/Index" target="main">软件名称维护</a></li>
+            <li><a href="/Meeting/IndexQZ" target="main">问题分类维护</a></li>
+            <li><a href="/Meeting/IndexQZ" target="main">人员情况查询</a></li>
+        </ul>
         </div>
-    </form>
-
-    <script language="javascript">
-     $(".aaa:not(#tr1)").hide();
-    </script>
 </body>
 </html>

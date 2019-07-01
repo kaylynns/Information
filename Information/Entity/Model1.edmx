@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="InformationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="InformationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CaiGouXingShi">
           <Key>
             <PropertyRef Name="SID" />
@@ -47,6 +47,14 @@
           <Property Name="AShenHeJieGuo" Type="varchar" MaxLength="50" />
           <Property Name="AShenHeRiQi" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="info_Check">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project" Type="varchar" MaxLength="50" />
+          <Property Name="result" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="info_ComputerRoomVisit">
           <Key>
             <PropertyRef Name="CID" />
@@ -68,8 +76,8 @@
           <Property Name="CXuanXiang" Type="int" />
         </EntityType>
         <!--生成过程中发现错误:
-警告 6002: 表/视图“Information.dbo.info_Equipment”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
-        <EntityType Name="info_Equipment">
+警告 6002: 表/视图“Information.dbo.info_Equipments”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="info_Equipments">
           <Key>
             <PropertyRef Name="EID" />
           </Key>
@@ -89,14 +97,14 @@
         </EntityType>
         <EntityType Name="info_Maintenance">
           <Key>
-            <PropertyRef Name="MID" />
+            <PropertyRef Name="MIDs" />
           </Key>
-          <Property Name="MID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MIDs" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaintenanceTime" Type="datetime" />
           <Property Name="MDeviceName" Type="int" />
           <Property Name="MDetectionUnit" Type="varchar" MaxLength="50" />
-          <Property Name="MTestingPersonnel" Type="varchar" MaxLength="50" />
-          <Property Name="MAccompanyingOfficials" Type="varchar" MaxLength="50" />
+          <Property Name="MTestingPersonnel" Type="int" />
+          <Property Name="MAccompanyingOfficials" Type="int" />
           <Property Name="MTheRegistrar" Type="varchar" MaxLength="50" />
           <Property Name="Madvice" Type="varchar" MaxLength="50" />
         </EntityType>
@@ -285,6 +293,21 @@
           <Property Name="CInstructorTime" Type="datetime" />
           <Property Name="COpinion" Type="varchar" MaxLength="50" />
         </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Information.dbo.v_Maintenance”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="v_Maintenance">
+          <Key>
+            <PropertyRef Name="MIDs" />
+          </Key>
+          <Property Name="MaintenanceTime" Type="datetime" />
+          <Property Name="MDeviceName" Type="varchar" MaxLength="50" />
+          <Property Name="MDetectionUnit" Type="varchar" MaxLength="50" />
+          <Property Name="MIDs" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MTheRegistrar" Type="varchar" MaxLength="50" />
+          <Property Name="Madvice" Type="varchar" MaxLength="50" />
+          <Property Name="MTestingPersonnel" Type="varchar" MaxLength="100" />
+          <Property Name="MAccompanyingOfficials" Type="varchar" MaxLength="50" />
+        </EntityType>
         <Association Name="FK_info_Asset_CaiGouXingShi">
           <End Role="CaiGouXingShi" Type="Self.CaiGouXingShi" Multiplicity="0..1" />
           <End Role="info_Asset" Type="Self.info_Asset" Multiplicity="*" />
@@ -397,6 +420,7 @@
           <EntitySet Name="CaiGouXingShi" EntityType="Self.CaiGouXingShi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CaiGouYiJu" EntityType="Self.CaiGouYiJu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="info_Asset" EntityType="Self.info_Asset" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="info_Check" EntityType="Self.info_Check" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="info_ComputerRoomVisit" EntityType="Self.info_ComputerRoomVisit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="info_Maintenance" EntityType="Self.info_Maintenance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="info_Meeting" EntityType="Self.info_Meeting" Schema="dbo" store:Type="Tables" />
@@ -411,22 +435,22 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZiChanBeiZhu" EntityType="Self.ZiChanBeiZhu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZiChanZhuangTai" EntityType="Self.ZiChanZhuangTai" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="info_Equipment" EntityType="Self.info_Equipment" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="info_Equipments" EntityType="Self.info_Equipments" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [info_Equipment].[EID] AS [EID], 
-    [info_Equipment].[EDeviceName] AS [EDeviceName], 
-    [info_Equipment].[EquipmentModel] AS [EquipmentModel], 
-    [info_Equipment].[Eoffice] AS [Eoffice], 
-    [info_Equipment].[Ebusinesssystem] AS [Ebusinesssystem], 
-    [info_Equipment].[EbuYTime] AS [EbuYTime], 
-    [info_Equipment].[Eyear] AS [Eyear], 
-    [info_Equipment].[Eversion] AS [Eversion], 
-    [info_Equipment].[DEetailedParameters] AS [DEetailedParameters], 
-    [info_Equipment].[Esupplier] AS [Esupplier], 
-    [info_Equipment].[EPhone] AS [EPhone], 
-    [info_Equipment].[Econtact] AS [Econtact], 
-    [info_Equipment].[EIP] AS [EIP]
-    FROM [dbo].[info_Equipment] AS [info_Equipment]</DefiningQuery>
+    [info_Equipments].[EID] AS [EID], 
+    [info_Equipments].[EDeviceName] AS [EDeviceName], 
+    [info_Equipments].[EquipmentModel] AS [EquipmentModel], 
+    [info_Equipments].[Eoffice] AS [Eoffice], 
+    [info_Equipments].[Ebusinesssystem] AS [Ebusinesssystem], 
+    [info_Equipments].[EbuYTime] AS [EbuYTime], 
+    [info_Equipments].[Eyear] AS [Eyear], 
+    [info_Equipments].[Eversion] AS [Eversion], 
+    [info_Equipments].[DEetailedParameters] AS [DEetailedParameters], 
+    [info_Equipments].[Esupplier] AS [Esupplier], 
+    [info_Equipments].[EPhone] AS [EPhone], 
+    [info_Equipments].[Econtact] AS [Econtact], 
+    [info_Equipments].[EIP] AS [EIP]
+    FROM [dbo].[info_Equipments] AS [info_Equipments]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="v_Asset" EntityType="Self.v_Asset" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -467,6 +491,18 @@
     [V_ComputerRoomVisit].[CInstructorTime] AS [CInstructorTime], 
     [V_ComputerRoomVisit].[COpinion] AS [COpinion]
     FROM [dbo].[V_ComputerRoomVisit] AS [V_ComputerRoomVisit]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_Maintenance" EntityType="Self.v_Maintenance" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_Maintenance].[MaintenanceTime] AS [MaintenanceTime], 
+    [v_Maintenance].[MDeviceName] AS [MDeviceName], 
+    [v_Maintenance].[MDetectionUnit] AS [MDetectionUnit], 
+    [v_Maintenance].[MIDs] AS [MIDs], 
+    [v_Maintenance].[MTheRegistrar] AS [MTheRegistrar], 
+    [v_Maintenance].[Madvice] AS [Madvice], 
+    [v_Maintenance].[MTestingPersonnel] AS [MTestingPersonnel], 
+    [v_Maintenance].[MAccompanyingOfficials] AS [MAccompanyingOfficials]
+    FROM [dbo].[v_Maintenance] AS [v_Maintenance]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_info_Asset_CaiGouXingShi" Association="Self.FK_info_Asset_CaiGouXingShi">
             <End Role="CaiGouXingShi" EntitySet="CaiGouXingShi" />
@@ -559,6 +595,14 @@
           <NavigationProperty Name="ZiChanBeiZhu" Relationship="Self.FK_info_Asset_ZiChanBeiZhu" FromRole="info_Asset" ToRole="ZiChanBeiZhu" />
           <NavigationProperty Name="ZiChanZhuangTai" Relationship="Self.FK_info_Asset_ZiChanZhuangTai" FromRole="info_Asset" ToRole="ZiChanZhuangTai" />
         </EntityType>
+        <EntityType Name="info_Check">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="result" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="info_ComputerRoomVisit">
           <Key>
             <PropertyRef Name="CID" />
@@ -582,14 +626,14 @@
         </EntityType>
         <EntityType Name="info_Maintenance">
           <Key>
-            <PropertyRef Name="MID" />
+            <PropertyRef Name="MIDs" />
           </Key>
-          <Property Name="MID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MIDs" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MaintenanceTime" Type="DateTime" Precision="3" />
           <Property Name="MDeviceName" Type="Int32" />
           <Property Name="MDetectionUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MTestingPersonnel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MAccompanyingOfficials" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MTestingPersonnel" Type="Int32" />
+          <Property Name="MAccompanyingOfficials" Type="Int32" />
           <Property Name="MTheRegistrar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Madvice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
@@ -742,7 +786,7 @@
           <Property Name="TStates" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="info_Asset" Relationship="Self.FK_info_Asset_ZiChanZhuangTai" FromRole="ZiChanZhuangTai" ToRole="info_Asset" />
         </EntityType>
-        <EntityType Name="info_Equipment">
+        <EntityType Name="info_Equipments">
           <Key>
             <PropertyRef Name="EID" />
           </Key>
@@ -801,6 +845,19 @@
           <Property Name="CRelustID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CInstructorTime" Type="DateTime" Precision="3" />
           <Property Name="COpinion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="v_Maintenance">
+          <Key>
+            <PropertyRef Name="MIDs" />
+          </Key>
+          <Property Name="MaintenanceTime" Type="DateTime" Precision="3" />
+          <Property Name="MDeviceName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MDetectionUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MIDs" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MTheRegistrar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Madvice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MTestingPersonnel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MAccompanyingOfficials" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_info_Asset_CaiGouXingShi">
           <End Role="CaiGouXingShi" Type="Self.CaiGouXingShi" Multiplicity="0..1" />
@@ -914,6 +971,7 @@
           <EntitySet Name="CaiGouXingShi" EntityType="Self.CaiGouXingShi" />
           <EntitySet Name="CaiGouYiJu" EntityType="Self.CaiGouYiJu" />
           <EntitySet Name="info_Asset" EntityType="Self.info_Asset" />
+          <EntitySet Name="info_Check" EntityType="Self.info_Check" />
           <EntitySet Name="info_ComputerRoomVisit" EntityType="Self.info_ComputerRoomVisit" />
           <EntitySet Name="info_Maintenance" EntityType="Self.info_Maintenance" />
           <EntitySet Name="info_Meeting" EntityType="Self.info_Meeting" />
@@ -928,9 +986,10 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="ZiChanBeiZhu" EntityType="Self.ZiChanBeiZhu" />
           <EntitySet Name="ZiChanZhuangTai" EntityType="Self.ZiChanZhuangTai" />
-          <EntitySet Name="info_Equipment" EntityType="Self.info_Equipment" />
+          <EntitySet Name="info_Equipments" EntityType="Self.info_Equipments" />
           <EntitySet Name="v_Asset" EntityType="Self.v_Asset" />
           <EntitySet Name="V_ComputerRoomVisit" EntityType="Self.V_ComputerRoomVisit" />
+          <EntitySet Name="v_Maintenance" EntityType="Self.v_Maintenance" />
           <AssociationSet Name="FK_info_Asset_CaiGouXingShi" Association="Self.FK_info_Asset_CaiGouXingShi">
             <End Role="CaiGouXingShi" EntitySet="CaiGouXingShi" />
             <End Role="info_Asset" EntitySet="info_Asset" />
@@ -1019,6 +1078,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="info_Check">
+            <EntityTypeMapping TypeName="InformationModel.info_Check">
+              <MappingFragment StoreEntitySet="info_Check">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="project" ColumnName="project" />
+                <ScalarProperty Name="result" ColumnName="result" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="info_ComputerRoomVisit">
             <EntityTypeMapping TypeName="InformationModel.info_ComputerRoomVisit">
               <MappingFragment StoreEntitySet="info_ComputerRoomVisit">
@@ -1043,7 +1111,7 @@
           <EntitySetMapping Name="info_Maintenance">
             <EntityTypeMapping TypeName="InformationModel.info_Maintenance">
               <MappingFragment StoreEntitySet="info_Maintenance">
-                <ScalarProperty Name="MID" ColumnName="MID" />
+                <ScalarProperty Name="MIDs" ColumnName="MIDs" />
                 <ScalarProperty Name="MaintenanceTime" ColumnName="MaintenanceTime" />
                 <ScalarProperty Name="MDeviceName" ColumnName="MDeviceName" />
                 <ScalarProperty Name="MDetectionUnit" ColumnName="MDetectionUnit" />
@@ -1205,9 +1273,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="info_Equipment">
-            <EntityTypeMapping TypeName="InformationModel.info_Equipment">
-              <MappingFragment StoreEntitySet="info_Equipment">
+          <EntitySetMapping Name="info_Equipments">
+            <EntityTypeMapping TypeName="InformationModel.info_Equipments">
+              <MappingFragment StoreEntitySet="info_Equipments">
                 <ScalarProperty Name="EID" ColumnName="EID" />
                 <ScalarProperty Name="EDeviceName" ColumnName="EDeviceName" />
                 <ScalarProperty Name="EquipmentModel" ColumnName="EquipmentModel" />
@@ -1265,6 +1333,20 @@
                 <ScalarProperty Name="CRelustID" ColumnName="CRelustID" />
                 <ScalarProperty Name="CInstructorTime" ColumnName="CInstructorTime" />
                 <ScalarProperty Name="COpinion" ColumnName="COpinion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_Maintenance">
+            <EntityTypeMapping TypeName="InformationModel.v_Maintenance">
+              <MappingFragment StoreEntitySet="v_Maintenance">
+                <ScalarProperty Name="MaintenanceTime" ColumnName="MaintenanceTime" />
+                <ScalarProperty Name="MDeviceName" ColumnName="MDeviceName" />
+                <ScalarProperty Name="MDetectionUnit" ColumnName="MDetectionUnit" />
+                <ScalarProperty Name="MIDs" ColumnName="MIDs" />
+                <ScalarProperty Name="MTheRegistrar" ColumnName="MTheRegistrar" />
+                <ScalarProperty Name="Madvice" ColumnName="Madvice" />
+                <ScalarProperty Name="MTestingPersonnel" ColumnName="MTestingPersonnel" />
+                <ScalarProperty Name="MAccompanyingOfficials" ColumnName="MAccompanyingOfficials" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

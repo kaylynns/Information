@@ -55,21 +55,15 @@
     <Compile Include="BaseDao.cs" />
     <Compile Include="CaiGouXingShiDao.cs" />
     <Compile Include="CaiGouYiJuDao.cs" />
+    <Compile Include="CheckDao.cs" />
     <Compile Include="ComputerRoomVisitDao.cs" />
+    <Compile Include="EquipmentDao.cs" />
+    <Compile Include="MaintenanceDao.cs" />
+    <Compile Include="MeetingDao.cs" />
     <Compile Include="PiShiJieGuoDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserDao.cs" />
     <Compile Include="ZiChanBeiZhuDao.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Entity\Entity.csproj">
-      <Project>{c221f513-2052-421c-9708-245142b923b4}</Project>
-      <Name>Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IDAO\IDAO.csproj">
-      <Project>{a63668de-2cd1-44f9-a94b-054dc3411e2e}</Project>
-      <Name>IDAO</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
@@ -77,6 +71,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{f97ee5b1-4362-4b82-acbe-b1f67e4e4e5b}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IDAO\IDAO.csproj">
+      <Project>{a63668de-2cd1-44f9-a94b-054dc3411e2e}</Project>
+      <Name>IDAO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

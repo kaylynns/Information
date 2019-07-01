@@ -25,20 +25,7 @@ namespace DAO
                   .Select(e => e)
                   .ToList();
         }
-
-        //var list4=  aet.Users
-        //      .Join(aet.Classes,
-        //      uu => uu.ClassId,
-        //      c => c.ClassId,
-        //      (uu, c) => new { uu.Uname,c.ClassName })
-        //      .ToList();
-
-        //public List<T> selectJoin() {
-        //    List<T> list = ce.info_ComputerRoomVisit.Join(ce.PiShiJieGuo, e => e.CRelustID, c => c.CRelustID, (e, c) => new { e.CName, c.CRelustName }).ToList();
-        //   //List<T> list=ce.Set<T>().Join(ce.Set<T>,)
-        //    return list;
-        //}
-
+        
         public List<T> FenYe<K>(Expression<Func<T, K>> order, Expression<Func<T, bool>> where, out int rows, int currentPage, int pageSize)
         {
             var data = ce.Set<T>().OrderBy(order).Where(where);
@@ -54,7 +41,6 @@ namespace DAO
 
         public int Update(T t)
         {
-
             ce.Entry<T>(t).State = EntityState.Modified;
             return ce.SaveChanges();
         }

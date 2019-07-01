@@ -12,7 +12,7 @@ namespace Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class info_Equipment
+    public partial class info_Equipments
     {
         public int EID { get; set; }
         public string EDeviceName { get; set; }
