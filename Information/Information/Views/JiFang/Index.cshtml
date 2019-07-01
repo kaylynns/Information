@@ -78,6 +78,7 @@
                     success: function (msg) {
                         var data = eval("(" + msg + ")");
                         var datas = data["list"];
+                       
                         XunHuan(datas);
                         var rows = data["rows"];
                         pages = data["pages"];

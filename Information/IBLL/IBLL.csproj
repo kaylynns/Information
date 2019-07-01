@@ -49,6 +49,7 @@
     <Compile Include="IMaintenanceBll.cs" />
     <Compile Include="IMeetingBll.cs" />
     <Compile Include="IPiShiJieGuoBll.cs" />
+    <Compile Include="IRoleBll.cs" />
     <Compile Include="IUserBll.cs" />
     <Compile Include="IZiChanBeiZhuBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

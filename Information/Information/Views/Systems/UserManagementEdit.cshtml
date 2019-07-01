@@ -1,0 +1,74 @@
+﻿@model Entity.info_User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>用户编辑</title>
+    <link href="~/css/css.css" rel="stylesheet" />
+    <link href="~/Scripts/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+</head>
+<body>
+    @using (Html.BeginForm("UserManagementEdits", "Systems","post"))
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-horizontal" align="center">
+            <h2 align="center">用户编辑</h2>
+        
+            <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse;margin:10px 0px 0px 20px;"
+                   bordercolor="#6c9ec1" width="400px" height="200px" >
+                <tr>
+                        @Html.HiddenFor(model => model.UserID)
+                        @Html.HiddenFor(model=>model.UserPass)
+                </tr>
+                <tr>
+                    <td>登  录  名：</td>
+                    <td> @Html.EditorFor(model => model.UserName)</td>
+                </tr>
+                <tr>
+                    <td>真实姓        名：</td>
+                    <td>@Html.EditorFor(model => model.UserRealName)</td>
+                </tr>
+                <tr>
+                    <td>电话：</td>
+                    <td>@Html.EditorFor(model => model.UserPhone)</td>
+                </tr>
+                <tr>
+                    <td>公用电话：</td>
+                    <td>@Html.EditorFor(model => model.UseroffcePhone)</td>
+                </tr>
+                <tr>
+                    <td>所属处室：</td>
+                    <td colspan="3">
+                        @Html.EditorFor(model => model.UserKeShi)
+                    </td>
+                </tr>
+                <tr>
+                    <td>角色：</td>
+                    <td colspan="3">
+                        @Html.DropDownListFor(e => e.UserJueSe,ViewData["role"] as IEnumerable<SelectListItem>)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="保存" id="btn_select" Class="btn1" style="margin-left:10px" />
+                        <input type="button" value="修改密码" id="btn_select" Class="btn1" style="margin-left:10px" onclick="window.location.href = '/Systems/UserManagementPassEdit/@Model.UserID'"/>
+                        <input type="button" value="返回" id="btn_select" Class="btn1" style="margin-left:10px" onclick="window.location.href = '/Systems/UserManagementSelect'" />
+                    </td>
+                </tr>
+
+            </table>   
+        </div>
+    }
+    
+   
+
+</body>
+</html>

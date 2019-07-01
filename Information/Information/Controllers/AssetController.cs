@@ -15,7 +15,7 @@ namespace information.Controllers
     {
         IAssetBll iab = IocCreate.CreateAll<AssetService>("AssetTwo", "AssetService");
         ICaiGouXingShiBll icgxsb = IocCreate.CreateAll<CaiGouXingShiService>("CaiGouXingShiTwo", "CaiGouXingShiService");//采购形式
-        IZiChanBeiZhuBll izcbzb = IocCreate.CreateAll<ZiChanBeiZhuService>("ZiChanBeiZhuTwo", "ZiChanBeiZhuService");//资产备注
+        IZiChanBeiZhuBll izcbzb = IocCreate.CreateAll<ZiChanBeiZhuService>("ZiChanBeiZhuTwo", "ZiChanBeiZhuService");//资产类别
         ICaiGouYiJuBll icgyjb = IocCreate.CreateAll<CaiGouYiJuService>("CaiGouYiJuTwo", "CaiGouYiJuService");//采购依据
 
         #region 资产登记
@@ -290,7 +290,7 @@ namespace information.Controllers
                 }
                 else
                 {
-                    return Content("<script>alert('修改成功');window.location.href='/Asset/AssetRepairSelect'</script>");
+                    return Content("<script>alert('修改失败');window.location.href='/Asset/AssetRepairSelect'</script>");
                 }
 
             }

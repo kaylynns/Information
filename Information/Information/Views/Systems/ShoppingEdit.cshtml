@@ -1,0 +1,76 @@
+﻿@model Entity.CaiGouXingShi
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>采购形式修改</title>
+
+    <script src="~/Scripts/jquery-1.7.1.js"></script>
+    <script type="text/javascript">
+        function Update() {
+            if (msg == "ok") {
+                alert("修改成功！");
+                window.location.href = "/Asset/AssetSelect";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2 align="center">采购形式修改</h2>
+@using (Ajax.BeginForm("ShoppingEdits", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Update" }))
+{
+        @Html.AntiForgeryToken()
+        <table cellspacing="0" cellpadding="7" align="center" border="1" style="border-collapse: collapse; margin-bottom:20px"
+               bordercolor="#6c9ec1">
+            <tr>
+                <td>采购形式id</td>
+                <td>@Html.TextBoxFor(model => model.SID,new { @readonly="readonly"})</td>
+            </tr>
+            <tr>
+                <td>采购形式名称</td>
+                <td>@Html.EditorFor(model => model.SName)</td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2">
+                    <input id="Button1" type="submit" value="修改采购形式" Class="btn1" />
+                    <input type="button" value="返回" Class="btn1" style="margin-left:10px" OnClick="window.location.href = '/Systems/ShoppingSelect'" />
+                </td>
+            </tr>
+        </table>
+        @*<div class="form-horizontal">
+            <h4>CaiGouXingShi</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.SID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.SName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>*@
+    }
+    
+   
+</body>
+</html>

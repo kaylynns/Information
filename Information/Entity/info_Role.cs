@@ -14,10 +14,17 @@ namespace Entity
     
     public partial class info_Role
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public info_Role()
+        {
+            this.info_User = new HashSet<info_User>();
+        }
+    
         public int RoleID { get; set; }
         public string RoleName { get; set; }
         public string Remark { get; set; }
     
-        public virtual info_User info_User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<info_User> info_User { get; set; }
     }
 }

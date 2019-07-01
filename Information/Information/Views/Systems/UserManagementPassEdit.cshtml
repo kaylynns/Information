@@ -1,0 +1,109 @@
+﻿@model Entity.info_User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UserManagementPassEdit</title>
+   
+    <script src="~/Scripts/jquery-1.11.1.js"></script>
+    <script type="text/javascript">
+    $(function () {
+            //修改密码
+            $("#btn_Update").click(function () {
+            var upass="@Model.UserPass";
+            var pass = $("#Text1").val();
+            var xpass = $("#Text2").val();
+            var qpass = $("#Text3").val();
+         
+            if (pass == "" || pass == null) {
+                alert("请输入原密码！");
+            }else if (pass != upass) {
+                alert("原密码不正确，请重新输入");
+            }  else if (xpass == "" ||xpass == null) {
+                alert("请输入新密码！");
+            } else if (xpass != qpass) {
+                alert("两次密码不一致，请重新输入！");
+            } else {
+                //进数据库修改
+                $.ajax({
+                    type: "post",
+                    url: "/Systems/UserManagementPassEdits",
+                    data:"pass="+xpass+"&id="+@Model.UserID,
+                    success:function(msg){
+                        if (msg == "ok") {
+                            alert("密码修改成功！");
+                            window.location.href = '/Systems/UserManagementSelect';
+                        } else {
+                            alert("密码修改失败！");
+                        }
+
+                     }
+
+                })
+            }
+            })
+
+        //忘记密码
+        $("#forgetPwd").click(function(){
+            if(confirm('会重置一个密码，您确定要这么做吗？')){
+                //进数据库修改
+                $.ajax({
+                    type: "post",
+                    url: "/Systems/UserManagementPassEdits",
+                    data:"pass="+1+"&id="+@Model.UserID,
+                    success:function(msg){
+                        if (msg == "ok") {
+                            alert("密码重置成功！");
+                            window.location.href = '/Systems/UserManagementPassEdit/@Model.UserID' 
+                        } else {
+                            alert("密码重置失败！");
+                        }
+
+                    }
+
+                })
+                alert("重置后的密码是：1");
+            }
+           
+        });
+      
+
+
+        })
+    </script>
+</head>
+<body>
+    <h2 align="center">修改密码</h2>
+    <form action="Systems/UserManagementPassEdits" method="post">
+        <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse"
+       bordercolor="#6c9ec1">
+    <tr>
+        <td>真实姓名</td>
+        <td>@Html.EditorFor(model => model.UserRealName)</td>
+        <td>原密码</td>
+       <td><input id="Text1" type="password" /> <a style="color:red;font-size:11px;text-decoration:none"  id="forgetPwd">忘记密码？</a></td>
+    </tr>
+    <tr>
+        <td>新密码</td>
+        <td><input id="Text2" type="password" /></td>
+
+        <td>密码确认</td>
+        <td><input id="Text3" type="password" /></td>
+    </tr>
+    <tr>
+        <td colspan="4"  align="center" >
+            <input type="button" value="保存" id="btn_Update" Class="btn1" style="margin-left:10px" />
+            <input type="button" value="返回" id="fan" Class="btn1" style="margin-left:10px" onclick="window.location.href = '/Systems/UserManagementEdit/@Model.UserID'" />
+        </td>
+
+    </tr>
+</table>
+
+    </form>
+</body>
+</html>

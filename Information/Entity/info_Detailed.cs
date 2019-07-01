@@ -12,15 +12,10 @@ namespace Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class info_Maintenance
+    public partial class info_Detailed
     {
-        public int MIDs { get; set; }
-        public Nullable<System.DateTime> MaintenanceTime { get; set; }
-        public Nullable<int> MDeviceName { get; set; }
-        public string MDetectionUnit { get; set; }
-        public string MTestingPersonnel { get; set; }
-        public string MAccompanyingOfficials { get; set; }
-        public string MTheRegistrar { get; set; }
-        public string Madvice { get; set; }
+        public int DID { get; set; }
+        public string DName { get; set; }
+        public string Dhref { get; set; }
     }
 }

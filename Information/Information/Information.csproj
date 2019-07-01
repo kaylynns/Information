@@ -199,9 +199,9 @@
     <Compile Include="Controllers\JiFangSheBeiController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MainController.cs" />
-    <Compile Include="Controllers\MaintainController.cs" />
     <Compile Include="Controllers\MeetingController.cs" />
     <Compile Include="Controllers\ShenPiController.cs" />
+    <Compile Include="Controllers\SystemsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -670,10 +670,18 @@
     <Content Include="Views\Asset\AssetStatusSelect.cshtml" />
     <Content Include="Views\Asset\AssetStatusWaitSelect.cshtml" />
     <Content Include="Views\Asset\AssetStatusSelectEdit.cshtml" />
-    <Content Include="Views\Maintain\MaintainSelect.cshtml" />
-    <Content Include="Views\Maintain\MaintainLook.cshtml" />
-    <Content Include="Views\Maintain\JiFangJinChuSelelctAll.cshtml" />
-    <Content Include="Views\Maintain\JiFangJinChuSelectLook.cshtml" />
+    <Content Include="Views\Systems\PowerSelect.cshtml" />
+    <Content Include="Views\Systems\PowerEdit.cshtml" />
+    <Content Include="Views\Systems\UserManagementSelect.cshtml" />
+    <Content Include="Views\Systems\UserManagementEdit.cshtml" />
+    <Content Include="Views\Systems\UserManagementCreate.cshtml" />
+    <Content Include="Views\Systems\UserManagementPassEdit.cshtml" />
+    <Content Include="Views\Systems\QuestionSelect.cshtml" />
+    <Content Include="Views\Systems\QuestioEdit.cshtml" />
+    <Content Include="Views\Systems\SoftwareSelect.cshtml" />
+    <Content Include="Views\Systems\SoftwareEdit.cshtml" />
+    <Content Include="Views\Systems\ShoppingSelect.cshtml" />
+    <Content Include="Views\Systems\ShoppingEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

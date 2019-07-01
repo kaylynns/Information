@@ -49,6 +49,7 @@
     <Compile Include="IMaintenanceDao.cs" />
     <Compile Include="IMeetingDAO.cs" />
     <Compile Include="IPiShiJieGuoDao.cs" />
+    <Compile Include="IRoleDao.cs" />
     <Compile Include="IUserDao.cs" />
     <Compile Include="IZiChanBeiZhuDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

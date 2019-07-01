@@ -50,29 +50,8 @@
             $('.nav-header').click(function () {
                 $(this).next(".nav").toggle(300);
             });
-                                                <a class="a1" href="~/Asset/AssetSelect" target="main">资产登记</a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="/Asset/AssetRepairSelect" target="main">资产维修报废申请</a>
-                                            </td>
-                                        </tr>
-
-            });
+        })                    
     </script>
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="/Asset/AssetReviewSelect" target="main">资产维修报废审核</a>
-                                            </td>
-                                        </tr>
 
 </head>
 <body class="" style="background-color:#F3F3F3">
@@ -81,24 +60,12 @@
         <p class="nav-header"><a href="#dashboard-menu"> <i class="icon-dashboard"></i><spans id="aa">资产管理</spans> </a> </p>
 
         <ul id="dashboard-menu" class="nav nav-list collapse in">
-            <li><a href="index.html" target="main">资产登记</a></li>
-            <li><a href="users.html" target="main">资产维修报废申请</a></li>
-            <li><a href="user.html" target="main">资产维修报废审核</a></li>
-            <li><a href="media.html" target="main">资产维修报废查询</a></li>
-            <li><a href="calendar.html" target="main">资产设备统计查询</a></li>
+            <li><a class="a1" href="~/Asset/AssetSelect" target="main">资产登记</a></li>
+            <li><a class="a1" href="/Asset/AssetRepairSelect" target="main">资产维修报废申请</a></li>
+            <li><a class="a1" href="/Asset/AssetReviewSelect" target="main">资产维修报废审核</a></li>
+            <li><a class="a1" href="/Asset/AssetStatusSelect" target="main">资产维修报废查询</a></li>
 
         </ul>
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="/Asset/AssetStatusSelect" target="main">资产维修报废查询</a>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
 
                             @*机房管理*@
         <p class="nav-header"><a href="#dashboard-menu"><i class="icon-dashboard"></i>机房管理</a></p>
@@ -108,59 +75,10 @@
             <li><a href="/WhuWxiu/Index" target="main">机房维护维修</a></li>
             <li><a href="media.html" target="main">机房设备管理</a></li>
             <li><a href="calendar.html" target="main">机房进出查询</a></li>
-            <li><a href="#" target="main">机房维护维修查询</a></li>
+            <li><a href="/Maintain/MaintainSelect" target="main">机房维护维修查询</a></li>
         </ul>
 
-                                                <a class="a1" href="~/JiFang/Index" target="main">机房进出申请</a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="~/ShenPi/Index" target="main">机房进出审批</a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#" target="main">机房维护维修</a>
-                                            </td>
-                                        </tr>
-
-
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#" target="main">机房设备管理</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="/Maintain/JiFangJinChuSelelctAll" target="main">机房进出查询</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="13%" align="center">
-                                                <img src="~/img/left_1.gif" width="8" height="8" />
-                                            </td>
-                                            <td width="87%">
-                                                <a class="a1" href="#" target="main">机房维护维修查询</a>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
+                                           
 
                             @*视频会议*@
         <p class="nav-header"><a href="#dashboard-menu"><i class="icon-dashboard"></i>视频会议</a></p>
@@ -202,10 +120,8 @@
                             @*查询统计*@
         <p class="nav-header"><a href="#dashboard-menu"><i class="icon-dashboard"></i>系统设置</a></p>
         <ul id="accounts-menu" class="nav nav-list collapse in">
-            <li><a href="~/Meeting/Index" target="main">权限管理</a></li>
-            <li><a href="/Meeting/IndexQZ" target="main">部门管理</a></li>
-            <li><a href="#" target="main">用户管理</a></li>
-            <li><a href="#" target="main">文件类别管理</a></li>
+            <li><a href="~/Systems/PowerSelect" target="main">权限管理</a></li>
+            <li><a href="~/Systems/UserManagementSelect" target="main">用户管理</a></li>
             <li><a href="/Meeting/selectCX" target="main">资产类别管理</a></li>
             <li><a href="~/Meeting/Index" target="main">软件名称维护</a></li>
             <li><a href="/Meeting/IndexQZ" target="main">问题分类维护</a></li>
