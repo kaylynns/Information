@@ -45,19 +45,24 @@
     <Compile Include="ICheckBll.cs" />
     <Compile Include="IComputerRoomVisitBll.cs" />
     <Compile Include="IAssetBll.cs" />
-    <Compile Include="IEquipmentBll.cs" />
+    <Compile Include="IEquipmentsBll.cs" />
     <Compile Include="IMaintenanceBll.cs" />
     <Compile Include="IMeetingBll.cs" />
     <Compile Include="IPiShiJieGuoBll.cs" />
     <Compile Include="IRoleBll.cs" />
     <Compile Include="IUserBll.cs" />
     <Compile Include="IZiChanBeiZhuBll.cs" />
+    <Compile Include="lIEquipmentBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entity\Entity.csproj">
       <Project>{f97ee5b1-4362-4b82-acbe-b1f67e4e4e5b}</Project>
       <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IDAO\IDAO.csproj">
+      <Project>{a63668de-2cd1-44f9-a94b-054dc3411e2e}</Project>
+      <Name>IDAO</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

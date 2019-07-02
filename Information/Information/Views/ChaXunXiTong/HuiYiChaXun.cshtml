@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>会议测试及开会签字</title>
+    <title>视频会议测试及开会记录查询</title>
     <link href="~/css/css.css" rel="stylesheet" />
     <link href="~/Scripts/bootstrap.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
@@ -19,7 +19,6 @@
             border: 1px solid #c9dae4;
             margin-top: 10px;
         }
-
             .t1 tr th {
                 color: #0d487b;
                 /*background: #f2f4f8 url(../CSS/Table/images/sj_title_pp.jpg) repeat-x left bottom;*/
@@ -47,7 +46,7 @@
             background: #bcd4ec; /*这个将是鼠标高亮行的背景色*/
         }
 
-      #ListArea tr:first-child {
+        #ListArea tr:first-child {
             background: linear-gradient(#F8F8F8,#DEDEDE);
             font-weight: 800;
             font-size: 15px;
@@ -68,16 +67,14 @@
             var currentPage = 1;//当前页
             var pages = 1;//总页数
             var names;
-            var mid;
             show();//加载
-
-
             function show() {
                 $.ajax({
-                    url: "/Meeting/Index2",
+                    url: "/ChaXunXiTong/SelectHuiYiChaXun",
                     type: "post",
                     data: "currentpage=" + currentPage,
                     success: function (msg) {
+                        console.info(msg);
                         var dts = eval("(" + msg + ")");
                         var dt = dts["dt"];
                         fileTable(dt);
@@ -92,72 +89,24 @@
                 $("#ListArea tr:gt(0)").remove();//清空表格
                 for (var i = 0; i < dt.length; i++) {
                     var $tr = $("<tr></tr>");
-                    var $td1 = $("<td id='aa'>" + dt[i]["MName"] + "</td>");
+                    var $td1 = $("<td>" + dt[i]["MName"] + "</td>");
                     var $td2 = $("<td>" + dt[i]["Mstart"] + "</td>");
                     var $td3 = $("<td>" + dt[i]["MOwer"] + "</td>");
                     var $td4 = $("<td>" + dt[i]["MOpenTime"] + "</td>");
                     var $td5 = $("<td>" + dt[i]["MOverTime"] + "</td>");
-                    var $td7 = $('<td>  <input id="Text2" type="text" Width="240" value=' + dt[i]["Msignature"] + ' mid="' + dt[i]["MID"] + '"/></td>');
-                    var $td8;
-
-                    //alert($("#Text2").val());
-                    if (dt[i]["QZ"] == "1") {
-                        $td8 = $("<td style='color:blue;'>未签字</td>");
-                    } else if (dt[i]["QZ"] == "2") {
-                        $td8 = $("<td style='color:green;'>已签字</td>");
+                    var $td6 = $("<td>" + dt[i]["Msignature"] + "</td>");
+                    var $td9;
+                    if (dt[i]["QZ"]==2) {
+                         $td9= $("<td>签字通过</td>");
                     }
-
-                    $tr.append($td1, $td2, $td3, $td4, $td5, $td7, $td8);
+                    var $td7 = $("<td>" + dt[i]["Msignature"] + "</td>");
+                    var $td8 = $("<td><a href='/ChaXunXiTong/SelelctHuiYiChaKan/" + dt[i]["MID"] + "'>查看</a></td>");
+                    $tr.append($td1, $td2, $td3, $td4, $td5, $td7,$td9,$td8);
                     $("#ListArea").append($tr);
 
 
                     }
               }
-
-            //查询用户
-            $(document).on("click", "#Text2", function () {
-                mid = $(this).attr("mid");
-                $("#myModal").modal("show");
-                $.ajax({
-                    url: "/Meeting/selectUser",
-                    type: "post",
-                    data: "",
-                    success: function (msg) {
-                        var dts = eval("(" + msg + ")");
-                        var dt = dts["dt"];
-
-                        $("#re tr:gt(0)").remove();//清空表格
-                        for (var i = 0; i < dts.length; i++) {
-
-                            var $tr = $('<tr id="urm"></tr>');
-                            var $td1 = $('<td id="urms" ss=' + dts[i]["UserRealName"] + '>' + dts[i]["UserRealName"] + "</td>");
-
-                            $tr.append($td1);
-                            $("#re").append($tr);
-                        }
-                    }
-                })
-            })
-
-            //选择主任
-            $(document).on("click", "#urms", function () {
-                $("#urm").css("background", "blue");
-                var urm = $(this).attr("ss");
-
-                $.ajax({
-                    url: "/Meeting/MeetingUpdate",
-                    type: "post",
-                    data: "mid="+mid+"&urm="+urm,
-                    success: function (msg) {
-                        $("#myModal").modal("hide");
-                        show();
-                    }
-                })
-
-
-            })
-
-
             //模糊查询
             $("#Button1").click(function () {
                 names = $("#Text1").val();
@@ -235,7 +184,7 @@
 
 </head>
 <body>
-    <h2 align="center"> 会议测试及开会签字 </h2>
+    <h2 align="center"> 视频会议测试及开会记录查询 </h2>
     <div>
 
         会议名称：
@@ -257,6 +206,7 @@
             <td>会议结束时间</td>
             <td>主任签字</td>
             <td>状态</td>
+            <td>操作</td>
         </tr>
     </table>
     <div id="pageDiv">

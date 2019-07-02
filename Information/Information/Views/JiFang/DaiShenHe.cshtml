@@ -10,25 +10,41 @@
     <meta name="viewport" content="width=device-width" />
     <title>DaiShenHe</title>
     <link href="~/css/css.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.11.1.js"></script>
     <style type="text/css">
         input {
             outline: none;
             background: transparent;
             border: none;
-            outline: medium;
+         outline: medium;
         }
-        </style>
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $("#daichu textarea,#daichu span").css("visibility", "hidden");
+            $("#CXuanXiang").click(function () {
+                //单击同意
+                var ty = $("#CXuanXiang").val()
+                if (ty == 1) {
+                    //如果同意就弹出2
+                    $("#daichu textarea,#daichu span").css("visibility", "visible");
+                }
+              
+            })
+        })
+    </script>
 </head>
 <body>
+    <h2 align="center">机房进出审核</h2>
     <form method="post">
-        <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse"
-               bordercolor="#6c9ec1">
+        <table cellspacing="0" cellpadding="8" border="1" style="border-collapse: collapse"
+               bordercolor="#6c9ec1" align="center" >
             <tr>
                 <td align="left" style="height: 30px">
                     登记人：
                 </td>
                 <td align="left">
-                    @ViewData["DengJiren"]
+                    @Html.TextBoxFor(Model => Model.CRegistar, new { @readonly = "readonly" })
                 </td>
                 <td align="left">
                     @Html.HiddenFor(model => model.CID, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -71,7 +87,7 @@
                     陪同人员：
                 </td>
                 <td align="left" class="style1">
-                   @ViewData["LaiFang"]
+                    @ViewData["LaiFang"]
                     @Html.HiddenFor(model => model.CEntourage)
                 </td>
             </tr>
@@ -84,14 +100,18 @@
                     <table align="center" cellpadding="3" cellspacing="0" width="100%">
                         <tr height="22" class="JiaCu">
                             <td align="left">
-                               @Html.RadioButtonFor(Model=>Model.CXuanXiang,"1", new { @checked= "checked" })同意
-                                @Html.RadioButtonFor(Model => Model.CXuanXiang, "2")不同意
+                                @Html.RadioButtonFor(Model => Model.CXuanXiang, "1")同意
+                                @Html.RadioButtonFor(Model => Model.CXuanXiang, "2", new { @checked = "checked" })不同意
                             </td>
                         </tr>
                         <tr style="border-top:1px; border-top-color:#6c9ec1; border-bottom:0px; border-left:0px; border-right:0px; border-style:solid">
                             <td align="left" height="22">
                                 审核意见：
-                                @Html.TextAreaFor(Model=>Model.COpinion)
+                                @Html.TextAreaFor(Model => Model.COpinion)
+                            </td>
+                            <td align="left" height="22" id="daichu">
+                                <span>带出物品：</span>
+                                @Html.TextAreaFor(Model => Model.CBringOut)
                             </td>
                         </tr>
                     </table>
@@ -100,7 +120,7 @@
             <tr>
                 <td align="center" colspan="4" width="26">
                     <input id="btn_Bao" type="submit" value="提交" class="btn1" />
-                    <input id="btn_add" type="button" value="返回" class="btn1" />
+                    <input id="btn_add" type="button" value="返回" class="btn1"  onclick="window.location.href = '/JiFang/ShenPiShiTu'"/>
                 </td>
             </tr>
             <tr></tr>

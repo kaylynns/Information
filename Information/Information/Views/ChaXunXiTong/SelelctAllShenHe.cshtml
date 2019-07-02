@@ -1,4 +1,4 @@
-﻿@model  Entity.V_ComputerRoomVisit 
+﻿@model info_ComputerRoomVisit
 @{
     Layout = null;
 }
@@ -8,24 +8,18 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>ChaXun</title>
+    <title>机房出入查询表</title>
     <link href="~/css/css.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-1.11.1.js"></script>
     <style type="text/css">
-        input {
+                        input {
             outline: none;
             background: transparent;
             border: none;
             outline: medium;
-        }
-
-        .JiaCu input {
-            font-weight: 800;
-        }
     </style>
 </head>
 <body>
-    <h2 align="center"> 机房出入申请表 </h2>
+    <h2 align="center"> 机房出入查询表</h2>
     <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse"
            bordercolor="#6c9ec1">
         <tr>
@@ -33,7 +27,8 @@
                 登记人：
             </td>
             <td align="left">
-                @ViewData["DengJiren"]
+                @Html.TextBoxFor(Model => Model.CRegistar, new { @readonly = "readonly" })
+                @Html.TextBoxFor(model => model.CRegistar)
             </td>
             <td align="left">
                 &nbsp;
@@ -47,13 +42,13 @@
                 来访日期：
             </td>
             <td align="left">
-                @Html.TextBoxFor(Model => Model.CTIme)
+                @Html.TextBoxFor(model => model.CTIme, new { @readonly = "readonly" })
             </td>
             <td align="left">
                 来访人员：
             </td>
             <td align="left">
-                @Html.Label(Model.CName)
+                @Html.TextBoxFor(model => model.CName, new { @readonly = "readonly" })
             </td>
         </tr>
         <tr>
@@ -61,7 +56,7 @@
                 来访事由：
             </td>
             <td align="left" colspan="3">
-                @Html.Label(Model.Cause)
+                @Html.EditorFor(model => model.Cause, new { @readonly = "readonly" })
             </td>
         </tr>
         <tr>
@@ -69,35 +64,14 @@
                 携带物品：
             </td>
             <td align="left" class="style1">
-                @Html.Label(Model.Carries)
+                @Html.EditorFor(model => model.Carries, new { @readonly = "readonly" })
             </td>
             <td align="left" class="style1">
                 陪同人员：
             </td>
             <td align="left" class="style1">
-                @Html.Label(Model.CEntourage)
-            </td>
-        </tr>
-        <tr>
-            <td align="left" class="style1">
-                进入机房时间：
-            </td>
-            <td align="left" class="style1">
-                @Html.TextBoxFor(Model => Model.CEntryTime)
-            </td>
-            <td align="left" class="style1">
-                离开机房时间：
-            </td>
-            <td align="left" class="style1">
-                @Html.TextBoxFor(Model => Model.CLeaveTime)
-            </td>
-        </tr>
-        <tr>
-            <td align="left">
-                带出物品：
-            </td>
-            <td align="left" colspan="3">
-              
+                @ViewData["PeiTong"]
+                @*@Html.TextBoxFor(model => model.CEntourage,ViewData["PeiTong"] as IEnumerable<SelectListItem>)*@
             </td>
         </tr>
         <tr id="tr_sh">
@@ -137,7 +111,7 @@
         </tr>
         <tr>
             <td align="center" colspan="4" width="26">
-                <input id="btn_add" type="button" value="返回" class="btn1" onclick="location.href = '/ShenPi/Index'" />
+                <input id="btn_add" type="button" value="返回" class="btn1" onclick="location.href = '/ChaXunXiTong/Index'" />
             </td>
         </tr>
         <tr></tr>

@@ -1,0 +1,146 @@
+﻿@model  Entity.V_ComputerRoomVisit
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>机房出入审批表</title>
+    <link href="~/css/css.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.11.1.js"></script>
+    <style type="text/css">
+        input {
+            outline: none;
+            background: transparent;
+            border: none;
+            outline: medium;
+        }
+
+        .JiaCu input {
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body>
+    <h2 align="center"> 机房出入审批表 </h2>
+    <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse"
+           bordercolor="#6c9ec1">
+        <tr>
+            <td align="left" style="height: 30px">
+                登记人：
+            </td>
+            <td align="left">
+                @Html.TextBoxFor(Model => Model.CRegistar, new { @readonly = "readonly" })
+            </td>
+            <td align="left">
+                &nbsp;
+            </td>
+            <td align="left">
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 30px" align="left">
+                来访日期：
+            </td>
+            <td align="left">
+                @Html.TextBoxFor(Model => Model.CTIme, new { @readonly = "readonly" })
+            </td>
+            <td align="left">
+                来访人员：
+            </td>
+            <td align="left">
+                @Html.Label(Model.CName, new { @readonly = "readonly" })
+            </td>
+        </tr>
+        <tr>
+            <td align="left">
+                来访事由：
+            </td>
+            <td align="left" colspan="3">
+                @Html.Label(Model.Cause)
+            </td>
+        </tr>
+        <tr>
+            <td align="left" class="style1">
+                携带物品：
+            </td>
+            <td align="left" class="style1">
+                @Html.Label(Model.Carries, new { @readonly = "readonly" })
+            </td>
+            <td align="left" class="style1">
+                陪同人员：
+            </td>
+            <td align="left" class="style1">
+                @Html.Label(Model.CEntourage, new { @readonly = "readonly" })
+            </td>
+        </tr>
+        <tr>
+            <td align="left">
+                带出物品：
+            </td>
+            <td align="left" colspan="3">
+                @Html.Label(Model.CBringOut, new { @readonly = "readonly" })
+            </td>
+        </tr>
+        <tr>
+            <td align="left" class="style1">
+                进入机房时间：
+            </td>
+            <td align="left" class="style1">
+                @Html.TextBoxFor(Model => Model.CEntryTime, new { @readonly = "readonly" })
+            </td>
+            <td align="left" class="style1">
+                离开机房时间：
+            </td>
+            <td align="left" class="style1">
+                @Html.TextBoxFor(Model => Model.CLeaveTime, new { @readonly = "readonly" })
+            </td>
+        </tr>
+        <tr id="tr_sh">
+            <td style="height: 20px">
+                主任批示
+            </td>
+            <td align="left" colspan="3" style="padding-right: 0px; padding-left: 0px; padding-bottom: 0px;
+                                                        margin: 0px; padding-top: 0px" valign="middle">
+                <table align="center" cellpadding="3" cellspacing="0" width="100%">
+                    <tr height="22" class="JiaCu">
+                        <td align="left">
+                            批示结果：&nbsp;&nbsp;<b>
+                                @Html.TextBoxFor(Model => Model.CRelustID, new { @readonly = "readonly" })
+                            </b>
+                        </td>
+                        <td align="left">
+                            批示人：<b>
+                                @Html.TextBoxFor(Model => Model.CInstructor, new { @readonly = "readonly" })
+                            </b>
+                        </td>
+                        <td align="left">
+                            批示日期：<b>
+                                @Html.TextBoxFor(Model => Model.CInstructorTime, new { @readonly = "readonly" })
+                            </b>
+                        </td>
+                    </tr>
+                    <tr style="border-top: 1px; border-top-color: #6c9ec1; border-bottom: 0px; border-left: 0px;
+                                                                border-right: 0px; border-style: solid" height="22" class="JiaCu">
+                        <td align="left" colspan="3">
+                            批示意见： <b>
+                                @Html.TextBoxFor(Model => Model.COpinion, new { @readonly = "readonly" })
+                            </b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="4" width="26">
+                            <input id="btn_add" type="button" value="返回" class="btn1" onclick="window.location.href = '/JiFang/ShenPiShiTu'" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr></tr>
+    </table>
+</body>
+</html>

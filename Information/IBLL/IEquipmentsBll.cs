@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IBLL
 {
-   public interface IEquipmentBll
+   public interface IEquipmentsBll
     {
         List<info_Equipments> SelectAll();
         List<info_Equipments> SelectWhere(Expression<Func<info_Equipments, bool>> where);

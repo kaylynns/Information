@@ -16,6 +16,6 @@ namespace IDAO
         int Add(info_Asset t);//添加
         int Delete(info_Asset t);//删除
         int Update(info_Asset t);//修改
-
+        List<info_Asset> SelectAll();
     }
 }

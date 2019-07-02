@@ -46,6 +46,7 @@
     <Compile Include="ICheckDao.cs" />
     <Compile Include="IComputerRoomVisitDao.cs" />
     <Compile Include="IEquipmentDao.cs" />
+    <Compile Include="IEquipmentsDao.cs" />
     <Compile Include="IMaintenanceDao.cs" />
     <Compile Include="IMeetingDAO.cs" />
     <Compile Include="IPiShiJieGuoDao.cs" />

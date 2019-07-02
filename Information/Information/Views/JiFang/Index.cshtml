@@ -2,17 +2,17 @@
 
 @{
     Layout = null;
+
 }
-
 <!DOCTYPE html>
+<html>
 
-<div>
-    <html>
     <head>
         <meta name="viewport" content="width=device-width" />
         <title>机房进出申请</title>
         <link href="~/css/css.css" rel="stylesheet" />
         <script src="~/Scripts/jquery-1.11.1.js"></script>
+
         <style type="text/css">
             .t1 {
                 clear: both;
@@ -22,7 +22,7 @@
 
                 .t1 tr th {
                     color: #0d487b;
-                    background: #f2f4f8 url(../CSS/Table/images/sj_title_pp.jpg) repeat-x left bottom;
+                    /*background: #f2f4f8 url(../CSS/Table/images/sj_title_pp.jpg) repeat-x left bottom;*/
                     line-height: 28px;
                     border-bottom: 1px solid #9cb6cf;
                     border-top: 1px solid #e9edf3;
@@ -37,43 +37,37 @@
                     padding-bottom: 5px;
                     padding-top: 5px;
                     color: #444;
-                    border-top: 1px solid #FFFFFF;
+                    border-top: 1px solid #DDDDDD;
                     padding-left: 5px;
                     padding-right: 5px;
                     word-break: break-all;
                 }
-            /* white-space:nowrap; text-overflow:ellipsis; */
-            tr.alt td {
-                background: #ecf6fc; /*这行将给所有的tr加上背景色*/
-            }
 
             tr.over td {
                 background: #bcd4ec; /*这个将是鼠标高亮行的背景色*/
             }
+
+            #ListArea tr:first-child {
+                background: linear-gradient(#F8F8F8,#DEDEDE);
+                font-weight: 800;
+                font-size: 15px;
+            }
+
+            .t1 tr {
+                background-color: white;
+                text-align: center;
+                font-size: 15px;
+            }
         </style>
-        <script type="text/javascript">
-            $(document).ready(function () { //这个就是传说的ready
-                $(".t1 tr").mouseover(function () {
-                    //如果鼠标移到class为stripe的表格的tr上时，执行函数
-                    $(this).addClass("over");
-                }).mouseout(function () {
-                    //给这行添加class值为over，并且当鼠标一出该行时执行函数
-                    $(this).removeClass("over");
-                }) //移除该行的class
-                $(".t1 tr:even").addClass("alt");
-                //给class为stripe的表格的偶数行添加class值为alt
-            });
-        </script>
+
         <script type="text/javascript">
             var pages = 1;
             var currentPage = 1;
-            $(function () {
-                Show();
-            })
-            function Show() {
+            var lai = "";
+            function Show(currentPage,lai) {
                 $.ajax({
                     type: "post",
-                    data: "currentPage=" + currentPage,
+                    data: "currentPage=" + currentPage+"&lai="+lai,
                     url: "Index2",
                     success: function (msg) {
                         var data = eval("(" + msg + ")");
@@ -88,20 +82,13 @@
             }
             $(function () {
                 $("#Button1").click(function () {
-                    var lai = $("#Text1").val();
-                    var ren = $("#Text2").val();
-                    $.ajax({
-                        type: "post",
-                        data: "lai=" + lai + "&ren=" + ren + "&currentPage=" + currentPage,
-                        url: "Index2",
-                        success: function (msg) {
-                            Show();
-                        }
-                    })
+                    lai = $("#Text1").val();
+                    ren = $("#Text2").val();
+                    Show(currentPage, lai)
                 })
             })
             function XunHuan(datas) {
-                $("#table1 tr:gt(0)").remove();
+                $("#ListArea tr:gt(0)").remove();
                 for (var i = 0; i < datas.length; i++) {
                     var $tr = $("<tr></tr>");
                     var $td = $("<td>" + datas[i]["CTIme"] + "</td>");
@@ -111,42 +98,24 @@
                     var $td5 = $("<td>" + datas[i]["CEntourage"] + "</td>");
                     var $td6 = $("<td>" + datas[i]["CEntryTime"] + "</td>");
                     var $td7 = $("<td>" + datas[i]["CLeaveTime"] + "</td>");
-                    var $td8 = $("<td>" + datas[i]["CBringOut"] + "</td>");
                     var $td9 = $("<td  id='shen' >" + datas[i]["CRelustID"] + "</td>");
-                    var $td10;
-                    if (datas[i]["CRelustID"] == "审核通过") {
-                        //修改
-                        $td10 = $("<td><a href='Edit/" + datas[i]["CID"] + "'>编辑</a></td>");
-                    } else if (datas[i]["CRelustID"] == "驳回") {
-                        //查看全部
-                        $td10 = $("<td><a href='ChaXun/" + datas[i]["CID"] + "'>查看</a></td>");
-                    }
-                    $tr.append($td, $td2, $td3, $td4, $td5, $td6, $td7, $td8, $td9, $td10);
-                    $("#table1").append($tr);
-                    //if (datas[i]["CRelustID"] == "审核通过") {
-                    //    $("#shen").css("color", "forestgreen")
-                    //}else if (datas[i]["CRelustID"] =="驳回") {
-                    //    $("#shen").css("color", "red");
-                    //}
+                    $tr.append($td, $td2, $td3, $td4, $td5, $td6, $td7, $td9);
+                    $("#ListArea").append($tr);
                 }
-
-
-
             }
             $(function () {
+                Show(currentPage, lai)
                 //首页
                 $("#first").click(function () {
-
                     currentPage = 1;
-                    Show();
+                    Show(currentPage, lai)
                 })
-
                 //上一页
                 $("#prev").click(function () {
                     if (currentPage > 1) {
                         currentPage--;
                     }
-                    Show();
+                    Show(currentPage, lai)
                 })
 
                 //下一页
@@ -154,13 +123,17 @@
                     if (currentPage < pages) {
                         currentPage++;
                     }
-                    Show();
+                    Show(currentPage, lai)
                 })
 
                 //尾页
                 $("#last").click(function () {
                     currentPage = pages;
-                    Show();
+                    Show(currentPage, lai)
+                })
+                //清空
+                $("#btn_qingkong").click(function () {
+                    $("#Text1").val("");
                 })
 
             })
@@ -173,14 +146,12 @@
                 来访事由：
                 <input id="Text1" type="text" ID="txtSearch" Width="240" />
                 &nbsp;
-                来访人员：
-                <input id="Text2" type="text" ID="txtSearch" Width="240" />
+                <input id="Button1" type="button" value="查询" Class="btn1" />
                 &nbsp;
-                <input id="Button1" type="button" value="查询" />
-                &nbsp;
-                <input id="btn_add" type="button" value="添 加" onclick="location.href = 'Create'" />
+                <input id="btn_add" type="button" value="添 加" onclick="location.href = 'Create'" Class="btn1"/>
+                <input id="btn_qingkong" type="button" value="清 空"  Class="btn1" />
             </div>
-            <table width="100%" id="table1" border="0" class="t1" align="center" cellpadding="0"
+            <table width="100%" id="ListArea" border="0" class="t1" align="center" cellpadding="0"
                    cellspacing="0" h>
                 <tr align="center">
                     <td> 来访日期</td>
@@ -190,9 +161,7 @@
                     <td>陪同人员</td>
                     <td>进入机房时间</td>
                     <td>离开机房时间</td>
-                    <td>带出物品</td>
                     <td>状态</td>
-                    <td>操作</td>
                 </tr>
             </table>
             <div id="pageDiv">
@@ -208,4 +177,4 @@
         </div>
     </body>
 </html>
-</div>
+
