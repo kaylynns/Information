@@ -64,6 +64,10 @@
       <Project>{f97ee5b1-4362-4b82-acbe-b1f67e4e4e5b}</Project>
       <Name>Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IDAO\IDAO.csproj">
+      <Project>{a63668de-2cd1-44f9-a94b-054dc3411e2e}</Project>
+      <Name>IDAO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

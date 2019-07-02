@@ -60,6 +60,9 @@
     <Compile Include="ZiChanBeiZhuService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\DAO\DAO.csproj">
       <Project>{ee9fddc7-400f-49c3-a8f0-226af05190e6}</Project>
       <Name>DAO</Name>

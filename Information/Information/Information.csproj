@@ -195,6 +195,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AssetController.cs" />
+    <Compile Include="Controllers\ChaXunXiTongController.cs" />
     <Compile Include="Controllers\JiFangController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MainController.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Controllers\TechnologyController.cs" />
     <Compile Include="Controllers\WhuWuxiuSelectAllController.cs" />
     <Compile Include="Controllers\WhuWxiuController.cs" />
+    <Compile Include="Controllers\ZiChanController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -690,6 +692,17 @@
     <Content Include="Views\Meeting\selectSQ.cshtml" />
     <Content Include="Views\Meeting\selectSH.cshtml" />
     <Content Include="Views\Meeting\EditSH.cshtml" />
+    <Content Include="Views\ChaXunXiTong\Index.cshtml" />
+    <Content Include="Views\ChaXunXiTong\SelelctAllShenHe.cshtml" />
+    <Content Include="Views\ChaXunXiTong\SelelctAllBoHui.cshtml" />
+    <Content Include="Views\ChaXunXiTong\HuiYiChaXun.cshtml" />
+    <Content Include="Views\ChaXunXiTong\SelelctHuiYiChaKan.cshtml" />
+    <Content Include="Views\ChaXunXiTong\SelectTongJiWeiHuWeiXiu.cshtml" />
+    <Content Include="Views\ChaXunXiTong\SelectTongJiWeiHuWeiXiuChaKan.cshtml" />
+    <Content Include="Views\ChaXunXiTong\JiFangSheBeiSelelctAll.cshtml" />
+    <Content Include="Views\ChaXunXiTong\JiFangSheBeiChaKan.cshtml" />
+    <Content Include="Views\ZiChan\Index.cshtml" />
+    <Content Include="Views\ZiChan\JiFangJinChuSelectShiTu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -710,7 +723,7 @@
       <Name>BLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entity\Entity.csproj">
-      <Project>{c221f513-2052-421c-9708-245142b923b4}</Project>
+      <Project>{f97ee5b1-4362-4b82-acbe-b1f67e4e4e5b}</Project>
       <Name>Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\IBLL\IBLL.csproj">

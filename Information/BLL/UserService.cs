@@ -8,6 +8,7 @@ using IDAO;
 using IocContainer;
 using DAO;
 using Entity;
+using System.Linq.Expressions;
 
 namespace BLL
 {
@@ -21,6 +22,10 @@ namespace BLL
         }
         public List<info_User> SelectAll() {
             return iud.SelectAll();
+        }
+
+        public List<info_User> SelectWhere(Expression<Func<info_User, bool>> where) {
+            return iud.SelectWhere(where);
         }
     }
 }

@@ -12,7 +12,7 @@ using System.Linq.Expressions;
 
 namespace BLL
 {
-    public class CaiGouYiJuService : ICaiGouYiJuBll
+    public class CaiGouYiJuService :ICaiGouYiJuBll
     {
         ICaiGouYiJuDao icgyjd = IocCreate.CreateAll<CaiGouYiJuDao>("CaiGouYiJuOne", "CaiGouYiJuDao");
         public List<CaiGouYiJu> SelectAll()

@@ -13,7 +13,6 @@ namespace DAO
     {
         BaseDao<v_Asset> bd = new BaseDao<v_Asset>();
 
-
         public List<v_Asset> SelectV_Asset<K>(Expression<Func<v_Asset, K>> order, Expression<Func<v_Asset, bool>> where, out int rows, int currentPage, int pageSize) {
             return bd.FenYe(order, where, out rows, currentPage, pageSize);
         }

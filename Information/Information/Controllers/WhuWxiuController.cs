@@ -35,8 +35,6 @@ namespace information.Views.JiFang
             }
             else
             {
-
-                //  dt = imb.FenYe(e => e.MID, e => e.MName.Contains(names), out rows, currentpage, 3);
                 dt = icb.v_MainAll(e => e.MIDs, e => e.MDeviceName.Contains(names), out rows, currentpage, 3);
             }
 

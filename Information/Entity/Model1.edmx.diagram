@@ -5,6 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f3ed7e51a3c645249e38cfc123fd7637" Name="Diagram1">
+      <Diagram DiagramId="7c529a17b17b4d8790b0f2c1466f0557" Name="Diagram1" ZoomLevel="39">
         <EntityTypeShape EntityType="InformationModel.CaiGouXingShi" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="InformationModel.CaiGouYiJu" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="InformationModel.info_Asset" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />

@@ -9,12 +9,68 @@
   
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Login</title>
+    <title>信息用户登录</title>
     <link href="~/css/style1.css" rel="stylesheet" />
     <link href="~/Scripts/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-1.7.2.min.js"></script>
+    <script src="~/Scripts/jquery-1.11.1.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var Name = $("#Name").val();
+            var Pass = $("#Pass").val();
+            $("#Name").blur(function () {
+                 Name = $("#Name").val();
+                if (Name == null || Name == "") {
+                    $("#yan").html("用户名不能为空");
+                } else {
+                    $("#yan").html("");
+                }
+            })
+            $("#Pass").blur(function () {
+                Pass = $("#Pass").val();
+                if (Pass == null || Pass == "") {
+                    $("#zheng").html("密码不能为空");
+                } else {
+                    $("#zheng").html("");
+                }
+            })
+            $("#submit").click(function () {
+                Name = $("#Name").val();
+                Pass = $("#Pass").val();
+                if (Name==null||Name=="") {
+                    $("#yan").html("用户名不能为空");
+                } else {
+                    $("#yan").html("");
+                }
+                if (Pass == null || Pass == "") {
+                    $("#zheng").html("用户名不能为空");
+                } else {
+                    $("#zheng").html("");
+                }
+                            $.ajax({
+                                type: "post",
+                                data: "Name=" + Name + "&Pass=" + Pass,
+                                url: "/Login/Logins",
+                                success: function (msg) {
+                                    if (msg == "OK") {
+                                        alert("登录成功正在前往主页");
+                                        window.location.href = '/Main/Main'
+                                    }
+                                    if (msg == "nook") {
+                                        if (Name==null||Name==""&&Pass==""||Pass==null) {
+                                            alert("请输入用户名跟密码");
+                                        } else {
+                                            alert("登录失败");
+                                            window.location.href = 'Login'
+                                        }
+                                      
+                                    }
+                                }
+                            })                  
+                    })
+ })
 
+    </script>
 </head>
 <body style="background-color:#2B3137">
     <div id="body">
@@ -24,16 +80,33 @@
 
     </div>
     <div id="body_right">
-        <form role="form" action="Login" method="post">
             <div class="form-group" style="margin:12px">
-                <label for="name">用户名</label>
-                <input type="text" class="form-control" placeholder="请输入用户名" height="100" name="UserName">
-                <label for="name" style="margin-top:25px">密码</label>
-                <input type="password" class="form-control" placeholder="请输入密码" name="Pass">
-                <input id="submit" type="submit" value="登录" class=".btn-success" />
+                <table>
+                    <tr>
+                        <td>用户名</td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="form-control" placeholder="请输入用户名" height="100" name="Name" id="Name"></td>                   
+                    </tr>
+                    <tr>
+                        <td><span id="yan" style="color:red"></span></td>
+                    </tr>
+                    <tr>
+                        <td>密码</td>
+                    </tr>
+                    <tr>
+                        <td><input type="password" class="form-control" placeholder="请输入密码" name="Pass" id="Pass"></td>
+                    </tr>
+                    <tr>
+                        <td><span id="zheng" style="color:red"></span></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" value="登录" class=".btn-success" id="submit" /></td>
+                    </tr>
+                </table>
             </div>
-        </form>
     </div>
 </body>
 </html>
 
+ ..

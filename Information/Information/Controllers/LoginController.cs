@@ -20,7 +20,7 @@ namespace information.Controllers
         }
         //post:Login
         [HttpPost]
-        public ActionResult Login(string UserName, string Pass)
+        public ActionResult Logins(string Name, string Pass)
         {
             string UserRealName;
             int UserID;
@@ -35,9 +35,10 @@ namespace information.Controllers
             else
             {
                 List<info_User> result = iud.DengLu(UserName, Pass);
+                List<info_User> result = iud.DengLu(Name, Pass);
                 foreach (info_User item in result)
                 {
-                    UserName = item.UserName;
+                Name = item.UserName;
                     Pass = item.UserPass;
                     UserRealName = item.UserRealName;
                     UserID = item.UserID;
@@ -45,14 +46,16 @@ namespace information.Controllers
                 if (UserName != null)
                 {
                     //登录成功
-                    Session["UserName"] = UserName;
+                Session["UserName"] = Name;
                     Session["UserRealName"] = UserRealName;
                     Session["UserID"] = UserID;
                     return Content("<script>alert('登录成功');window.location.href='/Main/Main'</script>");
                 }
                 }
+                return Content("OK");       
             }
-            return Content("<script>alert('登录失败');window.location.href='/Login'</script>");
+         
+            return Content("nook");
         }
         // GET: Login/Details/5
         public ActionResult Details(int id)
