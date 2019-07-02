@@ -46,6 +46,7 @@
     <Compile Include="ComputerRoomVisitService.cs" />
     <Compile Include="AssetService.cs" />
     <Compile Include="EquipmentsService.cs" />
+    <Compile Include="DetailedService.cs" />
     <Compile Include="IEquipmentService.cs" />
     <Compile Include="MaintenanceService.cs" />
     <Compile Include="MeetingService.cs" />

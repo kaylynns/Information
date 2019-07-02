@@ -74,6 +74,7 @@
                 data: "currentPage=" + currentPage,
                 url: "ChaXunZiChan",
                 success: function (msg) {
+                 
                     var datas = eval("(" + msg + ")");
                     var data = datas["list"];
                     zhan(data)

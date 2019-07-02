@@ -14,12 +14,6 @@ namespace Entity
     
     public partial class info_Asset
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public info_Asset()
-        {
-            this.info_Equipment = new HashSet<info_Equipment>();
-        }
-    
         public int AID { get; set; }
         public string AName { get; set; }
         public int ATypeId { get; set; }
@@ -49,7 +43,5 @@ namespace Entity
         public virtual PiShiJieGuo PiShiJieGuo { get; set; }
         public virtual ZiChanBeiZhu ZiChanBeiZhu { get; set; }
         public virtual ZiChanZhuangTai ZiChanZhuangTai { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<info_Equipment> info_Equipment { get; set; }
     }
 }

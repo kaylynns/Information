@@ -17,6 +17,7 @@ namespace Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public info_Role()
         {
+            this.info_Permission = new HashSet<info_Permission>();
             this.info_User = new HashSet<info_User>();
         }
     
@@ -24,6 +25,8 @@ namespace Entity
         public string RoleName { get; set; }
         public string Remark { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<info_Permission> info_Permission { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<info_User> info_User { get; set; }
     }

@@ -77,11 +77,13 @@
         </EntityType>
         <EntityType Name="info_Detailed">
           <Key>
-            <PropertyRef Name="DID" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="DID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DName" Type="varchar" MaxLength="50" />
-          <Property Name="Dhref" Type="varchar" MaxLength="50" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="text" Type="varchar" MaxLength="50" />
+          <Property Name="pid" Type="int" />
+          <Property Name="ProAddress" Type="varchar" MaxLength="100" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="info_Equipment">
           <Key>
@@ -165,6 +167,14 @@
           <Property Name="OName" Type="nvarchar" MaxLength="50" />
           <Property Name="Offices" Type="nvarchar" MaxLength="50" />
           <Property Name="OAdrees" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="info_Permission">
+          <Key>
+            <PropertyRef Name="PID" />
+          </Key>
+          <Property Name="PID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleID" Type="int" />
+          <Property Name="id" Type="int" />
         </EntityType>
         <EntityType Name="info_Question">
           <Key>
@@ -317,6 +327,18 @@
           <Property Name="CInstructorTime" Type="datetime" />
           <Property Name="COpinion" Type="varchar" MaxLength="50" />
           <Property Name="CXuanXiang" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Information.dbo.v_Detailed”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="v_Detailed">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="text" Type="varchar" MaxLength="50" />
+          <Property Name="pid" Type="int" />
+          <Property Name="ProAddress" Type="varchar" MaxLength="100" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“Information.dbo.V_info_Equipment”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -482,6 +504,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Permission_info_Detailed">
+          <End Role="info_Detailed" Type="Self.info_Detailed" Multiplicity="0..1" />
+          <End Role="info_Permission" Type="Self.info_Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="info_Detailed">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="info_Permission">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permission_info_Role">
+          <End Role="info_Role" Type="Self.info_Role" Multiplicity="0..1" />
+          <End Role="info_Permission" Type="Self.info_Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="info_Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="info_Permission">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -525,6 +571,7 @@
           <EntitySet Name="info_Maintenance" EntityType="Self.info_Maintenance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="info_Meeting" EntityType="Self.info_Meeting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="info_Offices" EntityType="Self.info_Offices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="info_Permission" EntityType="Self.info_Permission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="info_Question" EntityType="Self.info_Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="info_Registration" EntityType="Self.info_Registration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="info_Role" EntityType="Self.info_Role" Schema="dbo" store:Type="Tables" />
@@ -575,6 +622,15 @@
     [V_ComputerRoomVisit].[COpinion] AS [COpinion], 
     [V_ComputerRoomVisit].[CXuanXiang] AS [CXuanXiang]
     FROM [dbo].[V_ComputerRoomVisit] AS [V_ComputerRoomVisit]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_Detailed" EntityType="Self.v_Detailed" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_Detailed].[id] AS [id], 
+    [v_Detailed].[text] AS [text], 
+    [v_Detailed].[pid] AS [pid], 
+    [v_Detailed].[ProAddress] AS [ProAddress], 
+    [v_Detailed].[state] AS [state]
+    FROM [dbo].[v_Detailed] AS [v_Detailed]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_info_Equipment" EntityType="Self.V_info_Equipment" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -652,6 +708,14 @@
           <AssociationSet Name="FK_info_User_info_Role" Association="Self.FK_info_User_info_Role">
             <End Role="info_Role" EntitySet="info_Role" />
             <End Role="info_User" EntitySet="info_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permission_info_Detailed" Association="Self.FK_Permission_info_Detailed">
+            <End Role="info_Detailed" EntitySet="info_Detailed" />
+            <End Role="info_Permission" EntitySet="info_Permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permission_info_Role" Association="Self.FK_Permission_info_Role">
+            <End Role="info_Role" EntitySet="info_Role" />
+            <End Role="info_Permission" EntitySet="info_Permission" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -739,11 +803,14 @@
         </EntityType>
         <EntityType Name="info_Detailed">
           <Key>
-            <PropertyRef Name="DID" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="DID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Dhref" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="text" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pid" Type="Int32" />
+          <Property Name="ProAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="info_Permission" Relationship="Self.FK_Permission_info_Detailed" FromRole="info_Detailed" ToRole="info_Permission" />
         </EntityType>
         <EntityType Name="info_Equipment">
           <Key>
@@ -828,6 +895,16 @@
           <Property Name="Offices" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OAdrees" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="info_Permission">
+          <Key>
+            <PropertyRef Name="PID" />
+          </Key>
+          <Property Name="PID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="id" Type="Int32" />
+          <NavigationProperty Name="info_Detailed" Relationship="Self.FK_Permission_info_Detailed" FromRole="info_Permission" ToRole="info_Detailed" />
+          <NavigationProperty Name="info_Role" Relationship="Self.FK_Permission_info_Role" FromRole="info_Permission" ToRole="info_Role" />
+        </EntityType>
         <EntityType Name="info_Question">
           <Key>
             <PropertyRef Name="QID" />
@@ -861,6 +938,7 @@
           <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="info_Permission" Relationship="Self.FK_Permission_info_Role" FromRole="info_Role" ToRole="info_Permission" />
           <NavigationProperty Name="info_User" Relationship="Self.FK_info_User_info_Role" FromRole="info_Role" ToRole="info_User" />
         </EntityType>
         <EntityType Name="info_Software">
@@ -986,6 +1064,16 @@
           <Property Name="COpinion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CXuanXiang" Type="Int32" />
         </EntityType>
+        <EntityType Name="v_Detailed">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="text" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pid" Type="Int32" />
+          <Property Name="ProAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="V_info_Equipment">
           <Key>
             <PropertyRef Name="EID" />
@@ -1108,6 +1196,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Permission_info_Detailed">
+          <End Role="info_Detailed" Type="Self.info_Detailed" Multiplicity="0..1" />
+          <End Role="info_Permission" Type="Self.info_Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="info_Detailed">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="info_Permission">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permission_info_Role">
+          <End Role="info_Role" Type="Self.info_Role" Multiplicity="0..1" />
+          <End Role="info_Permission" Type="Self.info_Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="info_Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="info_Permission">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_info_Registration_info_Software">
           <End Role="info_Software" Type="Self.info_Software" Multiplicity="0..1" />
           <End Role="info_Registration" Type="Self.info_Registration" Multiplicity="*" />
@@ -1156,6 +1268,7 @@
           <EntitySet Name="info_Maintenance" EntityType="Self.info_Maintenance" />
           <EntitySet Name="info_Meeting" EntityType="Self.info_Meeting" />
           <EntitySet Name="info_Offices" EntityType="Self.info_Offices" />
+          <EntitySet Name="info_Permission" EntityType="Self.info_Permission" />
           <EntitySet Name="info_Question" EntityType="Self.info_Question" />
           <EntitySet Name="info_Registration" EntityType="Self.info_Registration" />
           <EntitySet Name="info_Role" EntityType="Self.info_Role" />
@@ -1168,6 +1281,7 @@
           <EntitySet Name="ZiChanZhuangTai" EntityType="Self.ZiChanZhuangTai" />
           <EntitySet Name="v_Asset" EntityType="Self.v_Asset" />
           <EntitySet Name="V_ComputerRoomVisit" EntityType="Self.V_ComputerRoomVisit" />
+          <EntitySet Name="v_Detailed" EntityType="Self.v_Detailed" />
           <EntitySet Name="V_info_Equipment" EntityType="Self.V_info_Equipment" />
           <EntitySet Name="v_Maintenance" EntityType="Self.v_Maintenance" />
           <EntitySet Name="v_User" EntityType="Self.v_User" />
@@ -1194,6 +1308,14 @@
           <AssociationSet Name="FK_info_ComputerRoomVisit_PiShiJieGuo" Association="Self.FK_info_ComputerRoomVisit_PiShiJieGuo">
             <End Role="PiShiJieGuo" EntitySet="PiShiJieGuo" />
             <End Role="info_ComputerRoomVisit" EntitySet="info_ComputerRoomVisit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permission_info_Detailed" Association="Self.FK_Permission_info_Detailed">
+            <End Role="info_Detailed" EntitySet="info_Detailed" />
+            <End Role="info_Permission" EntitySet="info_Permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permission_info_Role" Association="Self.FK_Permission_info_Role">
+            <End Role="info_Role" EntitySet="info_Role" />
+            <End Role="info_Permission" EntitySet="info_Permission" />
           </AssociationSet>
           <AssociationSet Name="FK_info_Registration_info_Software" Association="Self.FK_info_Registration_info_Software">
             <End Role="info_Software" EntitySet="info_Software" />
@@ -1322,9 +1444,11 @@
           <EntitySetMapping Name="info_Detailed">
             <EntityTypeMapping TypeName="InformationModel.info_Detailed">
               <MappingFragment StoreEntitySet="info_Detailed">
-                <ScalarProperty Name="DID" ColumnName="DID" />
-                <ScalarProperty Name="DName" ColumnName="DName" />
-                <ScalarProperty Name="Dhref" ColumnName="Dhref" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="ProAddress" ColumnName="ProAddress" />
+                <ScalarProperty Name="state" ColumnName="state" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1413,6 +1537,15 @@
                 <ScalarProperty Name="OName" ColumnName="OName" />
                 <ScalarProperty Name="Offices" ColumnName="Offices" />
                 <ScalarProperty Name="OAdrees" ColumnName="OAdrees" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="info_Permission">
+            <EntityTypeMapping TypeName="InformationModel.info_Permission">
+              <MappingFragment StoreEntitySet="info_Permission">
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1573,6 +1706,17 @@
                 <ScalarProperty Name="CInstructorTime" ColumnName="CInstructorTime" />
                 <ScalarProperty Name="COpinion" ColumnName="COpinion" />
                 <ScalarProperty Name="CXuanXiang" ColumnName="CXuanXiang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_Detailed">
+            <EntityTypeMapping TypeName="InformationModel.v_Detailed">
+              <MappingFragment StoreEntitySet="v_Detailed">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="ProAddress" ColumnName="ProAddress" />
+                <ScalarProperty Name="state" ColumnName="state" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

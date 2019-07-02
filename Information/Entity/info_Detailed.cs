@@ -14,8 +14,19 @@ namespace Entity
     
     public partial class info_Detailed
     {
-        public int DID { get; set; }
-        public string DName { get; set; }
-        public string Dhref { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public info_Detailed()
+        {
+            this.info_Permission = new HashSet<info_Permission>();
+        }
+    
+        public int id { get; set; }
+        public string text { get; set; }
+        public Nullable<int> pid { get; set; }
+        public string ProAddress { get; set; }
+        public string state { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<info_Permission> info_Permission { get; set; }
     }
 }

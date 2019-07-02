@@ -1,4 +1,8 @@
-﻿using System;
+﻿using BLL;
+using IBLL;
+using IocContainer;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,8 +10,13 @@ using System.Web.Mvc;
 
 namespace information.Controllers
 {
+  
     public class MainController : Controller
     {
+        //权限
+        IDetailedBll idb = IocCreate.CreateAll<DetailedService>("DetailedTwo", "DetailedService");
+
+
         // GET: Main
         //主页
         public ActionResult Index()
@@ -20,6 +29,7 @@ namespace information.Controllers
         {
             return View();
         }
+
         //左边
         public ActionResult left()
         {
@@ -32,6 +42,39 @@ namespace information.Controllers
             ViewData["user"] = Session["UserName"];
             return View();
         }
+
+
+        //测试：权限
+        public ActionResult Mains()
+        {
+            return View();
+        }
+
+        public ActionResult MainsTree()
+        {
+            string rid =Session["RoleID"].ToString();
+           var dt=idb.detailed(rid, "0");
+          
+            //
+            //DataTable dt;
+            //if (context.Request["id"] == null)
+            //{
+            //    dt = ipdb.Tree(context.Application["RoleID"].ToString(), "0");
+            //}
+            //else
+            //{
+            //    dt = ipdb.Tree(context.Application["RoleID"].ToString(), context.Request["id"]);
+            //}
+            //context.Response.Write(JsonConvert.SerializeObject(dt));
+
+            return Content(JsonConvert.SerializeObject(dt));
+        }
+
+
+
+
+
+
 
 
         // GET: Main/Details/5

@@ -22,6 +22,6 @@ namespace IBLL
         int Add(info_User t);
         //用户管理带条件查询
         List<info_User> SelectWhere(Expression<Func<info_User, bool>> where);
-        List<info_User> SelectWhere(Expression<Func<info_User, bool>> where);
+        //List<info_User> SelectWhere(Expression<Func<info_User, bool>> where);
     }
 }

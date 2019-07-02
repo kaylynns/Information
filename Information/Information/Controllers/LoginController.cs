@@ -23,6 +23,7 @@ namespace information.Controllers
         public ActionResult Login(string UserName, string Pass)
         {
             string UserRealName;
+            var RoleID=0;
             if (UserName == null || UserName == "")
             {
                 return Content("<script>alert('用户名不能为空');window.location.href='Login'</script>");
@@ -39,13 +40,15 @@ namespace information.Controllers
                     UserName = item.UserName;
                     Pass = item.UserPass;
                     UserRealName = item.UserRealName;
-
+                    RoleID = item.UserJueSe;
                 if (UserName != null)
                 {
                     //登录成功
                     Session["UserName"] = UserName;
                     Session["UserRealName"] = UserRealName;
-                    return Content("<script>alert('登录成功');window.location.href='/Main/Main'</script>");
+                        Session["RoleID"] = RoleID;
+                       return Content("<script>alert('登录成功');window.location.href='/Main/Mains'</script>");
+                   // return Content("<script>alert('登录成功');window.location.href='/Main/Main'</script>");
                 }
                 }
             }

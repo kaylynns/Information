@@ -49,8 +49,9 @@ namespace BLL
             return iud.Update(t);
         }
 
-        public List<info_User> SelectWhere(Expression<Func<info_User, bool>> where) {
-            return iud.SelectWhere(where);
-        }
+        //public List<info_User> SelectWhere(Expression<Func<info_User, bool>> where)
+        //{
+        //    return iud.SelectWhere(where);
+        //}
     }
 }

@@ -45,6 +45,7 @@
     <Compile Include="ICheckBll.cs" />
     <Compile Include="IComputerRoomVisitBll.cs" />
     <Compile Include="IAssetBll.cs" />
+    <Compile Include="IDetailedBll.cs" />
     <Compile Include="IEquipmentsBll.cs" />
     <Compile Include="IMaintenanceBll.cs" />
     <Compile Include="IMeetingBll.cs" />

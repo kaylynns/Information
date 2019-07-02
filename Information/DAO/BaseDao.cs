@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Data.Entity;
 using Entity;
+using System.Data;
 
 namespace DAO
 {
@@ -49,6 +50,11 @@ namespace DAO
         {
             ce.Entry<T>(t).State = EntityState.Deleted;
             return ce.SaveChanges();
+        }
+        //sql语句
+        public List<T> cha(string sql){
+            return ce.Database.SqlQuery<T>(sql).ToList();
+
         }
     }
 }

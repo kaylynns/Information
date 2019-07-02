@@ -9,5 +9,6 @@ namespace DAO
 {
     public class CaiGouYiJuDao : BaseDao<CaiGouYiJu>, ICaiGouYiJuDao
     {
+
     }
 }

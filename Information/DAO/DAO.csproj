@@ -57,6 +57,7 @@
     <Compile Include="CaiGouYiJuDao.cs" />
     <Compile Include="CheckDao.cs" />
     <Compile Include="ComputerRoomVisitDao.cs" />
+    <Compile Include="DetailedDao.cs" />
     <Compile Include="EquipmentDao.cs" />
     <Compile Include="EquipmentsDao.cs" />
     <Compile Include="MaintenanceDao.cs" />

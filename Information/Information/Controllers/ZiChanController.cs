@@ -54,11 +54,11 @@ namespace information.Controllers
                     }
                 }    
         
-        public ActionResult ZiChanTianJia(string name, string lei) {
+        public ActionResult ZiChanTianJia(string name, string bei) {
             ZiChanBeiZhu cbs = new ZiChanBeiZhu
             {
                 AName = name,
-                ABeiZhu = lei
+                ABeiZhu = bei
             };
             if (izcbzb.Add(cbs) > 0)
             {

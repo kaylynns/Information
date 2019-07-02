@@ -4,61 +4,43 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="99be1e63b6374dc1b7361250e956a329" Name="Diagram1">
-        <EntityTypeShape EntityType="InformationModel.CaiGouXingShi" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.CaiGouYiJu" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
-      <Diagram DiagramId="7c529a17b17b4d8790b0f2c1466f0557" Name="Diagram1" ZoomLevel="39">
-        <EntityTypeShape EntityType="InformationModel.CaiGouXingShi" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.CaiGouYiJu" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Asset" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Check" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_ComputerRoomVisit" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Detailed" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Equipment" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Equipments" Width="1.5" PointX="5.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Maintenance" Width="1.5" PointX="7.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Meeting" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Offices" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Question" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Registration" Width="1.5" PointX="8" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Role" Width="1.5" PointX="10.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Software" Width="1.5" PointX="5.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Technology" Width="1.5" PointX="8" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_User" Width="1.5" PointX="13" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_ComputerRoomVisit" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Equipment" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Equipments" Width="1.5" PointX="10.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Maintenance" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Meeting" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Offices" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Question" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Registration" Width="1.5" PointX="10" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Role" Width="1.5" PointX="5.75" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Software" Width="1.5" PointX="7.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_Technology" Width="1.5" PointX="10" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.info_User" Width="1.5" PointX="8" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.PiShiJieGuo" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.sysdiagrams" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.ZiChanBeiZhu" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.sysdiagrams" Width="1.5" PointX="12.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.ZiChanBeiZhu" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.ZiChanZhuangTai" Width="1.5" PointX="0.75" PointY="13.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.v_Asset" Width="1.5" PointX="12.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.V_ComputerRoomVisit" Width="1.5" PointX="14.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.V_info_Equipment" Width="1.5" PointX="7.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.v_Maintenance" Width="1.5" PointX="14.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.v_User" Width="1.5" PointX="14.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.v_Asset" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.V_ComputerRoomVisit" Width="1.5" PointX="5.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.V_info_Equipment" Width="1.5" PointX="14.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="InformationModel.v_Maintenance" Width="1.5" PointX="7.75" PointY="14.75" IsExpanded="true" />
+      <Diagram DiagramId="10e29a4f83594be8863e4c0d90cf0657" Name="Diagram1">
+        <EntityTypeShape EntityType="InformationModel.CaiGouXingShi" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.CaiGouYiJu" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.info_Asset" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.info_Check" Width="1.5" PointX="2.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.info_ComputerRoomVisit" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.info_Detailed" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.info_Equipment" Width="1.5" PointX="5.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.info_Equipments" Width="1.5" PointX="7.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.info_Maintenance" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.info_Meeting" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.info_Offices" Width="1.5" PointX="4.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.info_Permission" Width="1.5" PointX="13" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.info_Question" Width="1.5" PointX="9.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.info_Registration" Width="1.5" PointX="8" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.info_Role" Width="1.5" PointX="10.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.info_Software" Width="1.5" PointX="5.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.info_Technology" Width="1.5" PointX="8" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.info_User" Width="1.5" PointX="13" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.PiShiJieGuo" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.sysdiagrams" Width="1.5" PointX="14.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.ZiChanBeiZhu" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.ZiChanZhuangTai" Width="1.5" PointX="0.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.v_Asset" Width="1.5" PointX="14.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.V_ComputerRoomVisit" Width="1.5" PointX="11.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.v_Detailed" Width="1.5" PointX="15.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.V_info_Equipment" Width="1.5" PointX="15.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.v_Maintenance" Width="1.5" PointX="5.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InformationModel.v_User" Width="1.5" PointX="7.75" PointY="16.75" IsExpanded="true" />
         <AssociationConnector Association="InformationModel.FK_info_Asset_CaiGouXingShi" ManuallyRouted="false" />
         <AssociationConnector Association="InformationModel.FK_info_Asset_CaiGouYiJu" ManuallyRouted="false" />
         <AssociationConnector Association="InformationModel.FK_info_Asset_PiShiJieGuo" ManuallyRouted="false" />
         <AssociationConnector Association="InformationModel.FK_info_Asset_ZiChanBeiZhu" ManuallyRouted="false" />
         <AssociationConnector Association="InformationModel.FK_info_Asset_ZiChanZhuangTai" ManuallyRouted="false" />
-        <AssociationConnector Association="InformationModel.FK_info_Equipment_info_Asset" ManuallyRouted="false" />
         <AssociationConnector Association="InformationModel.FK_info_ComputerRoomVisit_PiShiJieGuo" ManuallyRouted="false" />
+        <AssociationConnector Association="InformationModel.FK_Permission_info_Detailed" ManuallyRouted="false" />
+        <AssociationConnector Association="InformationModel.FK_Permission_info_Role" ManuallyRouted="false" />
         <AssociationConnector Association="InformationModel.FK_info_Registration_info_Software" ManuallyRouted="false" />
         <AssociationConnector Association="InformationModel.FK_info_User_info_Role" ManuallyRouted="false" />
         <AssociationConnector Association="InformationModel.FK_info_Technology_info_Technology" ManuallyRouted="false" />

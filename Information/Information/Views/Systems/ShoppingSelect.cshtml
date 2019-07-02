@@ -150,7 +150,7 @@
                     <td> 采购形式名称：<input id="txt_name" type="text" /></td>
                     <td><input type="button" value="查询" id="btn_select" Class="btn1" style="margin-left:10px" /></td>
                     <td>
-                        @using (Ajax.BeginForm("/Systems/ShoppingCreate", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Create" }))
+                        @using (Ajax.BeginForm("/ShoppingCreate", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Create" }))
                         {
                             @Html.Label("名称:")@Html.TextBoxFor(e=>e.SName) <input id="Button1" type="submit" value="添加采购形式" Class="btn1" />
                         }

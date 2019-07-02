@@ -86,8 +86,7 @@ namespace information.Controllers
         [HttpPost]
         public ActionResult PowerEdits(info_Role role)
         {
-            try
-            {
+        
                 if (irb.Update(role) > 0)
                 {
                     return Content("<script>alert('修改成功');window.location.href='/Systems/PowerSelect'</script>");
@@ -96,12 +95,7 @@ namespace information.Controllers
                     return Content("<script>alert('修改失败');window.location.href='/Systems/PowerSelect'</script>");
 
                 }
-                
-            }
-            catch
-            {
-                return View("PowerSelect");
-            }
+           
         }
         #endregion
         #region 用户管理
@@ -224,7 +218,7 @@ namespace information.Controllers
         }
         //修改密码[进行修改密码操作]
         public ActionResult UserManagementPassEdits(int id,string pass) {
-
+          
             info_User u = iud.SelectWhere(e => e.UserID == id).FirstOrDefault();
             u.UserPass = pass;
           
@@ -501,31 +495,31 @@ namespace information.Controllers
 
         public ActionResult ShoppingDelete(int id) {
 
-            //// var aid = iab.SelectAll();
-            // foreach (var item in aid)
-            // {
-            //     if (item.AID == id)
-            //     {
-            //         return Content("<script>alert('正在使用中，不能删除');window.location.href='/Systems/ShoppingSelect'</script>");
+             var aid = iab.SelectAll();
+            foreach (var item in aid)
+            {
+                if (item.AID == id)
+                {
+                    return Content("<script>alert('正在使用中，不能删除');window.location.href='/systems/shoppingselect'</script>");
 
-            //     }
-            // }
+                }
+            }
 
-            // CaiGouXingShi cgxs = new CaiGouXingShi()
-            // {
-            //     SID = id
-            // };
+            CaiGouXingShi cgxs = new CaiGouXingShi()
+            {
+                SID = id
+            };
 
-            // if (icgxsb.Delete(cgxs) > 0)
-            // {
-            //     return Content("<script>alert('删除成功');window.location.href='/Systems/ShoppingSelect'</script>");
-            // }
-            // else
-            // {
-            //     return Content("<script>alert('删除失败');window.location.href='/Systems/ShoppingSelect'</script>");
-            // }
+            if (icgxsb.Delete(cgxs) > 0)
+            {
+                return Content("<script>alert('删除成功');window.location.href='/systems/shoppingselect'</script>");
+            }
+            else
+            {
+                return Content("<script>alert('删除失败');window.location.href='/systems/shoppingselect'</script>");
+            }
 
-            return View();
+           
         }
 
         #endregion
