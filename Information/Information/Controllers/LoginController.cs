@@ -20,35 +20,23 @@ namespace information.Controllers
         }
         //post:Login
         [HttpPost]
-        public ActionResult Login(string UserName, string Pass)
+        public ActionResult Logins(string Name, string Pass)
         {
-            string UserRealName;
-            if (UserName == null || UserName == "")
-            {
-                return Content("<script>alert('用户名不能为空');window.location.href='Login'</script>");
-            }
-            else if (Pass == null || Pass == "")
-            {
-                return Content("<script>alert('密码不能为空');window.location.href='/Login'</script>");
-            }
-            else
-            {
-                List<info_User> result = iud.DengLu(UserName, Pass);
+                string UserRealName;
+                List<info_User> result = iud.DengLu(Name, Pass);
                 foreach (info_User item in result)
                 {
-                    UserName = item.UserName;
+                    Name = item.UserName;
                     Pass = item.UserPass;
-                    UserRealName = item.UserRealName;
-
-                if (UserName != null)
+                UserRealName = item.UserRealName;
+                if (Name != null)
                 {
                     //登录成功
-                    Session["UserName"] = UserName;
+                    Session["UserName"] = Name;
                     Session["UserRealName"] = UserRealName;
-                    return Content("<script>alert('登录成功');window.location.href='/Main/Main'</script>");
+                    return Content("OK");
                 }
-                }
-            }
+                }        
             return Content("<script>alert('登录失败');window.location.href='/Login'</script>");
         }
         // GET: Login/Details/5
