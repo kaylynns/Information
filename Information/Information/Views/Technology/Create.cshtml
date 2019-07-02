@@ -1,0 +1,132 @@
+﻿@model Entity.info_Technology
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    <link href="~/css/css.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.2.min.js"></script>
+    <script src="~/DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(document).on("click", ".sj input", function () {
+                WdatePicker({ readOnly: true, dateFmt: 'yyyy-MM-dd' });
+            })
+        })
+    </script>
+</head>
+<body>
+    <h2 align="center" style="font-size:25px;font-weight:bold"> 技术支持内容登记表 </h2>
+    <form method="post" action="/Technology/Create" style="">
+        <table cellspacing="0" cellpadding="7" align="center" border="1" style="border-collapse: collapse; margin-bottom:20px"
+               bordercolor="#6c9ec1">
+            <tr>
+                <td align="left">
+                  软件名称：
+                 </td>
+                <td>
+                    @Html.DropDownListFor(e => e.SID, ViewData["s"] as IEnumerable<SelectListItem>)
+                </td>
+                <td align="left" >
+                   填表日期：
+                </td>
+                <td class="sj">
+                    @Html.EditorFor(model => model.TDate)
+                </td>
+            </tr>
+            <tr>
+                <td align="left" style="height: 20px">
+                    登记人：<input id="Text1" type="hidden" value="" />
+                </td>
+                <td>
+                    @ViewData["urm"]
+                </td>
+                <td align="left">
+                   登记时间：
+                </td>
+               <td class="sj">
+                   @Html.EditorFor(model => model.TRegistrationTiime)
+               </td>
+            </tr>
+
+            <tr>
+                <td align="left" style="height: 20px">
+                    咨询人：
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.TConsultant)
+                </td>
+                <td align="left">
+                    联系方式：
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Tcontact)
+                </td>
+            </tr>
+
+            <tr>
+                <td align="left" style="height: 20px">
+                    咨询人所在部门：
+                </td>
+                <td>
+                    @Html.DropDownListFor(e => e.TDepartment, ViewData["b"] as IEnumerable<SelectListItem>)
+                </td>
+                <td align="left">
+                    解答时间：
+                </td>
+                <td class="sj">
+                    @Html.EditorFor(model => model.TAnswerTime)
+                </td>
+            </tr>
+
+            <tr>
+                <td align="left" style="height: 20px">
+                    问题分类
+                </td>
+                <td>
+                    @Html.DropDownListFor(e => e.QID, ViewData["q"] as IEnumerable<SelectListItem>)
+                </td>
+                <td align="left">
+                    问题内容描述：
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.TDescribe)
+                </td>
+            </tr>
+
+            <tr>
+                <td align="left" style="height: 20px">
+                    问题解答
+                </td>
+                <td>
+                    @Html.TextAreaFor(model => model.TAnswer)
+                </td>
+                <td align="left">
+                    备注：
+                </td>
+                <td>
+                    @Html.TextAreaFor(model => model.TRemark)
+                </td>
+            </tr>
+
+           <tr>
+                <td align="center" colspan="4" height="26">
+
+                    <input type="submit" value="保 存" class="btn1" />
+                    &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                    <input ID="btn_remove" type="reset" value="清 空" class="btn1" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input ID="btn_back" type="button" value="返 回" class="btn1" onclick="window.location.href=document.referrer" />
+                    <br />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

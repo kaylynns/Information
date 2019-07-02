@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
     @*<script src="~/Scripts/WebDatePicker.js"></script>*@
-    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/css/css.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.7.2.min.js"></script>
     <script src="~/Scripts/jquery-1.10.2.js"></script>
@@ -75,7 +75,7 @@
 <body>
     @using (Ajax.BeginForm("AssetCreates", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Add" }))
     {
-        <h2 align="center">资产登记表</h2>
+        <h2 align="center" style="font-size:25px;font-weight:bold">资产登记表</h2>
         <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse"
                bordercolor="#6c9ec1">
             <tr>

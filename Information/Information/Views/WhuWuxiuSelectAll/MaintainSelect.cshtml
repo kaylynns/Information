@@ -103,7 +103,7 @@
                 var $td3 = $("<td>" + datas[i]["MDetectionUnit"] + "</td>");
                 var $td4 = $("<td>" + datas[i]["MTestingPersonnel"] + "</td>");
                 var $td5 = $("<td>" + datas[i]["MAccompanyingOfficials"] + "</td>");
-                var $td6 = $("<td><a href='/Maintain/MaintainLook/" + datas[i]["MIDs"] + "'>查看</a></td>")
+                var $td6 = $("<td><a href='/WhuWuxiuSelectAll/MaintainLook/" + datas[i]["MIDs"] + "'>查看</a></td>")
                 $tr.append($td, $td2, $td3, $td4, $td5, $td6);
                 $("#ListArea").append($tr);
             }
@@ -138,15 +138,21 @@
                 show(currentPage, MDeviceName);
             })
 
+            //清除
+            $("#btn_clear").click(function () {
+                $("#Text1").val("");
+            })
+
         })
     </script>
 </head>
 <body>
-    <h2>设备维护查询</h2>
+    <h2  align="center" style="font-size:25px;font-weight:bold">设备维护查询</h2>
     设备名称：
     <input id="Text1" type="text" ID="txtSearch" Width="240" />
     <input id="Button1" type="button" value="查询" Class="btn1"/>
-
+    &nbsp;
+    <input id="btn_clear" type="reset" value="清 空" Class="btn1" />
     <table width="100%" id="ListArea" border="0" class="t1" align="center" cellpadding="0" cellspacing="0">
         <tr id="head">
             <td>日期</td>

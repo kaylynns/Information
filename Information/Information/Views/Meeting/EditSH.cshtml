@@ -1,0 +1,235 @@
+﻿@model Entity.info_Meeting
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EditSH</title>
+    <link href="~/css/css.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.11.1.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <style type="text/css">
+        .aa input {
+           border:none;
+           background-color:transparent;
+             }
+        .aa textarea {
+          border:none;
+          background-color:transparent;
+        }
+    </style>
+
+</head>
+<body>
+    <h2 align="center" id="mid" style="font-size:25px;font-weight:bold"> 会议设备维修审核</h2>
+
+    <form method="post" action="/Meeting/EditSH2" style="">
+        <table cellspacing="0" cellpadding="7" align="center" border="1" style="border-collapse: collapse; margin-bottom:20px"
+               bordercolor="#6c9ec1" id="table1">
+            <tr class="aa">
+                <td align="center">  会议名称：</td>
+
+                <td align="left" colspan="3">
+                    @Html.HiddenFor(model => model.MID)
+                    @Html.EditorFor(model => model.MName)
+
+                </td>
+            </tr>
+            <tr class="aa">
+                <td align="center" style="height: 20px">
+                    编号
+                </td>
+                <td align="center">
+                    内容
+                </td>
+                <td align="center">
+                    结果
+                </td>
+                <td align="center">
+                    备注
+                </td>
+            </tr>
+            <tr class="aa">
+                <td align="center" style="height: 20px" colspan="4">
+                    视频测试
+                </td>
+            </tr>
+            <tr class="aa">
+                <td align="center" style="height: 20px">
+                    1
+                </td>
+                <td align="left">
+                    开机测试时间
+                </td>
+                <td align="left" class="sj">
+                    @Html.EditorFor(model => model.Mstart)
+                </td>
+                <td align="center">
+                    测试备注
+                </td>
+
+            </tr>
+            <tr class="aa">
+                <td align="center" style="height: 20px">
+                    2
+                </td>
+                <td align="left">
+                    本地音视频情况
+                </td>
+                <td align="left">
+                    @Html.EditorFor(model => model.MAudioSituation)
+                    @*<input id="Text1" type="text" name="MAudioSituation" />*@
+                </td>
+                <td align="left" rowspan="6" class="dh">
+                    @Html.TextAreaFor(model => model.MNote, new { rows = "10", cols = "20" })
+
+                </td>
+            </tr>
+            <tr class="aa">
+                <td align="center" style="height: 20px">
+                    3
+                </td>
+                <td align="left">
+                    上下级音视频测试
+                </td>
+                <td align="left">
+                    @Html.EditorFor(model => model.MText)
+                    @*<input type="text" name="MText"/>*@
+                </td>
+            </tr>
+            <tr class="aa">
+                <td align="center" style="height: 20px">
+                    4
+                </td>
+                <td align="left">
+                    是否有发言
+                </td>
+                <td align="left">
+                    @Html.EditorFor(model => model.Mspeak)
+                </td>
+            </tr>
+            <tr class="aa">
+                <td align="center" style="height: 20px">
+                    5
+                </td>
+                <td align="left">
+                    会议室卫生情况
+                </td>
+                <td align="left">
+                    @Html.EditorFor(model => model.Mhealth)
+                </td>
+            </tr>
+            <tr class="aa">
+                <td align="center" style="height: 20px">
+                    6
+                </td>
+                <td align="left">
+                    测试完成时间
+                </td>
+                <td align="left" class="sj">
+                    @Html.EditorFor(model => model.MOwer)
+
+                </td>
+            </tr>
+            <tr class="aa">
+                <td align="center" style="height: 20px">
+                    7
+                </td>
+                <td align="left">
+                    有无故障
+                </td>
+                <td align="left" id="gz">
+                    @Html.EditorFor(model => model.MSolve)
+                </td>
+            </tr>
+            <tr>
+                <td align="center" style="height: 20px" colspan="4">
+                    正式开会
+                </td>
+            </tr>
+            <tr class="aa">
+                <td align="center" style="height: 20px">
+                    1
+                </td>
+                <td align="left">
+                    会议召开时间
+                </td>
+                <td align="left" class="sj">
+                    @Html.EditorFor(model => model.MOpenTime)
+                </td>
+                <td align="center">
+                    开会备注
+                </td>
+            </tr>
+            <tr class="aa">
+                <td align="center" style="height: 20px">
+                    2
+                </td>
+                <td align="left">
+                    会场音视频情况
+                </td>
+                <td align="left">
+                    @Html.EditorFor(model => model.MConference)
+                </td>
+                <td align="left" rowspan="3" id="kh">
+                    @Html.TextAreaFor(model => model.MComments, new { rows = "10", cols = "20" })@*开会备注*@
+                </td>
+            </tr>
+         
+            <tr class="aa">
+                <td align="center" style="height: 20px">
+                    3
+                </td>
+                <td align="left">
+                    会议结束时间
+                </td>
+                <td align="left" class="sj">
+                    @Html.EditorFor(model => model.MOverTime)
+
+                </td>
+            </tr>
+
+            <tr class="aa">
+                <td align="center" style="height: 20px">
+                    4
+                </td>
+                <td align="left">
+                    关闭设备
+                </td>
+                <td align="left">
+                    @Html.EditorFor(model => model.closeDevice)
+                </td>
+            </tr>
+        
+            <tr id="pishi" runat="server" visible="false" class="aa">
+                    <td align="center" style="height: 20px">
+                        5
+                    </td>
+                    <td align="left">
+                        信息中心主任批示：
+                    </td>
+                    <td align="left" colspan="1">
+                        @Html.RadioButtonFor(e => e.MOpinion, "同意", new { @checked = true })同意
+                        @Html.RadioButtonFor(e => e.MOpinion, "不同意")不同意
+                    </td>
+                </tr>
+            <tr>
+                <td align="center" colspan="4" height="26">
+
+                    <input type="submit" value="保 存" class="btn1" />
+                    &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                    <input ID="btn_remove" type="reset" value="清 空" class="btn1" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input ID="btn_back" type="button" value="返 回" class="btn1" onclick="window.location.href=document.referrer" />
+                    <br />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

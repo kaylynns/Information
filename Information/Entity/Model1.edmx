@@ -158,6 +158,7 @@
           <Property Name="MComments" Type="nvarchar" MaxLength="50" />
           <Property Name="closeDevice" Type="nvarchar" MaxLength="50" />
           <Property Name="QZ" Type="int" />
+          <Property Name="MState" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="info_Offices">
           <Key>
@@ -200,6 +201,7 @@
           <Property Name="RInformationCenter" Type="nvarchar" MaxLength="50" />
           <Property Name="RState" Type="nvarchar" MaxLength="50" />
           <Property Name="Remaek" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsOk" Type="int" />
         </EntityType>
         <EntityType Name="info_Role">
           <Key>
@@ -228,7 +230,7 @@
           <Property Name="TUserId" Type="int" />
           <Property Name="TRegistrationTiime" Type="datetime" />
           <Property Name="TConsultant" Type="nvarchar" MaxLength="50" />
-          <Property Name="TDepartment" Type="nvarchar" MaxLength="50" />
+          <Property Name="TDepartment" Type="int" />
           <Property Name="Tcontact" Type="nvarchar" MaxLength="50" />
           <Property Name="QID" Type="int" />
           <Property Name="TDescribe" Type="nvarchar" MaxLength="50" />
@@ -255,6 +257,13 @@
           </Key>
           <Property Name="CRelustID" Type="int" Nullable="false" />
           <Property Name="CRelustName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="Sid" />
+          </Key>
+          <Property Name="Sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SectionName" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -359,6 +368,46 @@
           <Property Name="EPhone" Type="varchar" MaxLength="50" />
           <Property Name="Econtact" Type="varchar" MaxLength="50" />
           <Property Name="EIP" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Information.dbo.v_info_Registration”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="v_info_Registration">
+          <Key>
+            <PropertyRef Name="RID" />
+          </Key>
+          <Property Name="RID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SID" Type="nvarchar" MaxLength="50" />
+          <Property Name="RUserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="ROffice" Type="varchar" MaxLength="50" />
+          <Property Name="RDate" Type="datetime" />
+          <Property Name="RFunction" Type="nvarchar" MaxLength="50" />
+          <Property Name="Requirements" Type="nvarchar" MaxLength="50" />
+          <Property Name="Rdepartment" Type="nvarchar" MaxLength="50" />
+          <Property Name="RInformationCenter" Type="nvarchar" MaxLength="50" />
+          <Property Name="RState" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remaek" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Information.dbo.v_info_Technology”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="v_info_Technology">
+          <Key>
+            <PropertyRef Name="TID" />
+          </Key>
+          <Property Name="TID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TSerialNumber" Type="varchar" MaxLength="50" />
+          <Property Name="SID" Type="nvarchar" MaxLength="50" />
+          <Property Name="TDate" Type="datetime" />
+          <Property Name="TUserId" Type="varchar" MaxLength="50" />
+          <Property Name="TRegistrationTiime" Type="datetime" />
+          <Property Name="TConsultant" Type="nvarchar" MaxLength="50" />
+          <Property Name="TDepartment" Type="varchar" MaxLength="50" />
+          <Property Name="Tcontact" Type="nvarchar" MaxLength="50" />
+          <Property Name="QID" Type="nvarchar" MaxLength="50" />
+          <Property Name="TDescribe" Type="nvarchar" MaxLength="50" />
+          <Property Name="TAnswer" Type="nvarchar" MaxLength="50" />
+          <Property Name="TAnswerTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="TRemark" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“Information.dbo.v_Maintenance”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -579,6 +628,7 @@
           <EntitySet Name="info_Technology" EntityType="Self.info_Technology" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="info_User" EntityType="Self.info_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PiShiJieGuo" EntityType="Self.PiShiJieGuo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZiChanBeiZhu" EntityType="Self.ZiChanBeiZhu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZiChanZhuangTai" EntityType="Self.ZiChanZhuangTai" Schema="dbo" store:Type="Tables" />
@@ -648,6 +698,40 @@
     [V_info_Equipment].[Econtact] AS [Econtact], 
     [V_info_Equipment].[EIP] AS [EIP]
     FROM [dbo].[V_info_Equipment] AS [V_info_Equipment]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_info_Registration" EntityType="Self.v_info_Registration" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_info_Registration].[RID] AS [RID], 
+    [v_info_Registration].[RName] AS [RName], 
+    [v_info_Registration].[SID] AS [SID], 
+    [v_info_Registration].[RUserId] AS [RUserId], 
+    [v_info_Registration].[ROffice] AS [ROffice], 
+    [v_info_Registration].[RDate] AS [RDate], 
+    [v_info_Registration].[RFunction] AS [RFunction], 
+    [v_info_Registration].[Requirements] AS [Requirements], 
+    [v_info_Registration].[Rdepartment] AS [Rdepartment], 
+    [v_info_Registration].[RInformationCenter] AS [RInformationCenter], 
+    [v_info_Registration].[RState] AS [RState], 
+    [v_info_Registration].[Remaek] AS [Remaek]
+    FROM [dbo].[v_info_Registration] AS [v_info_Registration]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_info_Technology" EntityType="Self.v_info_Technology" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_info_Technology].[TID] AS [TID], 
+    [v_info_Technology].[TSerialNumber] AS [TSerialNumber], 
+    [v_info_Technology].[SID] AS [SID], 
+    [v_info_Technology].[TDate] AS [TDate], 
+    [v_info_Technology].[TUserId] AS [TUserId], 
+    [v_info_Technology].[TRegistrationTiime] AS [TRegistrationTiime], 
+    [v_info_Technology].[TConsultant] AS [TConsultant], 
+    [v_info_Technology].[TDepartment] AS [TDepartment], 
+    [v_info_Technology].[Tcontact] AS [Tcontact], 
+    [v_info_Technology].[QID] AS [QID], 
+    [v_info_Technology].[TDescribe] AS [TDescribe], 
+    [v_info_Technology].[TAnswer] AS [TAnswer], 
+    [v_info_Technology].[TAnswerTime] AS [TAnswerTime], 
+    [v_info_Technology].[TRemark] AS [TRemark]
+    FROM [dbo].[v_info_Technology] AS [v_info_Technology]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="v_Maintenance" EntityType="Self.v_Maintenance" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -885,6 +969,7 @@
           <Property Name="MComments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="closeDevice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="QZ" Type="Int32" />
+          <Property Name="MState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="info_Offices">
           <Key>
@@ -929,6 +1014,7 @@
           <Property Name="RInformationCenter" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Remaek" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsOk" Type="Int32" />
           <NavigationProperty Name="info_Software" Relationship="Self.FK_info_Registration_info_Software" FromRole="info_Registration" ToRole="info_Software" />
         </EntityType>
         <EntityType Name="info_Role">
@@ -962,7 +1048,7 @@
           <Property Name="TUserId" Type="Int32" />
           <Property Name="TRegistrationTiime" Type="DateTime" Precision="3" />
           <Property Name="TConsultant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TDepartment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TDepartment" Type="Int32" />
           <Property Name="Tcontact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="QID" Type="Int32" />
           <Property Name="TDescribe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -993,6 +1079,13 @@
           <Property Name="CRelustName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="info_Asset" Relationship="Self.FK_info_Asset_PiShiJieGuo" FromRole="PiShiJieGuo" ToRole="info_Asset" />
           <NavigationProperty Name="info_ComputerRoomVisit" Relationship="Self.FK_info_ComputerRoomVisit_PiShiJieGuo" FromRole="PiShiJieGuo" ToRole="info_ComputerRoomVisit" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="Sid" />
+          </Key>
+          <Property Name="Sid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SectionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1091,6 +1184,42 @@
           <Property Name="EPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Econtact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="v_info_Registration">
+          <Key>
+            <PropertyRef Name="RID" />
+          </Key>
+          <Property Name="RID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ROffice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RDate" Type="DateTime" Precision="3" />
+          <Property Name="RFunction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Requirements" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rdepartment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RInformationCenter" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remaek" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="v_info_Technology">
+          <Key>
+            <PropertyRef Name="TID" />
+          </Key>
+          <Property Name="TID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TSerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TDate" Type="DateTime" Precision="3" />
+          <Property Name="TUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TRegistrationTiime" Type="DateTime" Precision="3" />
+          <Property Name="TConsultant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TDepartment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tcontact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TDescribe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TAnswer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TAnswerTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TRemark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="v_Maintenance">
           <Key>
@@ -1276,6 +1405,7 @@
           <EntitySet Name="info_Technology" EntityType="Self.info_Technology" />
           <EntitySet Name="info_User" EntityType="Self.info_User" />
           <EntitySet Name="PiShiJieGuo" EntityType="Self.PiShiJieGuo" />
+          <EntitySet Name="Section" EntityType="Self.Section" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="ZiChanBeiZhu" EntityType="Self.ZiChanBeiZhu" />
           <EntitySet Name="ZiChanZhuangTai" EntityType="Self.ZiChanZhuangTai" />
@@ -1283,6 +1413,8 @@
           <EntitySet Name="V_ComputerRoomVisit" EntityType="Self.V_ComputerRoomVisit" />
           <EntitySet Name="v_Detailed" EntityType="Self.v_Detailed" />
           <EntitySet Name="V_info_Equipment" EntityType="Self.V_info_Equipment" />
+          <EntitySet Name="v_info_Registration" EntityType="Self.v_info_Registration" />
+          <EntitySet Name="v_info_Technology" EntityType="Self.v_info_Technology" />
           <EntitySet Name="v_Maintenance" EntityType="Self.v_Maintenance" />
           <EntitySet Name="v_User" EntityType="Self.v_User" />
           <AssociationSet Name="FK_info_Asset_CaiGouXingShi" Association="Self.FK_info_Asset_CaiGouXingShi">
@@ -1527,6 +1659,7 @@
                 <ScalarProperty Name="MComments" ColumnName="MComments" />
                 <ScalarProperty Name="closeDevice" ColumnName="closeDevice" />
                 <ScalarProperty Name="QZ" ColumnName="QZ" />
+                <ScalarProperty Name="MState" ColumnName="MState" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1573,6 +1706,7 @@
                 <ScalarProperty Name="RInformationCenter" ColumnName="RInformationCenter" />
                 <ScalarProperty Name="RState" ColumnName="RState" />
                 <ScalarProperty Name="Remaek" ColumnName="Remaek" />
+                <ScalarProperty Name="IsOk" ColumnName="IsOk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1633,6 +1767,14 @@
               <MappingFragment StoreEntitySet="PiShiJieGuo">
                 <ScalarProperty Name="CRelustID" ColumnName="CRelustID" />
                 <ScalarProperty Name="CRelustName" ColumnName="CRelustName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Section">
+            <EntityTypeMapping TypeName="InformationModel.Section">
+              <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="Sid" ColumnName="Sid" />
+                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1736,6 +1878,44 @@
                 <ScalarProperty Name="EPhone" ColumnName="EPhone" />
                 <ScalarProperty Name="Econtact" ColumnName="Econtact" />
                 <ScalarProperty Name="EIP" ColumnName="EIP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_info_Registration">
+            <EntityTypeMapping TypeName="InformationModel.v_info_Registration">
+              <MappingFragment StoreEntitySet="v_info_Registration">
+                <ScalarProperty Name="RID" ColumnName="RID" />
+                <ScalarProperty Name="RName" ColumnName="RName" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="RUserId" ColumnName="RUserId" />
+                <ScalarProperty Name="ROffice" ColumnName="ROffice" />
+                <ScalarProperty Name="RDate" ColumnName="RDate" />
+                <ScalarProperty Name="RFunction" ColumnName="RFunction" />
+                <ScalarProperty Name="Requirements" ColumnName="Requirements" />
+                <ScalarProperty Name="Rdepartment" ColumnName="Rdepartment" />
+                <ScalarProperty Name="RInformationCenter" ColumnName="RInformationCenter" />
+                <ScalarProperty Name="RState" ColumnName="RState" />
+                <ScalarProperty Name="Remaek" ColumnName="Remaek" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_info_Technology">
+            <EntityTypeMapping TypeName="InformationModel.v_info_Technology">
+              <MappingFragment StoreEntitySet="v_info_Technology">
+                <ScalarProperty Name="TID" ColumnName="TID" />
+                <ScalarProperty Name="TSerialNumber" ColumnName="TSerialNumber" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="TDate" ColumnName="TDate" />
+                <ScalarProperty Name="TUserId" ColumnName="TUserId" />
+                <ScalarProperty Name="TRegistrationTiime" ColumnName="TRegistrationTiime" />
+                <ScalarProperty Name="TConsultant" ColumnName="TConsultant" />
+                <ScalarProperty Name="TDepartment" ColumnName="TDepartment" />
+                <ScalarProperty Name="Tcontact" ColumnName="Tcontact" />
+                <ScalarProperty Name="QID" ColumnName="QID" />
+                <ScalarProperty Name="TDescribe" ColumnName="TDescribe" />
+                <ScalarProperty Name="TAnswer" ColumnName="TAnswer" />
+                <ScalarProperty Name="TAnswerTime" ColumnName="TAnswerTime" />
+                <ScalarProperty Name="TRemark" ColumnName="TRemark" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -52,6 +52,11 @@
     <Compile Include="IMeetingDAO.cs" />
     <Compile Include="IPiShiJieGuoDao.cs" />
     <Compile Include="IRoleDao.cs" />
+    <Compile Include="IQuestionDao.cs" />
+    <Compile Include="IRegistrationDao.cs" />
+    <Compile Include="ISectionDao.cs" />
+    <Compile Include="ISoftwareDao.cs" />
+    <Compile Include="ITechnologyDao.cs" />
     <Compile Include="IUserDao.cs" />
     <Compile Include="IZiChanBeiZhuDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

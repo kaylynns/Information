@@ -32,7 +32,7 @@ namespace information.Controllers
            public ActionResult AssetSelectFen(int currentPage, string AType, string AName)
         {
             //currentPage：当前页 pageSize:显示几页,rows:总记录数,pages总页数
-            var pageSize = 2;
+            var pageSize = 3;
             int rows;
             List<v_Asset> dt;
             if (AType == "" && AType == null || AName == "" && AName == null)

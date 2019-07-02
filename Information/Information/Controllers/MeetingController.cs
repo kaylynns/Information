@@ -44,6 +44,29 @@ namespace information.Controllers
             dir.Add("pages", (rows - 1) / 3 + 1);
             return Content(JsonConvert.SerializeObject(dir));
         }
+
+        //查询出无故障的签字
+        public ActionResult IndexQZ2(int currentpage, string names)
+        {
+            int rows;
+            List<info_Meeting> dt;
+            if (names == null || names.Equals("") || names.Equals("undefined"))
+            {
+                dt = imb.FenYe(e => e.MID,e=>e.MSolve=="无"||e.MState=="审核成功", out rows, currentpage, 3);
+            }
+            else
+            {
+                dt = imb.FenYe(e => e.MID, e => e.MSolve == "无" ||( e.MSolve=="有"&& e.MState == "审核成功" && e.MName.Contains(names)), out rows, currentpage, 3);
+            }
+
+            Dictionary<string, object> dir = new Dictionary<string, object>();
+            dir.Add("dt", dt);
+            dir.Add("rows", rows);
+            dir.Add("currentpage", rows % 2 > 0 ? (rows / 2) + 1 : (rows / 2));
+            dir.Add("pages", (rows - 1) / 3 + 1);
+            return Content(JsonConvert.SerializeObject(dir));
+        }
+
         // GET: Meeting/Details/5
         public ActionResult CXIndex(int currentpage, string names)
         {
@@ -51,13 +74,11 @@ namespace information.Controllers
             List<info_Meeting> dt;
             if (names == null || names.Equals("") || names.Equals("undefined"))
             {
-                dt = imb.FenYe(e => e.MID, e => e.MID > 0&&e.QZ==2, out rows, currentpage, 3);
+                dt = imb.FenYe(e => e.MID,e=>e.QZ==2, out rows, currentpage, 3);
             }
             else
             {
-
-                //  dt = imb.FenYe(e => e.MID, e => e.MName.Contains(names), out rows, currentpage, 3);
-                dt = imb.FenYe(e => e.MID, e => e.MName.Contains(names), out rows, currentpage, 3);
+                dt = imb.FenYe(e => e.MID, e => e.MName.Contains(names)&&e.QZ==2, out rows, currentpage, 3);
             }
 
             Dictionary<string, object> dir = new Dictionary<string, object>();
@@ -80,10 +101,16 @@ namespace information.Controllers
         [HttpPost]
         public ActionResult Create(info_Meeting im)
         {
-            try
+            if (im.MSolve == "有")
             {
-                // TODO: Add insert logic here
                 im.QZ = 1;
+                im.MState = "待审核";
+            }
+            else {
+                im.QZ = 1;
+            }
+                // TODO: Add insert logic here
+               
                 int add = imb.Add(im);
                 if (add > 0)
                 {
@@ -93,12 +120,6 @@ namespace information.Controllers
                 {
                     return Content("<script>alert('添加失败！');window.location.href='Index'</script>");
                 }
-
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         // GET: Meeting/Edit/5视频会议测试及开会记录id查询
@@ -114,8 +135,16 @@ namespace information.Controllers
         public ActionResult Edit(info_Meeting im)
         {
 
-            // TODO: Add update logic here
-            im.QZ = 1;
+            if (im.MSolve == "有")
+            {
+                im.QZ = 1;
+                im.MState = "待审核";
+            }
+            else
+            {
+                im.QZ = 1;
+                im.MState = "";
+            }
             int update = imb.Update(im);
             if (update > 0)
             {
@@ -166,7 +195,7 @@ namespace information.Controllers
         {
             //info_Meeting im = new info_Meeting();
             //im.MID = mid;
-            info_Meeting im = imb.SelectWhere(e => e.MID == mid).FirstOrDefault(); ;
+            info_Meeting im = imb.SelectWhere(e => e.MID == mid).FirstOrDefault();
             im.Msignature = urm;
             im.QZ = 2;
             //im.Msignature = urm;
@@ -187,11 +216,73 @@ namespace information.Controllers
         {
             return View();
         }
-
+        //id查询
         public ActionResult selectId(int id)
         {
             info_Meeting me = imb.SelectWhere(e => e.MID == id).FirstOrDefault();
             return View(me);
+        }
+
+        //会议设备维修申请查询视图
+        public ActionResult selectSQ() {
+            return View();
+        }
+
+        //会议设备维修申请查询 有故障
+        public ActionResult selectSQ2(int currentpage,string names)
+        {
+            int rows;
+            List<info_Meeting> dt;
+            if (names == null || names.Equals("") || names.Equals("undefined"))
+            {
+                dt = imb.FenYe(e => e.MID, e => e.MSolve == "有", out rows, currentpage, 3);
+            }
+            else
+            {
+
+                //  dt = imb.FenYe(e => e.MID, e => e.MName.Contains(names), out rows, currentpage, 3);
+                dt = imb.FenYe(e => e.MID, e => e.MName.Contains(names) && e.MSolve == "有", out rows, currentpage, 3);
+            }
+
+            Dictionary<string, object> dir = new Dictionary<string, object>();
+            dir.Add("dt", dt);
+            dir.Add("rows", rows);
+            dir.Add("currentpage", rows % 2 > 0 ? (rows / 2) + 1 : (rows / 2));
+            dir.Add("pages", (rows - 1) / 3 + 1);
+            return Content(JsonConvert.SerializeObject(dir));
+        }
+
+        //会议设备维修审核查询视图
+        public ActionResult selectSH()
+        {
+            return View();
+        }
+        //会议设备维修审核
+        public ActionResult EditSH(int id)
+        {
+            info_Meeting me = imb.SelectWhere(e => e.MID == id).FirstOrDefault();
+
+            return View(me);
+        }
+
+        //会议设备维修审核
+        public ActionResult EditSH2(info_Meeting im)
+        {
+            if (im.MOpinion == "同意") {
+                im.MState = "审核成功";
+            } else if (im.MOpinion == "不同意") {
+                im.MState = "驳回";
+            }
+            im.QZ = 1;
+            int update = imb.Update(im);
+            if (update > 0)
+            {
+                return Content("<script>alert('审批完毕！');window.location.href='/Meeting/selectSH'</script>");
+            }
+            else {
+                return Content("<script>alert('审批失败！');window.location.href='/Meeting/selectSH'</script>");
+            }
+         
         }
     }
 }

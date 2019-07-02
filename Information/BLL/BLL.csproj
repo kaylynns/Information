@@ -53,6 +53,11 @@
     <Compile Include="PiShiJieGuoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleService.cs" />
+    <Compile Include="QuestionService.cs" />
+    <Compile Include="RegistrationService.cs" />
+    <Compile Include="SectionService.cs" />
+    <Compile Include="SoftwareService.cs" />
+    <Compile Include="TechnologyService.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="ZiChanBeiZhuService.cs" />
   </ItemGroup>

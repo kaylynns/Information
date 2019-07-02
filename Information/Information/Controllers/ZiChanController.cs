@@ -20,6 +20,7 @@ namespace information.Controllers
         {
             return View();
         }
+        //资产类别名称查询
         public ActionResult ChaXunZiChan(int currentPage) {
             List<ZiChanBeiZhu> list = new List<ZiChanBeiZhu>();
             int rows = 0;
@@ -31,6 +32,7 @@ namespace information.Controllers
             dic.Add("pages", (rows - 1) / 3 + 1);
             return Content(JsonConvert.SerializeObject(dic));
         }
+        //资产类别名称删除
         public ActionResult ZiChanShanChu(int id) {
            var panduan=iab.SelectAll();
             foreach (var item in panduan)
@@ -53,27 +55,40 @@ namespace information.Controllers
                         return Content("<script>alert('删除失败');location.href='/ZiChan/Index'</script>");
                     }
                 }    
-        
+        //资产类别名称添加
         public ActionResult ZiChanTianJia(string name, string bei) {
             ZiChanBeiZhu cbs = new ZiChanBeiZhu
             {
                 AName = name,
                 ABeiZhu = bei
             };
-            if (izcbzb.Add(cbs) > 0)
+            if (name==""||name==null)
             {
-                return Content("<script>alert('添加成功');location.href='/ZiChan/Index'</script>");
+                return Content("<script>alert('资产类别名称不能为空');location.href='/ZiChan/Index'</script>");
+            }
+            else if (bei==""||bei==null)
+            {
+                return Content("<script>alert('资产类别备注不能为空');location.href='/ZiChan/Index'</script>");
             }
             else
             {
-                return Content("<script>alert('添加失败');location.href='/ZiChan/Index'</script>");
-            }
+                if (izcbzb.Add(cbs) > 0)
+                {
+                    return Content("OK");
+                }
+                else
+                {
+                    return Content("<script>alert('添加失败');location.href='/ZiChan/Index'</script>");
+                }
         }
+}
+       //资产类别名称按ID查询
         [HttpGet]
         public ActionResult JiFangJinChuSelectShiTu(int id) {
          var csshi= izcbzb.SelectWhere(e => e.ATypeId == id).FirstOrDefault();
             return View(csshi);
         }
+        //资产类别名称修改
         [HttpPost]
         public ActionResult JiFangJinChuSelectShiTu(ZiChanBeiZhu zbz) {
             if (izcbzb.Update(zbz)>0)

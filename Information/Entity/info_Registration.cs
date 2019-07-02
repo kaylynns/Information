@@ -26,6 +26,7 @@ namespace Entity
         public string RInformationCenter { get; set; }
         public string RState { get; set; }
         public string Remaek { get; set; }
+        public Nullable<int> IsOk { get; set; }
     
         public virtual info_Software info_Software { get; set; }
     }

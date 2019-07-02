@@ -1,0 +1,110 @@
+﻿@model Entity.info_Registration
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ChanKan</title>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/css.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.2.min.js"></script>
+    <script src="~/DatePicker/WdatePicker.js"></script>
+    <style type="text/css">
+        #aa tr {
+            line-height: 50px;
+        }
+
+        .bb input {
+            border: none;
+            background: none;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h2 align="center" style="font-size:25px;font-weight:bold"> 查看业务系统使用申请表 </h2>
+    <form method="post" action="/Registration/SheHeEdit" style="">
+        <table cellspacing="0" cellpadding="7" align="center" border="1" style="border-collapse: collapse; margin-bottom:20px"
+               bordercolor="#6c9ec1" id="aa">
+            <tr class="bb">
+                <td align="left">
+                    软件名称：
+                </td>
+                <td>
+                    @Html.ViewData["ss"]
+                </td>
+                <td align="left">
+                    填表日期：
+                </td>
+                <td class="sj">
+                    @Html.EditorFor(model => model.RDate)
+                </td>
+            </tr>
+            <tr class="bb">
+                <td align="left" style="height: 20px">
+                    申请人：
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.RName)
+                </td>
+                <td align="left">
+                    申请人所在部门：
+                </td>
+                <td class="sj">
+                    @Html.ViewData["bb"]
+                    @Html.HiddenFor(model => model.ROffice)
+                </td>
+            </tr>
+
+            <tr class="bb">
+                <td align="left" style="height: 20px">
+                    功能要求：
+                </td>
+                <td colspan="3">
+                    @Html.TextBoxFor(model => model.RFunction)
+                </td>
+
+            </tr>
+
+            <tr class="bb">
+                <td align="left" style="height: 20px">
+                    业务部门审批：
+                </td>
+                <td colspan="3">
+                    @Html.TextBoxFor(model => model.Rdepartment, new { cols = "50", rows = "5" })
+                </td>
+            </tr>
+
+            <tr class="bb">
+                <td align="left">
+                    信息中心审批：
+                </td>
+                <td colspan="3">
+                    @Html.TextBoxFor(model => model.RInformationCenter)
+                </td>
+            </tr>
+
+            <tr class="bb">
+                <td align="left">
+                    备注：
+                </td>
+                <td class="sj" colspan="3">
+                    @Html.TextBoxFor(model => model.Remaek, new { cols = "50", rows = "5" })
+                </td>
+            </tr>
+
+
+            <tr>
+                <td align="center" colspan="4" height="26" style="">
+                    <input ID="btn_back" type="button" value="返 回" class="btn1" onclick="window.location.href=document.referrer" />
+                    <br />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
