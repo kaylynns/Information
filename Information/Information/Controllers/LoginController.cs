@@ -24,38 +24,23 @@ namespace information.Controllers
         {
             string UserRealName;
             int UserID;
-            if (UserName == null || UserName == "")
+            List<info_User> result = iud.DengLu(Name, Pass);
+            foreach (info_User item in result)
             {
-                return Content("<script>alert('用户名不能为空');window.location.href='Login'</script>");
-            }
-            else if (Pass == null || Pass == "")
-            {
-                return Content("<script>alert('密码不能为空');window.location.href='/Login'</script>");
-            }
-            else
-            {
-                List<info_User> result = iud.DengLu(UserName, Pass);
-                List<info_User> result = iud.DengLu(Name, Pass);
-                foreach (info_User item in result)
-                {
                 Name = item.UserName;
-                    Pass = item.UserPass;
-                    UserRealName = item.UserRealName;
-                    UserID = item.UserID;
-
-                if (UserName != null)
+                Pass = item.UserPass;
+                UserRealName = item.UserRealName;
+                UserID = item.UserID;
+                if (Name != null)
                 {
                     //登录成功
-                Session["UserName"] = Name;
+                    Session["UserName"] = Name;
                     Session["UserRealName"] = UserRealName;
                     Session["UserID"] = UserID;
-                    return Content("<script>alert('登录成功');window.location.href='/Main/Main'</script>");
+                    return Content("OK");
                 }
-                }
-                return Content("OK");       
             }
-         
-            return Content("nook");
+            return Content("<script>alert('登录失败');window.location.href='/Login'</script>");
         }
         // GET: Login/Details/5
         public ActionResult Details(int id)

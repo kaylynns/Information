@@ -12,17 +12,9 @@ namespace Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class info_User
+    public partial class Section
     {
-        public int UserID { get; set; }
-        public string UserName { get; set; }
-        public string UserPass { get; set; }
-        public string UserRealName { get; set; }
-        public string UserPhone { get; set; }
-        public string UseroffcePhone { get; set; }
-        public string UserKeShi { get; set; }
-        public int UserJueSe { get; set; }
-    
-        public virtual info_Role info_Role { get; set; }
+        public int Sid { get; set; }
+        public string SectionName { get; set; }
     }
 }

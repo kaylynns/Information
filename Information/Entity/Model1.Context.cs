@@ -49,8 +49,8 @@ namespace Entity
         public virtual DbSet<v_Asset> v_Asset { get; set; }
         public virtual DbSet<V_ComputerRoomVisit> V_ComputerRoomVisit { get; set; }
         public virtual DbSet<V_info_Equipment> V_info_Equipment { get; set; }
+        public virtual DbSet<v_info_Registration> v_info_Registration { get; set; }
         public virtual DbSet<v_info_Technology> v_info_Technology { get; set; }
         public virtual DbSet<v_Maintenance> v_Maintenance { get; set; }
-        public virtual DbSet<v_info_Registration> v_info_Registration { get; set; }
     }
 }

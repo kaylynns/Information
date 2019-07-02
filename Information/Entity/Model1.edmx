@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="InformationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="InformationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CaiGouXingShi">
           <Key>
             <PropertyRef Name="SID" />
@@ -681,7 +681,8 @@
             <End Role="info_User" EntitySet="info_User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InformationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -873,8 +874,8 @@
           <Property Name="RInformationCenter" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Remaek" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="info_Software" Relationship="Self.FK_info_Registration_info_Software" FromRole="info_Registration" ToRole="info_Software" />
           <Property Name="IsOk" Type="Int32" />
+          <NavigationProperty Name="info_Software" Relationship="Self.FK_info_Registration_info_Software" FromRole="info_Registration" ToRole="info_Software" />
         </EntityType>
         <EntityType Name="info_Role">
           <Key>
@@ -1032,6 +1033,23 @@
           <Property Name="EPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Econtact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="v_info_Registration">
+          <Key>
+            <PropertyRef Name="RID" />
+          </Key>
+          <Property Name="RID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ROffice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RDate" Type="DateTime" Precision="3" />
+          <Property Name="RFunction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Requirements" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rdepartment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RInformationCenter" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remaek" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="v_info_Technology">
           <Key>
@@ -1210,6 +1228,7 @@
           <EntitySet Name="v_Asset" EntityType="Self.v_Asset" />
           <EntitySet Name="V_ComputerRoomVisit" EntityType="Self.V_ComputerRoomVisit" />
           <EntitySet Name="V_info_Equipment" EntityType="Self.V_info_Equipment" />
+          <EntitySet Name="v_info_Registration" EntityType="Self.v_info_Registration" />
           <EntitySet Name="v_info_Technology" EntityType="Self.v_info_Technology" />
           <EntitySet Name="v_Maintenance" EntityType="Self.v_Maintenance" />
           <AssociationSet Name="FK_info_Asset_CaiGouXingShi" Association="Self.FK_info_Asset_CaiGouXingShi">
@@ -1252,25 +1271,7 @@
             <End Role="info_Software" EntitySet="info_Software" />
             <End Role="info_Technology" EntitySet="info_Technology" />
           </AssociationSet>
-          <EntitySet Name="v_info_Registration" EntityType="InformationModel.v_info_Registration" />
         </EntityContainer>
-        <EntityType Name="v_info_Registration">
-          <Key>
-            <PropertyRef Name="RID" />
-          </Key>
-          <Property Name="RID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ROffice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RDate" Type="DateTime" Precision="3" />
-          <Property Name="RFunction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Requirements" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Rdepartment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RInformationCenter" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Remaek" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1407,7 +1408,6 @@
           <EntitySetMapping Name="info_Meeting">
             <EntityTypeMapping TypeName="InformationModel.info_Meeting">
               <MappingFragment StoreEntitySet="info_Meeting">
-                <ScalarProperty Name="MState" ColumnName="MState" />
                 <ScalarProperty Name="MID" ColumnName="MID" />
                 <ScalarProperty Name="MName" ColumnName="MName" />
                 <ScalarProperty Name="MTime" ColumnName="MTime" />
@@ -1428,6 +1428,7 @@
                 <ScalarProperty Name="MComments" ColumnName="MComments" />
                 <ScalarProperty Name="closeDevice" ColumnName="closeDevice" />
                 <ScalarProperty Name="QZ" ColumnName="QZ" />
+                <ScalarProperty Name="MState" ColumnName="MState" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1453,7 +1454,6 @@
           <EntitySetMapping Name="info_Registration">
             <EntityTypeMapping TypeName="InformationModel.info_Registration">
               <MappingFragment StoreEntitySet="info_Registration">
-                <ScalarProperty Name="IsOk" ColumnName="IsOk" />
                 <ScalarProperty Name="RID" ColumnName="RID" />
                 <ScalarProperty Name="RName" ColumnName="RName" />
                 <ScalarProperty Name="SID" ColumnName="SID" />
@@ -1466,6 +1466,7 @@
                 <ScalarProperty Name="RInformationCenter" ColumnName="RInformationCenter" />
                 <ScalarProperty Name="RState" ColumnName="RState" />
                 <ScalarProperty Name="Remaek" ColumnName="Remaek" />
+                <ScalarProperty Name="IsOk" ColumnName="IsOk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1629,6 +1630,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="v_info_Registration">
+            <EntityTypeMapping TypeName="InformationModel.v_info_Registration">
+              <MappingFragment StoreEntitySet="v_info_Registration">
+                <ScalarProperty Name="RID" ColumnName="RID" />
+                <ScalarProperty Name="RName" ColumnName="RName" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
+                <ScalarProperty Name="RUserId" ColumnName="RUserId" />
+                <ScalarProperty Name="ROffice" ColumnName="ROffice" />
+                <ScalarProperty Name="RDate" ColumnName="RDate" />
+                <ScalarProperty Name="RFunction" ColumnName="RFunction" />
+                <ScalarProperty Name="Requirements" ColumnName="Requirements" />
+                <ScalarProperty Name="Rdepartment" ColumnName="Rdepartment" />
+                <ScalarProperty Name="RInformationCenter" ColumnName="RInformationCenter" />
+                <ScalarProperty Name="RState" ColumnName="RState" />
+                <ScalarProperty Name="Remaek" ColumnName="Remaek" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="v_info_Technology">
             <EntityTypeMapping TypeName="InformationModel.v_info_Technology">
               <MappingFragment StoreEntitySet="v_info_Technology">
@@ -1660,24 +1679,6 @@
                 <ScalarProperty Name="Madvice" ColumnName="Madvice" />
                 <ScalarProperty Name="MTestingPersonnel" ColumnName="MTestingPersonnel" />
                 <ScalarProperty Name="MAccompanyingOfficials" ColumnName="MAccompanyingOfficials" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="v_info_Registration">
-            <EntityTypeMapping TypeName="InformationModel.v_info_Registration">
-              <MappingFragment StoreEntitySet="v_info_Registration">
-                <ScalarProperty Name="Remaek" ColumnName="Remaek" />
-                <ScalarProperty Name="RState" ColumnName="RState" />
-                <ScalarProperty Name="RInformationCenter" ColumnName="RInformationCenter" />
-                <ScalarProperty Name="Rdepartment" ColumnName="Rdepartment" />
-                <ScalarProperty Name="Requirements" ColumnName="Requirements" />
-                <ScalarProperty Name="RFunction" ColumnName="RFunction" />
-                <ScalarProperty Name="RDate" ColumnName="RDate" />
-                <ScalarProperty Name="ROffice" ColumnName="ROffice" />
-                <ScalarProperty Name="RUserId" ColumnName="RUserId" />
-                <ScalarProperty Name="SID" ColumnName="SID" />
-                <ScalarProperty Name="RName" ColumnName="RName" />
-                <ScalarProperty Name="RID" ColumnName="RID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
