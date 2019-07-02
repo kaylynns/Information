@@ -31,8 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator">
-      <HintPath>..\..\..\mvc\workspace\T08\Unity\Unity.5.8.11\lib\net45\CommonServiceLocator.dll</HintPath>
-      <HintPath>..\..\..\..\Unity\Unity.5.8.11\lib\net45\CommonServiceLocator.dll</HintPath>
+      <HintPath>..\..\..\引用\Unity\Unity.5.8.11\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -44,25 +43,25 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="Unity.Abstractions">
-      <HintPath>..\..\..\..\Unity\Unity.5.8.11\lib\net45\Unity.Abstractions.dll</HintPath>
+      <HintPath>..\..\..\引用\Unity\Unity.5.8.11\lib\net45\Unity.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Configuration">
-      <HintPath>..\..\..\..\Unity\Unity.5.8.11\lib\net45\Unity.Configuration.dll</HintPath>
+      <HintPath>..\..\..\引用\Unity\Unity.5.8.11\lib\net45\Unity.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Container">
-      <HintPath>..\..\..\..\Unity\Unity.5.8.11\lib\net45\Unity.Container.dll</HintPath>
+      <HintPath>..\..\..\引用\Unity\Unity.5.8.11\lib\net45\Unity.Container.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Interception">
-      <HintPath>..\..\..\..\Unity\Unity.5.8.11\lib\net45\Unity.Interception.dll</HintPath>
+      <HintPath>..\..\..\引用\Unity\Unity.5.8.11\lib\net45\Unity.Interception.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Interception.Configuration">
-      <HintPath>..\..\..\..\Unity\Unity.5.8.11\lib\net45\Unity.Interception.Configuration.dll</HintPath>
+      <HintPath>..\..\..\引用\Unity\Unity.5.8.11\lib\net45\Unity.Interception.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RegistrationByConvention">
-      <HintPath>..\..\..\..\Unity\Unity.5.8.11\lib\net45\Unity.RegistrationByConvention.dll</HintPath>
+      <HintPath>..\..\..\引用\Unity\Unity.5.8.11\lib\net45\Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ServiceLocation">
-      <HintPath>..\..\..\..\Unity\Unity.5.8.11\lib\net45\Unity.ServiceLocation.dll</HintPath>
+      <HintPath>..\..\..\引用\Unity\Unity.5.8.11\lib\net45\Unity.ServiceLocation.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

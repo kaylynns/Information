@@ -213,16 +213,16 @@ namespace information.Controllers
         public ActionResult SheBeiGuanLiShiTu() {
             return View();
         }
-        public ActionResult SheBeiSelelct(int currentPage, string name, string lei) {
+        public ActionResult SheBeiSelelct(int currentPage, string name) {
             List<V_info_Equipment> list;
             int rows = 0;
-            if (name == ""|| name == null && lei == "" || lei == null)
+            if (name == ""|| name == null)
             {
                 list = shebei.FenYes(e => e.EID, e => e.EID>0, out rows, currentPage, 3);
             }
             else
             {
-                list = shebei.FenYes(e => e.EID, e => e.EAID.Contains(name) && e.EquipmentModel.Contains(lei), out rows, currentPage, 3);
+                list = shebei.FenYes(e => e.EID, e => e.EAID.Contains(name), out rows, currentPage, 3);
             }
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("list", list);

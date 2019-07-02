@@ -40,7 +40,7 @@ namespace information.Controllers
                     return Content("OK");
                 }
             }
-            return Content("<script>alert('登录失败');window.location.href='/Login'</script>");
+            return Content("nook");
         }
         // GET: Login/Details/5
         public ActionResult Details(int id)
