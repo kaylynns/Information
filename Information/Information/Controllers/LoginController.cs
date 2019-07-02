@@ -24,20 +24,18 @@ namespace information.Controllers
         {
                 string UserRealName;
                 List<info_User> result = iud.DengLu(Name, Pass);
-                foreach (info_User item in result)
-                {
-                    Name = item.UserName;
-                    Pass = item.UserPass;
+            foreach (info_User item in result)
+            {
+                Name = item.UserName;
+                Pass = item.UserPass;
                 UserRealName = item.UserRealName;
-                if (Name != null)
-                {
                     //登录成功
-                    Session["UserName"] = Name;
-                    Session["UserRealName"] = UserRealName;
-                    return Content("OK");
-                }
-                }        
-            return Content("<script>alert('登录失败');window.location.href='/Login'</script>");
+                Session["UserName"] = Name;
+                Session["UserRealName"] = UserRealName;
+                return Content("OK");       
+            }
+         
+            return Content("nook");
         }
         // GET: Login/Details/5
         public ActionResult Details(int id)

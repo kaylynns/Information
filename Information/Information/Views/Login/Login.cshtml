@@ -35,25 +35,30 @@
                 }
             })
             $("#submit").click(function () {
-                //Name = $("#Name").val();
-                //Pass = $("#Pass").val();
-                //if (Name==null||Name=="") {
-                //    $("#yan").html("用户名不能为空");
-                //} else {
-                //    $("#yan").html("");
-                //}
-                //if (Pass == null || Pass == "") {
-                //    $("#zheng").html("用户名不能为空");
-                //} else {
-                //    $("#zheng").html("");
-                //}
+                Name = $("#Name").val();
+                Pass = $("#Pass").val();
+                if (Name==null||Name=="") {
+                    $("#yan").html("用户名不能为空");
+                } else {
+                    $("#yan").html("");
+                }
+                if (Pass == null || Pass == "") {
+                    $("#zheng").html("用户名不能为空");
+                } else {
+                    $("#zheng").html("");
+                }
                             $.ajax({
                                 type: "post",
                                 data: "Name=" + Name + "&Pass=" + Pass,
-                                url: "Logins",
+                                url: "/Login/Logins",
                                 success: function (msg) {
                                     if (msg == "OK") {
+                                        alert("登录成功正在前往主页");
                                         window.location.href = '/Main/Main'
+                                    }
+                                    if (msg == "nook") {
+                                        alert("登录失败");
+                                        window.location.href = 'Login'
                                     }
                                 }
                             })                  

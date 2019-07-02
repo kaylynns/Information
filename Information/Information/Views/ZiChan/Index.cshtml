@@ -138,7 +138,9 @@
                     data: "name="+name+"&bei="+bei,
                     url: "ZiChanTianJia",
                     success: function (msg) {
-                        Show(currentPage);
+                        if (msg=="OK") {
+                            window.location.href='Index'
+                        }
                         $("#Text1").val("");
                         $("#Text2").val("");
                     }

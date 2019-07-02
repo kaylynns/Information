@@ -74,7 +74,7 @@ namespace information.Controllers
             {
                 if (izcbzb.Add(cbs) > 0)
                 {
-                    return Content("<script>alert('添加成功');location.href='/ZiChan/Index'</script>");
+                    return Content("OK");
                 }
                 else
                 {
