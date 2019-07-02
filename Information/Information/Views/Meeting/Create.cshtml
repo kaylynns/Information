@@ -17,31 +17,12 @@
         $(document).on("click", ".sj input", function () {
             WdatePicker({ readOnly: true, dateFmt: 'yyyy-MM-dd' });
         })
-        $(function () {
-            var id;
-            var ids;
-            $("input[type='radio']").click(function () {
-                alert($(this).attr("checked", "true").val());
-                if ($(this).attr("checked", "true").val() == "否") {
-                    id = 1
-                }
-                else {
-                    id = 2;
-                    ids=3
-                }
-
-                alert(id);
-                alert(ids);
-
-            })
-
-        })
-
+       
 
     </script>
 </head>
 <body>
-    <h2 align="center"> 视频会议测试及开会记录 </h2>
+    <h2 align="center"  style="font-size:25px;font-weight:bold"> 视频会议测试及开会记录 </h2>
 
     <form method="post" action="/Meeting/Create" style="">
         <table cellspacing="0" cellpadding="7" align="center" border="1" style="border-collapse: collapse; margin-bottom:20px"
@@ -154,7 +135,7 @@
 
                 </td>
             </tr>
-            @*<tr>
+            <tr>
                     <td align="center" style="height: 20px">
                         7
                     </td>
@@ -165,7 +146,7 @@
                         @Html.RadioButtonFor(e => e.MSolve, "有", new { @checked = true })有故障
                         @Html.RadioButtonFor(e => e.MSolve, "无")无故障
                     </td>
-                </tr>*@
+                </tr>
             <tr>
                 <td align="center" style="height: 20px" colspan="4">
                     正式开会

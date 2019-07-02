@@ -49,6 +49,11 @@
     <Compile Include="IMaintenanceBll.cs" />
     <Compile Include="IMeetingBll.cs" />
     <Compile Include="IPiShiJieGuoBll.cs" />
+    <Compile Include="IQuestionBll.cs" />
+    <Compile Include="IRegistrationBll.cs" />
+    <Compile Include="ISectionBll.cs" />
+    <Compile Include="ISoftwareBll.cs" />
+    <Compile Include="ITechnologyBll.cs" />
     <Compile Include="IUserBll.cs" />
     <Compile Include="IZiChanBeiZhuBll.cs" />
     <Compile Include="lIEquipmentBll.cs" />

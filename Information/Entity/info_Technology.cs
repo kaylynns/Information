@@ -21,7 +21,7 @@ namespace Entity
         public Nullable<int> TUserId { get; set; }
         public Nullable<System.DateTime> TRegistrationTiime { get; set; }
         public string TConsultant { get; set; }
-        public string TDepartment { get; set; }
+        public Nullable<int> TDepartment { get; set; }
         public string Tcontact { get; set; }
         public Nullable<int> QID { get; set; }
         public string TDescribe { get; set; }

@@ -63,6 +63,11 @@
     <Compile Include="MeetingDao.cs" />
     <Compile Include="PiShiJieGuoDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestionDao.cs" />
+    <Compile Include="RegistrationDao.cs" />
+    <Compile Include="SectionDao.cs" />
+    <Compile Include="SoftwareDao.cs" />
+    <Compile Include="TechnologyDao.cs" />
     <Compile Include="UserDao.cs" />
     <Compile Include="ZiChanBeiZhuDao.cs" />
   </ItemGroup>

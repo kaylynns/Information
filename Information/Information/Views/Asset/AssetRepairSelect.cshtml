@@ -15,6 +15,7 @@
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/vue.js"></script>
+   
     <style type="text/css">
         .t1 {
             clear: both;
@@ -24,7 +25,7 @@
 
             .t1 tr th {
                 color: #0d487b;
-                background: #f2f4f8 url(../CSS/Table/images/sj_title_pp.jpg) repeat-x left bottom;
+                /*background: #f2f4f8 url(../CSS/Table/images/sj_title_pp.jpg) repeat-x left bottom;*/
                 line-height: 28px;
                 border-bottom: 1px solid #9cb6cf;
                 border-top: 1px solid #e9edf3;
@@ -39,33 +40,29 @@
                 padding-bottom: 5px;
                 padding-top: 5px;
                 color: #444;
-                border-top: 1px solid #FFFFFF;
+                border-top: 1px solid #DDDDDD;
                 padding-left: 5px;
                 padding-right: 5px;
                 word-break: break-all;
             }
-        /* white-space:nowrap; text-overflow:ellipsis; */
-        tr.alt td {
-            background: #ecf6fc; /*这行将给所有的tr加上背景色*/
-        }
 
         tr.over td {
             background: #bcd4ec; /*这个将是鼠标高亮行的背景色*/
         }
+
+        #ListArea tr:first-child {
+            background: linear-gradient(#F8F8F8,#DEDEDE);
+            font-weight: 800;
+            font-size: 15px;
+        }
+
+        .t1 tr {
+            background-color: white;
+            text-align: center;
+            font-size: 15px;
+        }
     </style>
-    <script type="text/javascript">
-        $(document).ready(function () { //这个就是传说的ready
-            $(".t1 tr").mouseover(function () {
-                //如果鼠标移到class为stripe的表格的tr上时，执行函数
-                $(this).addClass("over");
-            }).mouseout(function () {
-                //给这行添加class值为over，并且当鼠标一出该行时执行函数
-                $(this).removeClass("over");
-            }) //移除该行的class
-            $(".t1 tr:even").addClass("alt");
-            //给class为stripe的表格的偶数行添加class值为alt
-        });
-    </script>
+
     <script type="text/javascript">
         var pageSize = 1;
         var vm;
@@ -195,7 +192,7 @@
 </head>
 <body>
     <div id="zong">
-        <h2 align="center">资产维修报废申请</h2>
+        <h2 align="center" style="font-size:25px;font-weight:bold">资产维修报废申请</h2>
         <table border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
             <tr>
                 <td>
@@ -260,8 +257,8 @@
 
         </table>
         <div id="pageDiv">
-            <div id="leftPage"></div>
-            <div id="rightPage">
+            <div id="leftPage" style="color:#3C8ABC;padding-top:10px"></div>
+            <div id="rightPage" style="float:right;position:relative;bottom:20px;">
                 <input type="button" value="首页" OnClick="btn_select_Click" Class="btn1" id="first" />&nbsp;&nbsp;
                 <input type="button" value="上一页" Class="btn1" id="prev" />&nbsp;&nbsp;
                 <input type="button" value="下一页" Class="btn1" id="next" />&nbsp;&nbsp;

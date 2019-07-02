@@ -34,5 +34,6 @@ namespace Entity
         public string MComments { get; set; }
         public string closeDevice { get; set; }
         public Nullable<int> QZ { get; set; }
+        public string MState { get; set; }
     }
 }

@@ -199,6 +199,8 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\MeetingController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\TechnologyController.cs" />
     <Compile Include="Controllers\WhuWuxiuSelectAllController.cs" />
     <Compile Include="Controllers\WhuWxiuController.cs" />
     <Compile Include="Global.asax.cs">
@@ -641,15 +643,6 @@
     <Content Include="Views\JiFang\Edit.cshtml" />
     <Content Include="Views\JiFang\ChaXun.cshtml" />
     <Content Include="Views\JiFang\Create.cshtml" />
-    <Content Include="Views\Asset\AssetCreate.cshtml" />
-    <Content Include="Views\Asset\AssetEdit.cshtml" />
-    <Content Include="Views\Asset\AssetRepairEdit.cshtml" />
-    <Content Include="Views\Asset\AssetRepairSelect.cshtml" />
-    <Content Include="Views\Asset\AssetReviewEdit.cshtml" />
-    <Content Include="Views\Asset\AssetReviewSelect.cshtml" />
-    <Content Include="Views\Asset\AssetSelect.cshtml" />
-    <Content Include="Views\Asset\Create.cshtml" />
-    <Content Include="Views\Asset\Edit.cshtml" />
     <Content Include="Views\AssetRepair\AssetRepairSelect.cshtml" />
     <Content Include="Views\AssetRepair\AssetRepairEdit.cshtml" />
     <Content Include="Views\Meeting\Index.cshtml" />
@@ -661,9 +654,6 @@
     <Content Include="Views\WhuWxiu\Index.cshtml" />
     <Content Include="Views\WhuWxiu\Create.cshtml" />
     <Content Include="Views\WhuWxiu\Edit.cshtml" />
-    <Content Include="Views\Asset\AssetStatusSelect.cshtml" />
-    <Content Include="Views\Asset\AssetStatusWaitSelect.cshtml" />
-    <Content Include="Views\Asset\AssetStatusSelectEdit.cshtml" />
     <Content Include="Views\JiFang\DaiShenHe.cshtml" />
     <Content Include="Views\JiFang\JiFangJinChuSelectLook.cshtml" />
     <Content Include="Views\JiFang\JiFangJinChuSelelctAll.cshtml" />
@@ -675,6 +665,31 @@
     <Content Include="Views\JiFang\ShenPiTongGuo.cshtml" />
     <Content Include="Views\WhuWuxiuSelectAll\MaintainSelect.cshtml" />
     <Content Include="Views\WhuWuxiuSelectAll\MaintainLook.cshtml" />
+    <Content Include="Views\Asset\AssetCreate.cshtml" />
+    <Content Include="Views\Asset\AssetEdit.cshtml" />
+    <Content Include="Views\Asset\AssetRepairEdit.cshtml" />
+    <Content Include="Views\Asset\AssetRepairSelect.cshtml" />
+    <Content Include="Views\Asset\AssetReviewEdit.cshtml" />
+    <Content Include="Views\Asset\AssetReviewSelect.cshtml" />
+    <Content Include="Views\Asset\AssetSelect.cshtml" />
+    <Content Include="Views\Asset\AssetStatusSelect.cshtml" />
+    <Content Include="Views\Asset\AssetStatusSelectEdit.cshtml" />
+    <Content Include="Views\Asset\AssetStatusWaitSelect.cshtml" />
+    <Content Include="Views\Asset\Create.cshtml" />
+    <Content Include="Views\Asset\Edit.cshtml" />
+    <Content Include="Views\Technology\Create.cshtml" />
+    <Content Include="Views\Technology\Index.cshtml" />
+    <Content Include="Views\Technology\Edit.cshtml" />
+    <Content Include="Views\Registration\Index.cshtml" />
+    <Content Include="Views\Registration\Create.cshtml" />
+    <Content Include="Views\Registration\Edit.cshtml" />
+    <Content Include="Views\Registration\IndexR.cshtml" />
+    <Content Include="Views\Registration\ShenHe.cshtml" />
+    <Content Include="Views\Registration\ChanKan.cshtml" />
+    <Content Include="Views\Registration\IndexSelect.cshtml" />
+    <Content Include="Views\Meeting\selectSQ.cshtml" />
+    <Content Include="Views\Meeting\selectSH.cshtml" />
+    <Content Include="Views\Meeting\EditSH.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

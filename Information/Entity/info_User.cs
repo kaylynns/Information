@@ -13,9 +13,9 @@ namespace Entity
     using System.Collections.Generic;
     using System.Runtime.Serialization;
 
-    [DataContract(IsReference = true)]
-    public partial class info_User
-    {
+    [DataContract(IsReference =true)]
+      public partial class info_User
+       {
         [DataMember]
         public int UserID { get; set; }
         [DataMember]

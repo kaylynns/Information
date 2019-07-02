@@ -10,7 +10,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>会议测试及开会签字</title>
     <link href="~/css/css.css" rel="stylesheet" />
-    <link href="~/Scripts/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    @*<link href="~/Scripts/bootstrap.css" rel="stylesheet" />*@
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <style type="text/css">
@@ -64,7 +65,6 @@
 
         $(document).ready(function () {
         
-
             //清除
             $("#btn_clear").click(function () {
                 $("#Text1").val("");
@@ -79,7 +79,7 @@
 
             function show() {
                 $.ajax({
-                    url: "/Meeting/Index2",
+                    url: "/Meeting/IndexQZ2",
                     type: "post",
                     data: "currentpage=" + currentPage,
                     success: function (msg) {
@@ -164,37 +164,13 @@
             })
 
 
-            //模糊查询
-            $("#Button1").click(function () {
-                names = $("#Text1").val();
-                Mshow();//加载模糊查询
-             })
-
-            //加载模糊查询
-            function Mshow() {
-                $.ajax({
-                    url: "/Meeting/Index2",
-                    type: "post",
-                    data: "currentPage=" + currentPage + "&names=" + names,
-                    success: function (msg) {
-                        var dts = eval("(" + msg + ")");
-                        var dt = dts["dt"];
-                        fileTable(dt);
-                        var rows = dts["rows"];
-                        pages = dts["pages"];
-                        $("#leftPage").html("共有" + rows + "条记录，当前第" + currentPage + "/" + pages + "页");
-                    }
-                })
-            }
 
                 //首页
                 $("#first").click(function () {
                     currentPage = 1;
-                    if (names != null) {
-                        Mshow()
-                    } else {
+                  
                         show();
-                    }
+                  
                 })
 
                 //上一页
@@ -202,11 +178,9 @@
                     if (currentPage > 1) {
                         currentPage--;
                     }
-                    if (names != null) {
-                        Mshow()
-                    } else {
+                   
                         show();
-                    }
+                  
                 })
 
                 //下一页
@@ -215,21 +189,18 @@
                             currentPage++;
                         }
 
-                        if (names != null) {
-                            Mshow()
-                        } else {
+                       
                             show();
-                        }
+                    
                   })
 
                 //尾页
                 $("#last").click(function () {
                     currentPage = pages;
-                    if (names != null) {
-                        Mshow()
-                    } else {
+                   
                         show();
-                    }
+                 
+
                 })
 
             });
@@ -241,18 +212,7 @@
 
 </head>
 <body>
-    <h2 align="center"> 会议测试及开会签字 </h2>
-    <div>
-
-        会议名称：
-        <input id="Text1" type="text" Width="240" />
-        &nbsp;
-        <input id="Button1" type="button" value="查询" Class="btn1" />
-        &nbsp;
-        <input id="btn_clear" type="reset" value="清空" Class="btn1" />
-
-    </div>
-
+    <h2 align="center"  style="font-size:25px;font-weight:bold"> 会议测试及开会签字 </h2>
     <table width="100%" id="ListArea" border="0" class="t1" align="center" cellpadding="0"
            cellspacing="0">
         <tr>
@@ -283,10 +243,10 @@
 
                 <div class="modal-body">
                     <form id="form1" role="form">
-                        <table class="tableEdit" id="re" align="center" style="border:1px solid red;width:200px;">
+                        <table class="tableEdit" id="re" align="center">
                             <thead>
                                 <tr>
-                                    <td>
+                                    <td style="color:blue">
                                         员工选择
                                     </td>
                                 </tr>

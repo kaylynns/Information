@@ -42,12 +42,15 @@ namespace Entity
         public virtual DbSet<info_Technology> info_Technology { get; set; }
         public virtual DbSet<info_User> info_User { get; set; }
         public virtual DbSet<PiShiJieGuo> PiShiJieGuo { get; set; }
+        public virtual DbSet<Section> Section { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<ZiChanBeiZhu> ZiChanBeiZhu { get; set; }
         public virtual DbSet<ZiChanZhuangTai> ZiChanZhuangTai { get; set; }
         public virtual DbSet<v_Asset> v_Asset { get; set; }
         public virtual DbSet<V_ComputerRoomVisit> V_ComputerRoomVisit { get; set; }
         public virtual DbSet<V_info_Equipment> V_info_Equipment { get; set; }
+        public virtual DbSet<v_info_Technology> v_info_Technology { get; set; }
         public virtual DbSet<v_Maintenance> v_Maintenance { get; set; }
+        public virtual DbSet<v_info_Registration> v_info_Registration { get; set; }
     }
 }

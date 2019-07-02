@@ -10,7 +10,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>selectCX</title>
     <link href="~/css/css.css" rel="stylesheet" />
-    <link href="~/Scripts/bootstrap.css" rel="stylesheet" />
+
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <style type="text/css">
@@ -122,8 +123,7 @@
                         $td8 = $("<td style='color:blue;'>未签字</td>");
                     } else if (dt[i]["QZ"] == "2") {
                         $td8 = $("<td style='color:green;'>已签字</td>");
-                    }
-
+                    } 
                     $tr.append($td1, $td2, $td3, $td4, $td5, $td7, $td8,$td9);
                     $("#ListArea").append($tr);
 
@@ -140,7 +140,7 @@
             //加载模糊查询
             function Mshow() {
                 $.ajax({
-                    url: "/Meeting/Index2",
+                    url: "/Meeting/CXIndex",
                     type: "post",
                     data: "currentPage=" + currentPage + "&names=" + names,
                     success: function (msg) {
@@ -208,7 +208,7 @@
 
 </head>
 <body>
-    <h2 align="center"> 会议测试及开会签字 </h2>
+    <h2 align="center"  style="font-size:25px;font-weight:bold"> 会议测试及开会签字 </h2>
     <div>
 
         会议名称：
