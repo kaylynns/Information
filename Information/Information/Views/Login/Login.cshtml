@@ -57,8 +57,13 @@
                                         window.location.href = '/Main/Main'
                                     }
                                     if (msg == "nook") {
-                                        alert("登录失败");
-                                        window.location.href = 'Login'
+                                        if (Name==null||Name==""&&Pass==""||Pass==null) {
+                                            alert("请输入用户名跟密码");
+                                        } else {
+                                            alert("登录失败");
+                                            window.location.href = 'Login'
+                                        }
+                                      
                                     }
                                 }
                             })                  
