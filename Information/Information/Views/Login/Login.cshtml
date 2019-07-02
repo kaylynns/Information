@@ -17,7 +17,6 @@
     <script type="text/javascript">
         $(function () {
             var Name = $("#Name").val();
-            var Pass = $("#Pass").val();
             $("#Name").blur(function () {
                  Name = $("#Name").val();
                 if (Name == null || Name == "") {
@@ -50,7 +49,7 @@
                             $.ajax({
                                 type: "post",
                                 data: "Name=" + Name + "&Pass=" + Pass,
-                                url: "/Login/Logins",
+                                url: "Logins",
                                 success: function (msg) {
                                     if (msg == "OK") {
                                         alert("登录成功正在前往主页");

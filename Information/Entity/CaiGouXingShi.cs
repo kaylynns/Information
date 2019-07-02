@@ -11,7 +11,9 @@ namespace Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [DataContract(IsReference = true)]
     public partial class CaiGouXingShi
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,8 +21,9 @@ namespace Entity
         {
             this.info_Asset = new HashSet<info_Asset>();
         }
-    
+        [DataMember]
         public int SID { get; set; }
+        [DataMember]
         public string SName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

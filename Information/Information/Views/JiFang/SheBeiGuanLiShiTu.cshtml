@@ -62,7 +62,6 @@
             var pages = 1;
             var currentPage = 1;
             var name = "";
-            var lei = "";
             $(function () {
                 Show(currentPage)
             })
@@ -84,14 +83,13 @@
             $(function () {
                 $("#Button1").click(function () {
                      name = $("#Text1").val();
-                    lei = $("#Text2").val();
-                  MoHu(name, lei);
+                  MoHu(name);
                 })
             })
-            function MoHu(name, lei) {
+            function MoHu(name) {
                 $.ajax({
                     type: "post",
-                    data: "currentPage=" + currentPage + "&name=" + name + "&lei=" + lei,
+                    data: "currentPage=" + currentPage + "&name=" + name,
                     url: "SheBeiSelelct",
                     success: function (msg) {
                         var data = eval("(" + msg + ")");
@@ -131,7 +129,7 @@
                     if ($("#Text1") == null || $("#Text1") == "" && $("#Text2") == null || $("#Text2") == "") {
                         Show()
                     } else {
-                        MoHu(name, lei);
+                        MoHu(name);
                     }
                 })
 
@@ -143,7 +141,7 @@
                     if ($("#Text1") == null || $("#Text1") == "" && $("#Text2") == null || $("#Text2") == "") {
                         Show()
                     } else {
-                        MoHu(name, lei);
+                        MoHu(name);
                     }
                 })
 
@@ -155,7 +153,7 @@
                     if ($("#Text1") == null || $("#Text1") == "" && $("#Text2") == null || $("#Text2") == "") {
                         Show()
                     } else {
-                        MoHu(name, lei);
+                        MoHu(name);
                     }
                    
                 })
@@ -166,7 +164,7 @@
                     if ($("#Text1") == null || $("#Text1") == "" && $("#Text2") == null || $("#Text2") == "") {
                         Show()
                     } else {
-                        MoHu(name, lei);
+                        MoHu(name);
                     }
                 })
 
@@ -180,14 +178,11 @@
             设备名称：
             <input id="Text1" type="text" ID="txtSearch" Width="240" />
             &nbsp;
-            设备型号：
-            <input id="Text2" type="text" ID="txtSearchs" Width="240" />
-            &nbsp;
             <input id="Button1" type="button" value="查询" Class="btn1" />
             &nbsp;
             <input id="btn_add" type="button" value="添 加" onclick="location.href = '/JiFang/SheBeiAddShiTu'" Class="btn1"/>
         </div>
-        <table width="100%" id="ListArea" border="0" class="t1" align="left" cellpadding="0"
+        <table width="100%" id="ListArea" border="0" class="t1" align="center" cellpadding="0"
                cellspacing="0" >
             <tr align="center">
                 <td>设备型号</td>

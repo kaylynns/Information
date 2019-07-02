@@ -8,9 +8,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
+    <title>机房维护维修修改</title>
     <link href="~/css/css.css" rel="stylesheet" />
-    <link href="~/Scripts/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
     <script src="~/DatePicker/WdatePicker.js"></script>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
@@ -186,7 +186,7 @@
         </script>
     </head>
 <body>
-    <h2 align="center" style="font-size:25px;font-weight:bold"> 机房维护 </h2>
+    <h2 align="center" style="font-size:25px;font-weight:bold"> 机房维护维修修改 </h2>
 
     <form method="post" action="/WhuWxiu/Edit" style="">
         <table cellspacing="0" cellpadding="7" align="center" border="1" style="border-collapse: collapse; margin-bottom:20px"
@@ -199,7 +199,7 @@
                     @Html.HiddenFor(model => model.MIDs)
                 </td>
                 <td id="sbid">
-                    @Html.HiddenFor(model => model.MDeviceName);
+                    @Html.HiddenFor(model => model.MDeviceName)
                 </td>
             </tr>
             <tr>
