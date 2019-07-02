@@ -150,9 +150,10 @@
                     <td> 问题分类名称：<input id="txt_name" type="text" /></td>
                     <td><input type="button" value="查询" id="btn_select" Class="btn1" style="margin-left:10px" /></td>
                     <td>
-                        @using (Ajax.BeginForm("/Systems/AssetCreate", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Create" }))
+                        @using (Ajax.BeginForm("QuestionCreate", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Create" }))
                             {
-                            @Html.Label("问题分类名称:")@Html.TextBoxFor(e => e.QName)   @Html.Label("角色备注:")@Html.TextBoxFor(e => e.QRemark)  <input id="Button1" type="submit" value="添加问题分类" Class="btn1" />
+                            @Html.Label("问题分类名称:")@Html.TextBoxFor(e => e.QName)   @Html.Label("角色备注:")@Html.TextBoxFor(e => e.QRemark)  
+                            <input id="Button1" type="submit" value="添加问题分类" Class="btn1" />
                            }
                 </tr>
             </table>

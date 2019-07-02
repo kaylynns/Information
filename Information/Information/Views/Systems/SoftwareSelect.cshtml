@@ -151,7 +151,7 @@
                     <td> 软件名称：<input id="txt_name" type="text" /></td>
                     <td><input type="button" value="查询" id="btn_select" Class="btn1" style="margin-left:10px" /></td>
                     <td>
-                        @using (Ajax.BeginForm("/Systems/SoftwareCreate", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Create" }))
+                        @using (Ajax.BeginForm("SoftwareCreate", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Create" }))
                         {
                             @Html.Label("软件名称:")@Html.TextBoxFor(e => e.Sdynacomm)   @Html.Label("备注:")@Html.TextBoxFor(e => e.Sremark)  <input id="Button1" type="submit" value="添加软件名称" Class="btn1" />
                         }

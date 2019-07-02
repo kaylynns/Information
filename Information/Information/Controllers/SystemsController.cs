@@ -18,6 +18,8 @@ namespace information.Controllers
         IUserBll iud = IocCreate.CreateAll<UserService>("UserTwo", "UserService");//用户表
         ICaiGouXingShiBll icgxsb = IocCreate.CreateAll<CaiGouXingShiService>("CaiGouXingShiTwo", "CaiGouXingShiService");//采购形式
         IAssetBll iab = IocCreate.CreateAll<AssetService>("AssetTwo", "AssetService");//资产表
+        IQuestionBll iqb = IocContainer.IocCreate.CreateAll<QuestionService>("QuestionTwo", "QuestionService");//问题
+        ISoftwareBll isb = IocContainer.IocCreate.CreateAll<SoftwareService>("SoftwareTwo", "SoftwareService");//软件
         #region 系统管理
 
         //进入系统管理页面
@@ -240,89 +242,89 @@ namespace information.Controllers
             return View();
         }
         //问题分类维护页面分页
-        // public ActionResult QuestionSelectFen(int currentPage, string name)
-        //  {
-        //    var pageSize = 2;
-        //    int rows;
+        public ActionResult QuestionSelectFen(int currentPage, string name)
+        {
+            var pageSize = 2;
+            int rows;
 
-        //    List<v_User> dt;
+            List<info_Question> dt;
 
-        //    if (name == "" && name == null)
-        //    {
-        //        //普通查询
-        //          dt = iud.SelectUser(e => e.QID, e => e.QID > 0, out rows, currentPage, pageSize);
-        //    }
-        //    else
-        //    {
-        //        //带条件查询
-        //         dt = iud.SelectUser(e => e.QID, e => e.QName.Contains(name), out rows, currentPage, pageSize);
-        //    }
-        //    Dictionary<string, object> dir = new Dictionary<string, object>();
-        //    dir.Add("data", dt);
-        //    dir.Add("rows", rows);
-        //    dir.Add("currentpage", rows % 2 > 0 ? (rows / 2) + 1 : (rows / 2));
-        //    dir.Add("pages", (rows - 1) / pageSize + 1);
-        //    return Content(JsonConvert.SerializeObject(dir));
+            if (name == "" && name == null)
+            {
+                //普通查询
+                dt = iqb.FenYe(e => e.QID, e => e.QID > 0, out rows, currentPage, pageSize);
+            }
+            else
+            {
+                //带条件查询
+                dt = iqb.FenYe(e => e.QID, e => e.QName.Contains(name), out rows, currentPage, pageSize);
+            }
+            Dictionary<string, object> dir = new Dictionary<string, object>();
+            dir.Add("data", dt);
+            dir.Add("rows", rows);
+            dir.Add("currentpage", rows % 2 > 0 ? (rows / 2) + 1 : (rows / 2));
+            dir.Add("pages", (rows - 1) / pageSize + 1);
+            return Content(JsonConvert.SerializeObject(dir));
 
-        //}
+        }
 
         //问题分类维护页面添加
         // GET: Systems/Create
         public ActionResult QuestionCreate(info_Question quest)
         {
-        //    if (iub.Add(quest) > 0)
-        //    {
-        //        return Content("<script>alert('添加成功');window.location.href='/Systems/QuestionSelect'</script>");
-        //    }
-        //    else
-        //    {
-        //        return Content("<script>alert('添加失败');window.location.href='/Systems/QuestionSelect'</script>");
-        //    }
-            return View();
+            if (iqb.Add(quest) > 0)
+            {
+                return Content("<script>alert('添加成功');window.location.href='/Systems/QuestionSelect'</script>");
+            }
+            else
+            {
+                return Content("<script>alert('添加失败');window.location.href='/Systems/QuestionSelect'</script>");
+            }
+            //return View();
         }
 
-
+        [HttpGet]
         //问题分类维护页面修改（进入修改页面）
         // GET: Systems/Create
         public ActionResult QuestioEdit(int id)
         {
-           //var dt= iud.SelectWhere(e => e.QID == id).FirstOrDefault();
-           // return View(dt);
-            return View();
+            var dt = iqb.SelectWhere(e => e.QID == id).FirstOrDefault();
+            return View(dt);
+          //  return View();
         }
-
+        [HttpPost]
         //问题分类维护页面修改（进行修改操作）
         // GET: Systems/Create
-        public ActionResult QuestioEdits(info_Question quest)
+        public ActionResult QuestioEdit(info_Question quest)
         {
-            //  if (iub.Add(quest) > 0)
-            //    {
-            //        return Content("<script>alert('修改成功');window.location.href='/Systems/QuestionSelect'</script>");
-            //    }
-            //    else
-            //    {
-            //        return Content("<script>alert('修改失败');window.location.href='/Systems/QuestionSelect'</script>");
-            //    }
-            return View();
+            if (iqb.Update(quest) > 0)
+            {
+                return Content("<script>alert('修改成功');window.location.href='/Systems/QuestionSelect'</script>");
+            }
+            else
+            {
+                return Content("<script>alert('修改失败');window.location.href='/Systems/QuestionSelect'</script>");
+            }
+          //  return View();
         }
 
         //问题分类维护页面删除（进入修改页面）
         // GET: Systems/Create
         public ActionResult QuestioDelete(int id)
         {
-            //info_Question q = new info_Question()
-            //{
-            //    QID = id
-            //};
-            //if (iud.Delete(q) > 0)
-            //{ 
-            //        return Content("<script>alert('修改成功');window.location.href='/Systems/QuestionSelect'</script>");
-            //    }
-            //    else
-            //    {
-            //        return Content("<script>alert('修改失败');window.location.href='/Systems/QuestionSelect'</script>");
-            //    }
-            return View();
+            info_Question q = new info_Question()
+            {
+                QID = id
+            };
+            if (iqb.Delete(q) > 0)
+            {
+                return Content("<script>alert('删除成功');window.location.href='/Systems/QuestionSelect'</script>");
+            }
+            else
+            {
+                return Content("<script>alert('删除失败');window.location.href='/Systems/QuestionSelect'</script>");
+            }
+            //return View();
         }
 
         #endregion
@@ -334,45 +336,45 @@ namespace information.Controllers
             return View();
         }
         //软件名称维护页面分页
-        // public ActionResult SoftwareSelectFen(int currentPage, string name)
-        //  {
-        //    var pageSize = 2;
-        //    int rows;
+        public ActionResult SoftwareSelectFen(int currentPage, string name)
+        {
+            var pageSize = 2;
+            int rows;
 
-        //    List<v_User> dt;
+            List<info_Software> dt;
 
-        //    if (name == "" && name == null)
-        //    {
-        //        //普通查询
-        //          dt = iud.SelectUser(e => e.SID, e => e.SID > 0, out rows, currentPage, pageSize);
-        //    }
-        //    else
-        //    {
-        //        //带条件查询
-        //         dt = iud.SelectUser(e => e.SID, e => e.Sdynacomm.Contains(name), out rows, currentPage, pageSize);
-        //    }
-        //    Dictionary<string, object> dir = new Dictionary<string, object>();
-        //    dir.Add("data", dt);
-        //    dir.Add("rows", rows);
-        //    dir.Add("currentpage", rows % 2 > 0 ? (rows / 2) + 1 : (rows / 2));
-        //    dir.Add("pages", (rows - 1) / pageSize + 1);
-        //    return Content(JsonConvert.SerializeObject(dir));
+            if (name == "" && name == null)
+            {
+                //普通查询
+                dt = isb.FenYe(e => e.SID, e => e.SID > 0, out rows, currentPage, pageSize);
+            }
+            else
+            {
+                //带条件查询
+                dt = isb.FenYe(e => e.SID, e => e.Sdynacomm.Contains(name), out rows, currentPage, pageSize);
+            }
+            Dictionary<string, object> dir = new Dictionary<string, object>();
+            dir.Add("data", dt);
+            dir.Add("rows", rows);
+            dir.Add("currentpage", rows % 2 > 0 ? (rows / 2) + 1 : (rows / 2));
+            dir.Add("pages", (rows - 1) / pageSize + 1);
+            return Content(JsonConvert.SerializeObject(dir));
 
-        //}
+        }
 
         //软件名称维护页面添加
         // GET: Systems/Create
         public ActionResult SoftwareCreate(info_Software soft)
         {
-            //    if (iub.Add(soft) > 0)
-            //    {
-            //        return Content("<script>alert('添加成功');window.location.href='/Systems/SoftwareSelect'</script>");
-            //    }
-            //    else
-            //    {
-            //        return Content("<script>alert('添加失败');window.location.href='/Systems/SoftwareSelect'</script>");
-            //    }
-            return View();
+            if (isb.Add(soft) > 0)
+            {
+                return Content("<script>alert('添加成功');window.location.href='/Systems/SoftwareSelect'</script>");
+            }
+            else
+            {
+                return Content("<script>alert('添加失败');window.location.href='/Systems/SoftwareSelect'</script>");
+            }
+            //return View();
         }
 
 
@@ -380,43 +382,41 @@ namespace information.Controllers
         // GET: Systems/Create
         public ActionResult SoftwareEdit(int id)
         {
-            //var dt= iud.SelectWhere(e => e.SID == id).FirstOrDefault();
-            // return View(dt);
-            return View();
+            var dt = isb.SelectWhere(e => e.SID == id).FirstOrDefault();
+            return View(dt);
         }
 
         //软件名称维护修改（进行修改操作）
         // GET: Systems/Create
         public ActionResult SoftwareEdits(info_Software soft)
         {
-            //  if (iub.Add(soft) > 0)
-            //    {
-            //        return Content("<script>alert('修改成功');window.location.href='/Systems/SoftwareSelect'</script>");
-            //    }
-            //    else
-            //    {
-            //        return Content("<script>alert('修改失败');window.location.href='/Systems/SoftwareSelect'</script>");
-            //    }
-            return View();
+            if (isb.Update(soft) > 0)
+            {
+                return Content("<script>alert('修改成功');window.location.href='/Systems/SoftwareSelect'</script>");
+            }
+            else
+            {
+                return Content("<script>alert('修改失败');window.location.href='/Systems/SoftwareSelect'</script>");
+            }
+            //return View();
         }
 
         //软件名称维护删除
         // GET: Systems/Create
         public ActionResult SoftwareDelete(int id)
         {
-            //info_Software soft = new info_Software()
-            //{
-            //    SID = id
-            //};
-            //if (iud.Delete(soft) > 0)
-            //{ 
-            //        return Content("<script>alert('修改成功');window.location.href='/Systems/SoftwareSelect'</script>");
-            //    }
-            //    else
-            //    {
-            //        return Content("<script>alert('修改失败');window.location.href='/Systems/SoftwareSelect'</script>");
-            //    }
-            return View();
+            info_Software soft = new info_Software()
+            {
+                SID = id
+            };
+            if (isb.Delete(soft) > 0)
+            {
+                return Content("<script>alert('删除成功');window.location.href='/Systems/SoftwareSelect'</script>");
+            }
+            else
+            {
+                return Content("<script>alert('删除失败');window.location.href='/Systems/SoftwareSelect'</script>");
+            }
         }
 
         #endregion
