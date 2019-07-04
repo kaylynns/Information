@@ -11,7 +11,7 @@ namespace Entity
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class info_Asset
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +19,7 @@ namespace Entity
         {
             this.info_Equipment = new HashSet<info_Equipment>();
         }
-        [DataMember]
+    
         public int AID { get; set; }
         public string AName { get; set; }
         public int ATypeId { get; set; }

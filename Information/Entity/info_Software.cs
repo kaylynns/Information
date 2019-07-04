@@ -11,7 +11,7 @@ namespace Entity
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class info_Software
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
