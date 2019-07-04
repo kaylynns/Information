@@ -48,6 +48,8 @@
         <AssociationConnector Association="InformationModel.FK_info_Registration_info_Software" ManuallyRouted="false" />
         <AssociationConnector Association="InformationModel.FK_info_User_info_Role" ManuallyRouted="false" />
         <AssociationConnector Association="InformationModel.FK_info_Technology_info_Technology" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="InformationModel.v_DetailedSelect" Width="1.5" PointX="10.375" PointY="15.75" />
+        <AssociationConnector Association="InformationModel.FK_info_Equipment_info_Asset" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

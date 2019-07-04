@@ -350,6 +350,20 @@
           <Property Name="state" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6002: 表/视图“Information.dbo.v_DetailedSelect”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="v_DetailedSelect">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="checked" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="text" Type="varchar" MaxLength="50" />
+          <Property Name="ProAddress" Type="varchar" MaxLength="100" />
+          <Property Name="pid" Type="int" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
+          <Property Name="checked" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
 警告 6002: 表/视图“Information.dbo.V_info_Equipment”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="V_info_Equipment">
           <Key>
@@ -663,6 +677,16 @@
     [v_Detailed].[state] AS [state]
     FROM [dbo].[v_Detailed] AS [v_Detailed]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="v_DetailedSelect" EntityType="Self.v_DetailedSelect" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_DetailedSelect].[id] AS [id], 
+    [v_DetailedSelect].[text] AS [text], 
+    [v_DetailedSelect].[ProAddress] AS [ProAddress], 
+    [v_DetailedSelect].[pid] AS [pid], 
+    [v_DetailedSelect].[state] AS [state], 
+    [v_DetailedSelect].[checked] AS [checked]
+    FROM [dbo].[v_DetailedSelect] AS [v_DetailedSelect]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_info_Equipment" EntityType="Self.V_info_Equipment" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [V_info_Equipment].[EID] AS [EID], 
@@ -787,8 +811,7 @@
             <End Role="info_Permission" EntitySet="info_Permission" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InformationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1464,7 +1487,66 @@
             <End Role="info_Software" EntitySet="info_Software" />
             <End Role="info_Technology" EntitySet="info_Technology" />
           </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="v_DetailedSelect" EntityType="InformationModel.v_DetailedSelect" />
+          <AssociationSet Name="FK_info_Equipment_info_Asset" Association="InformationModel.FK_info_Equipment_info_Asset">
+            <End Role="info_Asset" EntitySet="info_Asset" />
+            <End Role="info_Equipment" EntitySet="info_Equipment" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="v_DetailedSelect">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="checked" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="text" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pid" Type="Int32" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="checked" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_info_Equipment_info_Asset">
+          <End Type="InformationModel.info_Asset" Role="info_Asset" Multiplicity="0..1" />
+          <End Type="InformationModel.info_Equipment" Role="info_Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="info_Asset">
+              <PropertyRef Name="AID" />
+            </Principal>
+            <Dependent Role="info_Equipment">
+              <PropertyRef Name="EAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1917,6 +1999,25 @@
                 <ScalarProperty Name="UseroffcePhone" ColumnName="UseroffcePhone" />
                 <ScalarProperty Name="UserKeShi" ColumnName="UserKeShi" />
                 <ScalarProperty Name="UserJueSe" ColumnName="UserJueSe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="InformationModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="InformationModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="InformationModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="InformationModel.Store.sp_helpdiagramdefinition" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="InformationModel.Store.sp_helpdiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="InformationModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="InformationModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="v_DetailedSelect">
+            <EntityTypeMapping TypeName="InformationModel.v_DetailedSelect">
+              <MappingFragment StoreEntitySet="v_DetailedSelect">
+                <ScalarProperty Name="checked" ColumnName="checked" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="ProAddress" ColumnName="ProAddress" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

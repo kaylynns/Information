@@ -24,6 +24,7 @@ namespace information.Controllers
         {
             string UserRealName;
             int UserID;
+            int RoleID = 0;
             List<info_User> result = iud.DengLu(Name, Pass);
             foreach (info_User item in result)
             {
@@ -31,12 +32,14 @@ namespace information.Controllers
                 Pass = item.UserPass;
                 UserRealName = item.UserRealName;
                 UserID = item.UserID;
+                RoleID = item.UserJueSe;
                 if (Name != null)
                 {
                     //登录成功
                     Session["UserName"] = Name;
                     Session["UserRealName"] = UserRealName;
                     Session["UserID"] = UserID;
+                    Session["RoleID"] = RoleID;
                     return Content("OK");
                 }
             }

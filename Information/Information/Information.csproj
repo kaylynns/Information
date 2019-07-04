@@ -78,8 +78,10 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -1365,12 +1367,15 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\list.js" />
+    <Content Include="Scripts\locate.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\NumericF.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\TableJs.js" />
+    <Content Include="Scripts\time.js" />
     <Content Include="Scripts\vue.js" />
     <Content Include="Scripts\WebDatePicker.js" />
     <Content Include="Scripts\_references.js" />
@@ -1475,6 +1480,7 @@
     <Content Include="Views\ZiChan\JiFangJinChuSelectShiTu.cshtml" />
     <Content Include="Views\Main\Mains.cshtml" />
     <Content Include="Views\ChaXunXiTong\IndexR.cshtml" />
+    <Content Include="Views\Systems\PowerAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

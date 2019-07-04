@@ -139,6 +139,9 @@
     <Compile Include="v_Detailed.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="v_DetailedSelect.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="V_info_Equipment.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

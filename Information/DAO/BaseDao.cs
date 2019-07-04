@@ -51,10 +51,15 @@ namespace DAO
             ce.Entry<T>(t).State = EntityState.Deleted;
             return ce.SaveChanges();
         }
-        //sql语句
+        //sql语句查询
         public List<T> cha(string sql){
             return ce.Database.SqlQuery<T>(sql).ToList();
 
+        }
+        //sql语句增删改
+        public int ExecuteSql(string sql)
+        {
+            return ce.Database.ExecuteSqlCommand(sql);
         }
     }
 }

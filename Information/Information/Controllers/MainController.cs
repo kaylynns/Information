@@ -1,4 +1,5 @@
 ﻿using BLL;
+using Entity;
 using IBLL;
 using IocContainer;
 using Newtonsoft.Json;
@@ -52,9 +53,19 @@ namespace information.Controllers
 
         public ActionResult MainsTree()
         {
-            string rid =Session["RoleID"].ToString();
-           var dt=idb.detailed(rid, "0");
-          
+
+            List<v_Detailed> dt;
+           var id= HttpContext.Request["id"];
+            string rid = Session["RoleID"].ToString();
+            if (id == null)
+            {
+
+                 dt = idb.detailed(rid, "0");
+            }
+            else {
+               dt = idb.detailed(rid,id);
+
+            }
             //
             //DataTable dt;
             //if (context.Request["id"] == null)

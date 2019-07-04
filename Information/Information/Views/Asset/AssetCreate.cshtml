@@ -17,6 +17,59 @@
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/vue.js"></script>
     <script src="~/Scripts/DatePicker/WdatePicker.js"></script>
+  
+    
+
+
+    <script src="~/Scripts/comm.js"></script>
+    <script src="~/Scripts/list.js"></script>
+    <script src="~/Scripts/calendar-ch.js"></script>
+    <script src="~/Scripts/locate.js"></script>
+    @*<script type="text/javascript"  src="../../../javascript/comm/comm.js"></script>
+    <script type="text/javascript" src="../../../javascript/comm/list.js"></script>
+    <script type="text/javascript"  src="../../../javascript/calendar-ch.js"> </script>
+    <script type="text/javascript" src="../../../javascript/locate.js"> </script>*@
+   
+    <script type="text/javascript">
+        window.onload = check;
+        
+		function tick() {
+			var now = new Date();
+			var hours, minutes, seconds, noon;
+			var intHours, intMinutes, intSeconds;
+			intHours = now.getHours();
+			intMinutes = now.getMinutes();
+			intSeconds = now.getSeconds();
+			if (intHours < 24) {
+				hours = intHours+":";
+				noon = "A.M.";
+			} else {
+				intHours = intHours - 24;
+				hours = intHours + ":";
+				noon = "P.M.";
+			}
+			if (intMinutes < 10) {
+				minutes = "0"+intMinutes+":";
+			} else {
+				minutes = intMinutes+":";
+			}
+			if (intSeconds < 10) {
+				seconds = "0"+intSeconds+" ";
+			} else {
+				seconds = intSeconds+" ";
+			}
+			timeString = hours+minutes+seconds;
+			var now = new Date();
+		  	document.getElementById("nowTime").value=now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate()+" "+timeString;
+			window.setTimeout("tick();", 1000);
+		}
+
+		//load事件
+		function check() {
+		    //获得系统当前时间的方法
+		    tick();
+		}
+     </script>
     <script type="text/javascript">
         $(function () {
             $("#JID").hide();//隐藏id
@@ -24,10 +77,10 @@
         function img_select() {
             show();
             $(document).on("dblclick", ".option", function () {
-              
+
                 $("#YiJu").val($(this).text());
                 $('#myModal').modal('hide');//关闭模态框
-           
+
                 $("#JID").val($(this).val());//获取jid
 
             })
@@ -100,22 +153,24 @@
                     @Html.DropDownListFor(e => e.SID, ViewData["xs"] as IEnumerable<SelectListItem>)
 
                 </td>
-            </tr>
-            <tr>
+
                 <td>
                     @Html.Label("中标价格:")
                 </td>
                 <td>
                     @Html.EditorFor(model => model.AMoney)
                 </td>
+
+            </tr>
+            <tr>
+                
                 <td>
                     @Html.Label("供应商:")
                 </td>
                 <td>
                     @Html.EditorFor(model => model.ASuppler)
                 </td>
-            </tr>
-            <tr>
+          
                 <td>
                     @Html.Label("供应商电话:")
                 </td>
@@ -143,45 +198,54 @@
                     @Html.DropDownListFor(e => e.ATypeId, ViewData["type"] as IEnumerable<SelectListItem>)
 
                 </td>
-            </tr>
-            <tr>
                 <td>
                     @Html.Label("资产型号:")
                 </td>
                 <td>
                     @Html.EditorFor(model => model.AModel)
                 </td>
+            </tr>
+            <tr>
+              
                 <td>
                     @Html.Label("设备负责人:")
                 </td>
                 <td>
                     @Html.EditorFor(model => model.AEM)
                 </td>
+                <td>
+                    @Html.Label("登记时间:")
+                </td>
+                <td >
+                    <input type="text" name="emajorRelease.registTime"
+                           id="nowTime" readonly="readonly"
+                           class="INPUT_STYLE2">
+                    @*@Html.TextAreaFor(model => model.ARemarks, new { cols = "50" })*@
+                </td>
+                <td>
+                    @Html.Label("备注:")
+                </td>
+                <td >
+
+                    @Html.TextAreaFor(model => model.ARemarks, new { cols = "30" })
+                </td>
             </tr>
             <tr>
                 <td>
                     @Html.Label("详细参数:")
                 </td>
-                <td colspan="2">
-                    @Html.TextAreaFor(model => model.AParameter, new { cols = "30" })
+                <td colspan="3">
+                    @Html.TextAreaFor(model => model.AParameter, new { cols = "50" })
                 </td>
-                <td align="left">
+                <td align="left" colspan="2">
                     详细参数填写设备的详细参数<br />
                     如CPU型号个数，硬盘大小，内存大小<br />
                     安装的操作系统等参数
                 </td>
             </tr>
+           
             <tr>
-                <td>
-                    @Html.Label("备注:")
-                </td>
-                <td colspan="3">
-
-                    @Html.TextAreaFor(model => model.ARemarks, new { cols = "50" })
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" align="center">
+                <td colspan="6" align="center">
                     <input id="btn_save" type="submit" value="保 存" class="btn1" />
                     <input id="btn_QX" type="button" value="返回" class="btn1" style="margin-left:30px" onclick="window.location.href = '/Asset/AssetSelect'" />
 

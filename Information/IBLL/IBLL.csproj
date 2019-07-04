@@ -49,6 +49,7 @@
     <Compile Include="IEquipmentsBll.cs" />
     <Compile Include="IMaintenanceBll.cs" />
     <Compile Include="IMeetingBll.cs" />
+    <Compile Include="IPermissionBll.cs" />
     <Compile Include="IPiShiJieGuoBll.cs" />
     <Compile Include="IRoleBll.cs" />
     <Compile Include="IQuestionBll.cs" />

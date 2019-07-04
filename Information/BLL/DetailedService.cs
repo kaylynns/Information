@@ -19,5 +19,10 @@ namespace BLL
         {
             return idd.detailed(rid, pid);
         }
+
+        public List<v_DetailedSelect> DetailedSelect(string rid, string pid)
+        {
+            return idd.DetailedSelect(rid, pid);
+        }
     }
 }

@@ -50,6 +50,7 @@
     <Compile Include="IEquipmentService.cs" />
     <Compile Include="MaintenanceService.cs" />
     <Compile Include="MeetingService.cs" />
+    <Compile Include="PermissionService.cs" />
     <Compile Include="PiShiJieGuoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleService.cs" />
