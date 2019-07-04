@@ -250,7 +250,7 @@
                 <td v-else="item.CRelustID===''">{{item.CRelustID}}</td>
 
 
-                <td v-if="item.CRelustID==='待审核'" :style="{visibility: 'hidden'}"><a>操作</a></td>
+                <td v-if="item.CRelustID==='待审核'" ><a :style="{visibility: 'hidden'}">操作</a></td>
                 <td v-else="item.CRelustID!='待审核'"><a v-bind:href="['/Asset/AssetRepairEdit/'+item.AID]">操作</a></td>
             </tr>
 

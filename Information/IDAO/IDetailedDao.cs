@@ -11,5 +11,7 @@ namespace IDAO
     {
         //权限
         List<v_Detailed> detailed(string rid, string pid);
+        //查询出所有权限
+        List<v_DetailedSelect> DetailedSelect(string rid, string pid);
     }
 }

@@ -119,7 +119,7 @@
             <td>{{item.RoleID}}</td>
                 <td>{{item.RoleName}}</td>
                 <td>{{item.Remark}}</td>
-                <td><a  v-bind:href="['/Systems/PowerEdit/'+item.RoleID]" > 修改 </ a > &nbsp;&nbsp;&nbsp;<a  v-bind:href="['/Systems/PowerDelete/'+item.RoleID]" onclick="return confirm('您确定要删除这条数据吗？')">删除</a>&nbsp;&nbsp;&nbsp;<a href='/WhuWxiu/Edit/" + dt[i]["MIDs"] + "'>添加权限</a></td>
+                <td><a  v-bind:href="['/Systems/PowerEdit/'+item.RoleID]" > 修改 </ a > &nbsp;&nbsp;&nbsp;<a  v-bind:href="['/Systems/PowerDelete/'+item.RoleID]" onclick="return confirm('您确定要删除这条数据吗？')">删除</a>&nbsp;&nbsp;&nbsp;<a   v-bind:href="['/Systems/PowerAdd/'+item.RoleID]">设置权限</a></td>
             </tr>
 
         </table>

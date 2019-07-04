@@ -50,6 +50,7 @@
     <Compile Include="IEquipmentsDao.cs" />
     <Compile Include="IMaintenanceDao.cs" />
     <Compile Include="IMeetingDAO.cs" />
+    <Compile Include="IPermissionDao.cs" />
     <Compile Include="IPiShiJieGuoDao.cs" />
     <Compile Include="IRoleDao.cs" />
     <Compile Include="IQuestionDao.cs" />

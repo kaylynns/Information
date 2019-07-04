@@ -20,45 +20,43 @@ namespace information.Controllers
         IAssetBll iab = IocCreate.CreateAll<AssetService>("AssetTwo", "AssetService");//资产表
         IQuestionBll iqb = IocContainer.IocCreate.CreateAll<QuestionService>("QuestionTwo", "QuestionService");//问题
         ISoftwareBll isb = IocContainer.IocCreate.CreateAll<SoftwareService>("SoftwareTwo", "SoftwareService");//软件
+       IDetailedBll idb = IocCreate.CreateAll<DetailedService>("DetailedTwo", "DetailedService"); //权限详细
+        IPermissionBll ipsb = IocCreate.CreateAll<PermissionService>("PermissionTwo", "PermissionService");//权限分配
         #region 系统管理
 
-        //进入系统管理页面
+        //进入权限管理页面
         // GET: Systems
         public ActionResult PowerSelect()
         {
             return View();
         }
-        //进入系统管理页面查询操作
+        //进入权限角色管理页面查询操作
         public ActionResult PowerSelects()
         {
           var dt=irb.SelectAll();
             return Content(JsonConvert.SerializeObject(dt));
         }
-        //信息管理页面添加（进行添加操作）
+        //权限角色页面添加（进行添加操作）
         // POST: Systems/Create
         [HttpPost]
         public ActionResult PowerCreate(info_Role role)
         {
-            try
-            {
-                // TODO: Add insert logic here
 
-                if (irb.Add(role) > 0)
-                {
-                    return Content("<script>alert('添加成功');window.location.href='/Systems/PowerSelect'</script>");
-                }
-                else
-                {
-                    return Content("<script>alert('添加失败');window.location.href='/Systems/PowerSelect'</script>");
-                }
-            }
-            catch
+
+            // TODO: Add insert logic here
+
+            if (irb.Add(role) > 0)
             {
-                return View("PowerSelect");
+                return Content("<script>alert('添加成功');window.location.href='/Systems/PowerSelect'</script>");
+
+            } else {
+                return Content("<script>alert('添加失败');window.location.href='/Systems/PowerSelect'</script>");
             }
-         
+                       
+            
+                 
         }
-        //信息管理页面删除（进行删除操作）
+        //权限角色页面删除（进行删除操作）
         // GET: Systems/Delete/5
         public ActionResult PowerDelete(int id)
         {
@@ -75,7 +73,7 @@ namespace information.Controllers
                 return Content("<script>alert('删除失败');window.location.href='/Systems/PowerSelect'</script>");
             }
         }
-        //信息管理页面修改(进入修改操作页面)
+        //权限角色页面修改(进入修改操作页面)
         // GET: Systems/Edit/5
         public ActionResult PowerEdit(int id)
         {
@@ -83,7 +81,7 @@ namespace information.Controllers
             return View(dt);
         }
 
-        //信息管理页面修改(进行修改操作)
+        //权限角色页面修改(进行修改操作)
         // POST: Systems/Edit/5
         [HttpPost]
         public ActionResult PowerEdits(info_Role role)
@@ -99,7 +97,59 @@ namespace information.Controllers
                 }
            
         }
+    //权限添加（进入权限页面）
+        public ActionResult PowerAdd(string id) {
+            ViewBag.Rid = id;
+            return View();
+        }
+        //权限添加（查询所有权限）
+        public ActionResult PowerAdds(string rid){
+           
+           var idd = HttpContext.Request["id"];
+            
+            List<v_DetailedSelect> dt;
+            if (idd == null && rid != null)
+            {
+                dt = idb.DetailedSelect(rid, "0");
+            }
+            else {
+                dt = idb.DetailedSelect(rid, idd);
+            }
+            //var dt = idb.DetailedSelect(id, "0");
+        
+        
+           
+
+            return Content(JsonConvert.SerializeObject(dt));
+
+        }
+        //权限添加（进行添加操作）
+        public ActionResult PowerAddss(string rid,string qid) {
+            //事务
+            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope()) {
+                string[] qidd = qid.Split(',');
+            
+                int num =ipsb.delete(Convert.ToInt16(rid));
+            if (num >=0)
+            {
+                int num1 = 0;
+                foreach (var item in qidd)
+                {
+                    num1 = ipsb.Add(rid, item.ToString());
+                }
+                if (num1 > 0)
+                {
+                     ts.Complete();
+                 return Content("ok");
+                }
+
+                   
+            }
+            return Content("ok");
+            }
+        }
         #endregion
+
         #region 用户管理
 
         //用户管理页面查询
@@ -525,34 +575,6 @@ namespace information.Controllers
         #endregion
 
 
-        // GET: Systems/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-    
-        // GET: Systems/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-
-        // POST: Systems/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
     }
 }

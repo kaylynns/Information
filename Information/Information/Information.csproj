@@ -78,8 +78,10 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -596,6 +598,8 @@
     <Content Include="lib\lib\font-awesome\sass\font-awesome.scss" />
     <Content Include="lib\lib\fullcalendar-1.5.3\demos\json-events.php" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\calendar-ch.js" />
+    <Content Include="Scripts\comm.js" />
     <Content Include="Scripts\Divs.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -948,11 +952,14 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\list.js" />
+    <Content Include="Scripts\locate.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\NumericF.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\time.js" />
     <Content Include="Scripts\vue.js" />
     <Content Include="Scripts\WebDatePicker.js" />
     <Content Include="Scripts\_references.js" />
@@ -1056,6 +1063,7 @@
     <Content Include="Views\ZiChan\Index.cshtml" />
     <Content Include="Views\ZiChan\JiFangJinChuSelectShiTu.cshtml" />
     <Content Include="Views\Main\Mains.cshtml" />
+    <Content Include="Views\Systems\PowerAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,7 +8,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Main</title><link href="~/Image/bootstrap.css" rel="stylesheet" />
+    <title>Main</title>
+    <link href="~/css/css.css" rel="stylesheet" />
+    <link href="~/Image/bootstrap.css" rel="stylesheet" />
 <link href="~/css/theme.css" rel="stylesheet" />
 <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.7.1.js"></script>
@@ -73,7 +75,7 @@
             onClick: function (node) {
                 console.info(node);
                 var text = node.text;
-                var address = node.PopAddress;
+                var address = node.ProAddress;
 
                 if (address != null) {
                     //如果页面有就选中，否则就添加
@@ -82,7 +84,7 @@
                     } else {
                         $('#tabs').tabs('add', {
                             title: text,
-                            content: '<iframe src="'+address+'" width="99%" height="400px" />',
+                            content: '<iframe src="' + address + '" width="99%" height="800px" />',
                             closable: true,
                             tools: [{
                                 iconCls: 'icon-mini-refresh',
@@ -113,14 +115,16 @@
         </div>
 
         <div data-options="region:'center'" style="padding:5px;background:#eee;">
-            <div id="tabs" class="easyui-tabs" style="width:1080px;height:420px;">  </div>
+                <div id="tabs" class="easyui-tabs" style="width:1080px;height:440px;">  </div>
 
 
-        </div>
-
-
+    </div>
 
 
 
+    @*<frameset name="lf" cols="195,*" frameborder="NO" border="0" framespacing="0">
+        <frame src="left" name="left" scrolling="NO">
+        <frame src="Index" name="main" id="main">
+    </frameset>*@
 </body>  
 </html>

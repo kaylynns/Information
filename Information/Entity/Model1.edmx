@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="InformationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="InformationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CaiGouXingShi">
           <Key>
             <PropertyRef Name="SID" />
@@ -42,7 +42,7 @@
           <Property Name="AYears" Type="varchar" MaxLength="50" />
           <Property Name="AExplain" Type="varchar" MaxLength="100" />
           <Property Name="ASupplerPhone" Type="varchar" MaxLength="50" />
-          <Property Name="AShenHeRan" Type="varchar" MaxLength="100" />
+          <Property Name="AShenHeRan" Type="varchar" MaxLength="50" />
           <Property Name="AShenHeYiJian" Type="varchar" MaxLength="50" />
           <Property Name="AShenHeJieGuo" Type="varchar" MaxLength="50" />
           <Property Name="AShenHeRiQi" Type="varchar" MaxLength="50" />
@@ -350,6 +350,20 @@
           <Property Name="state" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--生成过程中发现错误:
+警告 6002: 表/视图“Information.dbo.v_DetailedSelect”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="v_DetailedSelect">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="checked" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="text" Type="varchar" MaxLength="50" />
+          <Property Name="ProAddress" Type="varchar" MaxLength="100" />
+          <Property Name="pid" Type="int" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
+          <Property Name="checked" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
 警告 6002: 表/视图“Information.dbo.V_info_Equipment”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
         <EntityType Name="V_info_Equipment">
           <Key>
@@ -514,6 +528,18 @@
             </Principal>
             <Dependent Role="info_ComputerRoomVisit">
               <PropertyRef Name="CRelustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_info_Equipment_info_Asset">
+          <End Role="info_Asset" Type="Self.info_Asset" Multiplicity="0..1" />
+          <End Role="info_Equipment" Type="Self.info_Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="info_Asset">
+              <PropertyRef Name="AID" />
+            </Principal>
+            <Dependent Role="info_Equipment">
+              <PropertyRef Name="EAID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -682,6 +708,16 @@
     [v_Detailed].[state] AS [state]
     FROM [dbo].[v_Detailed] AS [v_Detailed]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="v_DetailedSelect" EntityType="Self.v_DetailedSelect" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_DetailedSelect].[id] AS [id], 
+    [v_DetailedSelect].[text] AS [text], 
+    [v_DetailedSelect].[ProAddress] AS [ProAddress], 
+    [v_DetailedSelect].[pid] AS [pid], 
+    [v_DetailedSelect].[state] AS [state], 
+    [v_DetailedSelect].[checked] AS [checked]
+    FROM [dbo].[v_DetailedSelect] AS [v_DetailedSelect]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_info_Equipment" EntityType="Self.V_info_Equipment" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [V_info_Equipment].[EID] AS [EID], 
@@ -781,6 +817,10 @@
             <End Role="PiShiJieGuo" EntitySet="PiShiJieGuo" />
             <End Role="info_ComputerRoomVisit" EntitySet="info_ComputerRoomVisit" />
           </AssociationSet>
+          <AssociationSet Name="FK_info_Equipment_info_Asset" Association="Self.FK_info_Equipment_info_Asset">
+            <End Role="info_Asset" EntitySet="info_Asset" />
+            <End Role="info_Equipment" EntitySet="info_Equipment" />
+          </AssociationSet>
           <AssociationSet Name="FK_info_Registration_info_Software" Association="Self.FK_info_Registration_info_Software">
             <End Role="info_Software" EntitySet="info_Software" />
             <End Role="info_Registration" EntitySet="info_Registration" />
@@ -802,8 +842,7 @@
             <End Role="info_Permission" EntitySet="info_Permission" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InformationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -846,7 +885,7 @@
           <Property Name="AYears" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AExplain" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ASupplerPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AShenHeRan" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AShenHeRan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AShenHeYiJian" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AShenHeJieGuo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AShenHeRiQi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -855,6 +894,7 @@
           <NavigationProperty Name="PiShiJieGuo" Relationship="Self.FK_info_Asset_PiShiJieGuo" FromRole="info_Asset" ToRole="PiShiJieGuo" />
           <NavigationProperty Name="ZiChanBeiZhu" Relationship="Self.FK_info_Asset_ZiChanBeiZhu" FromRole="info_Asset" ToRole="ZiChanBeiZhu" />
           <NavigationProperty Name="ZiChanZhuangTai" Relationship="Self.FK_info_Asset_ZiChanZhuangTai" FromRole="info_Asset" ToRole="ZiChanZhuangTai" />
+          <NavigationProperty Name="info_Equipment" Relationship="InformationModel.FK_info_Equipment_info_Asset" FromRole="info_Asset" ToRole="info_Equipment" />
         </EntityType>
         <EntityType Name="info_Check">
           <Key>
@@ -913,6 +953,7 @@
           <Property Name="EPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Econtact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="info_Asset" Relationship="InformationModel.FK_info_Equipment_info_Asset" FromRole="info_Equipment" ToRole="info_Asset" />
         </EntityType>
         <EntityType Name="info_Equipments">
           <Key>
@@ -1491,7 +1532,36 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="v_DetailedSelect" EntityType="InformationModel.v_DetailedSelect" />
+          <AssociationSet Name="FK_info_Equipment_info_Asset" Association="InformationModel.FK_info_Equipment_info_Asset">
+            <End Role="info_Asset" EntitySet="info_Asset" />
+            <End Role="info_Equipment" EntitySet="info_Equipment" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="v_DetailedSelect">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="checked" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="text" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pid" Type="Int32" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="checked" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_info_Equipment_info_Asset">
+          <End Type="InformationModel.info_Asset" Role="info_Asset" Multiplicity="0..1" />
+          <End Type="InformationModel.info_Equipment" Role="info_Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="info_Asset">
+              <PropertyRef Name="AID" />
+            </Principal>
+            <Dependent Role="info_Equipment">
+              <PropertyRef Name="EAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1954,6 +2024,18 @@
           <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="InformationModel.Store.sp_helpdiagrams" />
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="InformationModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="InformationModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="v_DetailedSelect">
+            <EntityTypeMapping TypeName="InformationModel.v_DetailedSelect">
+              <MappingFragment StoreEntitySet="v_DetailedSelect">
+                <ScalarProperty Name="checked" ColumnName="checked" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="ProAddress" ColumnName="ProAddress" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

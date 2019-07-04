@@ -58,6 +58,7 @@ namespace Entity
         public virtual DbSet<v_info_Technology> v_info_Technology { get; set; }
         public virtual DbSet<v_Maintenance> v_Maintenance { get; set; }
         public virtual DbSet<v_User> v_User { get; set; }
+        public virtual DbSet<v_DetailedSelect> v_DetailedSelect { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
