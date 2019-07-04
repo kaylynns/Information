@@ -8,11 +8,12 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>IndexR</title>
+    <title>业务系统使用审核</title>
     <link href="~/css/bootstrap.css" rel="stylesheet" />
     <link href="~/css/css.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.11.1.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/TableJs.js"></script>@*表格js样式*@
 
     <style type="text/css">
         .t1 {
@@ -80,7 +81,7 @@
 
             function show() {
                 $.ajax({
-                    url: "/Registration/Index2",
+                    url: "/Registration/IndexRs",
                     type: "post",
                     data: "currentpage=" + currentPage,
                     success: function (msg) {
@@ -100,7 +101,7 @@
             function fileTable(dt) {
                 $("#ListArea tr:gt(0)").remove();//清空表格
                 for (var i = 0; i < dt.length; i++) {
-                    var $tr = $("<tr></tr>");
+                    var $tr = $("<tr id='cc'></tr>");
                     var $td2 = $("<td>" + dt[i]["SID"] + "</td>");
                     var $td3 = $("<td>" + dt[i]["RName"] + "</td>");
                     var $td4 = $("<td>" + dt[i]["ROffice"] + "</td>");
@@ -195,7 +196,7 @@
     </script>
 </head>
 <body>
-    <h2 align="center" style="font-size:25px;font-weight:bold"> 业务系统使用申请表 </h2>
+    <h2 align="center" style="font-size:25px;font-weight:bold"> 业务系统使用审核 </h2>
     <div>
         软件名称：<input id="Text1" type="text" Width="240" />
         &nbsp;

@@ -24,6 +24,8 @@ namespace information.Controllers
         lIEquipmentBll shebei = IocCreate.CreateAll<IEquipmentService>("JiFangSheBeiTwo", "IEquipmentService");
         //用户表
         IUserBll iud = IocCreate.CreateAll<UserService>("UserTwo", "UserService");
+        IRegistrationBll ird = IocContainer.IocCreate.CreateAll<RegistrationService>("RegistrationTwo", "RegistrationService");//业务系统
+
         // GET: ChaXunXiTong
         //查询系统机房进出查询视图
         public ActionResult Index()
@@ -78,7 +80,7 @@ namespace information.Controllers
             List<info_Meeting> dt;
             if (names == null || names.Equals("") || names.Equals("undefined"))
             {
-                dt = imb.FenYe(e => e.MID, e => e.MID == 2, out rows, currentpage, 3);
+                dt = imb.FenYe(e => e.MID, e => e.MID >0, out rows, currentpage, 3);
             }
             else
             {
@@ -175,6 +177,34 @@ namespace information.Controllers
             var eaid = ts.EAID;
             ViewBag.leibiao = iab.SelectWhere(e => e.AID == eaid);
             return View(ts);
+        }
+
+        //业务系统使用查询视图
+        public ActionResult IndexR() {
+            return View();
+        }
+
+        //业务系统使用查询
+        public ActionResult IndexRs(int currentpage, string names, string rname)
+        {
+            int rows;
+            List<v_info_Registration> dt;
+            if (names == null && rname == null)
+            {
+                dt = ird.v_MainAll(e => e.RID, e => e.RID > 0, out rows, currentpage, 3);
+            }
+            else
+            {
+
+                //  dt = imb.FenYe(e => e.MID, e => e.MName.Contains(names), out rows, currentpage, 3);
+                dt = ird.v_MainAll(e => e.RID, e => e.SID.Contains(names) && e.RName.Contains(rname), out rows, currentpage, 3);
+            }
+            Dictionary<string, object> dir = new Dictionary<string, object>();
+            dir.Add("dt", dt);
+            dir.Add("rows", rows);
+            dir.Add("currentpage", rows % 2 > 0 ? (rows / 2) + 1 : (rows / 2));
+            dir.Add("pages", (rows - 1) / 3 + 1);
+            return Content(JsonConvert.SerializeObject(dir));
         }
     }
 }

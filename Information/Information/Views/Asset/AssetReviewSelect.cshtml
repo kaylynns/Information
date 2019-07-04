@@ -14,7 +14,7 @@
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/vue.js"></script>
-   
+    <script src="~/Scripts/TableJs.js"></script>@*表格js样式*@
     <style type="text/css">
         .t1 {
             clear: both;
@@ -231,7 +231,7 @@
                 <td>审核状态</td>
                 <td>操作</td>
             </tr>
-            <tr v-for="(item,i) in nums">
+            <tr v-for="(item,i) in nums" id="cc">
                 <td>{{item.AID}}</td>
                 <td>{{item.ATypeId}}</td>
                 <td>{{item.AName}}</td>
@@ -251,7 +251,7 @@
                 <td v-else="item.CRelustID===''">{{item.CRelustID}}</td>
 
 
-                <td v-if="item.CRelustID!='待审核'" :style="{visibility: 'hidden'}"><a>操作</a></td>
+                <td v-if="item.CRelustID!='待审核'" ><a :style="{visibility: 'hidden'}">操作</a></td>
                 <td v-else="item.CRelustID==='待审核'"><a v-bind:href="['/Asset/AssetReviewEdit/'+item.AID]">操作</a></td>
             </tr>
 

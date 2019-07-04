@@ -498,7 +498,7 @@ namespace information.Controllers
              var aid = iab.SelectAll();
             foreach (var item in aid)
             {
-                if (item.AID == id)
+                if (item.SID == id)
                 {
                     return Content("<script>alert('正在使用中，不能删除');window.location.href='/systems/shoppingselect'</script>");
 
@@ -525,34 +525,6 @@ namespace information.Controllers
         #endregion
 
 
-        // GET: Systems/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-    
-        // GET: Systems/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-
-        // POST: Systems/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
     }
 }

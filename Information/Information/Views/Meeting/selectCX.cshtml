@@ -14,6 +14,8 @@
     <link href="~/css/bootstrap.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/TableJs.js"></script>@*表格js样式*@
+    @*表格显示样式*@
     <style type="text/css">
         .t1 {
             clear: both;
@@ -61,20 +63,14 @@
         }
     </style>
 
+   
+  
 
 
     <script type="text/javascript">
 
         $(document).ready(function () {
-            $(".t1 tr").mouseover(function () {
-                //如果鼠标移到class为stripe的表格的tr上时，执行函数
-                $(this).addClass("over");
-            }).mouseout(function () {
-                //给这行添加class值为over，并且当鼠标一出该行时执行函数
-                $(this).removeClass("over");
-            }) //移除该行的class
-            $(".t1 tr:even").addClass("alt");
-            //给class为stripe的表格的偶数行添加class值为alt
+           
 
             //清除
             $("#btn_clear").click(function () {
@@ -108,7 +104,7 @@
             function fileTable(dt) {
                 $("#ListArea tr:gt(0)").remove();//清空表格
                 for (var i = 0; i < dt.length; i++) {
-                    var $tr = $("<tr></tr>");
+                    var $tr = $("<tr id='cc'></tr>");
                     var $td1 = $("<td id='aa'>" + dt[i]["MName"] + "</td>");
                     var $td2 = $("<td>" + dt[i]["Mstart"] + "</td>");
                     var $td3 = $("<td>" + dt[i]["MOwer"] + "</td>");
@@ -123,13 +119,14 @@
                         $td8 = $("<td style='color:blue;'>未签字</td>");
                     } else if (dt[i]["QZ"] == "2") {
                         $td8 = $("<td style='color:green;'>已签字</td>");
-                    } 
+                    }
                     $tr.append($td1, $td2, $td3, $td4, $td5, $td7, $td8,$td9);
                     $("#ListArea").append($tr);
 
                     }
-              }
+            }
 
+            
 
             //模糊查询
             $("#Button1").click(function () {
@@ -200,10 +197,6 @@
                 })
 
             });
-
-
-
-
     </script>
 
 </head>

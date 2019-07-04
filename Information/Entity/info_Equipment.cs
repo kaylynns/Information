@@ -27,5 +27,7 @@ namespace Entity
         public string EPhone { get; set; }
         public string Econtact { get; set; }
         public string EIP { get; set; }
+    
+        public virtual info_Asset info_Asset { get; set; }
     }
 }

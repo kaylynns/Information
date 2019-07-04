@@ -231,7 +231,7 @@ namespace information.Controllers
         public ActionResult AssetRepairSelectFen(int currentPage, string AType, string AName, string TName)
         {
             //currentPage：当前页 pageSize:显示几页,rows:总记录数,pages总页数
-            var pageSize = 2;
+            var pageSize = 3;
             int rows;
 
             List<v_Asset> dt;
@@ -310,7 +310,7 @@ namespace information.Controllers
         public ActionResult AssetReviewFen(int currentPage, string AType, string AName, string TName)
         {
             //currentPage：当前页 pageSize:显示几页,rows:总记录数,pages总页数
-            var pageSize = 2;
+            var pageSize = 3;
             int rows;
 
             List<v_Asset> dt;
@@ -384,7 +384,7 @@ namespace information.Controllers
         public ActionResult AssetStatusSelectFen(int currentPage, string AType, string AName, string TName)
         {
             //currentPage：当前页 pageSize:显示几页,rows:总记录数,pages总页数
-            var pageSize = 2;
+            var pageSize = 3;
             int rows;
 
             List<v_Asset> dt;

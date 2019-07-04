@@ -22,7 +22,7 @@ namespace Entity
             this.info_Registration = new HashSet<info_Registration>();
             this.info_Technology = new HashSet<info_Technology>();
         }
-        [DataMember]
+       [DataMember]
         public int SID { get; set; }
         [DataMember]
         public string Sdynacomm { get; set; }

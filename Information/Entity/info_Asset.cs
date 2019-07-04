@@ -21,7 +21,6 @@ namespace Entity
         {
             this.info_Equipment = new HashSet<info_Equipment>();
         }
-    
         [DataMember]
         public int AID { get; set; }
         [DataMember]

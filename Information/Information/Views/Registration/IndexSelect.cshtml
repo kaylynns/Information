@@ -110,11 +110,8 @@
             //首页
             $("#first").click(function () {
                 currentPage = 1;
-                if (names != null) {
-                    Mshow()
-                } else {
                     show();
-                }
+               
             })
 
             //上一页
@@ -122,11 +119,8 @@
                 if (currentPage > 1) {
                     currentPage--;
                 }
-                if (names != null) {
-                    Mshow()
-                } else {
                     show();
-                }
+              
             })
 
             //下一页
@@ -135,21 +129,16 @@
                     currentPage++;
                 }
 
-                if (names != null) {
-                    Mshow()
-                } else {
                     show();
-                }
+                
             })
 
             //尾页
             $("#last").click(function () {
                 currentPage = pages;
-                if (names != null) {
-                    Mshow()
-                } else {
+          
                     show();
-                }
+              
             })
 
         })

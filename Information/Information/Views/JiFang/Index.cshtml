@@ -12,7 +12,8 @@
         <title>机房进出申请</title>
         <link href="~/css/css.css" rel="stylesheet" />
         <script src="~/Scripts/jquery-1.11.1.js"></script>
-
+        <script src="~/Scripts/TableJs.js"></script>@*表格js样式*@
+        @*表格显示样式*@
         <style type="text/css">
             .t1 {
                 clear: both;
@@ -90,7 +91,7 @@
             function XunHuan(datas) {
                 $("#ListArea tr:gt(0)").remove();
                 for (var i = 0; i < datas.length; i++) {
-                    var $tr = $("<tr></tr>");
+                    var $tr = $("<tr id='cc'></tr>");
                     var $td = $("<td>" + datas[i]["CTIme"] + "</td>");
                     var $td2 = $("<td>" + datas[i]["Cause"] + "</td>");
                     var $td3 = $("<td>" + datas[i]["CName"] + "</td>");
@@ -156,7 +157,7 @@
             <table width="100%" id="ListArea" border="0" class="t1" align="center" cellpadding="0"
                    cellspacing="0" h>
                 <tr align="center">
-                    <td> 来访日期</td>
+                    <td>来访日期</td>
                     <td>来访事由</td>
                     <td>来访人员</td>
                     <td>携带物品</td>
