@@ -12,13 +12,6 @@
     <link href="~/css/css.css" rel="stylesheet" />
     <script src="~/DatePicker/WdatePicker.js"></script>
     <style type="text/css">
-        input {
-            outline: none;
-            background: transparent;
-            border: none;
-            outline: medium;
-        }
-
         .JiaCu input {
             font-weight: 800;
         }
@@ -39,16 +32,11 @@
                 <td align="left" style="height: 30px">
                     登记人：
                 </td>
-                <td align="left">                   
+                <td align="left" colspan="3">                   
                     @ViewData["DengJiren"]
-                </td>
-                <td align="left">
                     @Html.HiddenFor(model => model.CID, htmlAttributes: new { @class = "control-label col-md-2" })
-                    &nbsp;
                 </td>
-                <td align="left">
-                    &nbsp;
-                </td>
+               
             </tr>
             <tr>
                 <td style="height: 30px" align="left">

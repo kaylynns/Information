@@ -22,7 +22,6 @@ namespace Entity
             this.info_Asset = new HashSet<info_Asset>();
         }
         [DataMember]
-    
         public int SID { get; set; }
         [DataMember]
         public string SName { get; set; }

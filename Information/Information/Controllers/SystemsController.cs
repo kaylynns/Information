@@ -586,7 +586,7 @@ namespace information.Controllers
              var aid = iab.SelectAll();
             foreach (var item in aid)
             {
-                if (item.AID == id)
+                if (item.SID == id)
                 {
                     return Content("<script>alert('正在使用中，不能删除');window.location.href='/systems/shoppingselect'</script>");
 

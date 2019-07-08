@@ -14,7 +14,7 @@ namespace information.Views.JiFang
     public class WhuWxiuController : Controller
     {
         IUserBll iud = IocCreate.CreateAll<UserService>("UserTwo", "UserService");
-        IComputerRoomVisitBll lcr = IocCreate.CreateAll<ComputerRoomVisitService>("ComputerRoomVisitTwo", "ComputerRoomVisitService");
+        IComputerRoomVisitBll lcr = IocCreate.CreateAll<ComputerRoomVisitService>("ComputerRoomVisitTwo", "ComputerRoomVisitService");//机房进出查询
         IMaintenanceBll img = IocContainer.IocCreate.CreateAll<MaintenanceService>("MaintenanceTwo", "MaintenanceService");
         ICheckBll icb = IocContainer.IocCreate.CreateAll<CheckService>("CheckTwo", "CheckService");
         IAssetBll iab = IocCreate.CreateAll<AssetService>("AssetTwo", "AssetService");
@@ -63,7 +63,7 @@ namespace information.Views.JiFang
         public List<SelectListItem> FillClass()
         {
             List<SelectListItem> list = new List<SelectListItem>();
-            List<Entity.info_ComputerRoomVisit> lists = lcr.SelelctAll();
+            List<Entity.info_ComputerRoomVisit> lists = lcr.SelectWheres(e => e.CRelustID == 2);
             foreach (Entity.info_ComputerRoomVisit dr in lists)
             {
                 SelectListItem sl = new SelectListItem()

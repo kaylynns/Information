@@ -29,7 +29,7 @@ namespace information.Controllers
             List<v_info_Registration> dt;
             if (names == null  && rname == null )
             {
-                dt = ird.v_MainAll(e => e.RID, e => e.RID > 0, out rows, currentpage, 3);
+                dt = ird.v_MainAll(e => e.RID, e => e.RState=="审核成功", out rows, currentpage, 3);
             }
             else
             {
@@ -50,6 +50,29 @@ namespace information.Controllers
         public ActionResult IndexR()
         {
             return View();
+        }
+
+        //业务系统使用审核
+        public ActionResult IndexRs(int currentpage, string names, string rname)
+        {
+            int rows;
+            List<v_info_Registration> dt;
+            if (names == null && rname == null)
+            {
+                dt = ird.v_MainAll(e => e.RID, e =>e.RID>0, out rows, currentpage, 3);
+            }
+            else
+            {
+
+                //  dt = imb.FenYe(e => e.MID, e => e.MName.Contains(names), out rows, currentpage, 3);
+                dt = ird.v_MainAll(e => e.RID, e => e.SID.Contains(names) && e.RName.Contains(rname), out rows, currentpage, 3);
+            }
+            Dictionary<string, object> dir = new Dictionary<string, object>();
+            dir.Add("dt", dt);
+            dir.Add("rows", rows);
+            dir.Add("currentpage", rows % 2 > 0 ? (rows / 2) + 1 : (rows / 2));
+            dir.Add("pages", (rows - 1) / 3 + 1);
+            return Content(JsonConvert.SerializeObject(dir));
         }
 
         //业务系统查询

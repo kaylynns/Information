@@ -12,6 +12,7 @@
     <link href="~/css/css.css" rel="stylesheet" />
     <link href="~/css/bootstrap.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/TableJs.js"></script>@*表格js样式*@
     <style type="text/css">
         .t1 {
             clear: both;
@@ -97,7 +98,7 @@
         function XunHuan(datas) {
             $("#ListArea tr:gt(0)").remove();
             for (var i = 0; i < datas.length; i++) {
-                var $tr = $("<tr></tr>");
+                var $tr = $("<tr id='cc'></tr>");
                 var $td = $("<td>" + datas[i]["MaintenanceTime"] + "</td>");
                 var $td2 = $("<td>" + datas[i]["MDeviceName"] + "</td>");
                 var $td3 = $("<td>" + datas[i]["MDetectionUnit"] + "</td>");

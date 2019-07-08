@@ -11,6 +11,7 @@
     <title>机房设备管理表</title>
     <link href="~/css/css.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.11.1.js"></script>
+    <script src="~/Scripts/TableJs.js"></script>@*表格js样式*@
     <style type="text/css">
         .t1 {
             clear: both;
@@ -105,7 +106,7 @@
             function XunHuan(datas) {
                 $("#ListArea tr:gt(0)").remove();
                 for (var i = 0; i < datas.length; i++) {
-                    var $tr = $("<tr id='hang'></tr>");
+                    var $tr = $("<tr id='cc'></tr>");
                     var $td = $("<td >" + datas[i]["EquipmentModel"] + "</td>");
                     var $td2 = $("<td>" + datas[i]["EAID"] + "</td>");
                     var $td3 = $("<td>" + datas[i]["Eoffice"] + "</td>");
