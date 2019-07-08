@@ -314,6 +314,7 @@
           <Property Name="CRelustID" Type="nvarchar" MaxLength="50" />
           <Property Name="AYears" Type="varchar" MaxLength="50" />
           <Property Name="AExplain" Type="varchar" MaxLength="100" />
+          <Property Name="ASupplerPhone" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“Information.dbo.V_ComputerRoomVisit”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -677,7 +678,8 @@
     [v_Asset].[TID] AS [TID], 
     [v_Asset].[CRelustID] AS [CRelustID], 
     [v_Asset].[AYears] AS [AYears], 
-    [v_Asset].[AExplain] AS [AExplain]
+    [v_Asset].[AExplain] AS [AExplain], 
+    [v_Asset].[ASupplerPhone] AS [ASupplerPhone]
     FROM [dbo].[v_Asset] AS [v_Asset]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_ComputerRoomVisit" EntityType="Self.V_ComputerRoomVisit" store:Type="Views" store:Schema="dbo">
@@ -1177,6 +1179,7 @@
           <Property Name="CRelustID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AYears" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AExplain" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ASupplerPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="V_ComputerRoomVisit">
           <Key>
@@ -1879,6 +1882,7 @@
           <EntitySetMapping Name="v_Asset">
             <EntityTypeMapping TypeName="InformationModel.v_Asset">
               <MappingFragment StoreEntitySet="v_Asset">
+                <ScalarProperty Name="ASupplerPhone" ColumnName="ASupplerPhone" />
                 <ScalarProperty Name="AID" ColumnName="AID" />
                 <ScalarProperty Name="AName" ColumnName="AName" />
                 <ScalarProperty Name="ATypeId" ColumnName="ATypeId" />

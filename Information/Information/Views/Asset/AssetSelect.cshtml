@@ -90,6 +90,7 @@
                                 var rows = dt["rows"];
                                 pages = dt["pages"];
                                 $("#leftPage").text("共有" + rows + "条记录，当前第" + currentPage + "/" + pages + "页");
+                               
                             }
                         })
                     }
@@ -134,6 +135,12 @@
                 AType = $("#txt_type").val();
                 AName = $("#txt_name").val();
                 vm.load(currentPage, AType, AName);
+            })
+            //清空
+            $("#QingKong").click(function () {
+                //给查询的文本框清空
+                $("#txt_type").val("");
+                $("#txt_name").val("");
             })
           
         })
@@ -202,6 +209,7 @@
 
                     <td> 资产名称：<input id="txt_name" type="text" /></td>
                     <td><input type="button" value="查询" id="btn_select"Class="btn1" style="margin-left:10px" /></td>
+                    <td><input type="button" value="清空" id="QingKong" Class="btn1" style="margin-left:10px" /></td>
                     <td><input id="Button1" type="button" value="添加" ID="btn_Add" OnClick="window.location.href = '/Asset/AssetCreate'" Class="btn1" style="margin-left:10px" /></td>
                 </tr>
             </table>
@@ -239,7 +247,7 @@
         <div id="pageDiv">
             <div id="leftPage" style="color:#3C8ABC;padding-top:10px"></div>
             <div id="rightPage" style="float:right;position:relative;bottom:20px;">
-                <input type="button" value="首页" OnClick="btn_select_Click" Class="btn1" id="first" />&nbsp;&nbsp;
+                <input type="button" value="首页" Class="btn1" id="first" />&nbsp;&nbsp;
                 <input type="button" value="上一页" Class="btn1" id="prev" />&nbsp;&nbsp;
                 <input type="button" value="下一页" Class="btn1" id="next" />&nbsp;&nbsp;
                 <input type="button" value="尾页" Class="btn1" id="last" />&nbsp;&nbsp;

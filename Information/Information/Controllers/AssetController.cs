@@ -29,7 +29,7 @@ namespace information.Controllers
             return View();
         }
         //资产登记页面分页查询
-           public ActionResult AssetSelectFen(int currentPage, string AType, string AName)
+        public ActionResult AssetSelectFen(int currentPage, string AType, string AName)
         {
             //currentPage：当前页 pageSize:显示几页,rows:总记录数,pages总页数
             var pageSize = 3;
@@ -38,12 +38,12 @@ namespace information.Controllers
             if (AType == "" && AType == null || AName == "" && AName == null)
             {
                 //普通查询
-                dt = iab.SelectV_Asset(e => e.AID, e => e.AID > 0, out rows, currentPage, pageSize);
+                dt = iab.SelectV_Asset(e => e.AID, e => e.TID == "使用中", out rows, currentPage, pageSize);
             }
             else
             {
                 //带条件查询
-                dt = iab.SelectV_Asset(e => e.AID, e => e.ATypeId.Contains(AType) && e.AName.Contains(AName), out rows, currentPage, pageSize);
+                dt = iab.SelectV_Asset(e => e.AID, e => e.ATypeId.Contains(AType) && e.AName.Contains(AName) && e.TID == "使用中", out rows, currentPage, pageSize);
             }
 
 
@@ -149,7 +149,7 @@ namespace information.Controllers
             var JID = asset.JID;  //获取采购依据
             var jname = icgyjb.SelectWhere(f => f.JID == JID); //根据采购依据进行查询
             ViewBag.jname = jname; //将查询结果存入viewBag
-            
+
             return View(asset);
         }
 
@@ -244,7 +244,7 @@ namespace information.Controllers
             else
             {
                 //带条件查询
-                dt = iab.SelectV_Asset(e => e.AID, e => e.ATypeId.Contains(AType) && e.AName.Contains(AName) && e.TID.Contains(TName), out rows, currentPage, pageSize);
+                dt = iab.SelectV_Asset(e => e.AID, e => e.ATypeId.Contains(AType) && e.AName.Contains(AName) && e.TID.Contains(TName) && e.TID == "使用中", out rows, currentPage, pageSize);
             }
 
             // var dt = iab.SelectV_Asset(e => e.AID, e => e.AID > 0, out rows, currentPage, pageSize);
@@ -318,12 +318,12 @@ namespace information.Controllers
             if (AType == "" && AType == null || AName == "" && AName == null || TName == "" && TName == null)
             {
                 //普通查询
-                dt = iab.SelectV_Asset(e => e.AID, e => e.CRelustID=="待审核", out rows, currentPage, pageSize);
+                dt = iab.SelectV_Asset(e => e.AID, e => e.CRelustID == "待审核", out rows, currentPage, pageSize);
             }
             else
             {
                 //带条件查询
-                dt = iab.SelectV_Asset(e => e.AID,e => e.ATypeId.Contains(AType) && e.AName.Contains(AName) && e.TID.Contains(TName)&&e.CRelustID.Contains("待审核"), out rows, currentPage, pageSize);
+                dt = iab.SelectV_Asset(e => e.AID, e => e.ATypeId.Contains(AType) && e.AName.Contains(AName) && e.TID.Contains(TName) && e.CRelustID.Contains("待审核"), out rows, currentPage, pageSize);
             }
 
             // var dt = iab.SelectV_Asset(e => e.AID, e => e.AID > 0, out rows, currentPage, pageSize);
@@ -354,7 +354,7 @@ namespace information.Controllers
         //进入资产审核申请操作页面（进行修改操作）
         public ActionResult AssetReviewEdits(info_Asset asset)
         {
-          // asset.AShenHeRan = Session["UserRealName"].ToString();
+            asset.AShenHeRan = Session["UserRealName"].ToString();
             asset.AShenHeRiQi = DateTime.Now.ToString();
             if (asset.AShenHeJieGuo == "同意")
             {
@@ -363,6 +363,49 @@ namespace information.Controllers
             else if (asset.AShenHeJieGuo == "不同意")
             {
                 asset.CRelustID = 3;
+                asset.TID = 1;
+              
+
+            }
+            if (iab.Update(asset) > 0)
+            {
+                return Content("<script>alert('审核成功');window.location.href='/Asset/AssetReviewSelect'</script>");
+            }
+            else
+            {
+                return Content("<script>alert('修改失败');window.location.href='/Asset/AssetReviewSelect'</script>");
+            }
+        }
+
+        //资产的审核的维修(进入维修的操作页面)
+        public ActionResult AssetReviewXiuEdit(int id)
+        {
+            var dt = iab.SelectWhere(e => e.AID == id).FirstOrDefault();
+            var ATypeId = dt.ATypeId;//资产类别
+            var JID = dt.JID;//采购依据
+            var SID = dt.SID;//采购形式
+            ViewBag.ATypeId = izcbzb.SelectWhere(e => e.ATypeId == ATypeId);
+            ViewBag.JID = icgyjb.SelectWhere(e => e.JID == JID);
+            ViewBag.SID = icgxsb.SelectWhere(e => e.SID == SID);
+            return View(dt);
+        }
+
+
+
+        //资产的审核的维修(进行维修的修改)
+        public ActionResult AssetReviewXiuEdits(info_Asset asset)
+        {
+            // asset.AShenHeRan = Session["UserRealName"].ToString();
+            asset.AShenHeRiQi = DateTime.Now.ToString();
+            if (asset.AShenHeJieGuo == "同意")
+            {
+                asset.CRelustID = 2;
+                asset.TID = 1;
+            }
+            else if (asset.AShenHeJieGuo == "不同意")
+            {
+                asset.CRelustID = 3;
+                asset.TID = 2;
             }
             if (iab.Update(asset) > 0)
             {
@@ -373,8 +416,8 @@ namespace information.Controllers
                 return Content("<script>alert('修改成功');window.location.href='/Asset/AssetReviewSelect'</script>");
             }
         }
-        #endregion
 
+        #endregion
         #region 资产报废停用维修查询
         //进入资产报废停用维修查询页面
         public ActionResult AssetStatusSelect() {

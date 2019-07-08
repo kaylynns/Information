@@ -22,7 +22,7 @@ namespace Entity
             this.info_Permission = new HashSet<info_Permission>();
             this.info_User = new HashSet<info_User>();
         }
-        [DataMember]
+      [DataMember]
         public int RoleID { get; set; }
         [DataMember]
         public string RoleName { get; set; }

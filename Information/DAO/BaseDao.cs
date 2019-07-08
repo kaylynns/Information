@@ -21,8 +21,9 @@ namespace DAO
             return ce.Set<T>().Select(e => e).ToList();
         }
         public List<T> SelectWhere(Expression<Func<T, bool>> where)
-        {
-            return ce.Set<T>().Where(where)
+        {//AsNoTracking() :返回一个新查询，其中返回的实体类不会在dbcontext中进行缓存
+            return ce.Set<T>()
+                  .AsNoTracking().Where(where)
                   .Select(e => e)
                   .ToList();
         }

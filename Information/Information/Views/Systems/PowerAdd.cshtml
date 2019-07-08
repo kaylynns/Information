@@ -48,12 +48,12 @@
                 var nodes1 = $('#tt').tree('getChecked', 'indeterminate');//获取半勾
 
                 var nodes1 = $("#tt").tree("getChecked", "indeterminate");//获取半勾的
-                for (var i = 0; i < nodes1.length; i++) {//循环选中
+                for (var i = 0; i < nodes1.length; i++) {//循环选中    
                     qid += nodes1[i].id + ",";
                 }
                 //获取修改后的qid,截取逗号后面的
                 qid = qid.substring(0, qid.length - 1);
-                for (var i = 0; i < rid; i++) {
+                
                       $.ajax({
                           url: "/Systems/PowerAddss?rid="+rid+"&qid="+qid,
                            type: "post",
@@ -68,7 +68,7 @@
 
                       }
                     });//DELajax
-                }//for
+              
             })//click
 
 
