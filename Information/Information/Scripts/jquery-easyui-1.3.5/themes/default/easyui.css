@@ -2061,16 +2061,16 @@ a.s-btn-plain-active {
   overflow: hidden;
 }
 .tree-expanded {
-  background: url('images/tree_icons.png') no-repeat -18px 0px;
+  background: url('images/tree_icons.png')  no-repeat -18px 0px;
 }
 .tree-expanded-hover {
-  background: url('images/tree_icons.png') no-repeat -50px 0px;
+  background: url('images/tree_icons.png')  no-repeat -50px 0px;
 }
 .tree-collapsed {
-  background: url('images/tree_icons.png') no-repeat 0px 0px;
+  background:url('images/tree_icons.png')  no-repeat -2px 0px;
 }
 .tree-collapsed-hover {
-  background: url('images/tree_icons.png') no-repeat -32px 0px;
+  background:url('images/tree_icons.png')  no-repeat -32px 0px;
 }
 .tree-lines .tree-expanded,
 .tree-lines .tree-root-first .tree-expanded {
@@ -2098,13 +2098,13 @@ a.s-btn-plain-active {
   background: url('images/tree_icons.png') no-repeat -160px 0;
 }
 .tree-folder {
-  background: url('images/tree_icons.png') no-repeat -208px 0;
+  background:  url('../../../../Image/in.png') repeat-x -238px 0;
 }
 .tree-folder-open {
-  background: url('images/tree_icons.png') no-repeat -224px 0;
+    background: url('../../../../Image/in.png') repeat-x -222px ;
 }
 .tree-file {
-  background: url('images/tree_icons.png') no-repeat -240px 0;
+  background:url('../../../../Image/zls.png') repeat-x -240px 0;
 }
 .tree-loading {
   background: url('images/loading.gif') no-repeat center center;
@@ -2181,7 +2181,7 @@ a.s-btn-plain-active {
   color: #000000;
 }
 .tree-node-selected {
-  background: #FBEC88;
+  background-color:#E0ECFF;
   color: #000000;
 }
 .validatebox-invalid {

@@ -68,28 +68,7 @@
               text-align:center;
              }
     </style>
-    <script type="text/javascript">
-        $(function () {
-
-            $.ajax({
-                url: "/WhuWuxiuSelectAll/selectJC",
-                type: "post",
-                success: function (msg) {
-                    var datas = eval("(" + msg + ")");
-                    $("#jcT tr:gt(0)").remove();
-                    for (var i = 0; i < datas.length; i++) {
-                        var $tr = $('<tr class="aa" align="center"></tr>');
-                        var $td = $('<td>  <input id="pro" type="text" Width="240" value=' + datas[i]["project"] + '></td>');
-                        var $td2 = $('<td>  <input id="res" type="text" Width="240" value=' + datas[i]["result"] + '></td>');
-
-                        $tr.append($td, $td2);
-                        $("#jcT").append($tr);
-                    }
-                }
-            })
-        })
-
-    </script>
+    
 </head>
 <body>
     <h2  align="center" style="font-size:25px;font-weight:bold">设备维护查询</h2>
@@ -116,19 +95,7 @@
             <td>@Html.EditorFor(model => model.MAccompanyingOfficials, new { @readonly = "readonly" })</td>
         </tr>
         <tr></tr>
-        <tr>
-            <td colspan="2">
-                <table width="100%" id="jcT" border="0" class="t1" align="center" cellpadding="0"
-                       cellspacing="0">
-
-                    <tr id="head">
-                        <td>检测项目</td>
-                        <td>检测结果</td>
-                    </tr>
-
-                </table>
-            </td>
-        </tr>
+       
         <tr>
             <td colspan="2"></td>
         </tr>

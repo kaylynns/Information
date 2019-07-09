@@ -105,21 +105,8 @@ namespace information.Controllers
 
         }
 
-        public ActionResult selectJC()
-        {
-            List<info_Check> ics = icb.SelectAll();
-            return Content(JsonConvert.SerializeObject(ics));
-        }
 
-        //设备维护查询页面的检测查询
-
-        public ActionResult DetectionSelect()
-        {
-            List<info_Check> ics = icb.SelectAll();
-            return Content(JsonConvert.SerializeObject(ics));
-        }
-
-
+     
 
     
 }

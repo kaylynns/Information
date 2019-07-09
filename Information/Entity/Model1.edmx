@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="InformationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="InformationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CaiGouXingShi">
           <Key>
             <PropertyRef Name="SID" />
@@ -46,14 +46,6 @@
           <Property Name="AShenHeYiJian" Type="varchar" MaxLength="50" />
           <Property Name="AShenHeJieGuo" Type="varchar" MaxLength="50" />
           <Property Name="AShenHeRiQi" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="info_Check">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="project" Type="varchar" MaxLength="50" />
-          <Property Name="result" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="info_ComputerRoomVisit">
           <Key>
@@ -314,6 +306,7 @@
           <Property Name="CRelustID" Type="nvarchar" MaxLength="50" />
           <Property Name="AYears" Type="varchar" MaxLength="50" />
           <Property Name="AExplain" Type="varchar" MaxLength="100" />
+          <Property Name="ASupplerPhone" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“Information.dbo.V_ComputerRoomVisit”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -607,7 +600,6 @@
           <EntitySet Name="CaiGouXingShi" EntityType="Self.CaiGouXingShi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CaiGouYiJu" EntityType="Self.CaiGouYiJu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="info_Asset" EntityType="Self.info_Asset" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="info_Check" EntityType="Self.info_Check" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="info_ComputerRoomVisit" EntityType="Self.info_ComputerRoomVisit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="info_Detailed" EntityType="Self.info_Detailed" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="info_Equipment" EntityType="Self.info_Equipment" Schema="dbo" store:Type="Tables" />
@@ -646,7 +638,8 @@
     [v_Asset].[TID] AS [TID], 
     [v_Asset].[CRelustID] AS [CRelustID], 
     [v_Asset].[AYears] AS [AYears], 
-    [v_Asset].[AExplain] AS [AExplain]
+    [v_Asset].[AExplain] AS [AExplain], 
+    [v_Asset].[ASupplerPhone] AS [ASupplerPhone]
     FROM [dbo].[v_Asset] AS [v_Asset]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_ComputerRoomVisit" EntityType="Self.V_ComputerRoomVisit" store:Type="Views" store:Schema="dbo">
@@ -811,8 +804,7 @@
             <End Role="info_Permission" EntitySet="info_Permission" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InformationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -865,14 +857,6 @@
           <NavigationProperty Name="ZiChanBeiZhu" Relationship="Self.FK_info_Asset_ZiChanBeiZhu" FromRole="info_Asset" ToRole="ZiChanBeiZhu" />
           <NavigationProperty Name="ZiChanZhuangTai" Relationship="Self.FK_info_Asset_ZiChanZhuangTai" FromRole="info_Asset" ToRole="ZiChanZhuangTai" />
           <NavigationProperty Name="info_Equipment" Relationship="Self.FK_info_Equipment_info_Asset" FromRole="info_Asset" ToRole="info_Equipment" />
-        </EntityType>
-        <EntityType Name="info_Check">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="project" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="result" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="info_ComputerRoomVisit">
           <Key>
@@ -1147,6 +1131,7 @@
           <Property Name="CRelustID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AYears" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AExplain" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ASupplerPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="V_ComputerRoomVisit">
           <Key>
@@ -1424,7 +1409,6 @@
           <EntitySet Name="CaiGouXingShi" EntityType="Self.CaiGouXingShi" />
           <EntitySet Name="CaiGouYiJu" EntityType="Self.CaiGouYiJu" />
           <EntitySet Name="info_Asset" EntityType="Self.info_Asset" />
-          <EntitySet Name="info_Check" EntityType="Self.info_Check" />
           <EntitySet Name="info_ComputerRoomVisit" EntityType="Self.info_ComputerRoomVisit" />
           <EntitySet Name="info_Detailed" EntityType="Self.info_Detailed" />
           <EntitySet Name="info_Equipment" EntityType="Self.info_Equipment" />
@@ -1550,15 +1534,6 @@
                 <ScalarProperty Name="AShenHeYiJian" ColumnName="AShenHeYiJian" />
                 <ScalarProperty Name="AShenHeJieGuo" ColumnName="AShenHeJieGuo" />
                 <ScalarProperty Name="AShenHeRiQi" ColumnName="AShenHeRiQi" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="info_Check">
-            <EntityTypeMapping TypeName="InformationModel.info_Check">
-              <MappingFragment StoreEntitySet="info_Check">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="project" ColumnName="project" />
-                <ScalarProperty Name="result" ColumnName="result" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1819,6 +1794,7 @@
           <EntitySetMapping Name="v_Asset">
             <EntityTypeMapping TypeName="InformationModel.v_Asset">
               <MappingFragment StoreEntitySet="v_Asset">
+                <ScalarProperty Name="ASupplerPhone" ColumnName="ASupplerPhone" />
                 <ScalarProperty Name="AID" ColumnName="AID" />
                 <ScalarProperty Name="AName" ColumnName="AName" />
                 <ScalarProperty Name="ATypeId" ColumnName="ATypeId" />

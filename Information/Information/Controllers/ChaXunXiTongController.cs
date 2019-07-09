@@ -53,14 +53,16 @@ namespace information.Controllers
         }
         //查询系统机房进出审核通过视图
         public ActionResult SelelctAllShenHe(int id) {
-            info_ComputerRoomVisit cop = lcr.SelectWheres(e => e.CID == id).FirstOrDefault();
+            V_ComputerRoomVisit cop = lcr.SelectWhere(e => e.CID == id).FirstOrDefault();
+            //info_ComputerRoomVisit cop = lcr.SelectWheres(e => e.CID == id).FirstOrDefault();
             ChaXunPeiTong(id);
             return View(cop);
         }
         //查询系统机房进出驳回视图
         public ActionResult SelelctAllBoHui(int id)
         {
-            info_ComputerRoomVisit cop = lcr.SelectWheres(e => e.CID == id).FirstOrDefault();
+            V_ComputerRoomVisit cop = lcr.SelectWhere(e => e.CID == id).FirstOrDefault();
+
             ChaXunPeiTong(id);
             return View(cop);
         }
@@ -143,11 +145,7 @@ namespace information.Controllers
             return View(im);
         }
         //查询检测表
-        public ActionResult selectJC()
-        {
-            List<info_Check> ics = icb.SelectAll();
-            return Content(JsonConvert.SerializeObject(ics));
-        }
+        
         //机房设备查询视图
         public ActionResult JiFangSheBeiSelelctAll() {
             return View();

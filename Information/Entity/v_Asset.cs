@@ -32,5 +32,6 @@ namespace Entity
         public string CRelustID { get; set; }
         public string AYears { get; set; }
         public string AExplain { get; set; }
+        public string ASupplerPhone { get; set; }
     }
 }

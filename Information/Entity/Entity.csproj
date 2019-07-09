@@ -60,9 +60,6 @@
     <Compile Include="info_Asset.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="info_Check.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="info_ComputerRoomVisit.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

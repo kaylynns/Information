@@ -11,11 +11,6 @@ namespace IBLL
   public  interface ICheckBll
     {
         List<v_Maintenance> v_MainAll(Expression<Func<v_Maintenance, int>> order, Expression<Func<v_Maintenance, bool>> where, out int rows, int currentPage, int pageSize);
-        List<info_Check> SelectAll();
-        List<info_Check> SelectWhere(Expression<Func<info_Check, bool>> where);
-        List<info_Check> FenYe(Expression<Func<info_Check, int>> order, Expression<Func<info_Check, bool>> where, out int rows, int currentPage, int pageSize);
-        int Add(info_Check t);
-        int Delete(info_Check t);
-        int Update(info_Check t);
+      
     }
 }

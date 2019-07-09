@@ -48,7 +48,7 @@ namespace information.Views.JiFang
 
         public ActionResult selectCB()
         {
-           List<info_Asset> list= iab.SelectAll();
+           List<info_Asset> list= iab.SelectWhere(e=>e.TID==4);
            // List<info_Equipments> list = ieb.SelectAll();
             return Content(JsonConvert.SerializeObject(list));
         }
@@ -102,63 +102,9 @@ namespace information.Views.JiFang
             FillClass();   //查询检测人员
             return View();
         }
-        //查询检测表
-        public ActionResult selectJC() {
-            List<info_Check> ics = icb.SelectAll();
-            return Content(JsonConvert.SerializeObject(ics));
-        }
-
-        // 检测删除
-        public ActionResult CheDel(int id) {
-            info_Check ics = new info_Check();
-            ics.id = id;
-            int del = icb.Delete(ics);
-            if (del > 0)
-            {
-                return Content("<script>window.location.href='/WhuWxiu/Create'</script>");
-            }
-            else
-            {
-                return Content("<script>window.location.href='Index'</script>");
-            }
-        }
-
-        //添加检测
-        [HttpPost]
-        public ActionResult checkCreate(string project, string result)
-        {
-            info_Check ic = new info_Check();
-            ic.project = project;
-            ic.result = result;
-            int add = icb.Add(ic);
-            if (add > 0)
-            {
-                // return Content("<script>alert('添加成功！');window.location.href='/WhuWxiu/Create'</script>");
-                return Content("ok");
-            }
-            else
-            {
-                return Content("<script>window.location.href='Index'</script>");
-            }
-        }
-
-        //修改检测
-        public ActionResult CheIdEdit(int id,string pro,string res)
-        {
-            info_Check ics = new info_Check();
-            ics.id = id;
-            ics.project = pro;
-            ics.result = res;
-            int update = icb.Update(ics);
-            if (update>0) {
-                // return Content("<script>alert('修改成功！');window.location.href='/WhuWxiu/Create'</script>");
-                return Content("ok");
-            }
-            else
-            {
-                return Content("<script>alert('修改失败！');window.location.href='Index'</script>");
-            }
-        }
+     
+     
+      
 
         // POST: WhuWxiu/Create
         [HttpPost]

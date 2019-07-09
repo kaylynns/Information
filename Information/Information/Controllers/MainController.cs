@@ -40,7 +40,7 @@ namespace information.Controllers
         //头部
         public ActionResult top()
         {
-            ViewData["user"] = Session["UserName"];
+           
             return View();
         }
 
@@ -48,6 +48,7 @@ namespace information.Controllers
         //测试：权限
         public ActionResult Mains()
         {
+            ViewData["user"] = Session["UserName"];
             return View();
         }
 

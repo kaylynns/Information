@@ -354,8 +354,9 @@ namespace information.Controllers
         //进入资产审核申请操作页面（进行修改操作）
         public ActionResult AssetReviewEdits(info_Asset asset)
         {
-          // asset.AShenHeRan = Session["UserRealName"].ToString();
+          asset.AShenHeRan = Session["UserRealName"].ToString();
             asset.AShenHeRiQi = DateTime.Now.ToString();
+
             if (asset.AShenHeJieGuo == "同意")
             {
                 asset.CRelustID = 2;
@@ -366,11 +367,11 @@ namespace information.Controllers
             }
             if (iab.Update(asset) > 0)
             {
-                return Content("<script>alert('修改成功');window.location.href='/Asset/AssetReviewSelect'</script>");
+                return Content("<script>alert('审核结束');window.location.href='/Asset/AssetReviewSelect'</script>");
             }
             else
             {
-                return Content("<script>alert('修改成功');window.location.href='/Asset/AssetReviewSelect'</script>");
+                return Content("<script>alert('审核失败');window.location.href='/Asset/AssetReviewSelect'</script>");
             }
         }
         #endregion

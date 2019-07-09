@@ -28,7 +28,6 @@ namespace Entity
         public virtual DbSet<CaiGouXingShi> CaiGouXingShi { get; set; }
         public virtual DbSet<CaiGouYiJu> CaiGouYiJu { get; set; }
         public virtual DbSet<info_Asset> info_Asset { get; set; }
-        public virtual DbSet<info_Check> info_Check { get; set; }
         public virtual DbSet<info_ComputerRoomVisit> info_ComputerRoomVisit { get; set; }
         public virtual DbSet<info_Detailed> info_Detailed { get; set; }
         public virtual DbSet<info_Equipment> info_Equipment { get; set; }

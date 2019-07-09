@@ -320,7 +320,7 @@ namespace information.Controllers
         public ActionResult JiFangJinChuSelectLook(int id)
         {
             DengJiRen();
-            var dt = lcr.SelectWhere(e => e.CID == id).FirstOrDefault();
+            V_ComputerRoomVisit dt = lcr.SelectWhere(e => e.CID == id).FirstOrDefault();
             return View(dt);
         }
 
