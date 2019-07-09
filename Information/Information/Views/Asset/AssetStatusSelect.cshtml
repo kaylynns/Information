@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>资产报废停用维修审核</title>
+    <title>资产报废停用维修查询</title>
     <link href="~/css/css.css" rel="stylesheet" />
     <link href="~/css/bootstrap.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.10.2.js"></script>
@@ -142,7 +142,13 @@
                  AName = $("#txt_name").val();
                  vm.load(currentPage,AType,AName,TName);
             })
-
+            //清空
+            $("#QingKong").click(function () {
+                //给查询的文本框清空
+                $("#txt_type").val("");
+                $("#Select1").val("");
+                $("#txt_name").val("")
+            })
         })
 
         function img_select() {
@@ -215,6 +221,8 @@
                     </select>
                 </td>
                 <td><input type="button" value="查询" id="btn_select" Class="btn1" style="margin-left:10px" /></td>
+
+                <td><input type="button" value="清空" id="QingKong" Class="btn1" style="margin-left:10px" /></td>
             </tr>
         </table>
 

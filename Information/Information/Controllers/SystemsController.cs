@@ -60,17 +60,39 @@ namespace information.Controllers
         // GET: Systems/Delete/5
         public ActionResult PowerDelete(int id)
         {
-            info_Role role = new info_Role
+            //事务
+            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
             {
-                RoleID = id
-            };
-            if (irb.Delete(role) > 0)
-            {
-                return Content("<script>alert('删除成功');window.location.href='/Systems/PowerSelect'</script>");
-            }
-            else
-            {
-                return Content("<script>alert('删除失败');window.location.href='/Systems/PowerSelect'</script>");
+                var dd = iud.SelectAll();
+                foreach (var item in dd)
+                {   //判断角色是否被分配权限
+                    if (item.UserJueSe == id)
+                    {
+                        return Content("<script>alert('不能删除,这个角色正在被使用');window.location.href='/Systems/PowerSelect'</script>");
+                    }
+                }
+
+                info_Role role = new info_Role
+                {
+                    RoleID = id
+                };
+
+                if (ipsb.delete(id) > 0)
+                {
+                    if (irb.Delete(role) > 0)
+                    {
+                        ts.Complete();
+                        return Content("<script>alert('删除成功');window.location.href='/Systems/PowerSelect'</script>");
+                    }
+                    else
+                    {
+                        return Content("<script>alert('删除失败');window.location.href='/Systems/PowerSelect'</script>");
+                    }
+                }
+                else
+                {
+                    return Content("<script>alert('删除失败');window.location.href='/Systems/PowerSelect'</script>");
+                }
             }
         }
         //权限角色页面修改(进入修改操作页面)
@@ -97,7 +119,7 @@ namespace information.Controllers
                 }
            
         }
-    //权限添加（进入权限页面）
+      //权限添加（进入权限页面）
         public ActionResult PowerAdd(string id) {
             ViewBag.Rid = id;
             return View();
@@ -186,17 +208,33 @@ namespace information.Controllers
 
         //用户管理页面删除
         public ActionResult UserManagementDelete(int id) {
+
+
+            //查询出要删除用户的真实姓名是否和登陆进来的姓名相同  AsNoTracking
+            var list = iud.SelectWhere(e => e.UserID == id);
+
+            foreach (var item in list)
+            {
+                if (item.UserRealName == Session["UserRealName"].ToString())
+                {
+                    return Content("<script>alert('用户正在使用中不能被删除');window.location.href='/Systems/UserManagementSelect'</script>");
+                }
+            }
             info_User user = new info_User
             {
                 UserID = id
             };
+
+            //不相同，则删除
             if (iud.Delete(user) > 0)
             {
                 return Content("<script>alert('删除成功');window.location.href='/Systems/UserManagementSelect'</script>");
             }
-            else {
+            else
+            {
                 return Content("<script>alert('删除失败');window.location.href='/Systems/UserManagementSelect'</script>");
             }
+
 
         }
 

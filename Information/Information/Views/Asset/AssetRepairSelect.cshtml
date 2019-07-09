@@ -142,6 +142,13 @@
                  AName = $("#txt_name").val();
                  vm.load(currentPage,AType,AName,TName);
             })
+            //清空
+            $("#QingKong").click(function () {
+                //给查询的文本框清空
+                $("#txt_type").val("");
+                $("#Select1").val("");
+                $("#txt_name").val("")
+            })
 
         })
 
@@ -214,6 +221,7 @@
                              </select>
                 </td>
                 <td><input type="button" value="查询" id="btn_select" Class="btn1" style="margin-left:10px" /></td>
+                <td><input type="button" value="清空" id="QingKong" Class="btn1" style="margin-left:10px" /></td>
             </tr>
         </table>
 

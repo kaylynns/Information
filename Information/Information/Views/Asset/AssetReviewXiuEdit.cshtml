@@ -1,4 +1,5 @@
 ﻿@model Entity.info_Asset
+
 @{
     Layout = null;
 }
@@ -37,11 +38,11 @@
 
 </head>
 <body>
-    @using (Ajax.BeginForm("AssetReviewEdits", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Update" }))
+    @using (Ajax.BeginForm("AssetReviewXiuEdits", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Update" }))
     {
         @Html.AntiForgeryToken()
 
-        <h2 align="center" style="font-size:25px;font-weight:bold">资产报废停用维修审核</h2>
+        <h2 style="font-size:25px;font-weight:bold" align="center">资产维修审核</h2>
         <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse"
                bordercolor="#6c9ec1">
             <tr class="sq">
@@ -106,11 +107,10 @@
                 <td>@Html.TextBoxFor(model => model.AYears, new { @readonly = "readonly" })</td>
                 <td>资产状态</td>
                 <td>
-                    @*@Html.RadioButtonFor(model => model.TID, "1")使用中
+                    @Html.RadioButtonFor(model => model.TID, "1")使用中
                     @Html.RadioButtonFor(model => model.TID, "4")维修
                     @Html.RadioButtonFor(model => model.TID, "3")停用
-                    @Html.RadioButtonFor(model => model.TID, "2")报废*@
-                    @Html.TextBoxFor(model=>model.TID, new { @readonly = "readonly" })
+                    @Html.RadioButtonFor(model => model.TID, "2")报废
                 </td>
             </tr>
             <tr class="sq">
@@ -120,10 +120,18 @@
                 <td colspan="2">@Html.TextBoxFor(model => model.AExplain, new { @readonly = "readonly" })</td>
 
             </tr>
-        
+            <tr>
+                <td>审核</td>
+                <td colspan="3">
+                    @Html.RadioButtonFor(model => model.AShenHeJieGuo, "同意", new { @checked = true })同意维修
+                    @Html.RadioButtonFor(model => model.AShenHeJieGuo, "不同意")不同意维修<br />
+                    审核意见：@Html.TextBoxFor(model => model.AShenHeYiJian)
+                </td>
+            </tr>
             <tr>
                 <td colspan="4" align="center">
-                    <input id="btn_QX" type="button" value="返回" class="btn1" style="margin-left:30px" onclick="window.location.href = '/Asset/AssetStatusSelect'" />
+                    <input id="btn_save" type="submit" value="审核" class="btn1" />
+                    <input id="btn_QX" type="button" value="返回" class="btn1" style="margin-left:30px" onclick="window.location.href = '/Asset/AssetReviewSelect'" />
 
                 </td>
             </tr>
