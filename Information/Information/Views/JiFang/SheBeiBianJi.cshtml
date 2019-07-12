@@ -28,7 +28,7 @@
                         var use = eval("(" + msg + ")");
                         $("#sel option:gt(0)").remove();
                         for (var i = 0; i < use.length; i++) {
-                            var $tr = $('<option  id="btnAdd" AName=' + use[i]["AName"] + ' AID=' + use[i]["AID"] + '>' + use[i]["AName"] + "</option>");
+                            var $tr = $('<option  id="btnAdd" AName=' + use[i]["SIDS"] + ' AID=' + use[i]["SID"] + '>' + use[i]["SIDS"] + "</option>");
                             $("#sel").append($tr);
                         }
                     }
@@ -56,15 +56,16 @@
             <tr>
                 <td align="left" rowspan="2">
                     设备名称：
-                    @Html.HiddenFor(model => model.EID)
-                </td>
+                    @Html.HiddenFor(model => model.EAID)
+                    @Html.HiddenFor(e => e.EID)
+                </td> 
                 <td align="left" rowspan="2">
                     <table border="0" cellpadding="0" cellspacing="0">
                         <tr>
                             <td>
-                                @foreach (info_Asset item in ViewBag.leibiao)
+                                @foreach (info_Software item in ViewBag.leibiao)
                                 {
-                                    @Html.TextBox("MingCheng",item.AName)
+                                    @Html.TextBox("MingCheng",item.Sdynacomm)
                                 }
                                 @Html.HiddenFor(model=>model.EAID)
                             </td>

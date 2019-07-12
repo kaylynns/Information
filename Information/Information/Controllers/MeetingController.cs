@@ -14,6 +14,9 @@ namespace information.Controllers
     {
         IMeetingBll imb = IocContainer.IocCreate.CreateAll<MeetingService>("MeetingTwo", "MeetingService");
         IUserBll iub = IocContainer.IocCreate.CreateAll<UserService>("UserTwo", "UserService");
+        IMaintenanceBll img = IocContainer.IocCreate.CreateAll<MaintenanceService>("MaintenanceTwo", "MaintenanceService");
+        ISoftwareBll isb = IocContainer.IocCreate.CreateAll<SoftwareService>("SoftwareTwo", "SoftwareService");//软件     
+        ICheckBll icb = IocContainer.IocCreate.CreateAll<CheckService>("CheckTwo", "CheckService");
         // GET: Meeting视频会议测试及开会记录
         public ActionResult Index()
         {
@@ -65,6 +68,12 @@ namespace information.Controllers
             dir.Add("currentpage", rows % 2 > 0 ? (rows / 2) + 1 : (rows / 2));
             dir.Add("pages", (rows - 1) / 3 + 1);
             return Content(JsonConvert.SerializeObject(dir));
+        }
+
+        public ActionResult selectCB() {
+            var im = icb.selectM();
+
+            return Content(JsonConvert.SerializeObject(im));
         }
 
         // GET: Meeting/Details/5

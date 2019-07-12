@@ -94,6 +94,7 @@
           <Property Name="EPhone" Type="varchar" MaxLength="50" />
           <Property Name="Econtact" Type="varchar" MaxLength="50" />
           <Property Name="EIP" Type="varchar" MaxLength="50" />
+          <Property Name="Ename" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="info_Equipments">
           <Key>
@@ -363,7 +364,7 @@
             <PropertyRef Name="EID" />
           </Key>
           <Property Name="EID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EAID" Type="varchar" MaxLength="50" />
+          <Property Name="EAID" Type="nvarchar" MaxLength="50" />
           <Property Name="EquipmentModel" Type="varchar" MaxLength="50" />
           <Property Name="Eoffice" Type="varchar" MaxLength="50" />
           <Property Name="Ebusinesssystem" Type="varchar" MaxLength="50" />
@@ -384,7 +385,8 @@
           </Key>
           <Property Name="RID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RName" Type="nvarchar" MaxLength="50" />
-          <Property Name="SID" Type="nvarchar" MaxLength="50" />
+          <Property Name="SIDS" Type="nvarchar" MaxLength="50" />
+          <Property Name="SID" Type="int" />
           <Property Name="RUserId" Type="nvarchar" MaxLength="50" />
           <Property Name="ROffice" Type="varchar" MaxLength="50" />
           <Property Name="RDate" Type="datetime" />
@@ -423,7 +425,7 @@
             <PropertyRef Name="MIDs" />
           </Key>
           <Property Name="MaintenanceTime" Type="datetime" />
-          <Property Name="MDeviceName" Type="varchar" MaxLength="50" />
+          <Property Name="MDeviceName" Type="nvarchar" MaxLength="50" />
           <Property Name="MDetectionUnit" Type="varchar" MaxLength="50" />
           <Property Name="MIDs" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MTheRegistrar" Type="varchar" MaxLength="50" />
@@ -521,18 +523,6 @@
             </Principal>
             <Dependent Role="info_ComputerRoomVisit">
               <PropertyRef Name="CRelustID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_info_Equipment_info_Asset">
-          <End Role="info_Asset" Type="Self.info_Asset" Multiplicity="0..1" />
-          <End Role="info_Equipment" Type="Self.info_Equipment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="info_Asset">
-              <PropertyRef Name="AID" />
-            </Principal>
-            <Dependent Role="info_Equipment">
-              <PropertyRef Name="EAID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -701,6 +691,7 @@
             <DefiningQuery>SELECT 
     [v_info_Registration].[RID] AS [RID], 
     [v_info_Registration].[RName] AS [RName], 
+    [v_info_Registration].[SIDS] AS [SIDS], 
     [v_info_Registration].[SID] AS [SID], 
     [v_info_Registration].[RUserId] AS [RUserId], 
     [v_info_Registration].[ROffice] AS [ROffice], 
@@ -779,10 +770,6 @@
             <End Role="PiShiJieGuo" EntitySet="PiShiJieGuo" />
             <End Role="info_ComputerRoomVisit" EntitySet="info_ComputerRoomVisit" />
           </AssociationSet>
-          <AssociationSet Name="FK_info_Equipment_info_Asset" Association="Self.FK_info_Equipment_info_Asset">
-            <End Role="info_Asset" EntitySet="info_Asset" />
-            <End Role="info_Equipment" EntitySet="info_Equipment" />
-          </AssociationSet>
           <AssociationSet Name="FK_info_Registration_info_Software" Association="Self.FK_info_Registration_info_Software">
             <End Role="info_Software" EntitySet="info_Software" />
             <End Role="info_Registration" EntitySet="info_Registration" />
@@ -856,7 +843,6 @@
           <NavigationProperty Name="PiShiJieGuo" Relationship="Self.FK_info_Asset_PiShiJieGuo" FromRole="info_Asset" ToRole="PiShiJieGuo" />
           <NavigationProperty Name="ZiChanBeiZhu" Relationship="Self.FK_info_Asset_ZiChanBeiZhu" FromRole="info_Asset" ToRole="ZiChanBeiZhu" />
           <NavigationProperty Name="ZiChanZhuangTai" Relationship="Self.FK_info_Asset_ZiChanZhuangTai" FromRole="info_Asset" ToRole="ZiChanZhuangTai" />
-          <NavigationProperty Name="info_Equipment" Relationship="Self.FK_info_Equipment_info_Asset" FromRole="info_Asset" ToRole="info_Equipment" />
         </EntityType>
         <EntityType Name="info_ComputerRoomVisit">
           <Key>
@@ -907,7 +893,7 @@
           <Property Name="EPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Econtact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="info_Asset" Relationship="Self.FK_info_Equipment_info_Asset" FromRole="info_Equipment" ToRole="info_Asset" />
+          <Property Name="Ename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="info_Equipments">
           <Key>
@@ -1180,7 +1166,7 @@
             <PropertyRef Name="EID" />
           </Key>
           <Property Name="EID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EAID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EAID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EquipmentModel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Eoffice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Ebusinesssystem" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -1199,7 +1185,8 @@
           </Key>
           <Property Name="RID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SIDS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SID" Type="Int32" />
           <Property Name="RUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ROffice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RDate" Type="DateTime" Precision="3" />
@@ -1234,7 +1221,7 @@
             <PropertyRef Name="MIDs" />
           </Key>
           <Property Name="MaintenanceTime" Type="DateTime" Precision="3" />
-          <Property Name="MDeviceName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MDeviceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MDetectionUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MIDs" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MTheRegistrar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -1318,18 +1305,6 @@
             </Principal>
             <Dependent Role="info_Asset">
               <PropertyRef Name="TID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_info_Equipment_info_Asset">
-          <End Role="info_Asset" Type="Self.info_Asset" Multiplicity="0..1" />
-          <End Role="info_Equipment" Type="Self.info_Equipment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="info_Asset">
-              <PropertyRef Name="AID" />
-            </Principal>
-            <Dependent Role="info_Equipment">
-              <PropertyRef Name="EAID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1457,10 +1432,6 @@
             <End Role="ZiChanZhuangTai" EntitySet="ZiChanZhuangTai" />
             <End Role="info_Asset" EntitySet="info_Asset" />
           </AssociationSet>
-          <AssociationSet Name="FK_info_Equipment_info_Asset" Association="Self.FK_info_Equipment_info_Asset">
-            <End Role="info_Asset" EntitySet="info_Asset" />
-            <End Role="info_Equipment" EntitySet="info_Equipment" />
-          </AssociationSet>
           <AssociationSet Name="FK_info_ComputerRoomVisit_PiShiJieGuo" Association="Self.FK_info_ComputerRoomVisit_PiShiJieGuo">
             <End Role="PiShiJieGuo" EntitySet="PiShiJieGuo" />
             <End Role="info_ComputerRoomVisit" EntitySet="info_ComputerRoomVisit" />
@@ -1585,6 +1556,7 @@
                 <ScalarProperty Name="EPhone" ColumnName="EPhone" />
                 <ScalarProperty Name="Econtact" ColumnName="Econtact" />
                 <ScalarProperty Name="EIP" ColumnName="EIP" />
+                <ScalarProperty Name="Ename" ColumnName="Ename" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1794,7 +1766,6 @@
           <EntitySetMapping Name="v_Asset">
             <EntityTypeMapping TypeName="InformationModel.v_Asset">
               <MappingFragment StoreEntitySet="v_Asset">
-                <ScalarProperty Name="ASupplerPhone" ColumnName="ASupplerPhone" />
                 <ScalarProperty Name="AID" ColumnName="AID" />
                 <ScalarProperty Name="AName" ColumnName="AName" />
                 <ScalarProperty Name="ATypeId" ColumnName="ATypeId" />
@@ -1813,6 +1784,7 @@
                 <ScalarProperty Name="CRelustID" ColumnName="CRelustID" />
                 <ScalarProperty Name="AYears" ColumnName="AYears" />
                 <ScalarProperty Name="AExplain" ColumnName="AExplain" />
+                <ScalarProperty Name="ASupplerPhone" ColumnName="ASupplerPhone" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1884,6 +1856,7 @@
               <MappingFragment StoreEntitySet="v_info_Registration">
                 <ScalarProperty Name="RID" ColumnName="RID" />
                 <ScalarProperty Name="RName" ColumnName="RName" />
+                <ScalarProperty Name="SIDS" ColumnName="SIDS" />
                 <ScalarProperty Name="SID" ColumnName="SID" />
                 <ScalarProperty Name="RUserId" ColumnName="RUserId" />
                 <ScalarProperty Name="ROffice" ColumnName="ROffice" />

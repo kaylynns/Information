@@ -11,6 +11,7 @@ namespace IDAO
    public interface ICheckDao
     {
         List<v_Maintenance> v_MainAll(Expression<Func<v_Maintenance, int>> order, Expression<Func<v_Maintenance, bool>> where, out int rows, int currentPage, int pageSize);
-     
+        List<v_info_Registration> selectAll();
+        List<v_Maintenance> selectM();
     }
 }

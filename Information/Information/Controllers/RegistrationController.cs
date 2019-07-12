@@ -35,7 +35,7 @@ namespace information.Controllers
             {
 
                 //  dt = imb.FenYe(e => e.MID, e => e.MName.Contains(names), out rows, currentpage, 3);
-                dt = ird.v_MainAll(e => e.RID, e => e.SID.Contains(names)&&e.RName.Contains(rname), out rows, currentpage, 3);
+                dt = ird.v_MainAll(e => e.RID, e => e.SIDS.Contains(names)&&e.RName.Contains(rname), out rows, currentpage, 3);
             }
             Dictionary<string, object> dir = new Dictionary<string, object>();
             dir.Add("dt", dt);
@@ -65,7 +65,7 @@ namespace information.Controllers
             {
 
                 //  dt = imb.FenYe(e => e.MID, e => e.MName.Contains(names), out rows, currentpage, 3);
-                dt = ird.v_MainAll(e => e.RID, e => e.SID.Contains(names) && e.RName.Contains(rname), out rows, currentpage, 3);
+                dt = ird.v_MainAll(e => e.RID, e => e.SIDS.Contains(names) && e.RName.Contains(rname), out rows, currentpage, 3);
             }
             Dictionary<string, object> dir = new Dictionary<string, object>();
             dir.Add("dt", dt);

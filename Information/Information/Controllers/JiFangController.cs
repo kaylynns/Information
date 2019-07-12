@@ -20,6 +20,10 @@ namespace information.Controllers
         //机房进出
         IComputerRoomVisitBll lcr =IocCreate.CreateAll<ComputerRoomVisitService>("ComputerRoomVisitTwo", "ComputerRoomVisitService");
         // GET: JiFang
+
+        IRegistrationBll ird = IocContainer.IocCreate.CreateAll<RegistrationService>("RegistrationTwo", "RegistrationService");//软件
+
+        ISoftwareBll isb = IocContainer.IocCreate.CreateAll<SoftwareService>("SoftwareTwo", "SoftwareService");//软件
         //进入机房创建视图
         public ActionResult Index()
         {
@@ -235,7 +239,7 @@ namespace information.Controllers
         public ActionResult SheBeiBianJi(int id) {
           info_Equipment ts=shebei.SelectWhere(e => e.EID == id).FirstOrDefault();
           var eaid=ts.EAID;
-          ViewBag.leibiao=iab.SelectWhere(e => e.AID == eaid);
+          ViewBag.leibiao=isb.SelectWhere(e => e.SID == eaid);
             return View(ts);
         }
         [HttpPost]
@@ -252,23 +256,43 @@ namespace information.Controllers
                     return Content("<script>alert('修改失败');window.location.href='SheBeiGuanLiShiTu'</script>");
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                return View("SheBeiGuanLiShiTu");
+                return Content("<script>alert('"+ex.Message+"');window.location.href='SheBeiGuanLiShiTu'</script>");
             }
         }
+
+        //查询机房申请审核成功的来访人员
+        public void FillClass()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            List<info_ComputerRoomVisit> lists = lcr.SelectWheres(e => e.CRelustID == 2);
+            foreach (info_ComputerRoomVisit dr in lists)
+            {
+                SelectListItem sl = new SelectListItem()
+                {
+                    Text = dr.CName,
+                    Value = dr.CID.ToString()
+                };
+                list.Add(sl);
+            }
+
+            ViewData["Enames"] = list;
+        }
+
         //机房设备添加视图
         public ActionResult SheBeiAddShiTu() {
-           
+
+            FillClass(); //查询机房申请审核成功的来访人员
             return View();
         }
         [HttpPost]
         //添加机房设备信息
         public ActionResult SheBeiAddShiTu(info_Equipment len) {
             try
-            {
-            //    len.EAID = AID;
-                int SheBeiAdd = shebei.Add(len);
+            { 
+               // len.Ename = 1.ToString();
+                int SheBeiAdd= shebei.Add(len);
                 if (SheBeiAdd > 0)
                 {
                     return Content("<script>alert('添加成功');window.location.href='SheBeiGuanLiShiTu'</script>");
@@ -285,7 +309,8 @@ namespace information.Controllers
         }
         //机房设备查询设备名称
         public ActionResult SheBeiChaLeiBie() {
-            List<info_Asset> Yi = iab.SelectAll();
+            //List<info_Asset> Yi = iab.SelectAll();
+            List<v_info_Registration> Yi = ird.v_RWhere(e=>e.RState== "审核成功");
             return Content(JsonConvert.SerializeObject(Yi));
         }
 

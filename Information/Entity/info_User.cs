@@ -13,7 +13,7 @@ namespace Entity
     using System.Collections.Generic;
     using System.Runtime.Serialization;
 
-    [DataContract(IsReference = true)]
+    [DataContract(IsReference =true)]
     public partial class info_User
     {
         [DataMember]

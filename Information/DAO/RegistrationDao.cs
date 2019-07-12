@@ -16,5 +16,9 @@ namespace DAO
         {
             return bd.FenYe(order, where, out rows, currentPage, pageSize);
         }
+
+      public  List<v_info_Registration> v_RWhere(Expression<Func<v_info_Registration, bool>> where) {
+            return bd.SelectWhere(where);
+        }
     }
 }

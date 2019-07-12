@@ -129,11 +129,10 @@
                     var $td5 = $("<td>" + dt[i]["Tcontact"] + "</td>");
                     var $td6 = $("<td>" + dt[i]["QID"] + "</td>");
                     var $td9 = $("<td>" + dt[i]["TDescribe"] + "</td>");
-                    var $td01 = $("<td>" + dt[i]["TAnswer"] + "</td>");
                     var $td8 = $("<td><a href='/Technology/Edit/" + dt[i]["TID"] + "'>修改</a></td>")
                     var $td7 = $("<td><a onclick=\"return confirm('您确定要删除吗？')\" href='/Technology/Delete/" + dt[i]["TID"] + "' id='del'>删除</a> </td>")
 
-                    $tr.append($td1, $td2, $td3, $td4, $td5, $td6, $td9, $td01, $td7, $td8);
+                    $tr.append($td1, $td2, $td3, $td4, $td5, $td6, $td9, $td7, $td8);
                     $("#ListArea").append($tr);
              }
             }
@@ -242,7 +241,7 @@
             <td>联系方式</td>
             <td>问题分类</td>
             <td>问题描述</td>
-            <td>问题解答</td>
+          
             <td>编辑</td>
             <td>删除</td>
         </tr>

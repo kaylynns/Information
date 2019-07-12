@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-   public class RegistrationService: IRegistrationBll
+    public class RegistrationService : IRegistrationBll
     {
         IRegistrationDao imd = IocContainer.IocCreate.CreateAll<RegistrationDao>("RegistrationOne", "RegistrationDao");
         public List<info_Registration> SelectAll()
@@ -50,5 +50,9 @@ namespace BLL
             return imd.v_MainAll(order, where, out rows, currentPage, pageSize);
         }
 
+        public List<v_info_Registration> v_RWhere(Expression<Func<v_info_Registration, bool>> where)
+        {
+            return imd.v_RWhere(where);
+        }
     }
 }

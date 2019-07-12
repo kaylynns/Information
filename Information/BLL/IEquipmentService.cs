@@ -29,5 +29,8 @@ namespace BLL
         public int Update(info_Equipment cz) {
             return iud.Update(cz);
         }
+        public List<info_Equipment> SelectAll() {
+            return iud.SelectAll();
+        }
     }
 }

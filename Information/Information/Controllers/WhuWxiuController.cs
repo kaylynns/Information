@@ -18,6 +18,9 @@ namespace information.Views.JiFang
         IMaintenanceBll img = IocContainer.IocCreate.CreateAll<MaintenanceService>("MaintenanceTwo", "MaintenanceService");
         ICheckBll icb = IocContainer.IocCreate.CreateAll<CheckService>("CheckTwo", "CheckService");
         IAssetBll iab = IocCreate.CreateAll<AssetService>("AssetTwo", "AssetService");
+        IRegistrationBll ird = IocContainer.IocCreate.CreateAll<RegistrationService>("RegistrationTwo", "RegistrationService");//软件
+        ISoftwareBll isb = IocContainer.IocCreate.CreateAll<SoftwareService>("SoftwareTwo", "SoftwareService");//软件                                                                                                               //机房设备管理
+        lIEquipmentBll shebei = IocCreate.CreateAll<IEquipmentService>("JiFangSheBeiTwo", "IEquipmentService");
         // GET: WhuWxiu 设备维护
         public ActionResult Index()
         {
@@ -46,12 +49,17 @@ namespace information.Views.JiFang
             return Content(JsonConvert.SerializeObject(dir));
         }
 
+
+        //机房设备查询设备名称
         public ActionResult selectCB()
         {
-           List<info_Asset> list= iab.SelectWhere(e=>e.TID==4);
-           // List<info_Equipments> list = ieb.SelectAll();
-            return Content(JsonConvert.SerializeObject(list));
+            //List<info_Asset> Yi = iab.SelectAll();
+
+            var Yi = icb.selectAll();
+            
+            return Content(JsonConvert.SerializeObject(Yi));
         }
+     
 
         // GET: WhuWxiu/Details/5
         public ActionResult Details(int id)
@@ -131,8 +139,8 @@ namespace information.Views.JiFang
             ShengCheng();//查询陪同人员
             FillClass();   //查询检测人员
             info_Maintenance im = img.SelectWhere(e=>e.MIDs==id).FirstOrDefault();
-            info_Asset ies = iab.SelectWhere(e => e.AID == im.MDeviceName).FirstOrDefault();
-            ViewData["a"] =ies.AName;
+            info_Software ies = isb.SelectWhere(e => e.SID == im.MDeviceName).FirstOrDefault();
+            ViewData["a"] =ies.Sdynacomm;
             return View(im);
         }
 

@@ -30,7 +30,7 @@
                         var use = eval("(" + msg + ")");
                         $("#sel option:gt(0)").remove();
                         for (var i = 0; i < use.length; i++) {
-                            var $tr = $('<option  id="btnAdd" AName=' + use[i]["AName"] + ' AID=' + use[i]["AID"] + '>' + use[i]["AName"] + "</option>");
+                            var $tr = $('<option  id="btnAdd" AName=' + use[i]["SIDS"] + ' AID=' + use[i]["SID"] + '>' + use[i]["SIDS"] + "</option>");
                             $("#sel").append($tr);
                         }
                     }
@@ -39,7 +39,7 @@
             $(document).on("click", "#btnAdd", function () {
                 var AName = $(this).attr("AName")
                 $("#Text1").val(AName)
-                var AID=$(this).attr("AID");
+                var AID = $(this).attr("AID");
                 $("#EAID").val(AID);
                 $('#myModal').modal('hide');
             })
@@ -55,7 +55,16 @@
     {
         <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse"
                bordercolor="#6c9ec1">
+            
             <tr>
+
+                <td>设备管理员</td>
+                <td colspan="3">@Html.DropDownListFor(model => model.Ename, ViewData["Enames"] as IEnumerable<SelectListItem>)</td>
+
+            </tr>
+              
+            <tr>
+                
                 <td align="left" rowspan="2">
                     设备名称：
                 </td>
@@ -64,7 +73,7 @@
                         <tr>
                             <td>
                                 <input id="Text1" type="text" />
-                                @Html.HiddenFor(model=>model.EAID)
+                                @Html.HiddenFor(model => model.EAID)
                             </td>
                             <td>
                                 <font face="宋体">
@@ -186,6 +195,9 @@
                     </table>
                 </td>
             </tr>
+
+          
+
             <tr>
                 <td align="center" colspan="4" height="26">
                     <input id="BaoCun" type="submit" value="保存" class="btn1" />

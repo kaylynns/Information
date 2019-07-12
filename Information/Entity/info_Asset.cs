@@ -13,15 +13,9 @@ namespace Entity
     using System.Collections.Generic;
     using System.Runtime.Serialization;
 
-    [DataContract(IsReference =true)]
+    [DataContract(IsReference = true)]
     public partial class info_Asset
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public info_Asset()
-        {
-            this.info_Equipment = new HashSet<info_Equipment>();
-        }
-    
         [DataMember]
         public int AID { get; set; }
         [DataMember]
@@ -74,7 +68,5 @@ namespace Entity
         public virtual PiShiJieGuo PiShiJieGuo { get; set; }
         public virtual ZiChanBeiZhu ZiChanBeiZhu { get; set; }
         public virtual ZiChanZhuangTai ZiChanZhuangTai { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<info_Equipment> info_Equipment { get; set; }
     }
 }

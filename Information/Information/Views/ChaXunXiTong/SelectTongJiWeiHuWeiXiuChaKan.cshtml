@@ -74,33 +74,7 @@
             border: none;
         }
     </style>
-    <script type="text/javascript">
-        $(function () {
-            var ids;
-            //加载检测
-            show();
-            var aa;
-            var ids
-        function show() {
-            $.ajax({
-                url: "/ChaXunXiTong/selectJC",
-                type: "post",
-                data: "",
-                success: function (msg) {
-                    var dts = eval("(" + msg + ")");
-                    $("#jcT tr:gt(0)").remove();//清空表格
-                    for (var i = 0; i < dts.length; i++) {
-                        var $tr = $('<tr class="aa" align="center"></tr>');
-                        var $td1 = $('<td>  <input id="pro" type="text" Width="240" value=' + dts[i]["project"] + '></td>');
-                        var $td2 = $('<td>  <input id="res" type="text" Width="240" value=' + dts[i]["result"] + '></td>');
-                        $tr.append($td1, $td2);
-                        $("#jcT").append($tr);
-                    }
-                }
-            })
-        }
-        })
-    </script>
+  
 </head>
 <body>
     <h2 align="center"> 设备维护查询</h2>
@@ -150,18 +124,7 @@
                 </td>
 
             </tr>
-            <tr> </tr>
-            <tr>
-                <td colspan="2">
-                    <table width="100%" id="jcT" border="0" class="t1" align="center" cellpadding="0"
-                           cellspacing="0">
-                        <tr id="head">
-                            <td>检测项目</td>
-                            <td>检测结果</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
+          
             <tr>
 
                 <td align="center">
@@ -174,7 +137,7 @@
 
             <tr>
                 <td align="center" colspan="4" height="26">
-                    <input ID="btn_back" type="button" value="返 回" class="btn1" onclick="location.href = 'SelectTongJiWeiHuWeiXiu'" />
+                    <input ID="btn_back" type="button" value="返 回" class="btn1" onclick="location.href = '/ChaXunXiTong/SelectTongJiWeiHuWeiXiu'" />
                     <br />
                 </td>
             </tr>

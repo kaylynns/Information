@@ -17,6 +17,7 @@ namespace information.Controllers
         ICaiGouXingShiBll icgxsb = IocCreate.CreateAll<CaiGouXingShiService>("CaiGouXingShiTwo", "CaiGouXingShiService");//采购形式
         IZiChanBeiZhuBll izcbzb = IocCreate.CreateAll<ZiChanBeiZhuService>("ZiChanBeiZhuTwo", "ZiChanBeiZhuService");//资产类别
         ICaiGouYiJuBll icgyjb = IocCreate.CreateAll<CaiGouYiJuService>("CaiGouYiJuTwo", "CaiGouYiJuService");//采购依据
+        IMeetingBll imb = IocContainer.IocCreate.CreateAll<MeetingService>("MeetingTwo", "MeetingService");
 
         #region 资产登记
 
@@ -54,6 +55,13 @@ namespace information.Controllers
             dir.Add("pages", (rows - 1) / pageSize + 1);
             return Content(JsonConvert.SerializeObject(dir));
 
+        }
+
+        //查询签字成功的资产名称
+        public ActionResult selectCB()
+        {
+            var qz = imb.SelectWhere(e => e.QZ == 2);
+            return Content(JsonConvert.SerializeObject(qz));
         }
 
         //采购形式（查询）
@@ -395,7 +403,7 @@ namespace information.Controllers
         //资产的审核的维修(进行维修的修改)
         public ActionResult AssetReviewXiuEdits(info_Asset asset)
         {
-            // asset.AShenHeRan = Session["UserRealName"].ToString();
+             asset.AShenHeRan = Session["UserRealName"].ToString();
             asset.AShenHeRiQi = DateTime.Now.ToString();
 
             if (asset.AShenHeJieGuo == "同意")

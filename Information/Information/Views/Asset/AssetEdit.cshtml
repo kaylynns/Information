@@ -64,6 +64,43 @@
         }
 
     </script>
+
+    <script type="text/javascript">
+        $(document).on("click", ".sj input", function () {
+            WdatePicker({ readOnly: true, dateFmt: 'yyyy-MM-dd' });
+        })
+
+        $(function () {
+            $("#ck").click(function () {
+
+                $.ajax({
+                    url: "/Asset/selectCB",
+                    type: "post",
+                    data: "",
+                    success: function (msg) {
+                        var dts = eval("(" + msg + ")");
+
+                        $("#re tr:gt(0)").remove();//清空表格
+
+                        for (var i = 0; i < dts.length; i++) {
+                            var $tr = $('<tr id="urm" align="center"></tr>');
+                            var $td1 = $('<td id="urms" ss=' + dts[i]["MUserName"] + '  ids=' + dts[i]["MUserName"] + '>' + dts[i]["MUserName"] + "</td>");
+                            $tr.append($td1);
+                            $("#re").append($tr);
+                        }
+                    }
+                })
+            })
+
+            $(document).on("click", "#urms", function () {
+                var em = $(this).attr("ss");
+                ids = $(this).attr("ids");
+                $("#sbid input").val(ids);
+                $("#Text1 input").val(em);
+                $("#myModals").modal("hide");
+            })
+        })
+    </script>
 </head>
 
 <body>
@@ -121,8 +158,14 @@
                 <td>
                     @Html.Label("资产名称:")
                 </td>
-                <td>
-                    @Html.EditorFor(model => model.AName)
+                <td id="Text1">
+                    @Html.TextBoxFor(model => model.AName)
+
+                    <img src="~/img/lookup.gif" id="ck" data-toggle="modal" data-target="#myModals" />
+
+                <span id="sbid">
+                    @Html.HiddenFor(model => model.AName)
+                </span>
                 </td>
             </tr>
             <tr>
@@ -199,22 +242,7 @@
                                 <asp:ScriptManager ID="ScriptManager1" runat="server">
                                 </asp:ScriptManager>
                                 <asp:Panel ID="Panel1" runat="server" Width="100%">
-                                    @*<table border="0" cellpadding="0" cellspacing="0" style="width: 100%">
-                                            <tr>
-                                                <td>
-                                                    编号：
-                                                </td>
-                                                <td align="center">
-                                                    <input id="Text1" type="text" />
-                                                </td>
-                                                <td align="left">
-                                                    <input id="Button1" type="button" value="查询" Class="btn1" style="margin-left:10px" />
-                                                </td>
-                                                <td align="right">
-                                                    &nbsp;
-                                                </td>
-                                            </tr>
-                                        </table>*@
+                                  
                                     <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse;margin:10px 0px 0px 20px"
                                            bordercolor="#6c9ec1" width="200px">
                                         <tr>
@@ -249,6 +277,32 @@
 
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
+    </div>
+
+    <div class="modal fade" id="myModals" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <form id="form1" role="form">
+                        <table class="tableEdit" id="re" align="center" style="border:1px solid red;width:200px;">
+                            <thead>
+                                <tr>
+                                    <td>
+                                        设备名称
+                                    </td>
+                                </tr>
+                            </thead>
+
+                        </table>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
     </div>
 </body>
 </html>

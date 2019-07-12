@@ -21,6 +21,13 @@ namespace BLL
             return imd.v_MainAll(order, where, out rows, currentPage, pageSize);
         }
 
+        public List<v_info_Registration> selectAll() {
+            return imd.selectAll();
+        }
 
-    }
+        public List<v_Maintenance> selectM()
+        {
+            return imd.selectM();
+        }
+        }
 }

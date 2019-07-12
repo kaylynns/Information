@@ -10,9 +10,10 @@
     <meta name="viewport" content="width=device-width" />
     <title>Edit</title>
     <link href="~/css/css.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-1.7.2.min.js"></script>
-
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
     <script src="~/DatePicker/WdatePicker.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     <style type="text/css">
         #kh textarea {
             margin-top: 5px;
@@ -23,6 +24,36 @@
             WdatePicker({ readOnly: true, dateFmt: 'yyyy-MM-dd' });
         })
 
+        $(function () {
+            $("#ck").click(function () {
+
+                $.ajax({
+                    url: "/Meeting/selectCB",
+                    type: "post",
+                    data: "",
+                    success: function (msg) {
+                        var dts = eval("(" + msg + ")");
+
+                        $("#re tr:gt(0)").remove();//清空表格
+
+                        for (var i = 0; i < dts.length; i++) {
+                            var $tr = $('<tr id="urm" align="center"></tr>');
+                            var $td1 = $('<td id="urms" ss=' + dts[i]["MDeviceName"] + '  ids=' + dts[i]["MDeviceName"] + '>' + dts[i]["MDeviceName"] + "</td>");
+                            $tr.append($td1);
+                            $("#re").append($tr);
+                        }
+                    }
+                })
+            })
+
+            $(document).on("click", "#urms", function () {
+                var em = $(this).attr("ss");
+                ids = $(this).attr("ids");
+                $("#sbid input").val(ids);
+                $("#Text1 input").val(em);
+                $("#myModal").modal("hide");
+            })
+        })
     </script>
 
 </head>
@@ -231,29 +262,23 @@
                     @Html.RadioButtonFor(e => e.closeDevice, "否")否
                 </td>
             </tr>
-            @*<tr>
-                    <td align="center" style="height: 20px">
-                        5
-                    </td>
-                    <td align="left">
-                        有无故障
-                    </td>
-                    <td align="left">
-                        @Html.RadioButtonFor(e => e.MSolve, "有", new { @checked = true })有故障
-                        @Html.RadioButtonFor(e => e.MSolve, "无")无故障
-                    </td>
-                </tr>*@
-            @*<tr id="pishi" runat="server" visible="false">
-                    <td align="center" style="height: 20px">
-                        6
-                    </td>
-                    <td align="left">
-                        信息中心主任批示：
-                    </td>
-                    <td align="left" colspan="1">
-                        <input type="text" name="Msignature"/>
-                    </td>
-                </tr>*@
+
+            <tr>
+                <td align="center" style="height: 20px">
+                    5
+                </td>
+                <td align="left">
+                    软件名称
+                </td>
+                <td align="left" id="Text1">
+                    @Html.TextBoxFor(model=>model.MUserName)
+                   
+                    <img src="~/img/lookup.gif" id="ck" data-toggle="modal" data-target="#myModal" />
+                </td>
+                <td id="sbid">
+                    @Html.HiddenFor(model => model.MUserName)
+                </td>
+            </tr>
             <tr>
                 <td align="center" colspan="4" height="26">
 
@@ -267,5 +292,32 @@
             </tr>
         </table>
     </form>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <form id="form1" role="form">
+                        <table class="tableEdit" id="re" align="center" style="border:1px solid red;width:200px;">
+                            <thead>
+                                <tr>
+                                    <td>
+                                        设备名称
+                                    </td>
+                                </tr>
+                            </thead>
+
+                        </table>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
+
 </body>
 </html>

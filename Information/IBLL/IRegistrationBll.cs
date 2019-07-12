@@ -17,5 +17,6 @@ namespace IBLL
         int Add(info_Registration t);
         int Delete(info_Registration t);
         int Update(info_Registration t);
+        List<v_info_Registration> v_RWhere(Expression<Func<v_info_Registration, bool>> where);
     }
 }

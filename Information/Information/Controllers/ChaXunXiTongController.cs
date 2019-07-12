@@ -25,7 +25,7 @@ namespace information.Controllers
         //用户表
         IUserBll iud = IocCreate.CreateAll<UserService>("UserTwo", "UserService");
         IRegistrationBll ird = IocContainer.IocCreate.CreateAll<RegistrationService>("RegistrationTwo", "RegistrationService");//业务系统
-
+        ISoftwareBll isb = IocContainer.IocCreate.CreateAll<SoftwareService>("SoftwareTwo", "SoftwareService");//软件
         // GET: ChaXunXiTong
         //查询系统机房进出查询视图
         public ActionResult Index()
@@ -130,13 +130,17 @@ namespace information.Controllers
 
             info_Maintenance im = img.SelectWhere(e => e.MIDs == id).FirstOrDefault();
 
-            info_Asset ies = iab.SelectWhere(e => e.AID == im.MDeviceName).FirstOrDefault();
-            ViewData["a"] = ies.AName;
 
+           info_Software iss= isb.SelectWhere(e => e.SID == im.MDeviceName).FirstOrDefault();
+           
+            ViewData["a"] = iss.Sdynacomm;
+
+           
+           
             //查询陪同人员
             int mm = Convert.ToInt32(im.MAccompanyingOfficials);
             info_User iu = iud.SelectWhere(e => e.UserID == mm).FirstOrDefault();
-            ViewData["p"] = ies.RealName;
+            ViewData["p"] = iu.UserRealName;
 
             //查询检测人员
             int rr = Convert.ToInt32(im.MTestingPersonnel);
@@ -144,7 +148,6 @@ namespace information.Controllers
             ViewData["s"] = ir.CName;
             return View(im);
         }
-        //查询检测表
         
         //机房设备查询视图
         public ActionResult JiFangSheBeiSelelctAll() {
@@ -173,7 +176,7 @@ namespace information.Controllers
         public ActionResult JiFangSheBeiChaKan(int id) {
             info_Equipment ts = shebei.SelectWhere(e => e.EID == id).FirstOrDefault();
             var eaid = ts.EAID;
-            ViewBag.leibiao = iab.SelectWhere(e => e.AID == eaid);
+            ViewBag.leibiao = isb.SelectWhere(e => e.SID == eaid);
             return View(ts);
         }
 
@@ -195,7 +198,7 @@ namespace information.Controllers
             {
 
                 //  dt = imb.FenYe(e => e.MID, e => e.MName.Contains(names), out rows, currentpage, 3);
-                dt = ird.v_MainAll(e => e.RID, e => e.SID.Contains(names) && e.RName.Contains(rname), out rows, currentpage, 3);
+                dt = ird.v_MainAll(e => e.RID, e => e.SIDS.Contains(names) && e.RName.Contains(rname), out rows, currentpage, 3);
             }
             Dictionary<string, object> dir = new Dictionary<string, object>();
             dir.Add("dt", dt);

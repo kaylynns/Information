@@ -16,7 +16,8 @@ namespace Entity
     {
         public int RID { get; set; }
         public string RName { get; set; }
-        public string SID { get; set; }
+        public string SIDS { get; set; }
+        public Nullable<int> SID { get; set; }
         public string RUserId { get; set; }
         public string ROffice { get; set; }
         public Nullable<System.DateTime> RDate { get; set; }

@@ -15,5 +15,6 @@ namespace IDAO
         int Add(info_Equipment t);
         List<info_Equipment> SelectWhere(Expression<Func<info_Equipment, bool>> where);
         int Update(info_Equipment t);
+        List<info_Equipment> SelectAll();
     }
 }
