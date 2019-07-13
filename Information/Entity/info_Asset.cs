@@ -11,56 +11,31 @@ namespace Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
-    [DataContract(IsReference = true)]
+    
     public partial class info_Asset
     {
-        [DataMember]
         public int AID { get; set; }
-        [DataMember]
         public string AName { get; set; }
-        [DataMember]
         public int ATypeId { get; set; }
-        [DataMember]
         public string AModel { get; set; }
-        [DataMember]
         public Nullable<decimal> AMoney { get; set; }
-        [DataMember]
         public Nullable<System.DateTime> ABuyTime { get; set; }
-        [DataMember]
         public Nullable<System.DateTime> ApplyTime { get; set; }
-        [DataMember]
         public string AParameter { get; set; }
-        [DataMember]
         public string ASuppler { get; set; }
-        [DataMember]
         public string AEM { get; set; }
-        [DataMember]
         public string RealName { get; set; }
-        [DataMember]
         public Nullable<int> JID { get; set; }
-        [DataMember]
         public Nullable<int> SID { get; set; }
-        [DataMember]
         public string ARemarks { get; set; }
-        [DataMember]
         public Nullable<int> TID { get; set; }
-        [DataMember]
         public Nullable<int> CRelustID { get; set; }
-        [DataMember]
         public string AYears { get; set; }
-        [DataMember]
         public string AExplain { get; set; }
-        [DataMember]
         public string ASupplerPhone { get; set; }
-        [DataMember]
         public string AShenHeRan { get; set; }
-        [DataMember]
         public string AShenHeYiJian { get; set; }
-        [DataMember]
         public string AShenHeJieGuo { get; set; }
-        [DataMember]
         public string AShenHeRiQi { get; set; }
     
         public virtual CaiGouXingShi CaiGouXingShi { get; set; }

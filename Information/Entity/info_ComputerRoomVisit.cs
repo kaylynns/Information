@@ -11,40 +11,23 @@ namespace Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
-    [DataContract(IsReference = true)]
+    
     public partial class info_ComputerRoomVisit
     {
-        [DataMember]
         public int CID { get; set; }
-        [DataMember]
         public string CName { get; set; }
-        [DataMember]
         public Nullable<System.DateTime> CTIme { get; set; }
-        [DataMember]
         public string Cause { get; set; }
-        [DataMember]
         public string Carries { get; set; }
-        [DataMember]
         public Nullable<int> CEntourage { get; set; }
-        [DataMember]
         public string CBringOut { get; set; }
-        [DataMember]
         public Nullable<System.DateTime> CEntryTime { get; set; }
-        [DataMember]
         public Nullable<System.DateTime> CLeaveTime { get; set; }
-        [DataMember]
         public string CRegistar { get; set; }
-        [DataMember]
         public string CInstructor { get; set; }
-        [DataMember]
         public int CRelustID { get; set; }
-        [DataMember]
         public Nullable<System.DateTime> CInstructorTime { get; set; }
-        [DataMember]
         public string COpinion { get; set; }
-        [DataMember]
         public Nullable<int> CXuanXiang { get; set; }
     
         public virtual PiShiJieGuo PiShiJieGuo { get; set; }

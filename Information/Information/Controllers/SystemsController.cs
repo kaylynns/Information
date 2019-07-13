@@ -8,6 +8,10 @@ using IBLL;
 using Newtonsoft.Json;
 using Entity;
 using IocContainer;
+using StackExchange.Redis;
+using System.Net.Mail;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace information.Controllers
 {
@@ -287,18 +291,58 @@ namespace information.Controllers
 
         //用户管理页面添加（进行添加操作）
         [HttpPost]
-        public ActionResult UserManagementCreates(info_User u)
+        public async Task<ActionResult> UserManagementCreates(info_User u)
         {
-            if (iud.Add(u) > 0)
+            //事务
+            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
             {
-                return Content("<script>alert('添加成功');window.location.href='/Systems/UserManagementSelect'</script>");
+                if (iud.Add(u) > 0)
+                {
+                    await AddUser(u);
+                    ts.Complete();
+                    return Content("<script>alert('添加成功');window.location.href='/Systems/UserManagementSelect'</script>");
+                }
+                else
+                {
+                    return Content("<script>alert('添加失败');window.location.href='/Systems/UserManagementEdit/" + u.UserID + "'</script>");
+                }
             }
-            else
-            {
-                return Content("<script>alert('添加失败');window.location.href='/Systems/UserManagementEdit/" + u.UserID + "'</script>");
-            }
+
             // return View(dt);
         }
+        
+
+        public async Task AddUser(info_User u) {
+            using (ConnectionMultiplexer redis = await ConnectionMultiplexer.ConnectAsync("127.0.0.1:6379"))
+            {
+                IDatabase db = redis.GetDatabase();
+                await db.ListLeftPushAsync("d", JsonConvert.SerializeObject(u));
+                string zhi = db.ListRightPop("d");
+                //把json字符串转换为对象
+                info_User p = JsonConvert.DeserializeObject<info_User>(zhi);
+                //使用MailMessage发送电子邮件
+                MailMessage mail = new MailMessage();
+                //主题
+                mail.Subject = "欢迎您成为信息系统的一员";
+                //发件人
+                mail.From = new MailAddress("2214097825@qq.com");
+                //收件人
+                mail.To.Add(new MailAddress(u.Email));
+                //主体 
+                //HtmlHelper h=new HtmlHelper(Login, Login);
+                //    string login = "< a href = 'http://localhost:41502/Login/Login' > 登陆 </ a >";
+              
+                mail.Body = "欢迎"+u.UserRealName+ "，恭喜您成为信息系统的一员(*^_^*)，您的密码是：" + u.UserPass+ "!快去登陆一下吧";
+                //允许程序发邮件
+                SmtpClient sc = new SmtpClient("smtp.qq.com");
+                //发信的凭证
+                sc.Credentials = new NetworkCredential("2214097825@qq.com", "onfwcyynkhtjeadg");
+                sc.Send(mail);
+
+            }
+
+        }
+
 
         [HttpGet]
         //修改密码[进入修改密码页面]
