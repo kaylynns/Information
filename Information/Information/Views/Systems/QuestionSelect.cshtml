@@ -65,6 +65,9 @@
         #wh a {
             color: royalblue;
         }
+          .jz  td{
+              text-align:center;
+        }
     </style>
     <script type="text/javascript">
         var pageSize = 1;
@@ -137,6 +140,26 @@
                 vm.load(currentPage,name);
             })
 
+            //非空判断
+            $("#btn_cun").click(function () {
+                if ($("#QName").val() == "" || $("#QName").val() == null) {
+                    alert("请输入问题分类名称！");
+                } else {
+                    $.ajax({
+                        url: "/Systems/QuestionCreate",
+                        type: "Post",
+                        data: $("#formAdd").serialize(),
+                        success: function (msg) {
+                            if (msg == "ok") {
+                                alert("添加成功！");
+                                window.location.href = '/Systems/QuestionSelect'
+                            } else {
+                                alert("添加失败！");
+                            }
+                        }
+                    });
+                }
+            })
         })
         </script>
 </head>
@@ -150,11 +173,8 @@
                     <td> 问题分类名称：<input id="txt_name" type="text" /></td>
                     <td><input type="button" value="查询" id="btn_select" Class="btn1" style="margin-left:10px" /></td>
                     <td>
-                        @using (Ajax.BeginForm("QuestionCreate", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Create" }))
-                            {
-                            @Html.Label("问题分类名称:")@Html.TextBoxFor(e => e.QName)   @Html.Label("角色备注:")@Html.TextBoxFor(e => e.QRemark)  
-                            <input id="Button1" type="submit" value="添加问题分类" Class="btn1" />
-                           }
+                        <input id="Button1" type="submit" value="添加问题分类" Class="btn1" data-toggle="modal" data-target="#myModal" style="margin-left:10px"/>
+                     
                 </tr>
             </table>
 
@@ -183,14 +203,51 @@
 
         </table>
         <div id="pageDiv">
-            <div id="leftPage"></div>
-            <div id="rightPage">
-                <input type="button" value="首页" OnClick="btn_select_Click" Class="btn1" id="first" />&nbsp;&nbsp;
+            <div id="leftPage" style="color:#3C8ABC;padding-top:10px"></div>
+            <div id="rightPage" style="float:right;position:relative;bottom:20px;">
+                <input type="button" value="首页" Class="btn1" id="first" />&nbsp;&nbsp;
                 <input type="button" value="上一页" Class="btn1" id="prev" />&nbsp;&nbsp;
                 <input type="button" value="下一页" Class="btn1" id="next" />&nbsp;&nbsp;
                 <input type="button" value="尾页" Class="btn1" id="last" />&nbsp;&nbsp;
             </div>
         </div>
+    </div>
+
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-body" align="center">
+                    <h2 align="center">角色添加</h2>
+                   @*@using (Ajax.BeginForm("QuestionCreate", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Create" }))
+            {}*@
+                    <form id="formAdd">
+                        <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse;margin:10px 0px 0px 20px;"
+                               bordercolor="#6c9ec1" width="300px" height="200px" class="jz">
+
+                            <tr>
+                                <td>@Html.Label("问题分类名称:")</td>
+                                <td>@Html.TextBoxFor(e => e.QName, new { placeholder = "请输入问题名称" }) </td>
+                            </tr>
+                            <tr>
+                                <td>@Html.Label("角色备注:")</td>
+                                <td>@Html.TextBoxFor(e => e.QRemark)</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <input type="button" value="保存" id="btn_cun" Class="btn1" style="margin-left:10px" />
+                                    <input type="button" value="返回" id="btn_select" Class="btn1" style="margin-left:10px" onclick="window.location.href = '/Systems/QuestionSelect'" data-dismiss="modal" />
+                                </td>
+                            </tr>
+                        </table>
+                       </form>
+</div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
     </div>
 </body>
 </html>

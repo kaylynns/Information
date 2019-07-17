@@ -34,31 +34,49 @@ namespace information.Controllers
         {
             return View();
         }
-        //进入权限角色管理页面查询操作
-        public ActionResult PowerSelects()
+      
+        //权限角色管理页面查询(分页查询)
+        public ActionResult PowerSelectFen(int currentPage, string name)
         {
-          var dt=irb.SelectAll();
-            return Content(JsonConvert.SerializeObject(dt));
+            var pageSize = 3;
+            int rows;
+
+            List<info_Role> dt;
+
+            if (name == "" && name == null)
+            {
+                //普通查询
+                dt = irb.FenYe(e => e.RoleID, e => e.RoleID > 0, out rows, currentPage, pageSize);
+            }
+            else
+            {
+                //带条件查询
+                dt = irb.FenYe(e => e.RoleID , e => e.RoleName.Contains(name), out rows, currentPage, pageSize);
+            }
+            Dictionary<string, object> dir = new Dictionary<string, object>();
+            dir.Add("data", dt);
+            dir.Add("rows", rows);
+            dir.Add("currentpage", rows % 2 > 0 ? (rows / 2) + 1 : (rows / 2));
+            dir.Add("pages", (rows - 1) / pageSize + 1);
+            return Content(JsonConvert.SerializeObject(dir));
         }
+
+
+
         //权限角色页面添加（进行添加操作）
         // POST: Systems/Create
         [HttpPost]
         public ActionResult PowerCreate(info_Role role)
         {
-
-
-            // TODO: Add insert logic here
-
             if (irb.Add(role) > 0)
             {
-                return Content("<script>alert('添加成功');window.location.href='/Systems/PowerSelect'</script>");
+                return Content("ok");
 
-            } else {
-                return Content("<script>alert('添加失败');window.location.href='/Systems/PowerSelect'</script>");
             }
-                       
-            
-                 
+            else
+            {
+                return Content("no");
+            }
         }
         //权限角色页面删除（进行删除操作）
         // GET: Systems/Delete/5
@@ -81,7 +99,7 @@ namespace information.Controllers
                     RoleID = id
                 };
 
-                if (ipsb.delete(id) > 0)
+                if (ipsb.delete(id) >= 0)
                 {
                     if (irb.Delete(role) > 0)
                     {
@@ -152,7 +170,7 @@ namespace information.Controllers
         //权限添加（进行添加操作）
         public ActionResult PowerAddss(string rid,string qid) {
             //事务
-            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope()) {
+            //using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope()) {
                 string[] qidd = qid.Split(',');
             
                 int num =ipsb.delete(Convert.ToInt16(rid));
@@ -165,14 +183,14 @@ namespace information.Controllers
                 }
                 if (num1 > 0)
                 {
-                     ts.Complete();
+                   //  ts.Complete();
                  return Content("ok");
                 }
 
                    
             }
             return Content("ok");
-            }
+        //    }
         }
         #endregion
 
@@ -186,7 +204,7 @@ namespace information.Controllers
         //用户管理页面查询(分页查询)
         public ActionResult UserManagementSelectFen(int currentPage,string name)
         {
-            var pageSize = 2;
+            var pageSize = 3;
             int rows;
 
             List<v_User> dt;
@@ -294,30 +312,37 @@ namespace information.Controllers
         public async Task<ActionResult> UserManagementCreates(info_User u)
         {
             //事务
-            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
+            //using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
+            //{
+            if (iud.Add(u) > 0)
             {
-                if (iud.Add(u) > 0)
-                {
-                    await AddUser(u);
-                    ts.Complete();
-                    return Content("<script>alert('添加成功');window.location.href='/Systems/UserManagementSelect'</script>");
-                }
-                else
-                {
-                    return Content("<script>alert('添加失败');window.location.href='/Systems/UserManagementEdit/" + u.UserID + "'</script>");
-                }
+               await AddUser(u);
+                // ts.Complete();
+                return Content("<script>alert('添加成功');window.location.href='/Systems/UserManagementSelect'</script>");
             }
+            else
+            {
+                return Content("<script>alert('添加失败');window.location.href='/Systems/UserManagementEdit/" + u.UserID + "'</script>");
+            }
+            // }
 
             // return View(dt);
         }
-        
 
-        public async Task AddUser(info_User u) {
+        //邮箱
+        public async Task AddUser(info_User u)
+        {
             using (ConnectionMultiplexer redis = await ConnectionMultiplexer.ConnectAsync("127.0.0.1:6379"))
             {
                 IDatabase db = redis.GetDatabase();
-                await db.ListLeftPushAsync("d", JsonConvert.SerializeObject(u));
-                string zhi = db.ListRightPop("d");
+                Dictionary<object, object> di = new Dictionary<object, object>();
+                di.Add("UserID", u.UserID);
+                di.Add("UserRealName", u.UserRealName);
+                di.Add("Email", u.Email);
+             //   db.ListLeftPush("f", JsonConvert.SerializeObject(di));
+                 await db.ListLeftPushAsync("f", JsonConvert.SerializeObject(di));
+
+                string zhi = await db.ListRightPopAsync("f");
                 //把json字符串转换为对象
                 info_User p = JsonConvert.DeserializeObject<info_User>(zhi);
                 //使用MailMessage发送电子邮件
@@ -331,8 +356,8 @@ namespace information.Controllers
                 //主体 
                 //HtmlHelper h=new HtmlHelper(Login, Login);
                 //    string login = "< a href = 'http://localhost:41502/Login/Login' > 登陆 </ a >";
-              
-                mail.Body = "欢迎"+u.UserRealName+ "，恭喜您成为信息系统的一员(*^_^*)，您的密码是：" + u.UserPass+ "!快去登陆一下吧";
+
+                mail.Body = "欢迎" + u.UserRealName + "，恭喜您成为信息系统的一员(*^_^*)，您的密码是：" + u.UserPass + "!快去登陆一下吧";
                 //允许程序发邮件
                 SmtpClient sc = new SmtpClient("smtp.qq.com");
                 //发信的凭证
@@ -355,6 +380,7 @@ namespace information.Controllers
           
             info_User u = iud.SelectWhere(e => e.UserID == id).FirstOrDefault();
             u.UserPass = pass;
+        
           
             if (iud.Update(u) > 0)
             {
@@ -406,11 +432,11 @@ namespace information.Controllers
         {
             if (iqb.Add(quest) > 0)
             {
-                return Content("<script>alert('添加成功');window.location.href='/Systems/QuestionSelect'</script>");
+                return Content("ok");
             }
             else
             {
-                return Content("<script>alert('添加失败');window.location.href='/Systems/QuestionSelect'</script>");
+                return Content("no");
             }
             //return View();
         }
@@ -500,11 +526,11 @@ namespace information.Controllers
         {
             if (isb.Add(soft) > 0)
             {
-                return Content("<script>alert('添加成功');window.location.href='/Systems/SoftwareSelect'</script>");
+                return Content("ok");
             }
             else
             {
-                return Content("<script>alert('添加失败');window.location.href='/Systems/SoftwareSelect'</script>");
+                return Content("no");
             }
             //return View();
         }
@@ -590,11 +616,11 @@ namespace information.Controllers
         {
             if (icgxsb.Add(cgxs) > 0)
             {
-                return Content("<script>alert('添加成功');window.location.href='/Systems/ShoppingSelect'</script>");
+                return Content("ok");
             }
             else
             {
-                return Content("<script>alert('添加失败');window.location.href='/Systems/ShoppingSelect'</script>");
+                return Content("no");
             }
             //return View();
         }

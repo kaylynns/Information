@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>UserManagementSelect</title>
     <link href="~/css/css.css" rel="stylesheet" />
-    <link href="~/Scripts/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/vue.js"></script>
     <style type="text/css">
@@ -129,6 +129,7 @@
                 vm.load(currentPage, name);
             })
 
+
         })
 
     </script>
@@ -161,9 +162,9 @@
             </tr>
         </table>
         <div id="pageDiv">
-            <div id="leftPage"></div>
-            <div id="rightPage">
-                <input type="button" value="首页" OnClick="btn_select_Click" Class="btn1" id="first" />&nbsp;&nbsp;
+            <div id="leftPage" style="color:#3C8ABC;padding-top:10px"></div>
+            <div id="rightPage" style="float:right;position:relative;bottom:20px;">
+                <input type="button" value="首页" Class="btn1" id="first" />&nbsp;&nbsp;
                 <input type="button" value="上一页" Class="btn1" id="prev" />&nbsp;&nbsp;
                 <input type="button" value="下一页" Class="btn1" id="next" />&nbsp;&nbsp;
                 <input type="button" value="尾页" Class="btn1" id="last" />&nbsp;&nbsp;

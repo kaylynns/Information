@@ -12,6 +12,7 @@
     <link href="~/css/css.css" rel="stylesheet" />
     <link href="~/css/bootstrap.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.11.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
     <style type="text/css">
                 .zhi td {
         text-align:center;
@@ -59,6 +60,9 @@
             background-color: white;
             text-align: center;
             font-size: 15px;
+        }
+         .jz td {
+            text-align: center;
         }
     </style>
 
@@ -131,7 +135,7 @@
         })
         //添加按钮
         $(function () {
-            $("#Button1").click(function () {
+            $("#btn_Add").click(function () {
                 var name = $("#Text1").val();
                 var bei = $("#Text2").val();
                 $.ajax({
@@ -140,7 +144,8 @@
                     url: "ZiChanTianJia",
                     success: function (msg) {
                         if (msg=="OK") {
-                            window.location.href='Index'
+                            window.location.href = 'Index';
+                            alert('添加成功！');
                         }
                         $("#Text1").val("");
                         $("#Text2").val("");
@@ -152,7 +157,8 @@
 </head>
 <body>
     <h2 align="center"> 资产类别表 </h2>
-    <div>
+    <div><input id="button1" type="submit" value="添加角色" Class="btn1" data-toggle="modal" data-target="#myModal" style="margin-left:10px" /></div>
+    @*<div>
         资产类别名称：
         <input id="Text1" type="text" ID="txtSearch" Width="240" />
         &nbsp;
@@ -161,7 +167,7 @@
         &nbsp;
         <input id="Button1" type="button" value="添 加" Class="btn1" />
         &nbsp;
-    </div>
+    </div>*@
     <table width="100%" id="ListArea" border="0" class="t1" align="center" cellpadding="0"
            cellspacing="0">
         <tr align="center">
@@ -180,5 +186,41 @@
             <input type="button" value="尾页" Class="btn1" id="last" />&nbsp;&nbsp;
         </div>
     </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-body" align="center">
+                    <h2 align="center">资产类别添加</h2>
+                   
+                        <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse;margin:10px 0px 0px 20px;"
+                               bordercolor="#6c9ec1" width="300px" height="200px" class="jz">
+                            @*<tr>
+                                    <td colspan="2"></td>
+                                </tr>*@
+                            <tr>
+                                <td>@Html.Label("资产类别名称:")</td>
+                                <td><input id="Text1" type="text" ID="txtSearch" Width="240" /></td>
+                            </tr>
+                            <tr>
+                                <td>@Html.Label("角色备注:")</td>
+                                <td><input id="Text2" type="text" ID="txtSearch" Width="240" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <input id="btn_Add" type="button" value="添 加" Class="btn1" />
+                                    <input type="button" value="返回" id="btn_select" Class="btn1" style="margin-left:10px" onclick="window.location.href = '/Systems/PowerSelect'" data-dismiss="modal" />
+                                </td>
+                            </tr>
+                        </table>
+                    
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
 </body>
 </html>

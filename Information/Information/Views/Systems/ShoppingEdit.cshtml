@@ -26,8 +26,8 @@
 @using (Ajax.BeginForm("ShoppingEdits", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Update" }))
 {
         @Html.AntiForgeryToken()
-        <table cellspacing="0" cellpadding="7" align="center" border="1" style="border-collapse: collapse; margin-bottom:20px"
-               bordercolor="#6c9ec1">
+        <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse;margin:10px 0px 0px 20px;"
+                               bordercolor="#6c9ec1" width="300px" height="200px" class="jz">
             <tr>
                 <td>采购形式id</td>
                 <td>@Html.TextBoxFor(model => model.SID,new { @readonly="readonly"})</td>

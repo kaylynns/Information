@@ -136,7 +136,26 @@
                 name = $("#txt_name").val();
                 vm.load(currentPage,name);
             })
-
+            //非空判断
+            $("#btn_cun").click(function () {
+                if ($("#SName").val() == "" || $("#SName").val() == null) {
+                    alert("请输入采购形式！");
+                } else {
+                    $.ajax({
+                        url: "/Systems/ShoppingCreate",
+                        type: "Post",
+                        data: $("#formAdd").serialize(),
+                        success: function (msg) {
+                            if (msg == "ok") {
+                                alert("添加成功！");
+                                window.location.href = '/Systems/ShoppingSelect'
+                            } else {
+                                alert("添加失败！");
+                            }
+                        }
+                    });
+                }
+            })
         })
     </script>
 </head>
@@ -150,11 +169,11 @@
                     <td> 采购形式名称：<input id="txt_name" type="text" /></td>
                     <td><input type="button" value="查询" id="btn_select" Class="btn1" style="margin-left:10px" /></td>
                     <td>
-                        @using (Ajax.BeginForm("/ShoppingCreate", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Create" }))
-                        {
-                            @Html.Label("名称:")@Html.TextBoxFor(e=>e.SName) <input id="Button1" type="submit" value="添加采购形式" Class="btn1" />
-                        }
-                </tr>
+                            <form id="formAdd">
+                                @Html.Label("名称:")@Html.TextBoxFor(e => e.SName) <input id="btn_cun" type="submit" value="添加采购形式" Class="btn1" />
+                                </form>
+                             
+</tr>
             </table>
 
         </div>
@@ -181,9 +200,9 @@
 
         </table>
         <div id="pageDiv">
-            <div id="leftPage"></div>
-            <div id="rightPage">
-                <input type="button" value="首页" OnClick="btn_select_Click" Class="btn1" id="first" />&nbsp;&nbsp;
+            <div id="leftPage" style="color:#3C8ABC;padding-top:10px"></div>
+            <div id="rightPage" style="float:right;position:relative;bottom:20px;">
+                <input type="button" value="首页" Class="btn1" id="first" />&nbsp;&nbsp;
                 <input type="button" value="上一页" Class="btn1" id="prev" />&nbsp;&nbsp;
                 <input type="button" value="下一页" Class="btn1" id="next" />&nbsp;&nbsp;
                 <input type="button" value="尾页" Class="btn1" id="last" />&nbsp;&nbsp;

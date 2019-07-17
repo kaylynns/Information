@@ -25,6 +25,11 @@ namespace BLL
             return ird.Delete(t);
         }
 
+        public List<info_Role> FenYe<K>(Expression<Func<info_Role, K>> order, Expression<Func<info_Role, bool>> where, out int rows, int currentPage, int pageSize)
+        {
+            return ird.FenYe(order, where,out rows, currentPage, pageSize);
+        }
+
         public List<info_Role> SelectAll()
         {
             return ird.SelectAll();

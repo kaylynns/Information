@@ -10,9 +10,14 @@
     <meta name="viewport" content="width=device-width" />
     <title>PowerSelect</title>
     <link href="~/css/css.css" rel="stylesheet" />
-    <link href="~/Scripts/bootstrap.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-1.7.2.min.js"></script>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    @*<script src="~/Scripts/jquery-1.7.2.min.js"></script>*@
+    
+    <script src="~/Scripts/jquery-1.11.1.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/vue.js"></script>
+
+    <script src="~/Scripts/bootstrap.js"></script>
     <style type="text/css">
         .t1 {
             clear: both;
@@ -62,67 +67,184 @@
         #wh a {
             color: royalblue;
         }
+
+        .jz  td{
+              text-align:center;
+        }
+
     </style>
     <script type="text/javascript">
+        var pageSize = 1;
+        var vm;
+        var pages;
+        var currentPage = 1;
 
-        $(function(){
+        var name = "";
+        $(function () {
             vm = new Vue({
                 el: "#zong",
                 data: {    //每个 Vue 实例都会代理其 data 对象里所有的属性
                     nums: null
                 }, methods: {
-                    load: function (currPage, AType, AName) {
+                    load: function (currPage,name) {
                         var t = this;
                         $.ajax({
-                            url: "/Systems/PowerSelects",
+                            url: "/Systems/PowerSelectFen",
+                            data: "currentPage=" + currPage + "&name=" + name,
                             type: "Post",
                             success: function (msg) {
+                                //var dt = eval("(" + msg + ")");
+                                //t.nums = dt;
                                 var dt = eval("(" + msg + ")");
-                                t.nums = dt;
-                              
+                                t.nums = dt["data"];
+                                var rows = dt["rows"];
+                                pages = dt["pages"];
+                                $("#leftPage").text("共有" + rows + "条记录，当前第" + currentPage + "/" + pages + "页");
                             }
                         })
                     }
                 }
             });
             //加载
-            vm.load();
+            vm.load(currentPage, name);
+            //首页
+            $("#first").click(function () {
+                currentPage = 1;
+                vm.load(currentPage, name);
+            })
+
+            //上一页
+            $("#prev").click(function () {
+                if (currentPage > 1) {
+                    currentPage--;
+                }
+                vm.load(currentPage,name);
+            })
+
+            //下一页
+            $("#next").click(function () {
+                if (currentPage < pages) {
+                    currentPage++;
+                }
+                vm.load(currentPage,name);
+            })
+            //尾页
+            $("#last").click(function () {
+                currentPage = pages;
+                vm.load(currentPage,name);
+            })
+           
+            //查询
+            $("#btn_select").click(function () {
+                name = $("#txt_name").val();
+                vm.load(currentPage, name);
+            })
+            //清空
+            $("#QingKong").click(function () {
+                //给查询的文本框清空
+                $("#txt_type").val("");
+                $("#txt_name").val("");
+            })
+
+            //非空判断
+            $("#btn_cun").click(function () 
+            {
+                if ($("#RoleName").val() == "" || $("#RoleName").val() == null) {
+                    alert("请输入角色名称！");
+                } else {
+                    $.ajax({
+                        url: "/Systems/PowerCreate",
+                        type: "Post",
+                        data: $("#formAdd").serialize(),
+                        success: function (msg) {
+                            if (msg == "ok") {
+                                alert("添加成功！");
+                                window.location.href = '/Systems/PowerSelect'
+                            } else {
+                                alert("添加失败！");
+                            }
+                        }
+                    });
+               }
+            })
+       
         })
 
-        function Create(msg) {
-            if (msg == "ok") {
-                alert("添加成功！");
-            } else {
-                alert("添加失败！");
-            }
-        }
+    
+        
     </script>
 </head>
 <body>
     <div id="zong">
         <h2 align="center">权限管理</h2>
-        
-            @using (Ajax.BeginForm("PowerCreate", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Create" }))
-            {
-                @Html.Label("角色名称:")@Html.TextBoxFor(e=>e.RoleName)   @Html.Label("角色备注:")@Html.TextBoxFor(e => e.Remark)  <input id = "Button1" type = "submit" value = "添加角色" Class = "btn1" />
+        <input id="txt_name" type="text"   style="margin-left:10px" /><input id="btn_select" type="submit" value="角色查询" Class="btn1"  style="margin-left:10px" />
+        <input type="button" value="清空" id="QingKong" Class="btn1" style="margin-left:10px" />
 
-            }
-              <table width = "100%" id = "ListArea" border = "0" class="t1" align="center" cellpadding="0"
+        <input id="Button1" type="submit" value="添加角色" Class="btn1" data-toggle="modal"  data-target="#myModal"   style="margin-left:10px"/>
+       
+        <table width="100%" id="ListArea" border="0" class="t1" align="center" cellpadding="0"
                cellspacing="0">
-            <tr id = "head" >
-                <td> 编号 </td >
+            <tr id="head">
+                <td> 编号 </td>
                 <td> 角色名称 </td>
-                <td> 备注 </td >
+                <td> 备注 </td>
                 <td> 编辑 </td>
-                    </tr>
-                    <tr  v-for="(item,i) in nums">
-            <td>{{item.RoleID}}</td>
+            </tr>
+            <tr v-for="(item,i) in nums">
+                <td>{{item.RoleID}}</td>
                 <td>{{item.RoleName}}</td>
                 <td>{{item.Remark}}</td>
-                <td><a  v-bind:href="['/Systems/PowerEdit/'+item.RoleID]" > 修改 </ a > &nbsp;&nbsp;&nbsp;<a  v-bind:href="['/Systems/PowerDelete/'+item.RoleID]" onclick="return confirm('您确定要删除这条数据吗？')">删除</a>&nbsp;&nbsp;&nbsp;<a   v-bind:href="['/Systems/PowerAdd/'+item.RoleID]">设置权限</a></td>
+                @* v-bind:href="['/Systems/PowerEdit/'+item.RoleID]"   data-toggle="modal"  data-target="#myModal2" *@  
+                <td><a v-bind:href="['/Systems/PowerEdit/'+item.RoleID]"  > 修改 </a > &nbsp;&nbsp;&nbsp;<a v-bind:href="['/Systems/PowerDelete/'+item.RoleID]" onclick="return confirm('您确定要删除这条数据吗？')">删除</a>&nbsp;&nbsp;&nbsp;<a v-bind:href="['/Systems/PowerAdd/'+item.RoleID]">设置权限</a></td>
             </tr>
 
         </table>
+        <div id="pageDiv">
+            <div id="leftPage" style="color:#3C8ABC;padding-top:10px"></div>
+            <div id="rightPage" style="float:right;position:relative;bottom:20px;">
+                <input type="button" value="首页" Class="btn1" id="first" />&nbsp;&nbsp;
+                <input type="button" value="上一页" Class="btn1" id="prev" />&nbsp;&nbsp;
+                <input type="button" value="下一页" Class="btn1" id="next" />&nbsp;&nbsp;
+                <input type="button" value="尾页" Class="btn1" id="last" />&nbsp;&nbsp;
+            </div>
+        </div>
     </div>
+    
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-body" align="center">
+                        <h2 align="center">角色添加</h2>
+                   
+                        <form id="formAdd" >
+                            <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse;margin:10px 0px 0px 20px;"
+                                   bordercolor="#6c9ec1" width="300px" height="200px" class="jz">
+                                <tr>
+                                    <td>@Html.Label("角色名称:")</td>
+                                    <td>@*<input id="RoleName" type="text" />*@
+                                     @Html.TextBoxFor(e=>e.RoleName,new { placeholder = "请输入角色名" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.Label("角色备注:")</td>
+                                    <td>
+                                    @Html.TextBoxFor(e => e.Remark)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="center">
+                                        <input type="button" value="保存" id="btn_cun" Class="btn1" style="margin-left:10px" />
+                                        <input type="button" value="返回" id="btn_select" Class="btn1" style="margin-left:10px" onclick="window.location.href = '/Systems/PowerSelect'" data-dismiss="modal" />
+                                    </td>
+                                </tr>
+                            </table>
+                            </form>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
 </body>
 </html>

@@ -10,60 +10,44 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>PowerEdit</title>
+    <link href="~/css/css.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <style>
+       .jz  td{
+            text-align:center;
+        }
+
+    </style>
 </head>
 <body>
     <h2 align="center">角色更改</h2>
     @using (Html.BeginForm("PowerEdits", "Systems", "post"))
-    {
-        @Html.AntiForgeryToken()
-        <table cellspacing="0" cellpadding="7" align="center" border="1" style="border-collapse: collapse; margin-bottom:20px"
-               bordercolor="#6c9ec1">
+            {
+        <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse;"
+               bordercolor="#6c9ec1" width="400px" height="200px"> 
+       
             <tr>
-                <td>角色id</td>
+                <td>@Html.Label("角色id:")</td>
                 <td>@Html.TextBoxFor(model => model.RoleID, new { @readonly = "readonly" })</td>
             </tr>
             <tr>
-                <td>角色名称</td>
+                <td>@Html.Label("角色名称:")</td>
                 <td> @Html.TextBoxFor(model => model.RoleName)</td>
             </tr>
             <tr>
-                <td>角色备注</td>
+                <td>@Html.Label("角色备注:")</td>
                 <td>@Html.EditorFor(model => model.Remark)</td>
             </tr>
             <tr>
-                <td align="center" colspan="2">
-                    <input id="Button1" type="submit" value="角色更改6" Class="btn1" />
-                    <input type="button" value="返回" Class="btn1" style="margin-left:10px" OnClick="window.location.href = '/Systems/PowerSelect'" />
+                <td colspan="2" align="center">
+                    <input type="submit" value="保存" id="btn_select" Class="btn1" style="margin-left:10px" />
+                    <input type="button" value="返回" id="btn_select" Class="btn1" style="margin-left:10px" onclick="window.location.href = '/Systems/PowerSelect'" data-dismiss="modal" />
                 </td>
             </tr>
         </table>
-
-
-       
-            @*<div class="form-group">
-                @Html.Label("角色名称：")
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.RoleName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.Label("角色备注：")
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="更改"  Class="btn1" style="margin-left:10px" />
-                    <input type="button" value="返回"  Class="btn1" style="margin-left:10px" OnClick="window.location.href = '/Systems/PowerSelect'" />
-                </div>
-            </div>*@
-        
     }
+
+  
     
  
 </body>
