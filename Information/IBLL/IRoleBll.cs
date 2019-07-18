@@ -20,5 +20,7 @@ namespace IBLL
         int Delete(info_Role t);
         //添加
         int Add(info_Role t);
+        //分页
+        List<info_Role> FenYe<K>(Expression<Func<info_Role, K>> order, Expression<Func<info_Role, bool>> where, out int rows, int currentPage, int pageSize);
     }
 }

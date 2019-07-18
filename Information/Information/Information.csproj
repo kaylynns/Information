@@ -1111,7 +1111,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Scripts\vssver2.scc" />
     <Content Include="Views\Main\Main.cshtml" />
     <Content Include="Views\Main\left.cshtml" />
     <Content Include="Views\Main\top.cshtml" />

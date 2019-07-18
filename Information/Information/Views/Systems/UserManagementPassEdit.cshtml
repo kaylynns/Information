@@ -15,7 +15,7 @@
     $(function () {
             //修改密码
             $("#btn_Update").click(function () {
-            var upass="@Model.UserPass";
+                var upass="@Model.UserPass";
             var pass = $("#Text1").val();
             var xpass = $("#Text2").val();
             var qpass = $("#Text3").val();
@@ -51,15 +51,18 @@
         //忘记密码
         $("#forgetPwd").click(function(){
             if(confirm('会重置一个密码，您确定要这么做吗？')){
+                var rad = parseInt(Math.random() * (999999 - 100000 + 1) + 100000, 10);
+
                 //进数据库修改
                 $.ajax({
                     type: "post",
                     url: "/Systems/UserManagementPassEdits",
-                    data:"pass="+1+"&id="+@Model.UserID,
+                    data:"pass="+rad+"&id="+@Model.UserID,
                     success:function(msg){
                         if (msg == "ok") {
                             alert("密码重置成功！");
                             window.location.href = '/Systems/UserManagementPassEdit/@Model.UserID' 
+                          
                         } else {
                             alert("密码重置失败！");
                         }
@@ -67,7 +70,8 @@
                     }
 
                 })
-                alert("重置后的密码是：1");
+                alert("重置后的密码是："+rad);
+              
             }
            
         });
@@ -86,7 +90,7 @@
         <td>真实姓名</td>
         <td>@Html.EditorFor(model => model.UserRealName)</td>
         <td>原密码</td>
-       <td><input id="Text1" type="password" /> <a style="color:red;font-size:11px;text-decoration:none"  id="forgetPwd">忘记密码？</a></td>
+       <td><input id="Text1" type="text" /> <a style="color:red;font-size:11px;text-decoration:none"  id="forgetPwd">忘记密码？</a></td>
     </tr>
     <tr>
         <td>新密码</td>
