@@ -11,7 +11,9 @@ namespace Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [DataContract(IsReference = true)]
     public partial class info_Role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,9 +22,12 @@ namespace Entity
             this.info_Permission = new HashSet<info_Permission>();
             this.info_User = new HashSet<info_User>();
         }
-    
+
+        [DataMember]
         public int RoleID { get; set; }
+        [DataMember]
         public string RoleName { get; set; }
+        [DataMember]
         public string Remark { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

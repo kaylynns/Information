@@ -28,11 +28,19 @@
                     url: "SheBeiChaLeiBie",
                     success: function (msg) {
                         var use = eval("(" + msg + ")");
-                        $("#sel option:gt(0)").remove();
+                        $("#sel tr").remove();//清空表格
                         for (var i = 0; i < use.length; i++) {
-                            var $tr = $('<option  id="btnAdd" AName=' + use[i]["SIDS"] + ' AID=' + use[i]["SID"] + '>' + use[i]["SIDS"] + "</option>");
-                            $("#sel").append($tr);
+                     
+                            var $tr1 = $('<tr id="urm" align="center" style="height:37px"></tr>');
+                            var $td = $('<td id="btnAdd" AName=' + use[i]["SIDS"] + ' AID=' + use[i]["SID"] + '>' + use[i]["SIDS"] + "</td>");
+
+                        
+                            $tr1.append($td);
+                            $("#sel").append($tr1);
                         }
+
+                        var $tr2 = $('<tr id="urm" align="center"><td><input id="Button1" type="button" value="关闭" data-dismiss="modal" Class="btn1" /></td></tr>');
+                        $("#sel").append($tr2)
                     }
                 })
             })
@@ -43,7 +51,75 @@
                 $("#EAID").val(AID);
                 $('#myModal').modal('hide');
             })
+            //添加设备管理信息
+            $("#BaoCun").click(function () {
+                //获取设备名称值
+                var EAID= $("#EAID").val();
+                //获取使用处室的值
+                var Eoffice= $("#Eoffice").val();
+                //获取IP地址的值
+                var EIP= $("#EIP").val();
+                //获取业务系统的值
+                var Ebusinesssystem= $("#Ebusinesssystem").val();
+                //获取购买时间的值
+                var EbuYTime= $("#EbuYTime").val();
+                //获取使用年限的值
+                var Eyear= $("#Eyear").val();
+                //获取设备型号的值
+                var EquipmentModel= $("#EquipmentModel").val();
+                //获取系统版本的值
+                var Eversion= $("#Eversion").val();
+                //获取详细参数的值
+                var DEetailedParameters= $("#DEetailedParameters").val();
+                //获取供应商的值
+                var Esupplier= $("#Esupplier").val();
+                //获取联系电话的值
+                var EPhone= $("#EPhone").val();
+                //获取联系人的值
+                var Econtact = $("#Econtact").val();
+                if ((EAID == "" || EAID == null) || (Eoffice == "" || Eoffice == null) ||
+                    (EIP == "" || EIP == null) || (Ebusinesssystem == "" || Ebusinesssystem == null) ||
+                    (EbuYTime == "" || EbuYTime == null) || (Eyear == null || Eyear == "") ||
+                    (EquipmentModel == null || EquipmentModel == "") || (Eversion == "" || Eversion == null) ||
+                    (DEetailedParameters == "" || DEetailedParameters == null) || (Esupplier == null || Esupplier == "") ||
+                    (EPhone == null || EPhone == "") && (Econtact == null || Econtact == "")) {
+                    alert("请输入相对应的要输入的内容");
+                } else {
+                    $.ajax({
+                        type: "post",
+                        url: "SheBeiAddShiTu",
+                        data: $("#form1").serialize(),
+                        success: function (msg) {
+                            if (msg == "OK") {
+                                alert("添加成功正在前往机房设备查询");
+                                window.location.href = '/JiFang/SheBeiGuanLiShiTu'
+                            }
+                            else {
+                                alert("添加失败");
+                            }
+                        }
+
+                    })
+                }
+
+
+               
+
+
+
+
+
+
             })
+
+
+
+
+
+
+
+
+         })
                
              
 
@@ -51,20 +127,19 @@
 </head>
 <body>
     <h2 align="center">机房设备管理表</h2>
-    @using (Ajax.BeginForm("SheBeiAddShiTu",new AjaxOptions() {HttpMethod="Post"}))
-    {
-        <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse"
+    @*@using (Ajax.BeginForm("SheBeiAddShiTu",new AjaxOptions() {HttpMethod="Post"}))
+    {*@
+    <form id="form1">
+         <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse"
                bordercolor="#6c9ec1">
-            
             <tr>
 
                 <td>设备管理员</td>
                 <td colspan="3">@Html.DropDownListFor(model => model.Ename, ViewData["Enames"] as IEnumerable<SelectListItem>)</td>
 
             </tr>
-              
             <tr>
-                
+
                 <td align="left" rowspan="2">
                     设备名称：
                 </td>
@@ -72,7 +147,7 @@
                     <table border="0" cellpadding="0" cellspacing="0">
                         <tr>
                             <td>
-                                <input id="Text1" type="text" />
+                                <input id="Text1" type="text" readonly="readonly"/>
                                 @Html.HiddenFor(model => model.EAID)
                             </td>
                             <td>
@@ -196,17 +271,15 @@
                 </td>
             </tr>
 
-          
-
             <tr>
                 <td align="center" colspan="4" height="26">
-                    <input id="BaoCun" type="submit" value="保存" class="btn1" />
+                    <input id="BaoCun" type="button" value="保存" class="btn1" />
                     <input id="btn_add" type="button" value="返回" onclick="location.href = '/JiFang/SheBeiGuanLiShiTu'" class="btn1" />
                     <br />
                 </td>
             </tr>
         </table>
-     }
+    </form>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -218,24 +291,10 @@
                                 <asp:ScriptManager ID="ScriptManager1" runat="server">
                                 </asp:ScriptManager>
                                 <asp:Panel ID="Panel1" runat="server" Width="100%">
-                                    <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse;margin:10px 0px 0px 20px"
-                                           bordercolor="#6c9ec1" width="200px">
-                                        <tr>
-
-                                            <td>类别</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <select size="10" style="width: 200px;" id="sel"></select>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td colspan="2" align="center">
-                                                <input id="Button1" type="button" value="关闭" data-dismiss="modal" Class="btn1" />
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    <h3>设备名称查询</h3>
+                                    <table cellspacing="0" cellpadding="8" class="tableEdit" id="sel" align="center" border="1"
+                                           style="border-collapse: collapse"
+                                           bordercolor="#6c9ec1" width="200"></table>
                                     <br />
 
                             </td>

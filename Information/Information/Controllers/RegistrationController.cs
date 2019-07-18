@@ -201,8 +201,8 @@ namespace information.Controllers
                             int add = ird.Add(ir);
                             if (add > 0)
                             {
-                                return Content("<script>alert('申请成功！');window.location.href='/Registration/Index'</script>");
-                            }
+                            return Content("<script>alert('申请成功！');window.location.href='/Registration/Index'</script>");
+                        }
                             else
                             {
 

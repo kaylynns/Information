@@ -131,7 +131,7 @@
 
             //双击选中
             $(document).on("dblclick", "#option", function () {
-                $("#txt_type").val($(this).val());
+                $("#txt_type").val($(this).text());
                 $('#myModal').modal('hide');
             })
 
@@ -290,27 +290,25 @@
                                 <asp:ScriptManager ID="ScriptManager1" runat="server">
                                 </asp:ScriptManager>
                                 <asp:Panel ID="Panel1" runat="server" Width="100%">
-                                    <h2>资产类别查询</h2>
+                                    <h3>资产类别查询</h3>
                                     @using (Ajax.BeginForm("AssetCreates", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "Add" }))
                                     {
-                                        <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse;margin:10px 0px 0px 20px"
+                                        <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse"
                                                bordercolor="#6c9ec1" width="200px">
-                                            <tr>
 
-                                                <td>类别管理</td>
-                                            </tr>
-                                            <tr>
+                                            <tr v-for="(item,i) in nums" align="center" style="height:37px">
 
                                                 <td colspan="2">
+                                                    <span id="option">{{item.AName}}</span>
 
-                                                    <select size="10" style="width: 200px;">
+                                                    @*<select size="10" style="width: 200px;">
 
-                                                        <option id="option" v-for="(item,i) in nums">{{item.AName}}</option>
-                                                    </select>
+                                                            <option id="option" v-for="(item,i) in nums">{{item.AName}}</option>
+                                                        </select>*@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2" align="center">
+                                                <td colspan="2" align="center" style="height:37px">
                                                     <input id="btnAdd" type="button" value="添加" Class="btn1" style="margin-left:10px" onclick="btnAdd()" data-toggle="modal" data-target="#myModal2" />
                                                     <input id="Button1" type="button" value="关闭" data-dismiss="modal" Class="btn1" />
                                                 </td>

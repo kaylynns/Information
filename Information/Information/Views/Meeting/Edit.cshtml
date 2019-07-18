@@ -34,14 +34,16 @@
                     success: function (msg) {
                         var dts = eval("(" + msg + ")");
 
-                        $("#re tr:gt(0)").remove();//清空表格
+                        $("#re tr").remove();//清空表格
 
                         for (var i = 0; i < dts.length; i++) {
-                            var $tr = $('<tr id="urm" align="center"></tr>');
+                            var $tr = $('<tr id="urm" align="center" style="height:37px"></tr>');
                             var $td1 = $('<td id="urms" ss=' + dts[i]["MDeviceName"] + '  ids=' + dts[i]["MDeviceName"] + '>' + dts[i]["MDeviceName"] + "</td>");
                             $tr.append($td1);
                             $("#re").append($tr);
                         }
+                        var $tr2 = $('<tr id="urm" align="center"><td><input id="Button1" type="button" value="关闭" data-dismiss="modal" Class="btn1" /></td></tr>');
+                        $("#re").append($tr2)
                     }
                 })
             })
@@ -300,16 +302,11 @@
 
                 <div class="modal-body">
                     <form id="form1" role="form">
-                        <table class="tableEdit" id="re" align="center" style="border:1px solid red;width:200px;">
-                            <thead>
-                                <tr>
-                                    <td>
-                                        设备名称
-                                    </td>
-                                </tr>
-                            </thead>
-
-                        </table>
+                        <h3 align="center">软件名称查询</h3>
+                        <table cellspacing="0" cellpadding="8" class="tableEdit" id="re" align="center" border="1"
+                               style="border-collapse: collapse"
+                               bordercolor="#6c9ec1" width="200"></table>
+                        <br />
                         <div class="clearfix"></div>
                     </form>
                 </div>

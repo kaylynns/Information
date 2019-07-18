@@ -121,7 +121,7 @@ namespace information.Controllers
             int add = itb.Add(it);
             if (add > 0)
             {
-                return Content("<script>alert('添加成功！');window.location.href='/Technology/Index'</script>");
+                return Content("ok");
             }
             else
             {

@@ -122,7 +122,7 @@ namespace information.Views.JiFang
             
                 if (add > 0)
                 {
-                    return Content("<script>alert('添加成功！');window.location.href='/WhuWxiu/Index'</script>");
+                    return Content("ok");
                 }
                 else
                 {

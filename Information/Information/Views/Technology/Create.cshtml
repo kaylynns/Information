@@ -18,12 +18,40 @@
             $(document).on("click", ".sj input", function () {
                 WdatePicker({ readOnly: true, dateFmt: 'yyyy-MM-dd' });
             })
+
+            $("#add").click(function () {
+                var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+
+                if ($("table input").val() == null || $("table input").val() == "") {
+                    alert("请输入相对应的要输入的内容");
+                    return false;
+                } 
+                else if (!myreg.test($("#Tcontact").val())) {
+                    alert("联系电话格式输入不正确（十一位一开头的纯数字）");
+                    return false;
+                }else {
+
+                    $.ajax({
+                        url: "/Technology/Create",
+                        type: "post",
+                        data: $("#form1").serialize(),
+                        success: function (msg) {
+                            if (msg == "ok") {
+                                alert("添加成功");
+                                window.location.href = '/Technology/Index';
+                            } else {
+                                alert("添加失败");
+                            }
+                        }
+                    })
+                }
+            })
         })
     </script>
 </head>
 <body>
     <h2 align="center" style="font-size:25px;font-weight:bold"> 技术支持内容登记表 </h2>
-    <form method="post" action="/Technology/Create" style="">
+    <form method="post" action="" style="" id="form1">
         <table cellspacing="0" cellpadding="7" align="center" border="1" style="border-collapse: collapse; margin-bottom:20px"
                bordercolor="#6c9ec1">
             <tr>
@@ -63,7 +91,7 @@
                     @Html.EditorFor(model => model.TConsultant)
                 </td>
                 <td align="left">
-                    联系方式：
+                    联系电话：
                 </td>
                 <td>
                     @Html.EditorFor(model => model.Tcontact)
@@ -118,7 +146,7 @@
            <tr>
                 <td align="center" colspan="4" height="26">
 
-                    <input type="submit" value="保 存" class="btn1" />
+                    <input type="button" value="保 存" class="btn1" id="add" />
                     &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
                     <input ID="btn_remove" type="reset" value="清 空" class="btn1" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

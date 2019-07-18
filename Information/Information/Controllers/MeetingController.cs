@@ -123,7 +123,7 @@ namespace information.Controllers
                 int add = imb.Add(im);
                 if (add > 0)
                 {
-                    return Content("<script>alert('添加成功！');window.location.href='/Meeting/Index'</script>");
+                    return Content("ok");
                 }
                 else
                 {

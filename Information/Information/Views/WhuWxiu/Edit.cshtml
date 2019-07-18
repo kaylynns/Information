@@ -72,6 +72,19 @@
     </style>
 
     <script type="text/javascript">
+
+        var bool = false;
+        function inputNull(form) {
+            for (var i = 0; i < form.length; i++) {
+                if (form.elements[i].value == "" || form.elements[i].value == null) {
+                    alert("不能有空字段");
+                    form.elements[i].focus();
+                    return bool;
+                }
+            }
+           return true
+        }
+
         $(document).on("click", ".sj input", function () {
 
             WdatePicker({ readOnly: true, dateFmt: 'yyyy-MM-dd' });
@@ -110,12 +123,14 @@
                         $("#re tr:gt(0)").remove();//清空表格
 
                         for (var i = 0; i < dts.length; i++) {
-                            var $tr = $('<tr id="urm"></tr>');
+                            var $tr = $('<tr id="urm" align="center" style="height:37px"></tr>');
                             var $td1 = $('<td id="urms" ss=' + dts[i]["SIDS"] + '  ids=' + dts[i]["SID"] + '>' + dts[i]["SIDS"] + "</td>");
 
                             $tr.append($td1);
                             $("#re").append($tr);
                         }
+                        var $tr2 = $('<tr id="urm" align="center"><td><input id="Button1" type="button" value="关闭" data-dismiss="modal" Class="btn1" /></td></tr>');
+                        $("#re").append($tr2)
                     }
                 })
             })
@@ -136,7 +151,7 @@
 <body>
     <h2 align="center" style="font-size:25px;font-weight:bold"> 机房维护维修修改 </h2>
 
-    <form method="post" action="/WhuWxiu/Edit" style="">
+    <form method="post" action="/WhuWxiu/Edit" onsubmit="inputNull(this)">
         <table cellspacing="0" cellpadding="7" align="center" border="1" style="border-collapse: collapse; margin-bottom:20px"
                bordercolor="#6c9ec1">
             <tr>
@@ -219,16 +234,10 @@
 
                 <div class="modal-body">
                     <form id="form1" role="form">
-                        <table class="tableEdit" id="re" align="center" style="border:1px solid red;width:200px;">
-                            <thead>
-                                <tr>
-                                    <td>
-                                        设备名称
-                                    </td>
-                                </tr>
-                            </thead>
-
-                        </table>
+                        <h3 align="center"> 设备名称</h3>
+                        <table cellspacing="0" cellpadding="8" class="tableEdit" id="re" align="center" border="1"
+                               style="border-collapse: collapse"
+                               bordercolor="#6c9ec1" width="200"></table>
                         <div class="clearfix"></div>
                     </form>
                 </div>

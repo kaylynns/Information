@@ -30,14 +30,16 @@
                     success: function (msg) {
                         var dts = eval("(" + msg + ")");
 
-                        $("#re tr:gt(0)").remove();//清空表格
+                        $("#re tr").remove();//清空表格
 
                         for (var i = 0; i < dts.length; i++) {
-                            var $tr = $('<tr id="urm" align="center"></tr>');
+                            var $tr = $('<tr id="urm" align="center" style="height:37px"></tr>');
                             var $td1 = $('<td id="urms" ss=' + dts[i]["MDeviceName"] + '  ids=' + dts[i]["MDeviceName"] + '>' + dts[i]["MDeviceName"] + "</td>");
                             $tr.append($td1);
                             $("#re").append($tr);
                         }
+                        var $tr2 = $('<tr id="urm" align="center"><td><input id="Button1" type="button" value="关闭" data-dismiss="modal" Class="btn1" /></td></tr>');
+                        $("#re").append($tr2)
                     }
                 })
             })
@@ -49,13 +51,36 @@
                 $("#Text1").val(em);
                 $("#myModal").modal("hide");
             })
+
+
+            $("#add").click(function () {
+                if ($("form input[type='text']").val() == null || $("form input[type='text']").val() == "") {
+                    alert("请输入相对应的要输入的内容");
+                    return false;
+                } else {
+                    $.ajax({
+                        url: "/Meeting/Create",
+                        type: "post",
+                        data: $("#form1").serialize(),
+                        success: function (msg) {
+                            if (msg == "ok") {
+                                alert("添加成功");
+                                window.location.href = '/Meeting/Index';
+                            } else {
+                                alert("添加失败");
+                            }
+                        }
+                    })
+                }
+            })
+
         })
     </script>
 </head>
 <body>
     <h2 align="center"  style="font-size:25px;font-weight:bold"> 视频会议测试及开会记录 </h2>
 
-    <form method="post" action="/Meeting/Create" style="">
+    <form method="post" action="" style="" id="form1">
         <table cellspacing="0" cellpadding="7" align="center" border="1" style="border-collapse: collapse; margin-bottom:20px"
                bordercolor="#6c9ec1">
             <tr>
@@ -252,33 +277,11 @@
                     @Html.HiddenFor(model => model.MUserName)
                 </td>
             </tr>
-            @*<tr>
-                    <td align="center" style="height: 20px">
-                        5
-                    </td>
-                    <td align="left">
-                        有无故障
-                    </td>
-                    <td align="left">
-                        @Html.RadioButtonFor(e => e.MSolve, "有", new { @checked = true })有故障
-                        @Html.RadioButtonFor(e => e.MSolve, "无")无故障
-                    </td>
-                </tr>*@
-            @*<tr id="pishi" runat="server" visible="false">
-                    <td align="center" style="height: 20px">
-                        6
-                    </td>
-                    <td align="left">
-                        信息中心主任批示：
-                    </td>
-                    <td align="left" colspan="1">
-                        <input type="text" name="Msignature"/>
-                    </td>
-                </tr>*@
+          
             <tr>
                 <td align="center" colspan="4" height="26">
 
-                    <input type="submit" value="保 存" class="btn1" />
+                    <input type="button" value="保 存" class="btn1" id="add"/>
                     &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
                     <input ID="btn_remove" type="reset" value="清 空" class="btn1" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -295,16 +298,11 @@
 
                 <div class="modal-body">
                     <form id="form1" role="form">
-                        <table class="tableEdit" id="re" align="center" style="border:1px solid red;width:200px;">
-                            <thead>
-                                <tr>
-                                    <td>
-                                        设备名称
-                                    </td>
-                                </tr>
-                            </thead>
-
-                        </table>
+                        <h3 align="center">软件名称查询</h3>
+                        <table cellspacing="0" cellpadding="8" class="tableEdit" id="re" align="center" border="1"
+                               style="border-collapse: collapse"
+                               bordercolor="#6c9ec1" width="200"></table>
+                        <br />
                         <div class="clearfix"></div>
                     </form>
                 </div>

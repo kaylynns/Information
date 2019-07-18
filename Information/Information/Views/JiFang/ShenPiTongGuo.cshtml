@@ -1,4 +1,4 @@
-﻿@model  Entity.V_ComputerRoomVisit
+﻿@model  V_ComputerRoomVisit
 @{
     Layout = null;
 }
@@ -53,7 +53,7 @@
                 来访人员：
             </td>
             <td align="left">
-                @Html.Label(Model.CName, new { @readonly = "readonly" })
+                @Html.TextBoxFor(Model=>Model.CName, new { @readonly = "readonly" })
             </td>
         </tr>
         <tr>
@@ -61,7 +61,7 @@
                 来访事由：
             </td>
             <td align="left" colspan="3">
-                @Html.Label(Model.Cause)
+                @Html.TextBoxFor(Model=>Model.Cause)
             </td>
         </tr>
         <tr>
@@ -69,13 +69,13 @@
                 携带物品：
             </td>
             <td align="left" class="style1">
-                @Html.Label(Model.Carries, new { @readonly = "readonly" })
+                @Html.TextBoxFor(Model=>Model.Carries, new { @readonly = "readonly" })
             </td>
             <td align="left" class="style1">
                 陪同人员：
             </td>
             <td align="left" class="style1">
-                @Html.Label(Model.CEntourage, new { @readonly = "readonly" })
+                @Html.TextBoxFor(Model=>Model.CEntourage, new { @readonly = "readonly" })
             </td>
         </tr>
         <tr>
@@ -83,7 +83,7 @@
                 带出物品：
             </td>
             <td align="left" colspan="3">
-                @Html.Label(Model.CBringOut, new { @readonly = "readonly" })
+                @Html.TextBoxFor(Model=>Model.CBringOut, new { @readonly = "readonly" })
             </td>
         </tr>
         <tr>

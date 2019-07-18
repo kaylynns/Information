@@ -11,17 +11,28 @@ namespace Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [DataContract(IsReference =true)]
     public partial class info_User
     {
+        [DataMember]
         public int UserID { get; set; }
+        [DataMember]
         public string UserName { get; set; }
+        [DataMember]
         public string UserPass { get; set; }
+        [DataMember]
         public string UserRealName { get; set; }
+        [DataMember]
         public string UserPhone { get; set; }
+        [DataMember]
         public string UseroffcePhone { get; set; }
+        [DataMember]
         public string UserKeShi { get; set; }
+        [DataMember]
         public int UserJueSe { get; set; }
+        [DataMember]
         public string Email { get; set; }
     
         public virtual info_Role info_Role { get; set; }

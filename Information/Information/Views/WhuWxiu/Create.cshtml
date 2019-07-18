@@ -16,6 +16,9 @@
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
    
+
+   
+
     <style type="text/css">
         .t1 {
             clear: both;
@@ -69,32 +72,58 @@
              }
 
     </style>
+
+
     <script type="text/javascript">
         $(document).on("click", ".sj input", function () {
-         
+
             WdatePicker({ readOnly: true, dateFmt: 'yyyy-MM-dd' });
         })
 
         $(function () {
-            var ids;
-            $("#jc").click(function(){
-                $.ajax({
-                    url: "/WhuWxiu/checkCreate",
-                    type: "post",
-                    data: "project=" + $("#project").val() + "&result=" + $("#result").val(),
-                    success: function (msg) {
-                        if (msg == "ok") {
-                            alert("添加成功");
-                            $("#project").val("");
-                            $("#result").val("");
-                            show();
 
-                        } else {
-                            alert("添加失败");
+            $("#addc").click(function () {
+                if ($("table input").val() == null || $("table input").val() == "" ) {
+                    alert("请输入相对应的要输入的内容");
+                } else {
+
+                    $.ajax({
+                        url: "/WhuWxiu/Create",
+                        type: "post",
+                        data: $("#form1").serialize(),
+                        success: function (msg) {
+                            if (msg == "ok") {
+                                alert("添加成功");
+                                window.location.href = '/WhuWxiu/Index';
+                            } else {
+                                alert("添加失败");
+                            }
                         }
-                    }
-                })
+                    })
+                }
             })
+
+          
+
+            var ids;
+            //$("#jc").click(function(){
+            //    $.ajax({
+            //        url: "/WhuWxiu/checkCreate",
+            //        type: "post",
+            //        data: "project=" + $("#project").val() + "&result=" + $("#result").val(),
+            //        success: function (msg) {
+            //            if (msg == "ok") {
+            //                alert("添加成功");
+            //                $("#project").val("");
+            //                $("#result").val("");
+            //                show();
+
+            //            } else {
+            //                alert("添加失败");
+            //            }
+            //        }
+            //    })
+            //})
 
             $("#ck").click(function () {
               
@@ -108,11 +137,14 @@
                         $("#re tr:gt(0)").remove();//清空表格
                        
                         for (var i = 0; i < dts.length; i++) {
-                            var $tr = $('<tr id="urm" align="center"></tr>');
+                            var $tr = $('<tr id="urm" align="center" style="height:37px"></tr>');
                             var $td1 = $('<td id="urms" ss=' + dts[i]["SIDS"] + '  ids=' + dts[i]["SID"] + '>' + dts[i]["SIDS"] + "</td>");
                             $tr.append($td1);
                             $("#re").append($tr);
                         }
+
+                        var $tr2 = $('<tr id="urm" align="center"><td><input id="Button1" type="button" value="关闭" data-dismiss="modal" Class="btn1" /></td></tr>');
+                        $("#re").append($tr2)
                     }
                 })
             })
@@ -133,20 +165,22 @@
         })
        
     </script>
+  
 </head>
 <body>
     <h2 align="center" style="font-size:25px;font-weight:bold"> 机房维护 </h2>
 
-    <form method="post" action="/WhuWxiu/Create" style="">
+    <form method="post" style="" onsubmit="return inputNull()" action="" id="form1">
         <table cellspacing="0" cellpadding="7" align="center" border="1" style="border-collapse: collapse; margin-bottom:20px;"  bordercolor="#6c9ec1"  >
             <tr>
                 <td align="center">  日期：</td>
 
                 <td align="left" class="sj">
-                    @Html.EditorFor(model => model.MaintenanceTime)
-                  
+                   
+                    @Html.TextBoxFor(model => model.MaintenanceTime)
+                  <span></span>
                 </td>
-                <td id="sbid">
+                <td id="sbid" style="visibility:hidden">
                     @Html.HiddenFor(model => model.MDeviceName)
                 </td>
             </tr>
@@ -155,13 +189,13 @@
                   维护设备名称
                 </td>
                 <td align="left">
-                    <input id="Text1" type="text" />
+                    <input id="Text1" type="text"  placeholder=""/>
                   <img src="~/img/lookup.gif" id="ck"data-toggle="modal" data-target="#myModal"/>
                 </td>
                
             </tr>
             <tr>
-                <td align="center" style="height: 20px">
+                <td align="center" style="height: 20px"  class="sj">
                    负责检测单位
                 </td>
                 <td align="left">
@@ -199,13 +233,13 @@
             </tr>
          
             <tr>
-                <td align="center" colspan="4" height="26">
-                    <input type="submit" value="保 存" class="btn1" id="add"/>
+                <td align="center" colspan="2" height="26">
+                    <input type="button" value="保 存" class="btn1" id="addc"/>
                     &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
                     <input ID="btn_remove" type="reset" value="清 空" class="btn1" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input ID="btn_back" type="button" value="返 回" class="btn1" onclick="window.location.href=document.referrer" />
-                    <br />
+             
                 </td>
             </tr>
         </table>
@@ -218,14 +252,11 @@
 
                 <div class="modal-body">
                     <form id="form1" role="form">
-                        <table class="tableEdit" id="re" align="center" style="border:1px solid red;width:200px;">
-                            <thead>
-                                <tr>
-                                    <td>
-                                       设备名称
-                                    </td>
-                                </tr>
-                            </thead>
+                        <h3 align="center"> 设备名称</h3>
+                        <table cellspacing="0" cellpadding="8" class="tableEdit" id="re" align="center" border="1"
+                               style="border-collapse: collapse"
+                               bordercolor="#6c9ec1" width="200">
+                            
 
                         </table>
                         <div class="clearfix"></div>

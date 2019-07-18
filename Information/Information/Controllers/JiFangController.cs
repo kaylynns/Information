@@ -89,18 +89,25 @@ namespace information.Controllers
         {
             try
             {
-                crv.CRelustID = 1;
-                crv.CEntryTime=DateTime.Now;
-                crv.CLeaveTime = DateTime.Now;
-                crv.CRegistar = Session["UserRealName"].ToString();
-                int tianjia = lcr.Add(crv);
-                if (tianjia > 0)
+                if (crv.CName == "" || crv.CName == null|| crv.Cause == null || crv.Cause == ""|| crv.Cause == null || crv.Cause == "")
                 {
-                    return Content("<script>alert('保存成功');window.location.href='Index'</script>");
+                    return Content("nook");
                 }
                 else
                 {
-                    return Content("<script>alert('保存失败');window.location.href='Create'</script>");
+                    crv.CRelustID = 1;
+                    crv.CEntryTime = DateTime.Now;
+                    crv.CLeaveTime = DateTime.Now;
+                    crv.CRegistar = Session["UserRealName"].ToString();
+                    int tianjia = lcr.Add(crv);
+                    if (tianjia > 0)
+                    {
+                        return Content("OK");
+                    }
+                    else
+                    {
+                        return Content("nook");
+                    }
                 }
             }
             catch
@@ -217,6 +224,7 @@ namespace information.Controllers
         public ActionResult SheBeiGuanLiShiTu() {
             return View();
         }
+        //查询机房设备管理分页
         public ActionResult SheBeiSelelct(int currentPage, string name) {
             List<V_info_Equipment> list;
             int rows = 0;
@@ -235,6 +243,24 @@ namespace information.Controllers
             dic.Add("pages", (rows - 1) / 3 + 1);
             return Content(JsonConvert.SerializeObject(dic));
         }
+        //查询机房申请审核成功的来访人员
+        public void FillClass()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            List<info_ComputerRoomVisit> lists = lcr.SelectWheres(e => e.CRelustID == 2);
+            foreach (info_ComputerRoomVisit dr in lists)
+            {
+                SelectListItem sl = new SelectListItem()
+                {
+                    Text = dr.CName,
+                    Value = dr.CID.ToString()
+                };
+                list.Add(sl);
+            }
+
+            ViewData["Enames"] = list;
+        }
+
         //机房设备管理编辑
         public ActionResult SheBeiBianJi(int id) {
           info_Equipment ts=shebei.SelectWhere(e => e.EID == id).FirstOrDefault();
@@ -242,6 +268,7 @@ namespace information.Controllers
           ViewBag.leibiao=isb.SelectWhere(e => e.SID == eaid);
             return View(ts);
         }
+        //机房设备管理修改
         [HttpPost]
         public ActionResult SheBeiBianJiXiu(info_Equipment zhi) {
             try
@@ -261,26 +288,8 @@ namespace information.Controllers
                 return Content("<script>alert('"+ex.Message+"');window.location.href='SheBeiGuanLiShiTu'</script>");
             }
         }
-
-        //查询机房申请审核成功的来访人员
-        public void FillClass()
-        {
-            List<SelectListItem> list = new List<SelectListItem>();
-            List<info_ComputerRoomVisit> lists = lcr.SelectWheres(e => e.CRelustID == 2);
-            foreach (info_ComputerRoomVisit dr in lists)
-            {
-                SelectListItem sl = new SelectListItem()
-                {
-                    Text = dr.CName,
-                    Value = dr.CID.ToString()
-                };
-                list.Add(sl);
-            }
-
-            ViewData["Enames"] = list;
-        }
-
         //机房设备添加视图
+        [HttpGet]
         public ActionResult SheBeiAddShiTu() {
 
             FillClass(); //查询机房申请审核成功的来访人员
@@ -291,15 +300,15 @@ namespace information.Controllers
         public ActionResult SheBeiAddShiTu(info_Equipment len) {
             try
             { 
-               // len.Ename = 1.ToString();
+              
                 int SheBeiAdd= shebei.Add(len);
                 if (SheBeiAdd > 0)
                 {
-                    return Content("<script>alert('添加成功');window.location.href='SheBeiGuanLiShiTu'</script>");
+                    return Content("OK");
                 }
                 else
                 {
-                    return Content("<script>alert('添加失败');window.location.href='SheBeiGuanLiShiTu'</script>");
+                    return Content("nook");
                 }
             }
             catch

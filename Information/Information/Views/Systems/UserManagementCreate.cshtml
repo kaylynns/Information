@@ -14,11 +14,11 @@
     <link href="~/css/bootstrap.css" rel="stylesheet" />
     <link href="~/css/css.css" rel="stylesheet" />
 </head>
-<body >
-    @using (Html.BeginForm("UserManagementCreates", "Systems","post"))
+<body>
+    @using (Html.BeginForm("UserManagementCreates", "Systems", "post"))
     {
-      
-            <h2 align="center">用户添加</h2>
+
+        <h2 align="center">用户添加</h2>
             <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse;width:500px;height:200px;"
                    bordercolor="#6c9ec1">
                 <tr>
@@ -27,7 +27,7 @@
                         @Html.EditorFor(model => model.UserName)
                         @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                     </td>
-               
+
                     <td>@Html.Label("真实姓名：")</td>
                     <td>
                         @Html.EditorFor(model => model.UserRealName)
@@ -40,7 +40,7 @@
                         @Html.EditorFor(model => model.UserPass)
                         @Html.ValidationMessageFor(model => model.UserPass, "", new { @class = "text-danger" })
                     </td>
-              
+
                     <td>@Html.Label("邮箱：")</td>
                     <td>
                         @Html.EditorFor(model => model.Email)
@@ -53,7 +53,7 @@
                         @Html.EditorFor(model => model.UserPhone)
                         @Html.ValidationMessageFor(model => model.UserPhone, "", new { @class = "text-danger" })
                     </td>
-             
+
                     <td>@Html.Label("公用电话：")</td>
                     <td>
                         @Html.EditorFor(model => model.UseroffcePhone)
@@ -66,7 +66,7 @@
                         @Html.EditorFor(model => model.UserKeShi)
                         @Html.ValidationMessageFor(model => model.UserKeShi, "", new { @class = "text-danger" })
                     </td>
-               
+
                     <td>@Html.Label("角色：")</td>
                     <td>
                         @Html.DropDownListFor(e => e.UserJueSe, ViewData["role"] as IEnumerable<SelectListItem>)
@@ -74,8 +74,8 @@
                 </tr>
                 <tr>
                     <td colspan="4" align="center">
-                        <input type="submit" value="添加用户" id="btn btn-default"   Class="btn1"/>
-                        <input type="button" value="返回" id="btn_select"  Class="btn1" style="margin-left:10px" onclick="window.location.href = '/Systems/UserManagementSelect'" />
+                        <input type="submit" value="添加用户" id="btn btn-default" Class="btn1" />
+                        <input type="button" value="返回" id="btn_select" Class="btn1" style="margin-left:10px" onclick="window.location.href = '/Systems/UserManagementSelect'" />
                     </td>
 
                 </tr>
@@ -83,7 +83,7 @@
 
 
     }
-    
-  
+
+
 </body>
 </html>

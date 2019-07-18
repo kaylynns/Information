@@ -133,12 +133,15 @@
                         $("#re tr:gt(0)").remove();//清空表格
                         for (var i = 0; i < dts.length; i++) {
 
-                            var $tr = $('<tr id="urm"></tr>');
+                            var $tr = $('<tr id="urm" align="center" style="height:37px"></tr>');
                             var $td1 = $('<td id="urms" ss=' + dts[i]["UserRealName"] + '>' + dts[i]["UserRealName"] + "</td>");
 
                             $tr.append($td1);
                             $("#re").append($tr);
                         }
+
+                        var $tr2 = $('<tr id="urm" align="center"><td><input id="Button1" type="button" value="关闭" data-dismiss="modal" Class="btn1" /></td></tr>');
+                        $("#re").append($tr2)
                     }
                 })
             })
@@ -241,16 +244,12 @@
 
                 <div class="modal-body">
                     <form id="form1" role="form">
-                        <table class="tableEdit" id="re" align="center">
-                            <thead>
-                                <tr>
-                                    <td style="color:blue">
-                                        员工选择
-                                    </td>
-                                </tr>
-                            </thead>
-
-                        </table>
+                        <h3 align="center">员工选择</h3>
+                        <table cellspacing="0" cellpadding="8" class="tableEdit" id="re" align="center" border="1"
+                               style="border-collapse: collapse"
+                               bordercolor="#6c9ec1" width="200"></table>
+                       
+                           
                         <div class="clearfix"></div>
                     </form>
                 </div>

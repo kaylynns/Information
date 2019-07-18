@@ -21,11 +21,57 @@
         $(document).on("click", ".JiFang input", function () {
             WdatePicker();
         })
+        $(function () {
+            $("#btn_Bao").click(function () {
+                //获取来访日期值
+                var CTIme = $("#CTIme").val();
+                //获取来访人员值
+                var CName = $("#CName").val();
+                //获取来访事由的值
+                var Cause = $("#Cause").val();
+                //获取携带物品的值
+                var Carries = $("#Carries").val();
+              
+               if ((CTIme == "" || CTIme == null) && (CName == "" || CName == null) && (Cause == null || Cause == "") && (Carries == "" || Carries == null)) {
+                   alert("请输入相对应的要输入的内容");
+                }
+               else if (CTIme == "" || CTIme == null) {
+                    alert("请选择来访日期");
+                }
+               else if (CName == "" || CName == null) {
+                    alert("请输入需要来访的人员");
+                }
+               else if (Cause == null || Cause == "") {
+                    alert("请输入来访事由");
+                }
+                else  if (Carries == "" || Carries == null) {
+                      alert("请输入要携带的物品");
+                 }
+                else if (!(CTIme == "" || CTIme == null || CName == "" || CName == null || Cause == null || Cause == "" || Carries == "" || Carries == null)) {
+                    $.ajax({
+                        type: "post",
+                        url: "Create",
+                        data: $("#form1").serialize(),
+                        success: function (msg) {
+                            if (msg == "OK") {
+                                alert("添加成功正在前往主页");
+                                window.location.href = '/JiFang/Index'
+                            }
+                            else {
+                                alert("添加失败");
+                            }
+                        }
+
+                   })
+                }
+               
+            })
+        })
     </script>
 </head>
 <body>
     <h2 align="center" style="font-size:25px;font-weight:bold"> 机房出入申请表 </h2>
-    <form method="post">
+    <form method="post" id="form1">
         <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse"
                bordercolor="#6c9ec1">
             <tr>
@@ -76,7 +122,7 @@
             </tr>
             <tr>
                 <td align="center" colspan="4" width="26">
-                    <input id="btn_Bao" type="submit" value="提交" class="btn1" onclick="location.href = '/JiFang/Create'" />
+                    <input id="btn_Bao" type="button" value="提交" class="btn1"/>
                     <input id="btn_add" type="button" value="返回" class="btn1" onclick="location.href = '/JiFang/Index'" />
                 </td>
             </tr>

@@ -26,11 +26,19 @@
                     data: "",
                     success: function (msg) {
                         var use = eval("(" + msg + ")");
-                        $("#sel option:gt(0)").remove();
+                        $("#sel tr").remove();//清空表格
                         for (var i = 0; i < use.length; i++) {
-                            var $tr = $('<option  id="btnAdd" AName=' + use[i]["SIDS"] + ' AID=' + use[i]["SID"] + '>' + use[i]["SIDS"] + "</option>");
-                            $("#sel").append($tr);
+
+                            var $tr1 = $('<tr id="urm" align="center" style="height:37px"></tr>');
+                            var $td = $('<td id="btnAdd" AName=' + use[i]["SIDS"] + ' AID=' + use[i]["SID"] + '>' + use[i]["SIDS"] + "</td>");
+
+                            //var $tr = $('<option  id="btnAdd" AName=' + use[i]["SIDS"] + ' AID=' + use[i]["SID"] + '>' + use[i]["SIDS"] + "</option>");
+                            $tr1.append($td);
+                            $("#sel").append($tr1);
                         }
+
+                        var $tr2 = $('<tr id="urm" align="center"><td><input id="Button1" type="button" value="关闭" data-dismiss="modal" Class="btn1" /></td></tr>');
+                        $("#sel").append($tr2)
                     }
                 })
             })
@@ -209,24 +217,11 @@
                                 <asp:ScriptManager ID="ScriptManager1" runat="server">
                                 </asp:ScriptManager>
                                 <asp:Panel ID="Panel1" runat="server" Width="100%">
-                                    <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse;margin:10px 0px 0px 20px"
-                                           bordercolor="#6c9ec1" width="200px">
-                                        <tr>
-
-                                            <td>类别</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <select size="10" style="width: 200px;" id="sel"></select>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td colspan="2" align="center">
-                                                <input id="Button1" type="button" value="关闭" data-dismiss="modal" Class="btn1" />
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    <h3>设备名称查询</h3>
+                                    <table cellspacing="0" cellpadding="8" class="tableEdit" id="sel" align="center" border="1"
+                                           style="border-collapse: collapse"
+                                           bordercolor="#6c9ec1" width="200"></table>
+                                    <br />
                                     <br />
 
                             </td>

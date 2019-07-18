@@ -8,10 +8,11 @@ using IBLL;
 using Newtonsoft.Json;
 using Entity;
 using IocContainer;
+using System.Threading.Tasks;
 using StackExchange.Redis;
 using System.Net.Mail;
 using System.Net;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace information.Controllers
 {
@@ -81,7 +82,7 @@ namespace information.Controllers
                     RoleID = id
                 };
 
-                if (ipsb.delete(id) > 0)
+                if (ipsb.delete(id) >= 0)
                 {
                     if (irb.Delete(role) > 0)
                     {
@@ -186,7 +187,7 @@ namespace information.Controllers
         //用户管理页面查询(分页查询)
         public ActionResult UserManagementSelectFen(int currentPage,string name)
         {
-            var pageSize = 2;
+            var pageSize = 3;
             int rows;
 
             List<v_User> dt;
@@ -293,32 +294,40 @@ namespace information.Controllers
         [HttpPost]
         public async Task<ActionResult> UserManagementCreates(info_User u)
         {
-            //事务
-            using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope())
-            {
+          
                 if (iud.Add(u) > 0)
                 {
-                    await AddUser(u);
-                    ts.Complete();
+                     AddUser(u);
+                   
                     return Content("<script>alert('添加成功');window.location.href='/Systems/UserManagementSelect'</script>");
                 }
                 else
                 {
                     return Content("<script>alert('添加失败');window.location.href='/Systems/UserManagementEdit/" + u.UserID + "'</script>");
                 }
-            }
+            
 
             // return View(dt);
         }
         
 
-        public async Task AddUser(info_User u) {
-            using (ConnectionMultiplexer redis = await ConnectionMultiplexer.ConnectAsync("127.0.0.1:6379"))
+        public async void AddUser(info_User u) {
+           ThreadPool.SetMinThreads(800, 800);
+           
+            using (var redis = await ConnectionMultiplexer.ConnectAsync("127.0.0.1:6379"))
             {
                 IDatabase db = redis.GetDatabase();
-                await db.ListLeftPushAsync("d", JsonConvert.SerializeObject(u));
-                string zhi = db.ListRightPop("d");
-                //把json字符串转换为对象
+
+
+                Dictionary<object, object> di = new Dictionary<object, object>();
+                di.Add("UserID", u.UserID);
+                di.Add("UserRealName", u.UserRealName);
+                di.Add("Email", u.Email);
+
+               await db.ListLeftPushAsync("f", JsonConvert.SerializeObject(di));
+
+                string zhi = await db.ListRightPopAsync("f");
+                 //把json字符串转换为对象
                 info_User p = JsonConvert.DeserializeObject<info_User>(zhi);
                 //使用MailMessage发送电子邮件
                 MailMessage mail = new MailMessage();
@@ -376,7 +385,7 @@ namespace information.Controllers
         //问题分类维护页面分页
         public ActionResult QuestionSelectFen(int currentPage, string name)
         {
-            var pageSize = 2;
+            var pageSize = 3;
             int rows;
 
             List<info_Question> dt;

@@ -133,7 +133,8 @@ namespace information.Controllers
                 asset.TID = 1;
                 if (iab.Add(asset) > 0)
                 {
-                    return Content("<script>alert('添加成功');window.location.href='/Asset/AssetSelect'</script>");
+                    // return Content("<script>alert('添加成功');window.location.href='/Asset/AssetSelect'</script>");
+                    return Content("ok");
                 }
                 else
                 {

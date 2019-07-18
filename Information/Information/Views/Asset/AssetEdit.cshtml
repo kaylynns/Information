@@ -83,11 +83,14 @@
                         $("#re tr:gt(0)").remove();//清空表格
 
                         for (var i = 0; i < dts.length; i++) {
-                            var $tr = $('<tr id="urm" align="center"></tr>');
+                            var $tr = $('<tr id="urm" align="center" style="height:37px"></tr>');
                             var $td1 = $('<td id="urms" ss=' + dts[i]["MUserName"] + '  ids=' + dts[i]["MUserName"] + '>' + dts[i]["MUserName"] + "</td>");
                             $tr.append($td1);
                             $("#re").append($tr);
                         }
+
+                        var $tr2 = $('<tr id="urm" align="center"><td><input id="Button1" type="button" value="关闭" data-dismiss="modal" Class="btn1" /></td></tr>');
+                        $("#re").append($tr2)
                     }
                 })
             })
@@ -236,32 +239,34 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <table id="Table2" border="0" cellpadding="3" cellspacing="0" class="table3">
+                    <table id="Table2" border="0" cellpadding="3" cellspacing="0" class="table3" align="center">
                         <tr>
                             <td colspan="3">
                                 <asp:ScriptManager ID="ScriptManager1" runat="server">
                                 </asp:ScriptManager>
                                 <asp:Panel ID="Panel1" runat="server" Width="100%">
-                                  
-                                    <table cellspacing="0" cellpadding="8" align="left" border="1" style="border-collapse: collapse;margin:10px 0px 0px 20px"
-                                           bordercolor="#6c9ec1" width="200px">
-                                        <tr>
 
-                                            <td>请示报告</td>
-                                        </tr>
-                                        <tr v-for="(item,i) in nums">
-                                            <td colspan="2">
-                                                <select size="10" style="width: 200px;" id="sel">
-                                                    <option class="option" v-for="(item,i) in nums" value="item.JID">{{item.JName}}</option>
-                                                </select>
-                                                
+                                    <h3 align="center">采购依据查询</h3>
+                                    <table cellspacing="0" cellpadding="8" align="center" border="1" style="border-collapse: collapse"
+                                           bordercolor="#6c9ec1" width="200px">
+
+                                        <tr align="center" style="height:37px">
+
+                                            <td colspan="2" id="sel" v-for="(item,i) in nums" value="item.JID">
+                                                <span class="option"> {{item.JName}}</span>
+
+                                                @*<select size="10" style="width: 200px;" id="sel" >
+                                        <option class="option" v-for="(item,i) in nums" :value="item.JID" >{{item.JName}}</option>
+                                    </select>*@
+
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td colspan="2" align="center">
+                                        <tr align="center" style="height:37px">
+                                            <td>
                                                 <input id="Button1" type="button" value="关闭" data-dismiss="modal" Class="btn1" />
                                             </td>
                                         </tr>
+
                                     </table>
                                     <br />
 
@@ -286,14 +291,10 @@
 
                 <div class="modal-body">
                     <form id="form1" role="form">
-                        <table class="tableEdit" id="re" align="center" style="border:1px solid red;width:200px;">
-                            <thead>
-                                <tr>
-                                    <td>
-                                        设备名称
-                                    </td>
-                                </tr>
-                            </thead>
+                        <h3 align="center">设备名称查询</h3>
+                        <table cellspacing="0" cellpadding="8" class="tableEdit" id="re" align="center" border="1"
+                               style="border-collapse: collapse"
+                               bordercolor="#6c9ec1" width="200">
 
                         </table>
                         <div class="clearfix"></div>
